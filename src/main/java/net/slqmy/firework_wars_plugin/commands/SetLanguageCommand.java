@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.commands;
+package net.slqmy.firework_wars_plugin.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.Argument;
@@ -14,13 +14,13 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 
 import net.kyori.adventure.text.Component;
-import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
-import net.slqmy.template_paper_plugin.language.LanguageManager;
-import net.slqmy.template_paper_plugin.language.Message;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import net.slqmy.firework_wars_plugin.language.LanguageManager;
+import net.slqmy.firework_wars_plugin.language.Message;
 
 public class SetLanguageCommand extends CommandAPICommand {
 
-  public SetLanguageCommand(TemplatePaperPlugin plugin) {
+  public SetLanguageCommand(FireworkWarsPlugin plugin) {
     super("set-language");
 
     LanguageManager languageManager = plugin.getLanguageManager();

@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin;
+package net.slqmy.firework_wars_plugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -6,12 +6,12 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
-import net.slqmy.template_paper_plugin.commands.SetLanguageCommand;
-import net.slqmy.template_paper_plugin.data.player.PlayerDataManager;
-import net.slqmy.template_paper_plugin.language.LanguageManager;
+import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
+import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
+import net.slqmy.firework_wars_plugin.language.LanguageManager;
 
 @DefaultQualifier(NonNull.class)
-public final class TemplatePaperPlugin extends JavaPlugin {
+public final class FireworkWarsPlugin extends JavaPlugin {
 
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;

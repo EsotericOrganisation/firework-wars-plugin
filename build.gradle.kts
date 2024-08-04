@@ -35,10 +35,10 @@ fun pascalcase(kebabcaseString: String): String {
   return pascalCaseString
 }
 
-description = "Test plugin for paperweight-userdev"
+description = "A Minecraft Paper plugin that adds a firework-focused PvP gamemode."
 
 val mainProjectAuthor = "Slqmy"
-val projectAuthors = listOfNotNull(mainProjectAuthor)
+val projectAuthors = listOfNotNull(mainProjectAuthor, "rolyPolyVole")
 
 val topLevelDomain = "net"
 

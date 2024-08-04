@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.data.player;
+package net.slqmy.firework_wars_plugin.data.player;
 
 import java.util.UUID;
 

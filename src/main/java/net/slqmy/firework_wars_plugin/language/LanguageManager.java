@@ -1,10 +1,10 @@
-package net.slqmy.template_paper_plugin.language;
+package net.slqmy.firework_wars_plugin.language;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
-import net.slqmy.template_paper_plugin.data.player.PlayerProfile;
-import net.slqmy.template_paper_plugin.util.FileUtil;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import net.slqmy.firework_wars_plugin.data.player.PlayerProfile;
+import net.slqmy.firework_wars_plugin.util.FileUtil;
 
 import java.util.UUID;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class LanguageManager {
 
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-  private final TemplatePaperPlugin plugin;
+  private final FireworkWarsPlugin plugin;
 
   private final String languagesFolderName = "languages";
   private final String languagesFolderPath;
@@ -41,7 +41,7 @@ public class LanguageManager {
     return languages.keySet();
   }
 
-  public LanguageManager(TemplatePaperPlugin plugin) {
+  public LanguageManager(FireworkWarsPlugin plugin) {
     this.plugin = plugin;
 
     File dataFolder = plugin.getDataFolder();

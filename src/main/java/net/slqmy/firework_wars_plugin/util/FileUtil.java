@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.util;
+package net.slqmy.firework_wars_plugin.util;
 
 import java.util.stream.Collectors;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package net.slqmy.template_paper_plugin.data.player;
+package net.slqmy.firework_wars_plugin.data.player;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 
 import com.google.gson.Gson;
 
-import net.slqmy.template_paper_plugin.TemplatePaperPlugin;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 
 public class PlayerDataManager {
 
-  private final TemplatePaperPlugin plugin;
+  private final FireworkWarsPlugin plugin;
 
   private final String playerDataFolderName = "player-data";
   private final String playerDataFolderPath;
@@ -25,7 +25,7 @@ public class PlayerDataManager {
 
   private final Map<UUID, PlayerProfile> playerData = new HashMap<>();
 
-  public PlayerDataManager(TemplatePaperPlugin plugin) {
+  public PlayerDataManager(FireworkWarsPlugin plugin) {
     this.plugin = plugin;
 
     playerDataFolderPath = plugin.getDataFolder().getPath() + File.separator + playerDataFolderName;
