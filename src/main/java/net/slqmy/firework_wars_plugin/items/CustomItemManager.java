@@ -6,5 +6,6 @@ import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 public class CustomItemManager {
 
   public CustomItemManager(FireworkWarsPlugin plugin) {
+    new FireworkRifleItem(plugin);
   }
 }
