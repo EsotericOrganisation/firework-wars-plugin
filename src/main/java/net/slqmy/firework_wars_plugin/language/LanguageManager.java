@@ -7,8 +7,12 @@ import net.slqmy.firework_wars_plugin.data.player.PlayerProfile;
 import net.slqmy.firework_wars_plugin.util.FileUtil;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +28,8 @@ public class LanguageManager {
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private final FireworkWarsPlugin plugin;
+
+  private final Pattern placeholderPattern = Pattern.compile("\\{(\\d+)}");
 
   private final String languagesFolderName = "languages";
   private final String languagesFolderPath;
@@ -119,6 +125,52 @@ public class LanguageManager {
     setLanguage(player.getUniqueId(), language);
   }
 
+  public String getLocale(CommandSender commandSender) {
+    if (!(commandSender instanceof Player player)) {
+      return defaultLanguage;
+    }
+
+    Locale playerLocale = player.locale();
+    String localeDisplayName = playerLocale.getDisplayName();
+
+    if (!getLanguages().contains(localeDisplayName)) {
+      return defaultLanguage;
+    }
+
+    return localeDisplayName;
+  }
+
+  public String getLocale(UUID uuid) {
+    Player player = Bukkit.getPlayer(uuid);
+    return getLocale(player);
+  }
+
+  public String getLocale(PlayerProfile profile) {
+    return getLocale(profile.getUuid());
+  }
+
+  public String getProfileLanguage(PlayerProfile profile) {
+    if (profile == null) {
+      return null;
+    }
+
+    return profile.getLanguage();
+  }
+
+  public String getProfileLanguage(UUID uuid) {
+    return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
+  }
+
+  public String getProfileLanguage(CommandSender commandSender) {
+    if (commandSender == null) {
+      return null;
+    } else if (commandSender instanceof Player player) {
+      return getProfileLanguage(player.getUniqueId());
+    } else {
+      return defaultLanguage;
+    }
+  }
+
   public String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
     Map<Message, String> languageMessageMap = languages.get(language);
     String miniMessageString = languageMessageMap.get(message);
@@ -134,81 +186,101 @@ public class LanguageManager {
     return getRawMessageString(message, language, true);
   }
 
-  public String getFormattedMessageString(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    return String.format(getRawMessageString(message, language, fallbackOnDefaultLanguage), arguments);
+  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);    
+
+    Matcher matcher = placeholderPattern.matcher(miniMessageString);
+
+    String[] parts = placeholderPattern.split(miniMessageString);
+    List<Integer> argumentIndexes = new ArrayList<>();
+
+    while (matcher.find()) {
+      argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
+    }
+
+    Component output = miniMessage.deserialize(parts[0]);
+
+    for (int i = 1; i < parts.length; i++) {
+      int argumentIndex = argumentIndexes.get(i - 1);
+      output = output.append(arguments[argumentIndex]);
+
+      String part = parts[i];
+      Component component = miniMessage.deserialize(part);
+      output = output.append(component);
+    }
+
+    return output;
   }
 
-  public String getFormattedMessageString(Message message, String language, Object... arguments) {
-    return getFormattedMessageString(message, language, true, arguments);
+  public Component getMessage(Message message, String language, Component... arguments) {
+    return getMessage(message, language, true, arguments);
   }
 
   public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
-    return miniMessage.deserialize(getFormattedMessageString(message, language, fallbackOnDefaultLanguage, arguments));
+    return getMessage(message, language, fallbackOnDefaultLanguage, toComponents(arguments));
   }
 
   public Component getMessage(Message message, String language, Object... arguments) {
     return getMessage(message, language, true, arguments);
   }
 
-  public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
     return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, CommandSender commandSender, Component... arguments) {
+    return getMessage(message, commandSender, true, arguments);
+  }
+
+  public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments));
   }
 
   public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
     return getMessage(message, commandSender, true, arguments);
   }
 
-  public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
+  public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Component... arguments) {
     return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, UUID uuid, Component... arguments) {
+    return getMessage(message, uuid, true, arguments);
+  }
+
+  public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments));
   }
 
   public Component getMessage(Message message, UUID uuid, Object... arguments) {
     return getMessage(message, uuid, true, arguments);
   }
 
-  private String getLocale(CommandSender commandSender) {
-    if (!(commandSender instanceof Player player)) {
-      return defaultLanguage;
+  public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments);
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
+    return getMessage(message, playerProfile, true, arguments);
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    return getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments));
+  }
+
+  public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+    return getMessage(message, playerProfile, true, arguments);
+  }
+
+  public Component[] toComponents(Object ...objects) {
+    return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
+  }
+
+  public Component toComponent(Object object) {
+    if (object instanceof Component component) {
+      return component;
     }
 
-    Locale playerLocale = player.locale();
-    String localeDisplayName = playerLocale.getDisplayName();
-
-    if (!getLanguages().contains(localeDisplayName)) {
-      return defaultLanguage;
-    }
-
-    return localeDisplayName;
-  }
-
-  private String getLocale(UUID uuid) {
-    Player player = Bukkit.getPlayer(uuid);
-    return getLocale(player);
-  }
-
-  private String getLocale(PlayerProfile profile) {
-    return getLocale(profile.getUuid());
-  }
-
-  private String getProfileLanguage(PlayerProfile profile) {
-    if (profile == null) {
-      return null;
-    }
-
-    return profile.getLanguage();
-  }
-
-  private String getProfileLanguage(UUID uuid) {
-    return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
-  }
-
-  private String getProfileLanguage(CommandSender commandSender) {
-    if (commandSender == null) {
-      return null;
-    } else if (commandSender instanceof Player player) {
-      return getProfileLanguage(player.getUniqueId());
-    } else {
-      return defaultLanguage;
-    }
+    return Component.text(String.valueOf(object));
   }
 }

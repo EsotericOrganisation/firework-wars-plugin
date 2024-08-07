@@ -11,8 +11,6 @@ import dev.jorel.commandapi.arguments.GreedyStringArgument;
 
 import java.util.Set;
 
-import org.bukkit.Bukkit;
-
 import net.kyori.adventure.text.Component;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.language.LanguageManager;
@@ -34,11 +32,8 @@ public class SetLanguageCommand extends CommandAPICommand {
           @Override
           public String apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
             String selectedLanguage = info.currentInput();
-
-            Bukkit.getLogger().info(selectedLanguage);
-
             if (!languages.contains(selectedLanguage)) {
-              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), true, new Object[] {selectedLanguage});
+              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), selectedLanguage);
               throw CustomArgumentException.fromAdventureComponent(errorMessage);
             }
 

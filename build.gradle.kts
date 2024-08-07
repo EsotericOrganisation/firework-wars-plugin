@@ -1,10 +1,13 @@
+import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 plugins {
   java
   `java-library`
 
-  id("io.papermc.paperweight.userdev") version "1.7.1"
+  `maven-publish`
+
+  id("io.papermc.paperweight.userdev") version "1.7.2"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
   id("xyz.jpenilla.run-paper") version "2.3.0"
 
@@ -15,7 +18,7 @@ val groupStringSeparator = "."
 val kebabcaseStringSeparator = "-"
 val snakecaseStringSeparator = "_"
 
-fun capitaliseFirstLetter(string: String): String {
+fun capitalizeFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
@@ -29,7 +32,7 @@ fun pascalcase(kebabcaseString: String): String {
   val splitString = kebabcaseString.split(kebabcaseStringSeparator)
 
   for (part in splitString) {
-    pascalCaseString += capitaliseFirstLetter(part)
+    pascalCaseString += capitalizeFirstLetter(part)
   }
 
   return pascalCaseString
@@ -42,13 +45,24 @@ val projectAuthors = listOfNotNull(mainProjectAuthor, "rolyPolyVole")
 
 val topLevelDomain = "net"
 
-group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(rootProject.name)
-version = "1.0.0-SNAPSHOT"
+val projectNameString = rootProject.name
+
+group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
+version = "1.0.0"
+
+val buildDirectoryString = buildDir.toString()
+
+val projectGroupString = group.toString()
+val projectVersionString = version.toString()
 
 val javaVersion = 21
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion)
 val paperApiVersion = "1.21"
 
 java {
+  sourceCompatibility = javaVersionEnumMember
+  targetCompatibility = javaVersionEnumMember
+
   toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 }
 
@@ -63,6 +77,14 @@ dependencies {
 }
 
 tasks {
+  build {
+    dependsOn(shadowJar)
+  }
+
+  shadowJar {
+    archiveFileName = projectNameString + "-" + projectVersionString + "." + "jar"
+  }
+
   compileJava {
     options.release = javaVersion
   }
@@ -75,8 +97,24 @@ tasks {
 bukkitPluginYaml {
   authors = projectAuthors
 
-  main = project.group.toString() + groupStringSeparator + pascalcase(rootProject.name)
+  main = projectGroupString + groupStringSeparator + pascalcase(projectNameString)
   apiVersion = paperApiVersion
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            groupId = projectGroupString
+            artifactId = projectNameString
+            version = projectVersionString
+        }
+    }
+}
+
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+  dependsOn(tasks.named("build"))
 }
