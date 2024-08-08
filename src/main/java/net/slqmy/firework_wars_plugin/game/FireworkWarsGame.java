@@ -84,6 +84,16 @@ public class FireworkWarsGame {
     
   }
 
+  public FireworkWarsTeam getTeam(Player player) {
+    for (FireworkWarsTeam team : teams) {
+      if (team.getPlayers().contains(player)) {
+        return team;
+      }
+    }
+
+    return null;
+  }
+
   public enum GameState {
     WAITING,
     STARTING,
