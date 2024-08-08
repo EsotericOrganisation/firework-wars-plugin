@@ -7,4 +7,8 @@ import net.slqmy.firework_wars_plugin.arena.BlockLocation;
 public class Arena {
   private Location lobbySpawnLocation;
   private BlockLocation[] blockLocations;
+
+  public Location getLobbySpawnLocation() {
+    return lobbySpawnLocation;
+  }
 }
