@@ -3,4 +3,4 @@ UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
 
-GAME_STARTING_IN_TIME: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
+GAME_STARTING_IN_TIME: "<yellow>The game will start in </yellow>{0}<yellow> seconds.</yellow>"
