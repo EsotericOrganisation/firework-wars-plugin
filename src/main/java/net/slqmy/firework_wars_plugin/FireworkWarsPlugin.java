@@ -10,6 +10,7 @@ import net.slqmy.firework_wars_plugin.arena.ArenaManager;
 import net.slqmy.firework_wars_plugin.commands.ArenaCommand;
 import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
 import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
+import net.slqmy.firework_wars_plugin.event.listeners.GameEventListener;
 import net.slqmy.firework_wars_plugin.game.GameManager;
 import net.slqmy.firework_wars_plugin.items.CustomItemManager;
 import net.slqmy.firework_wars_plugin.language.LanguageManager;
@@ -58,6 +59,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     arenaManager = new ArenaManager(this);
     gameManager = new GameManager(this);
     customItemManager = new CustomItemManager(this);
+
+    new GameEventListener(this);
 
     new SetLanguageCommand(this);
 
