@@ -17,7 +17,7 @@ public class Arena {
   @Expose
   private @Nullable int maximumPlayerCount;
   @Expose
-  private int countDownSeconds;
+  private int countDownSeconds = 15;
   @Expose
   private PlayerLocation[] teamSpawnLocations;
   @Expose
