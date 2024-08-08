@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.Arena;
+import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
 import net.slqmy.firework_wars_plugin.language.Message;
 
 public class FireworkWarsGame {
@@ -14,6 +15,8 @@ public class FireworkWarsGame {
   private final FireworkWarsPlugin plugin;
 
   private Arena arena;
+
+  private final List<FireworkWarsTeam> teams = new ArrayList<>();
 
   private GameState gameState = GameState.WAITING;
   private List<Player> players = new ArrayList<>();
@@ -57,7 +60,19 @@ public class FireworkWarsGame {
   }
 
   public void startGame() {
+    for (ConfiguredTeam configuredTeam : arena.getTeamInformation()) {
+      teams.add(new FireworkWarsTeam(configuredTeam));
+    }
 
+    distributePlayersAccrossTeams();
+  }
+
+  public void distributePlayersAccrossTeams() {
+    for (int i = 0; i < players.size(); i++) {
+      int teamIndex = i % teams.size();
+      FireworkWarsTeam team = teams.get(teamIndex);
+      team.addPlayer(players.get(i));
+    }
   }
 
   public enum GameState {
