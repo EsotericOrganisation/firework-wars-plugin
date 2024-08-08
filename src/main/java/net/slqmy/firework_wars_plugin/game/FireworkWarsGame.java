@@ -16,6 +16,18 @@ public class FireworkWarsGame {
   private GameState gameState = GameState.WAITING;
   private List<Player> players = new ArrayList<>();
 
+  public Arena getArena() {
+    return arena;
+  }
+
+  public GameState getGameState() {
+    return gameState;
+  }
+
+  public void setGameState(GameState gameState) {
+    this.gameState = gameState;
+  }
+
   public FireworkWarsGame(Arena arena) {
     this.arena = arena;
   }
@@ -32,7 +44,7 @@ public class FireworkWarsGame {
   }
 
   public void startGame() {
-
+    GameCountdown countdown = new GameCountdown(this);
   }
 
   public enum GameState {
