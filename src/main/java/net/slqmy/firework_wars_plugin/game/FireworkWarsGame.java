@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.Arena;
 import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
@@ -14,6 +15,8 @@ import net.slqmy.firework_wars_plugin.language.Message;
 public class FireworkWarsGame {
 
   private final FireworkWarsPlugin plugin;
+
+  private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private Arena arena;
 
@@ -92,6 +95,10 @@ public class FireworkWarsGame {
     }
 
     return null;
+  }
+
+  public void elimenateTeam(FireworkWarsTeam team) {
+    sendMessage(Message.TEAM_ELIMENATED, miniMessage.deserialize(team.getConfiguredTeam().getMiniMessageString()));
   }
 
   public enum GameState {

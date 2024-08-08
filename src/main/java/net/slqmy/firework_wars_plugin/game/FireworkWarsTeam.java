@@ -13,6 +13,10 @@ public class FireworkWarsTeam {
 
   private final List<Player> players = new ArrayList<>();
 
+  public ConfiguredTeam getConfiguredTeam() {
+    return configuredTeam;
+  }
+
   public List<Player> getPlayers() {
     return players;
   }
