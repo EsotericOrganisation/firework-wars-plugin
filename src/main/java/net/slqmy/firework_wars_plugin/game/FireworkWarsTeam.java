@@ -19,5 +19,6 @@ public class FireworkWarsTeam {
 
   public void addPlayer(Player player) {
     players.add(player);
+    player.teleport(configuredTeam.getSpawnLocation().getBukkitLocation());
   }
 }
