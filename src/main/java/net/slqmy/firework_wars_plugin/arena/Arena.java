@@ -12,10 +12,16 @@ public class Arena {
   @Expose
   private PlayerLocation lobbySpawnLocation;
   @Expose
+  private PlayerLocation[] teamSpawnLocations;
+  @Expose
   private BlockLocation[] chestLocations;
 
   public PlayerLocation getLobbySpawnLocation() {
     return lobbySpawnLocation;
+  }
+
+  public PlayerLocation[] getTeamSpawnLocations() {
+    return teamSpawnLocations;
   }
 
   public BlockLocation[] getChestLocations() {
