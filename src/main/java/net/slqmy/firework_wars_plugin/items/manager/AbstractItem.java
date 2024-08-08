@@ -1,5 +1,6 @@
-package net.slqmy.firework_wars_plugin.items;
+package net.slqmy.firework_wars_plugin.items.manager;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -14,6 +15,7 @@ import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 public abstract class AbstractItem implements Listener {
 
   protected final FireworkWarsPlugin plugin;
+  protected final MiniMessage MM;
 
   protected final String itemId;
   protected final Material itemMaterial;
@@ -22,15 +24,21 @@ public abstract class AbstractItem implements Listener {
 
   public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial) {
     this.plugin = plugin;
+    this.MM = MiniMessage.miniMessage();
+
     this.itemId = itemId;
     this.itemMaterial = itemMaterial;
 
-    isItemKey = new NamespacedKey(plugin, "custom_item_id");
+    this.isItemKey = new NamespacedKey(plugin, "custom_item_id");
 
-    Bukkit.getPluginManager().registerEvents(this, plugin);
+    plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }
 
-  public boolean isItem(ItemStack itemStack) {
+  public String getItemId() {
+    return this.itemId;
+  }
+
+  public boolean isValidCustomItem(ItemStack itemStack) {
     if (itemStack == null) {
       return false;
     }
@@ -39,8 +47,7 @@ public abstract class AbstractItem implements Listener {
       return false;
     }
 
-    PersistentDataContainer dataContainer = itemStack.getItemMeta().getPersistentDataContainer();
-    String itemStackItemId = dataContainer.get(isItemKey, PersistentDataType.STRING);
+    String itemStackItemId = plugin.getPdcManager().getStringValue(itemStack.getItemMeta(), isItemKey);
     return itemId.equals(itemStackItemId);
   }
 

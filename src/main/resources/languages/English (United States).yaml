@@ -2,3 +2,4 @@ SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
+FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful. Shoots one firework at a time.</gray>"

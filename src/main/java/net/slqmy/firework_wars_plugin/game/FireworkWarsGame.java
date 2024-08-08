@@ -9,9 +9,9 @@ import net.slqmy.firework_wars_plugin.arena.Arena;
 
 public class FireworkWarsGame {
   
-  private Arena arena;
+  private final Arena arena;
 
-  private List<Player> players = new ArrayList<>();
+  private final List<Player> players = new ArrayList<>();
 
   public FireworkWarsGame(Arena arena) {
     this.arena = arena;

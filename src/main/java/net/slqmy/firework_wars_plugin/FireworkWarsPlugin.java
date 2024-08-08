@@ -1,5 +1,6 @@
 package net.slqmy.firework_wars_plugin;
 
+import net.slqmy.firework_wars_plugin.util.PersistentDataManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
@@ -11,7 +12,7 @@ import net.slqmy.firework_wars_plugin.commands.ArenaCommand;
 import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
 import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
 import net.slqmy.firework_wars_plugin.game.GameManager;
-import net.slqmy.firework_wars_plugin.items.CustomItemManager;
+import net.slqmy.firework_wars_plugin.items.manager.CustomItemManager;
 import net.slqmy.firework_wars_plugin.language.LanguageManager;
 
 @DefaultQualifier(NonNull.class)
@@ -22,25 +23,30 @@ public final class FireworkWarsPlugin extends JavaPlugin {
   private ArenaManager arenaManager;
   private GameManager gameManager;
   private CustomItemManager customItemManager;
+  private PersistentDataManager pdcManager;
 
   public PlayerDataManager getPlayerDataManager() {
-    return playerDataManager;
+    return this.playerDataManager;
   }
 
   public LanguageManager getLanguageManager() {
-    return languageManager;
+    return this.languageManager;
   }
 
   public ArenaManager getArenaManager() {
-    return arenaManager;
+    return this.arenaManager;
   }
 
   public GameManager getGameManager() {
-    return gameManager;
+    return this.gameManager;
   }
 
   public CustomItemManager getCustomItemManager() {
-    return customItemManager;
+    return this.customItemManager;
+  }
+
+  public PersistentDataManager getPdcManager() {
+    return this.pdcManager;
   }
 
   @Override
@@ -53,14 +59,14 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     CommandAPI.onLoad(commandAPIConfig);
     CommandAPI.onEnable();
 
-    playerDataManager = new PlayerDataManager(this);
-    languageManager = new LanguageManager(this);
-    arenaManager = new ArenaManager(this);
-    gameManager = new GameManager();
-    customItemManager = new CustomItemManager(this);
+    this.playerDataManager = new PlayerDataManager(this);
+    this.languageManager = new LanguageManager(this);
+    this.arenaManager = new ArenaManager(this);
+    this.gameManager = new GameManager();
+    this.customItemManager = new CustomItemManager(this);
+    this.pdcManager = new PersistentDataManager(this);
 
     new SetLanguageCommand(this);
-
     new ArenaCommand(this);
   }
 
