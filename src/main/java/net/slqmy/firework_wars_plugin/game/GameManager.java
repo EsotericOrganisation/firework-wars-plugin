@@ -16,7 +16,7 @@ public class GameManager {
     FireworkWarsGame game = games.get(arena);
 
     if (game == null) {
-      game = new FireworkWarsGame();
+      game = new FireworkWarsGame(arena);
       games.put(arena, game);
     }
 

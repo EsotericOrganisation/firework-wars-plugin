@@ -13,6 +13,10 @@ public class FireworkWarsGame {
 
   private List<Player> players = new ArrayList<>();
 
+  public FireworkWarsGame(Arena arena) {
+    this.arena = arena;
+  }
+
   public void addPlayer(Player player) {
     players.add(player);
     player.teleport(arena.getLobbySpawnLocation());
