@@ -17,6 +17,8 @@ public class Arena {
   @Expose
   private @Nullable int maximumPlayerCount;
   @Expose
+  private int countDownSeconds;
+  @Expose
   private PlayerLocation[] teamSpawnLocations;
   @Expose
   private BlockLocation[] chestLocations;
@@ -31,6 +33,10 @@ public class Arena {
 
   public @Nullable int getmaximumPlayerCount() {
     return maximumPlayerCount;
+  }
+
+  public int getCountDownSeconds() {
+    return countDownSeconds;
   }
 
   public PlayerLocation[] getTeamSpawnLocations() {

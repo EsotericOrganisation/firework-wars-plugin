@@ -2,3 +2,5 @@ SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
+
+GAME_STARTING_IN_TIME: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"

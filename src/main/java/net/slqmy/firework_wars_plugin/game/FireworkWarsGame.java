@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.Arena;
+import net.slqmy.firework_wars_plugin.language.Message;
 
 public class FireworkWarsGame {
 
@@ -44,6 +45,12 @@ public class FireworkWarsGame {
       if (players.size() >= requiredPlayerCount) {
         startGame();
       }
+    }
+  }
+
+  public void sendMessage(Message message, Object... arguments) {
+    for (Player player : players) {
+      plugin.getLanguageManager().sendMessage(message, player, arguments);
     }
   }
 

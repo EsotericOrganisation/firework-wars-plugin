@@ -4,6 +4,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.game.FireworkWarsGame.GameState;
+import net.slqmy.firework_wars_plugin.language.Message;
 
 public class GameCountdown extends BukkitRunnable {
 
@@ -11,10 +12,14 @@ public class GameCountdown extends BukkitRunnable {
 
   private final FireworkWarsGame game;
 
+  private int countDownSeconds;
+
   public GameCountdown(FireworkWarsPlugin plugin, FireworkWarsGame game) {
     super();
     this.plugin = plugin;
     this.game = game;
+
+    countDownSeconds = game.getArena().getCountDownSeconds();
   }
 
   public void start() {
@@ -24,6 +29,8 @@ public class GameCountdown extends BukkitRunnable {
 
   @Override
   public void run() {
-    
+    game.sendMessage(Message.GAME_STARTING_IN_TIME, countDownSeconds);
+
+    countDownSeconds--;
   }
 }
