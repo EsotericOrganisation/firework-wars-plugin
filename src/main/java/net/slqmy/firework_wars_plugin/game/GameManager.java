@@ -13,6 +13,13 @@ public class GameManager {
   public GameManager() {}
 
   public FireworkWarsGame getFireworkWarsGame(Arena arena) {
+    FireworkWarsGame game = games.get(arena);
+
+    if (game == null) {
+      game = new FireworkWarsGame();
+      games.put(arena, game);
+    }
+
     return games.get(arena);
   } 
 }
