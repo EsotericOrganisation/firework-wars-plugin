@@ -90,6 +90,12 @@ public class FireworkWarsGame {
     player.setGameMode(GameMode.SPECTATOR);
 
     FireworkWarsTeam team = getTeam(player);
+    if (isTeamElimated(team)) {
+      elimenateTeam(team);
+    }
+  }
+
+  public boolean isTeamElimated(FireworkWarsTeam team) {
     boolean isEveryoneInTeamElimenated = true;
     for (Player teamPlayer : team.getPlayers()) {
       if (teamPlayer.getGameMode() != GameMode.SPECTATOR) {
@@ -97,10 +103,7 @@ public class FireworkWarsGame {
         break;
       }
     }
-
-    if (isEveryoneInTeamElimenated) {
-      elimenateTeam(team);
-    }
+    return isEveryoneInTeamElimenated;
   }
 
   public FireworkWarsTeam getTeam(Player player) {
