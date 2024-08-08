@@ -92,6 +92,10 @@ public class FireworkWarsGame {
     FireworkWarsTeam team = getTeam(player);
     if (isTeamElimated(team)) {
       elimenateTeam(team);
+      List<FireworkWarsTeam> remainingTeams = getRemainingTeams();
+      if (remainingTeams.size() == 1) {
+        endGame(remainingTeams.get(0));
+      }
     }
   }
 
@@ -104,6 +108,20 @@ public class FireworkWarsGame {
       }
     }
     return isEveryoneInTeamElimenated;
+  }
+
+  public List<FireworkWarsTeam> getRemainingTeams() {
+    List<FireworkWarsTeam> remainingTeams = new ArrayList<>();
+    for (FireworkWarsTeam team : teams) {
+      if (!isTeamElimated(team)) {
+        remainingTeams.add(team);
+      }
+    }
+    return remainingTeams;
+  }
+
+  public void endGame(FireworkWarsTeam winningTeam) {
+
   }
 
   public FireworkWarsTeam getTeam(Player player) {
