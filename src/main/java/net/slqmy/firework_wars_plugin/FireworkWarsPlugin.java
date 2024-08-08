@@ -7,6 +7,7 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.firework_wars_plugin.arena.ArenaManager;
+import net.slqmy.firework_wars_plugin.commands.ArenaCommand;
 import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
 import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
 import net.slqmy.firework_wars_plugin.game.GameManager;
@@ -59,6 +60,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     customItemManager = new CustomItemManager(this);
 
     new SetLanguageCommand(this);
+
+    new ArenaCommand(this);
   }
 
   @Override
