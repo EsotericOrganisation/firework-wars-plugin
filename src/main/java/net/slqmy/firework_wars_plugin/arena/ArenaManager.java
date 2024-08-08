@@ -28,6 +28,7 @@ public class ArenaManager {
     Gson gson = new Gson();
     try (Reader reader = new FileReader(file)) {
       arenaInformation = gson.fromJson(reader, ArenaInformation.class);
+      reader.close();
     } catch (IOException exception) {
       exception.printStackTrace();
       return;
