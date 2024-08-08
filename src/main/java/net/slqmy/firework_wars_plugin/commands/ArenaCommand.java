@@ -40,7 +40,7 @@ public class ArenaCommand extends CommandAPICommand {
         .executesPlayer((info) -> {
           int arenaNumber = (int) info.args().get(arenaNumberNodeName);
 
-          Arena arena = arenas[arenaNumber];
+          Arena arena = arenaInformation.arenas[arenaNumber - 1];
           FireworkWarsGame game = gameManager.getFireworkWarsGame(arena);
           game.addPlayer(info.sender());
         })
