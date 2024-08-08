@@ -15,12 +15,14 @@ public class ArenaManager {
 
   private ArenaInformation arenaInformation = null;
 
-  private final String arenasFilePath = "arenas.json";
+  private final String arenasResourcePath = "arenas.json";
+  private final String arenasFilePath;
 
   public ArenaManager(FireworkWarsPlugin plugin) {
     this.plugin = plugin;
 
-    plugin.saveResource(arenasFilePath, false);
+    plugin.saveResource(arenasResourcePath, false);
+    arenasFilePath = plugin.getDataFolder().getPath() + File.separator + arenasResourcePath;
     File file = new File(arenasFilePath);
 
     Gson gson = new Gson();
