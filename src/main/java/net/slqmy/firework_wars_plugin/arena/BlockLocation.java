@@ -1,10 +1,32 @@
 package net.slqmy.firework_wars_plugin.arena;
 
+import com.google.gson.annotations.Expose;
+
 public class BlockLocation {
 
-  private String worldName;
+  @Expose
+  public String worldName;
 
-  private int x;
-  private int y;
-  private int z;
+  @Expose
+  public int x;
+  @Expose
+  public int y;
+  @Expose
+  public int z;
+
+  public String getWorldName() {
+    return worldName;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public int getZ() {
+    return z;
+  }
 }
