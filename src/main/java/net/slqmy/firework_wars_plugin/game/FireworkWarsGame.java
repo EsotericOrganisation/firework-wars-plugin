@@ -3,6 +3,7 @@ package net.slqmy.firework_wars_plugin.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
@@ -84,7 +85,22 @@ public class FireworkWarsGame {
   }
 
   public void onPlayerDeath(PlayerDeathEvent event) {
-    
+    Player player = event.getPlayer();
+
+    player.setGameMode(GameMode.SPECTATOR);
+
+    FireworkWarsTeam team = getTeam(player);
+    boolean isEveryoneInTeamElimenated = true;
+    for (Player teamPlayer : team.getPlayers()) {
+      if (teamPlayer.getGameMode() != GameMode.SPECTATOR) {
+        isEveryoneInTeamElimenated = false;
+        break;
+      }
+    }
+
+    if (isEveryoneInTeamElimenated) {
+      elimenateTeam(team);
+    }
   }
 
   public FireworkWarsTeam getTeam(Player player) {
