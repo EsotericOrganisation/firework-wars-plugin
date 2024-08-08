@@ -19,6 +19,6 @@ public class FireworkWarsGame {
 
   public void addPlayer(Player player) {
     players.add(player);
-    player.teleport(arena.getLobbySpawnLocation());
+    player.teleport(arena.getLobbySpawnLocation().getBukkitLocation());
   }
 }

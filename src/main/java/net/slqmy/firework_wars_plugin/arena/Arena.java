@@ -5,15 +5,16 @@ import org.bukkit.Location;
 import com.google.gson.annotations.Expose;
 
 import net.slqmy.firework_wars_plugin.arena.BlockLocation;
+import net.slqmy.firework_wars_plugin.arena.PlayerLocation;
 
 public class Arena {
 
   @Expose
-  private Location lobbySpawnLocation;
+  private PlayerLocation lobbySpawnLocation;
   @Expose
   private BlockLocation[] blockLocations;
 
-  public Location getLobbySpawnLocation() {
+  public PlayerLocation getLobbySpawnLocation() {
     return lobbySpawnLocation;
   }
 
