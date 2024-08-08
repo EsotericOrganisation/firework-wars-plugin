@@ -1,6 +1,6 @@
 package net.slqmy.firework_wars_plugin.arena;
 
-public class Team {
+public class ConfiguredTeam {
   
   private PlayerLocation spawnLocation;
 

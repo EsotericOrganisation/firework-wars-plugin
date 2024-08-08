@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 
 import net.slqmy.firework_wars_plugin.arena.BlockLocation;
 import net.slqmy.firework_wars_plugin.arena.PlayerLocation;
-import net.slqmy.firework_wars_plugin.arena.Team;
+import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
 
 public class Arena {
 
@@ -20,7 +20,7 @@ public class Arena {
   @Expose
   private int countDownSeconds = 15;
   @Expose
-  private Team[] teamInformation;
+  private ConfiguredTeam[] teamInformation;
   @Expose
   private BlockLocation[] chestLocations;
 
@@ -40,7 +40,7 @@ public class Arena {
     return countDownSeconds;
   }
 
-  public Team[] getTeamInformation() {
+  public ConfiguredTeam[] getTeamInformation() {
     return teamInformation;
   }
 
