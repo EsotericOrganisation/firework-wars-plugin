@@ -9,6 +9,7 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.slqmy.firework_wars_plugin.arena.ArenaManager;
 import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
 import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
+import net.slqmy.firework_wars_plugin.game.GameManager;
 import net.slqmy.firework_wars_plugin.items.CustomItemManager;
 import net.slqmy.firework_wars_plugin.language.LanguageManager;
 
@@ -18,6 +19,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
   private PlayerDataManager playerDataManager;
   private LanguageManager languageManager;
   private ArenaManager arenaManager;
+  private GameManager gameManager;
   private CustomItemManager customItemManager;
 
   public PlayerDataManager getPlayerDataManager() {
@@ -30,6 +32,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
   public ArenaManager getArenaManager() {
     return arenaManager;
+  }
+
+  public GameManager getGameManager() {
+    return gameManager;
   }
 
   public CustomItemManager getCustomItemManager() {
@@ -49,6 +55,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     playerDataManager = new PlayerDataManager(this);
     languageManager = new LanguageManager(this);
     arenaManager = new ArenaManager(this);
+    gameManager = new GameManager();
     customItemManager = new CustomItemManager(this);
 
     new SetLanguageCommand(this);
