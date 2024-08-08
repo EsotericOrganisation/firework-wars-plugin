@@ -18,6 +18,10 @@ public class ArenaManager {
   private final String arenasResourcePath = "arenas.json";
   private final String arenasFilePath;
 
+  public ArenaInformation getArenaInformation() {
+    return arenaInformation;
+  }
+
   public ArenaManager(FireworkWarsPlugin plugin) {
     this.plugin = plugin;
 
