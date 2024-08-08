@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.Arena;
 
 public class FireworkWarsGame {
-  
+
+  private final FireworkWarsPlugin plugin;
+
   private Arena arena;
 
   private final int requiredPlayerCount = 2;
@@ -28,7 +31,8 @@ public class FireworkWarsGame {
     this.gameState = gameState;
   }
 
-  public FireworkWarsGame(Arena arena) {
+  public FireworkWarsGame(FireworkWarsPlugin plugin, Arena arena) {
+    this.plugin = plugin;
     this.arena = arena;
   }
 
@@ -44,7 +48,8 @@ public class FireworkWarsGame {
   }
 
   public void startGame() {
-    GameCountdown countdown = new GameCountdown(this);
+    GameCountdown countdown = new GameCountdown(plugin, this);
+    countdown.start();
   }
 
   public enum GameState {
