@@ -121,7 +121,7 @@ public class FireworkWarsGame {
   }
 
   public void endGame(FireworkWarsTeam winningTeam) {
-
+    sendMessage(Message.TEAM_WON, miniMessage.deserialize(winningTeam.getConfiguredTeam().getMiniMessageString()));
   }
 
   public FireworkWarsTeam getTeam(Player player) {
