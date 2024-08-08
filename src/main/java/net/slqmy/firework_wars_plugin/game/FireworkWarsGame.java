@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.Arena;
@@ -77,6 +78,10 @@ public class FireworkWarsGame {
       FireworkWarsTeam team = teams.get(teamIndex);
       team.addPlayer(players.get(i));
     }
+  }
+
+  public void onPlayerDeath(PlayerDeathEvent event) {
+    
   }
 
   public enum GameState {
