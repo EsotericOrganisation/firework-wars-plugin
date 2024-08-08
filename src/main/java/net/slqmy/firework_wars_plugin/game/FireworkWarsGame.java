@@ -121,7 +121,7 @@ public class FireworkWarsGame {
   }
 
   public void endGame(FireworkWarsTeam winningTeam) {
-    sendMessage(Message.TEAM_WON, miniMessage.deserialize(winningTeam.getConfiguredTeam().getMiniMessageString()));
+    sendMessage(Message.TEAM_WON, winningTeam.getDeserializedTeamName());
   }
 
   public FireworkWarsTeam getTeam(Player player) {
@@ -135,7 +135,7 @@ public class FireworkWarsGame {
   }
 
   public void elimenateTeam(FireworkWarsTeam team) {
-    sendMessage(Message.TEAM_ELIMENATED, miniMessage.deserialize(team.getConfiguredTeam().getMiniMessageString()));
+    sendMessage(Message.TEAM_ELIMENATED, team.getDeserializedTeamName());
   }
 
   public enum GameState {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
+import net.kyori.adventure.text.Component;
 import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
 
 public class FireworkWarsTeam {
@@ -28,5 +29,9 @@ public class FireworkWarsTeam {
   public void addPlayer(Player player) {
     players.add(player);
     player.teleport(configuredTeam.getSpawnLocation().getBukkitLocation());
+  }
+
+  public Component getDeserializedTeamName() {
+    return configuredTeam.getDeserializedTeamName();
   }
 }
