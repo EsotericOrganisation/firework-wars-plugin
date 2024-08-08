@@ -272,6 +272,54 @@ public class LanguageManager {
     return getMessage(message, playerProfile, true, arguments);
   }
 
+  public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    commandSender.sendMessage(getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
+  }
+
+  public void sendMessage(Message message, CommandSender commandSender, Component... arguments) {
+    commandSender.sendMessage(getMessage(message, commandSender, true, arguments));
+  }
+
+  public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    commandSender.sendMessage(getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments)));
+  }
+
+  public void sendMessage(Message message, CommandSender commandSender, Object... arguments) {
+    commandSender.sendMessage(getMessage(message, commandSender, true, arguments));
+  }
+
+  public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    Bukkit.getPlayer(uuid).sendMessage(getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments));
+  }
+
+  public void sendMessage(Message message, UUID uuid, Component... arguments) {
+    Bukkit.getPlayer(uuid).sendMessage(getMessage(message, uuid, true, arguments));
+  }
+
+  public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    Bukkit.getPlayer(uuid).sendMessage(getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments)));
+  }
+
+  public void sendMessage(Message message, UUID uuid, Object... arguments) {
+    Bukkit.getPlayer(uuid).sendMessage(getMessage(message, uuid, true, arguments));
+  }
+
+  public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
+    Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments));
+  }
+
+  public void sendMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
+    Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, true, arguments));
+  }
+
+  public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
+    Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments)));
+  }
+
+  public void sendMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
+    Bukkit.getPlayer(playerProfile.getUuid()).sendMessage(getMessage(message, playerProfile, true, arguments));
+  }
+
   public Component[] toComponents(Object ...objects) {
     return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
   }
