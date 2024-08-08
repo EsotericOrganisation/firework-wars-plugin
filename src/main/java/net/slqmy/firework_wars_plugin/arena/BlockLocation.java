@@ -5,14 +5,14 @@ import com.google.gson.annotations.Expose;
 public class BlockLocation {
 
   @Expose
-  public String worldName;
+  private String worldName;
 
   @Expose
-  public int x;
+  private int x;
   @Expose
-  public int y;
+  private int y;
   @Expose
-  public int z;
+  private int z;
 
   public String getWorldName() {
     return worldName;
