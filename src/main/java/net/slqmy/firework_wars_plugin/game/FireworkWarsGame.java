@@ -29,6 +29,10 @@ public class FireworkWarsGame {
     return gameState;
   }
 
+  public List<Player> getPlayers() {
+    return players;
+  }
+
   public void setGameState(GameState gameState) {
     this.gameState = gameState;
   }

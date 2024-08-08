@@ -7,6 +7,8 @@ import net.slqmy.firework_wars_plugin.arena.Arena;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.entity.Player;
+
 public class GameManager {
 
   private final FireworkWarsPlugin plugin;
@@ -27,4 +29,14 @@ public class GameManager {
 
     return games.get(arena);
   } 
+
+  public FireworkWarsGame getFireworkWarsGame(Player player) {
+    for (FireworkWarsGame game : games.values()) {
+      if (game.getPlayers().contains(player)) {
+        return game;
+      }
+    }
+
+    return null;
+  }
 }
