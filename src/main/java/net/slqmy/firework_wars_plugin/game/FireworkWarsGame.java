@@ -15,8 +15,6 @@ public class FireworkWarsGame {
 
   private Arena arena;
 
-  private final int requiredPlayerCount = 2;
-
   private GameState gameState = GameState.WAITING;
   private List<Player> players = new ArrayList<>();
 
@@ -42,7 +40,7 @@ public class FireworkWarsGame {
     player.teleport(arena.getLobbySpawnLocation().getBukkitLocation());
 
     if (gameState == GameState.WAITING) {
-      if (players.size() >= requiredPlayerCount) {
+      if (players.size() >= arena.getMinimumPlayerCount()) {
         startCountdown();
       }
     }
