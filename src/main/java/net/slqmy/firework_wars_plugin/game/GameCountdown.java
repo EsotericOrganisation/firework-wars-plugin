@@ -20,6 +20,7 @@ public class GameCountdown extends BukkitRunnable {
     this.game = game;
 
     countDownSeconds = game.getArena().getCountDownSeconds();
+    start();
   }
 
   public void start() {
@@ -32,5 +33,9 @@ public class GameCountdown extends BukkitRunnable {
     game.sendMessage(Message.GAME_STARTING_IN_TIME, countDownSeconds);
 
     countDownSeconds--;
+    if (countDownSeconds == 0) {
+      cancel();
+      game.startGame();
+    }
   }
 }

@@ -43,7 +43,7 @@ public class FireworkWarsGame {
 
     if (gameState == GameState.WAITING) {
       if (players.size() >= requiredPlayerCount) {
-        startGame();
+        startCountdown();
       }
     }
   }
@@ -54,9 +54,12 @@ public class FireworkWarsGame {
     }
   }
 
+  public void startCountdown() {
+    new GameCountdown(plugin, this);
+  }
+
   public void startGame() {
-    GameCountdown countdown = new GameCountdown(plugin, this);
-    countdown.start();
+
   }
 
   public enum GameState {
