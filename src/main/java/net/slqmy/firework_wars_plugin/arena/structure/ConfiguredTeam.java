@@ -4,7 +4,8 @@ import com.google.gson.annotations.Expose;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.slqmy.firework_wars_plugin.arena.dataType.PlayerLocation;
+import net.slqmy.firework_wars_plugin.arena.data_type.PlayerLocation;
+
 import org.bukkit.Color;
 
 public class ConfiguredTeam {
