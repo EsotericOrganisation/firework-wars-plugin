@@ -1,6 +1,8 @@
 package net.slqmy.firework_wars_plugin.items;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
+import net.slqmy.firework_wars_plugin.game.FireworkWarsGame;
+import net.slqmy.firework_wars_plugin.game.FireworkWarsTeam;
 import net.slqmy.firework_wars_plugin.items.nms.CustomCrossbow;
 import net.slqmy.firework_wars_plugin.util.ItemBuilder;
 import org.bukkit.Color;
@@ -13,9 +15,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import net.kyori.adventure.text.format.TextDecoration;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.items.manager.AbstractItem;
 import net.slqmy.firework_wars_plugin.language.Message;
@@ -44,10 +44,22 @@ public class FireworkRifleItem extends AbstractItem {
 
   @EventHandler
   public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
-    CrossbowMeta meta = (CrossbowMeta) event.getCrossbow().getItemMeta();
+    if (!(event.getEntity() instanceof Player player)) {
+      return;
+    }
+
+    CrossbowMeta crossbowMeta = (CrossbowMeta) event.getCrossbow().getItemMeta();
 
     ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
     FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
+
+    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+    FireworkWarsTeam team = game.getTeam(player);
+
+    addFireworkStars(fireworkMeta, team.getConfiguredTeam().getColor());
+    firework.setItemMeta(fireworkMeta);
+
+    crossbowMeta.setChargedProjectiles(List.of(firework));
   }
 
   @EventHandler
@@ -55,8 +67,8 @@ public class FireworkRifleItem extends AbstractItem {
 
   }
 
-  private void addFireworkStars(FireworkMeta meta, Color color, int count) {
-    for (int i = 0; i < count; i++) {
+  private void addFireworkStars(FireworkMeta meta, Color color) {
+    for (int i = 0; i < 4; i++) {
       meta.addEffect(FireworkEffect
           .builder()
           .withColor(Color.WHITE)

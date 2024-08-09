@@ -6,7 +6,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.Component;
-import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
+import net.slqmy.firework_wars_plugin.arena.structure.ConfiguredTeam;
 
 public class FireworkWarsTeam {
 

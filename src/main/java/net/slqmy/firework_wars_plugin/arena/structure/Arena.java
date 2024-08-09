@@ -1,22 +1,18 @@
-package net.slqmy.firework_wars_plugin.arena;
-
-import org.bukkit.Location;
-import org.jetbrains.annotations.Nullable;
+package net.slqmy.firework_wars_plugin.arena.structure;
 
 import com.google.gson.annotations.Expose;
 
-import net.slqmy.firework_wars_plugin.arena.BlockLocation;
-import net.slqmy.firework_wars_plugin.arena.PlayerLocation;
-import net.slqmy.firework_wars_plugin.arena.ConfiguredTeam;
+import net.slqmy.firework_wars_plugin.arena.dataType.BlockLocation;
+import net.slqmy.firework_wars_plugin.arena.dataType.PlayerLocation;
 
 public class Arena {
 
   @Expose
   private PlayerLocation lobbySpawnLocation;
   @Expose
-  private @Nullable int minimumPlayerCount = 2;
+  private int minimumPlayerCount = 2;
   @Expose
-  private @Nullable int maximumPlayerCount = PlayerCount.INFINITY.getValue();
+  private int maximumPlayerCount = PlayerCount.INFINITY.getValue();
   @Expose
   private int countDownSeconds = 15;
   @Expose
@@ -28,11 +24,11 @@ public class Arena {
     return lobbySpawnLocation;
   }
 
-  public @Nullable int getMinimumPlayerCount() {
+  public int getMinimumPlayerCount() {
     return minimumPlayerCount;
   }
 
-  public @Nullable int getmaximumPlayerCount() {
+  public int getMaximumPlayerCount() {
     return maximumPlayerCount;
   }
 
@@ -51,7 +47,7 @@ public class Arena {
   public enum PlayerCount {
     INFINITY(-1);
 
-    private int value;
+    private final int value;
 
     public int getValue() {
       return value;

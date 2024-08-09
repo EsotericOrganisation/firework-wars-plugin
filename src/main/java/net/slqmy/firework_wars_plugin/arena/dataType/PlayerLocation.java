@@ -1,4 +1,4 @@
-package net.slqmy.firework_wars_plugin.arena;
+package net.slqmy.firework_wars_plugin.arena.dataType;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

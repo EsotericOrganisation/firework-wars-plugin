@@ -1,9 +1,11 @@
-package net.slqmy.firework_wars_plugin.arena;
+package net.slqmy.firework_wars_plugin.arena.structure;
 
 import com.google.gson.annotations.Expose;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.slqmy.firework_wars_plugin.arena.dataType.PlayerLocation;
+import org.bukkit.Color;
 
 public class ConfiguredTeam {
 
@@ -12,10 +14,16 @@ public class ConfiguredTeam {
   @Expose
   private String miniMessageString;
   @Expose
+  private Color color;
+  @Expose
   private PlayerLocation spawnLocation;
 
   public String getMiniMessageString() {
     return miniMessageString;
+  }
+
+  public Color getColor() {
+    return color;
   }
 
   public PlayerLocation getSpawnLocation() {

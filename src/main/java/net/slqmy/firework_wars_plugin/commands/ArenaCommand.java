@@ -7,9 +7,9 @@ import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.IntegerArgument;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
-import net.slqmy.firework_wars_plugin.arena.Arena;
-import net.slqmy.firework_wars_plugin.arena.ArenaInformation;
-import net.slqmy.firework_wars_plugin.arena.ArenaManager;
+import net.slqmy.firework_wars_plugin.arena.structure.Arena;
+import net.slqmy.firework_wars_plugin.arena.structure.ArenaInformation;
+import net.slqmy.firework_wars_plugin.arena.manager.ArenaManager;
 import net.slqmy.firework_wars_plugin.game.FireworkWarsGame;
 import net.slqmy.firework_wars_plugin.game.GameManager;
 

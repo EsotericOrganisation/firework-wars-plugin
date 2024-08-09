@@ -12,22 +12,29 @@ import net.slqmy.firework_wars_plugin.game.FireworkWarsGame;
 public class GameEventListener implements Listener {
   
   private final FireworkWarsPlugin plugin;
+  private final FireworkWarsGame game;
 
-  public GameEventListener(FireworkWarsPlugin plugin) {
+  public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
     this.plugin = plugin;
+    this.game = game;
+  }
 
-    Bukkit.getPluginManager().registerEvents(this, plugin);
+  public void register() {
+    plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }
 
   @EventHandler
   public void onPlayerDeath(PlayerDeathEvent event) {
     Player player = event.getPlayer();
-    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
 
-    if (game == null) {
+    if (!isInGame(player)) {
       return;
     }
 
     game.onPlayerDeath(event);
+  }
+
+  private boolean isInGame(Player player) {
+    return game.getPlayers().contains(player);
   }
 }
