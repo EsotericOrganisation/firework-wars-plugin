@@ -11,6 +11,7 @@ import net.slqmy.firework_wars_plugin.arena.ArenaManager;
 import net.slqmy.firework_wars_plugin.commands.ArenaCommand;
 import net.slqmy.firework_wars_plugin.commands.SetLanguageCommand;
 import net.slqmy.firework_wars_plugin.data.player.PlayerDataManager;
+import net.slqmy.firework_wars_plugin.event.listeners.GameEventListener;
 import net.slqmy.firework_wars_plugin.game.GameManager;
 import net.slqmy.firework_wars_plugin.items.manager.CustomItemManager;
 import net.slqmy.firework_wars_plugin.language.LanguageManager;

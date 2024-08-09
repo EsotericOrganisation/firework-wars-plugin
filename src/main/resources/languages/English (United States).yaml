@@ -3,3 +3,9 @@ UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
 FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful. Shoots one firework at a time.</gray>"
+
+GAME_STARTING_IN_TIME_PLUARAL: "<yellow>The game will start in </yellow>{0}<yellow> seconds.</yellow>"
+GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow>{0}<yellow> second.</yellow>"
+
+TEAM_ELIMENATED: "{0}<yellow> has been elimenated!</yellow>"
+TEAM_WON: "{0}<yellow> has won the game!</yellow>"
