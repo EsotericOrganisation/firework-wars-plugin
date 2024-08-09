@@ -71,7 +71,7 @@ public class PersistentDataManager {
 
   public void setStringValue(PersistentDataHolder holder, String key, String value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
-    pdc.set(this.fromString(key), PersistentDataType.STRING, value);
+    pdc.set(fromString(key), PersistentDataType.STRING, value);
   }
 
   public void setBooleanValue(PersistentDataHolder holder, NamespacedKey key, Boolean value) {
@@ -81,7 +81,7 @@ public class PersistentDataManager {
 
   public void setBooleanValue(PersistentDataHolder holder, String key, Boolean value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
-    pdc.set(this.fromString(key), PersistentDataType.BOOLEAN, value);
+    pdc.set(fromString(key), PersistentDataType.BOOLEAN, value);
   }
 
   public void setIntValue(PersistentDataHolder holder, NamespacedKey key, Integer value) {
@@ -91,7 +91,7 @@ public class PersistentDataManager {
 
   public void setIntValue(PersistentDataHolder holder, String key, Integer value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
-    pdc.set(this.fromString(key), PersistentDataType.INTEGER, value);
+    pdc.set(fromString(key), PersistentDataType.INTEGER, value);
   }
 
   public void setIntListValue(PersistentDataHolder holder, NamespacedKey key, int[] value) {
@@ -101,10 +101,10 @@ public class PersistentDataManager {
 
   public void setIntListValue(PersistentDataHolder holder, String key, int[] value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
-    pdc.set(this.fromString(key), PersistentDataType.INTEGER_ARRAY, value);
+    pdc.set(fromString(key), PersistentDataType.INTEGER_ARRAY, value);
   }
 
   private NamespacedKey fromString(String key) {
-    return new NamespacedKey(this.plugin, key);
+    return new NamespacedKey(plugin, key);
   }
 }

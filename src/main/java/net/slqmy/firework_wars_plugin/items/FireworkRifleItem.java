@@ -30,14 +30,12 @@ public class FireworkRifleItem extends AbstractItem {
 
   @Override
   protected ItemStack getItem(Player player) {
-    AbstractItem ammoItem = plugin.getCustomItemManager().getItem("firework_rifle_ammo");
-
     return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
       .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE, player))
       .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_LORE, player))
       .setEnchanted(true)
       .setUnbreakable(true)
-      .itemSupplier(() -> new CustomCrossbow(ammoItem).getDefaultInstance().asBukkitCopy())
+      .itemSupplier(() -> plugin.getCustomItemManager().getNMSItem("firework_rifle_crossbow").getDefaultInstance().asBukkitCopy())
       .modifyMeta(meta -> meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true))
       .build();
   }

@@ -35,7 +35,7 @@ public abstract class AbstractItem implements Listener {
   }
 
   public String getItemId() {
-    return this.itemId;
+    return itemId;
   }
 
   public boolean isValidCustomItem(ItemStack itemStack) {

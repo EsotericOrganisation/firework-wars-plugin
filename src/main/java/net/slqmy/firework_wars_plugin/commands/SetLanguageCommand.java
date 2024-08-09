@@ -26,19 +26,16 @@ public class SetLanguageCommand extends CommandAPICommand {
 
     String languageArgumentNodeName = "language";
 
-    Argument<String> languageArgument = new CustomArgument<String, String>(
+    Argument<String> languageArgument = new CustomArgument<>(
         new GreedyStringArgument(languageArgumentNodeName),
-        new CustomArgumentInfoParser<String, String>() {
-          @Override
-          public String apply(CustomArgumentInfo<String> info) throws CustomArgumentException {
+        info -> {
             String selectedLanguage = info.currentInput();
             if (!languages.contains(selectedLanguage)) {
-              Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), selectedLanguage);
-              throw CustomArgumentException.fromAdventureComponent(errorMessage);
+                Component errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE, info.sender(), selectedLanguage);
+                throw CustomArgumentException.fromAdventureComponent(errorMessage);
             }
 
             return selectedLanguage;
-          }
         }).includeSuggestions(ArgumentSuggestions.strings(languageManager.getLanguages().toArray(String[]::new)));
 
     withArguments(languageArgument);
