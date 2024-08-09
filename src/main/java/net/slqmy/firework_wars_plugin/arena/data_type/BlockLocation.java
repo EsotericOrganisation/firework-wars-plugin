@@ -1,4 +1,4 @@
-package net.slqmy.firework_wars_plugin.arena.dataType;
+package net.slqmy.firework_wars_plugin.arena.data_type;
 
 import com.google.gson.annotations.Expose;
 

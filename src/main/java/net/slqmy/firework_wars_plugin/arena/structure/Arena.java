@@ -2,8 +2,8 @@ package net.slqmy.firework_wars_plugin.arena.structure;
 
 import com.google.gson.annotations.Expose;
 
-import net.slqmy.firework_wars_plugin.arena.dataType.BlockLocation;
-import net.slqmy.firework_wars_plugin.arena.dataType.PlayerLocation;
+import net.slqmy.firework_wars_plugin.arena.data_type.BlockLocation;
+import net.slqmy.firework_wars_plugin.arena.data_type.PlayerLocation;
 
 public class Arena {
 
