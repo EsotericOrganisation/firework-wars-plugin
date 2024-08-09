@@ -63,7 +63,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     this.playerDataManager = new PlayerDataManager(this);
     this.languageManager = new LanguageManager(this);
     this.arenaManager = new ArenaManager(this);
-    this.gameManager = new GameManager();
+    this.gameManager = new GameManager(this);
     this.customItemManager = new CustomItemManager(this);
     this.pdcManager = new PersistentDataManager(this);
 
