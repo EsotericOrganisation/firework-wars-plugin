@@ -29,13 +29,13 @@ public class FireworkRifleItem extends AbstractItem {
   }
 
   @Override
-  protected ItemStack getItem(Player player) {
+  public ItemStack getItem(Player player) {
     return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
       .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE, player))
       .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_LORE, player))
       .setEnchanted(true)
       .setUnbreakable(true)
-      .itemSupplier(() -> plugin.getCustomItemManager().getNMSItem("firework_rifle_crossbow").getDefaultInstance().asBukkitCopy())
+      .itemSupplier(() -> plugin.getCustomItemManager().getBukkitItemStackFromNMS("crossbow"))
       .modifyMeta(meta -> meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true))
       .build();
   }
@@ -46,17 +46,21 @@ public class FireworkRifleItem extends AbstractItem {
       return;
     }
 
-    CrossbowMeta crossbowMeta = (CrossbowMeta) event.getCrossbow().getItemMeta();
+    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+
+    if (game == null) {
+      return;
+    }
+
+    FireworkWarsTeam team = game.getTeam(player);
 
     ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
     FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
 
-    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
-    FireworkWarsTeam team = game.getTeam(player);
-
     addFireworkStars(fireworkMeta, team.getConfiguredTeam().getColor());
     firework.setItemMeta(fireworkMeta);
 
+    CrossbowMeta crossbowMeta = (CrossbowMeta) event.getCrossbow().getItemMeta();
     crossbowMeta.setChargedProjectiles(List.of(firework));
   }
 

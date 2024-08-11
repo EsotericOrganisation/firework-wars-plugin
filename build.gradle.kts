@@ -15,21 +15,21 @@ plugins {
 }
 
 val groupStringSeparator = "."
-val kebabcaseStringSeparator = "-"
-val snakecaseStringSeparator = "_"
+val kebabCaseStringSeparator = "-"
+val snakeCaseStringSeparator = "_"
 
 fun capitalizeFirstLetter(string: String): String {
   return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
 }
 
-fun snakecase(kebabcaseString: String): String {
-  return kebabcaseString.lowercase().replace(kebabcaseStringSeparator, snakecaseStringSeparator)
+fun snakeCase(kebabCaseString: String): String {
+  return kebabCaseString.lowercase().replace(kebabCaseStringSeparator, snakeCaseStringSeparator)
 }
 
-fun pascalcase(kebabcaseString: String): String {
+fun pascalCase(kebabCaseString: String): String {
   var pascalCaseString = ""
 
-  val splitString = kebabcaseString.split(kebabcaseStringSeparator)
+  val splitString = kebabCaseString.split(kebabCaseStringSeparator)
 
   for (part in splitString) {
     pascalCaseString += capitalizeFirstLetter(part)
@@ -41,13 +41,13 @@ fun pascalcase(kebabcaseString: String): String {
 description = "A Minecraft Paper plugin that adds a firework-focused PvP gamemode."
 
 val mainProjectAuthor = "Slqmy"
-val projectAuthors = listOfNotNull(mainProjectAuthor, "rolyPolyVole")
+val mainestProjectAuthor = "rolyPolyVole"
+val projectAuthors = listOfNotNull(mainProjectAuthor, mainestProjectAuthor)
 
 val topLevelDomain = "net"
-
 val projectNameString = rootProject.name
 
-group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakecase(projectNameString)
+group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakeCase(projectNameString)
 version = "1.0.0"
 
 val buildDirectoryString = buildDir.toString()
@@ -97,7 +97,7 @@ tasks {
 bukkitPluginYaml {
   authors = projectAuthors
 
-  main = projectGroupString + groupStringSeparator + pascalcase(projectNameString)
+  main = projectGroupString + groupStringSeparator + pascalCase(projectNameString)
   apiVersion = paperApiVersion
 
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP

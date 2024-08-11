@@ -17,7 +17,7 @@ public class RifleAmmo extends AbstractItem {
     }
 
     @Override
-    protected ItemStack getItem(Player player) {
+    public ItemStack getItem(Player player) {
         return new ItemBuilder<FireworkMeta>(plugin, itemMaterial)
             .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_AMMO, player))
             .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_AMMO_LORE, player))

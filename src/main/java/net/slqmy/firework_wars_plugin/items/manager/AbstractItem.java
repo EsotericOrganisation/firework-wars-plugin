@@ -55,5 +55,5 @@ public abstract class AbstractItem implements Listener {
     return new ItemStack(itemMaterial);
   }
 
-  protected abstract ItemStack getItem(Player player);
+  public abstract ItemStack getItem(Player player);
 }
