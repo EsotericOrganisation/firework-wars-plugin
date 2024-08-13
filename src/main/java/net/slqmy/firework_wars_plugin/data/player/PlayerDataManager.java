@@ -1,5 +1,9 @@
 package net.slqmy.firework_wars_plugin.data.player;
 
+import com.google.gson.Gson;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import org.bukkit.entity.Player;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,12 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
-import com.google.gson.Gson;
-
-import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 
 public class PlayerDataManager {
 
@@ -88,8 +86,8 @@ public class PlayerDataManager {
 
         writer.write(json);
 
-        writer.close();
         writer.flush();
+        writer.close();
       } catch (IOException exception) {
         exception.printStackTrace();
       }

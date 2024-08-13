@@ -1,20 +1,19 @@
 package net.slqmy.firework_wars_plugin.items.manager;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import net.slqmy.firework_wars_plugin.util.Keys;
+import net.slqmy.firework_wars_plugin.util.PersistentDataManager;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-
-import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 
 public abstract class AbstractItem implements Listener {
 
   protected final FireworkWarsPlugin plugin;
+  protected final PersistentDataManager pdcManager;
   protected final MiniMessage MM;
 
   protected final String itemId;
@@ -24,12 +23,13 @@ public abstract class AbstractItem implements Listener {
 
   public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial) {
     this.plugin = plugin;
+    this.pdcManager = plugin.getPdcManager();
     this.MM = MiniMessage.miniMessage();
 
     this.itemId = itemId;
     this.itemMaterial = itemMaterial;
 
-    this.isItemKey = new NamespacedKey(plugin, "custom_item_id");
+    this.isItemKey = Keys.CUSTOM_ITEM_ID;
 
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }

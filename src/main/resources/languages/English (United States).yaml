@@ -7,5 +7,5 @@ FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful. Shoots one firework a
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow>{0}<yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow>{0}<yellow> second.</yellow>"
 
-TEAM_ELIMENATED: "{0}<yellow> has been elimenated!</yellow>"
+TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
