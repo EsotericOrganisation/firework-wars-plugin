@@ -2,7 +2,21 @@ SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
-FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful. Shoots one firework at a time.</gray>"
+FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful.</gray>\n<gray>Shoots one firework at a time.</gray>"
+FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
+FIREWORK_RIFLE_AMMO_LORE: "<gray>1x rifle ammo</gray>"
+
+PLAYER_COMPASS: "<yellow>Player Tracker</yellow>"
+PLAYER_COMPASS_LORE_NOT_TRACKING: "<gray>No player is being tracked.</gray>"
+PLAYER_COMPASS_LORE_TRACKING: "<green>Tracking target: {0}</green>"
+PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
+PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target: {0}</green>"
+PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target:</bold> {0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}</green>"
+
+FIREWORK_SHOTGUN: "<red>Firework</red> Shotgun"
+FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>Shoots 7 fireworks at a time.</gray>"
+FIREWORK_SHOTGUN_AMMO: "<yellow>Shotgun Ammo</yellow>"
+FIREWORK_SHOTGUN_AMMO_LORE: "<gray>1x shotgun ammo</gray>"
 
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow>{0}<yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow>{0}<yellow> second.</yellow>"

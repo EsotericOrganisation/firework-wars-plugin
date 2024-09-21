@@ -31,21 +31,25 @@ public class CustomCrossbow extends CrossbowItem {
 
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return this::isValidAmmoItem;
+        return stack -> this.isValidAmmoItem(stack, false);
     }
 
     @Override
     public Predicate<ItemStack> getSupportedHeldProjectiles() {
-        return this.getAllSupportedProjectiles();
+        return stack -> this.isValidAmmoItem(stack, true);
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    private boolean isValidAmmoItem(ItemStack stack) {
+    private boolean isValidAmmoItem(ItemStack stack, boolean offHand) {
         FireworkWarsPlugin plugin = FireworkWarsPlugin.getInstance();
+
+        boolean superResult = offHand
+          ? super.getSupportedHeldProjectiles().test(stack)
+          : super.getAllSupportedProjectiles().test(stack);
 
         if (plugin == null) {
             Bukkit.getLogger().severe("Failed to get FireworkWars plugin instance!");
-            return super.getAllSupportedProjectiles().test(stack);
+            return superResult;
         }
 
         PersistentDataManager pdcManager = plugin.getPdcManager();
@@ -54,20 +58,23 @@ public class CustomCrossbow extends CrossbowItem {
         ItemMeta meta = bukkitStack.getItemMeta();
 
         if (meta == null) {
-            return false;
+            return superResult;
         }
 
-        if (!pdcManager.hasKey(meta, Keys.ITEM_OWNER_UUID)) {
-            return false;
+        if (!pdcManager.hasKey(meta, Keys.AMMO_OWNER_UUID)) {
+            return superResult;
         }
 
         if (!pdcManager.hasKey(meta, Keys.CUSTOM_ITEM_ID)) {
-            return false;
+            return superResult;
         }
 
-        UUID ownerUUID = UUID.fromString(pdcManager.getStringValue(meta, Keys.ITEM_OWNER_UUID));
+        UUID ownerUUID = UUID.fromString(pdcManager.getStringValue(meta, Keys.AMMO_OWNER_UUID));
         Player owner = plugin.getServer().getPlayer(ownerUUID);
-        assert owner != null;
+
+        if (owner == null) {
+            return superResult;
+        }
 
         org.bukkit.inventory.ItemStack mainHandItem = owner.getInventory().getItemInMainHand();
         org.bukkit.inventory.ItemStack offHandItem = owner.getInventory().getItemInOffHand();
@@ -80,9 +87,9 @@ public class CustomCrossbow extends CrossbowItem {
         } else if (!offHandItem.isEmpty() && toNMS(offHandItem).is(this)) {
             String acceptedAmmoId = pdcManager.getStringValue(offHandItem.getItemMeta(), Keys.GUN_ACCEPTED_AMMO_ID);
             return ammoId.equals(acceptedAmmoId);
-        } else {
-            return false;
         }
+
+        return superResult;
     }
 
     private ItemStack toNMS(org.bukkit.inventory.ItemStack stack) {

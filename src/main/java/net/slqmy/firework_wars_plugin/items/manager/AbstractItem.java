@@ -2,6 +2,7 @@ package net.slqmy.firework_wars_plugin.items.manager;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import net.slqmy.firework_wars_plugin.language.LanguageManager;
 import net.slqmy.firework_wars_plugin.util.Keys;
 import net.slqmy.firework_wars_plugin.util.PersistentDataManager;
 import org.bukkit.Material;
@@ -9,12 +10,15 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItem implements Listener {
 
   protected final FireworkWarsPlugin plugin;
-  protected final PersistentDataManager pdcManager;
   protected final MiniMessage MM;
+
+  protected final PersistentDataManager pdcManager;
+  protected final LanguageManager languageManager;
 
   protected final String itemId;
   protected final Material itemMaterial;
@@ -23,8 +27,10 @@ public abstract class AbstractItem implements Listener {
 
   public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial) {
     this.plugin = plugin;
-    this.pdcManager = plugin.getPdcManager();
     this.MM = MiniMessage.miniMessage();
+
+    this.pdcManager = plugin.getPdcManager();
+    this.languageManager = plugin.getLanguageManager();
 
     this.itemId = itemId;
     this.itemMaterial = itemMaterial;
@@ -38,6 +44,7 @@ public abstract class AbstractItem implements Listener {
     return itemId;
   }
 
+  @Contract("null -> false")
   public boolean isValidCustomItem(ItemStack itemStack) {
     if (itemStack == null) {
       return false;

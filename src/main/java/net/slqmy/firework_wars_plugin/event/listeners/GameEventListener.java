@@ -1,13 +1,12 @@
 package net.slqmy.firework_wars_plugin.event.listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
-
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.game.FireworkWarsGame;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class GameEventListener implements Listener {
   
@@ -21,6 +20,10 @@ public class GameEventListener implements Listener {
 
   public void register() {
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
+  }
+
+  public void unregister() {
+    HandlerList.unregisterAll(this);
   }
 
   @EventHandler

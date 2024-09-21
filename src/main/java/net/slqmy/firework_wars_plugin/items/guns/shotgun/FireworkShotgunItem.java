@@ -8,7 +8,9 @@ import net.slqmy.firework_wars_plugin.items.guns.BaseGunItem;
 import net.slqmy.firework_wars_plugin.language.Message;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
@@ -23,8 +25,8 @@ public class FireworkShotgunItem extends BaseGunItem {
     @Override
     public ItemStack getItem(Player player) {
         return getItemBuilder()
-            .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_SHOTGUN, player))
-            .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_SHOTGUN_LORE, player))
+            .setName(languageManager.getMessage(Message.FIREWORK_SHOTGUN, player))
+            .setLore(languageManager.getMessages(Message.FIREWORK_SHOTGUN_LORE, player))
             .itemSupplier(this::getCustomCrossbow)
             .modifyMeta(this::modifyMeta)
             .build();
@@ -33,25 +35,38 @@ public class FireworkShotgunItem extends BaseGunItem {
     @Override
     protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
         FireworkWarsTeam team = game.getTeam(player);
-
-        ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 2);
+        ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 5);
 
         CrossbowMeta crossbowMeta = (CrossbowMeta) event.getCrossbow().getItemMeta();
-        crossbowMeta.setChargedProjectiles(List.of(firework));
+
+        crossbowMeta.setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone()));
+        event.getCrossbow().setItemMeta(crossbowMeta);
     }
 
     @Override
     protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
-        ItemStack firework = ((Firework) event.getProjectile()).getItem();
-        Vector velocity = event.getProjectile().getVelocity();
-
-        for (int i = 0; i < 3; i++) {
-            Vector deviated = velocity.clone().add(
-                new Vector(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5));
-
-            player.launchProjectile(Firework.class, deviated, (fw) -> {
-                fw.setItem(firework.clone());
-            });
+        if (!(event.getProjectile() instanceof Firework firework)) {
+          return;
         }
+
+        if (!getAmmoItem().isValidCustomItem(firework.getItem())) {
+            return;
+        }
+
+        Vector newVelocity = firework.getVelocity().clone()
+          .rotateAroundY(randomNumber(-Math.PI / 12.0D, Math.PI / 12.0D))
+          .multiply(new Vector(1.0D, randomNumber(0.9D, 1.1D), 1.0D));
+
+        firework.setVelocity(newVelocity);
+        firework.setTicksToDetonate(Math.max(20, firework.getTicksToDetonate() - 5));
+    }
+
+    @EventHandler
+    public void onFireworkExplode(FireworkExplodeEvent event) {
+
+    }
+
+    private double randomNumber(double start, double end) {
+        return start + (Math.random() * (end - start));
     }
 }

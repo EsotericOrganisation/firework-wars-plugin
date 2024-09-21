@@ -1,18 +1,17 @@
 package net.slqmy.firework_wars_plugin.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.slqmy.firework_wars_plugin.event.listeners.GameEventListener;
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.PlayerDeathEvent;
-
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.arena.structure.Arena;
 import net.slqmy.firework_wars_plugin.arena.structure.ConfiguredTeam;
+import net.slqmy.firework_wars_plugin.event.listeners.GameEventListener;
 import net.slqmy.firework_wars_plugin.language.Message;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireworkWarsGame {
 
@@ -37,6 +36,26 @@ public class FireworkWarsGame {
 
   public List<Player> getPlayers() {
     return players;
+  }
+
+  public boolean isPlaying() {
+    return gameState == GameState.PLAYING;
+  }
+
+  public boolean isWaiting() {
+    return gameState == GameState.WAITING;
+  }
+
+  public boolean isStarting() {
+      return gameState == GameState.STARTING;
+  }
+
+  public boolean isAlive(Player player) {
+    return players.contains(player) && player.getGameMode() != GameMode.SPECTATOR;
+  }
+
+  public boolean isSpectator(Player player) {
+    return players.contains(player) && player.getGameMode() == GameMode.SPECTATOR;
   }
 
   public void setGameState(GameState gameState) {
@@ -72,6 +91,7 @@ public class FireworkWarsGame {
   }
 
   public void startGame() {
+    gameState = GameState.PLAYING;
     eventListener.register();
 
     for (ConfiguredTeam configuredTeam : arena.getTeamInformation()) {
@@ -82,6 +102,12 @@ public class FireworkWarsGame {
   }
 
   public void endGame(FireworkWarsTeam winningTeam) {
+    gameState = GameState.WAITING;
+    eventListener.unregister();
+
+    teams.clear();
+    players.clear();
+
     sendMessage(Message.TEAM_WON, winningTeam.getDeserializedTeamName());
   }
 

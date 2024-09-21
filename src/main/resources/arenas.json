@@ -1,3 +1,49 @@
 {
-    "arenas": []
+    "arenas": [
+        {
+            "countDownSeconds": 20,
+            "lobbySpawnLocation": {
+                "worldName": "world",
+                "x": 100,
+                "y": 100,
+                "z": 100,
+                "yaw": 90,
+                "pitch": 90
+            },
+            "teamInformation": [
+                {
+                    "color": { "color": "LIME" },
+                    "miniMessageString": "<green>Chaos Insurgency</green>",
+                    "spawnLocation": {
+                        "worldName": "world",
+                        "x": 100,
+                        "y": 100,
+                        "z": 100,
+                        "yaw": 90,
+                        "pitch": 90
+                    }
+                },
+                {
+                    "color": { "color": "BLUE" },
+                    "miniMessageString": "<blue>SCP Foundation</blue>",
+                    "spawnLocation": {
+                        "worldName": "world",
+                        "x": 200,
+                        "y": 200,
+                        "z": 200,
+                        "yaw": 90,
+                        "pitch": 90
+                    }
+                }
+            ],
+            "chestLocations": [
+                {
+                    "worldName": "world",
+                    "x": 110,
+                    "y": 110,
+                    "z": 110
+                }
+            ]
+        }
+    ]
 }

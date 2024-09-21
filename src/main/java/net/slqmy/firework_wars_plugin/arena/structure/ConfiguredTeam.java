@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.firework_wars_plugin.arena.data_type.PlayerLocation;
 
+import net.slqmy.firework_wars_plugin.arena.data_type.TeamColor;
 import org.bukkit.Color;
 
 public class ConfiguredTeam {
@@ -15,7 +16,7 @@ public class ConfiguredTeam {
   @Expose
   private String miniMessageString;
   @Expose
-  private Color color;
+  private TeamColor color;
   @Expose
   private PlayerLocation spawnLocation;
 
@@ -24,7 +25,7 @@ public class ConfiguredTeam {
   }
 
   public Color getColor() {
-    return color;
+    return color.toBukkit();
   }
 
   public PlayerLocation getSpawnLocation() {

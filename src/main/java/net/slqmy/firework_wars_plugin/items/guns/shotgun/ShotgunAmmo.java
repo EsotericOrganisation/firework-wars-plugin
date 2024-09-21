@@ -11,17 +11,17 @@ import org.bukkit.inventory.ItemStack;
 
 public class ShotgunAmmo extends AbstractItem {
     public ShotgunAmmo(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_rifle_ammo", Material.NETHER_WART);
+        super(plugin, "firework_shotgun_ammo", Material.NETHER_WART);
     }
 
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-            .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_SHOTGUN_AMMO, player))
-            .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_SHOTGUN_AMMO_LORE, player))
+            .setName(languageManager.getMessage(Message.FIREWORK_SHOTGUN_AMMO, player))
+            .setLore(languageManager.getMessage(Message.FIREWORK_SHOTGUN_AMMO_LORE, player))
             .modifyMeta(meta -> {
                 pdcManager.setStringValue(meta, isItemKey, itemId);
-                pdcManager.setStringValue(meta, Keys.ITEM_OWNER_UUID, player.getUniqueId().toString());
+                pdcManager.setStringValue(meta, Keys.AMMO_OWNER_UUID, player.getUniqueId().toString());
             })
             .build();
     }

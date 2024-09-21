@@ -7,6 +7,8 @@ import net.slqmy.firework_wars_plugin.items.manager.AbstractItem;
 import net.slqmy.firework_wars_plugin.items.nms.CustomCrossbow;
 import net.slqmy.firework_wars_plugin.util.ItemBuilder;
 import net.slqmy.firework_wars_plugin.util.Keys;
+import net.slqmy.firework_wars_plugin.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
@@ -49,6 +51,8 @@ public abstract class BaseGunItem extends AbstractItem {
         ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
         FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
 
+        plugin.getPdcManager().setStringValue(fireworkMeta, Keys.CUSTOM_ITEM_ID, ammoId);
+
         addFireworkStars(fireworkMeta, color, stars);
         firework.setItemMeta(fireworkMeta);
 
@@ -59,11 +63,17 @@ public abstract class BaseGunItem extends AbstractItem {
         for (int i = 0; i < amount; i++) {
             meta.addEffect(FireworkEffect
                 .builder()
+                .with(FireworkEffect.Type.BURST)
                 .withColor(Color.WHITE)
                 .withFade(color)
+                .withTrail()
                 .withFlicker()
                 .build());
         }
+    }
+
+    protected AbstractItem getAmmoItem() {
+        return plugin.getCustomItemManager().getItem(ammoId);
     }
 
     protected abstract void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event);
@@ -81,7 +91,16 @@ public abstract class BaseGunItem extends AbstractItem {
 
         FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
 
-        if (game == null) {
+        if (game == null || !game.isPlaying()) {
+            return;
+        }
+
+        boolean hasAmmo = Util.testInventory(player.getInventory(), item -> {
+            if (item != null) Bukkit.broadcastMessage(item.getType().name());
+            return getAmmoItem().isValidCustomItem(item);
+        });
+
+        if (!hasAmmo) {
             return;
         }
 
@@ -100,7 +119,7 @@ public abstract class BaseGunItem extends AbstractItem {
 
         FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
 
-        if (game == null) {
+        if (game == null || !game.isPlaying()) {
             return;
         }
 

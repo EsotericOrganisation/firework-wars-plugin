@@ -18,11 +18,11 @@ public class RifleAmmo extends AbstractItem {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-            .setName(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_AMMO, player))
-            .setLore(plugin.getLanguageManager().getMessage(Message.FIREWORK_RIFLE_AMMO_LORE, player))
+            .setName(languageManager.getMessage(Message.FIREWORK_RIFLE_AMMO, player))
+            .setLore(languageManager.getMessage(Message.FIREWORK_RIFLE_AMMO_LORE, player))
             .modifyMeta(meta -> {
                 pdcManager.setStringValue(meta, isItemKey, itemId);
-                pdcManager.setStringValue(meta, Keys.ITEM_OWNER_UUID, player.getUniqueId().toString());
+                pdcManager.setStringValue(meta, Keys.AMMO_OWNER_UUID, player.getUniqueId().toString());
             })
             .build();
     }

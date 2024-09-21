@@ -101,40 +101,6 @@ public final class ReflectUtil {
         setFieldValue(clazz, fieldName, instance, value);
     }
 
-    public void setFinalFieldValue(Field field, Object instance, Object value) {
-        try {
-            Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-            modifiersField.setInt(field, field.getModifiers() & ~java.lang.reflect.Modifier.FINAL);
-
-            field.set(instance, value);
-            modifiersField.setInt(field, field.getModifiers() | java.lang.reflect.Modifier.FINAL);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-          logger.error("Failed to set final field value:" + e.getMessage());
-        }
-    }
-
-    public void setFinalFieldValue(Field field, Object value) {
-        if (!reflecting) {
-            throw new IllegalStateException("Cannot set final field value without class context outside a reflection function!");
-        }
-
-        setFinalFieldValue(field, instance, value);
-    }
-
-    public void setFinalFieldValue(Class<?> clazz, String fieldName, Object instance, Object value) {
-        Field field = getField(clazz, fieldName);
-        setFinalFieldValue(field, instance, value);
-    }
-
-    public void setFinalFieldValue(String fieldName, Object value) {
-        if (!reflecting) {
-            throw new IllegalStateException("Cannot set final field value without class context outside a reflection function!");
-        }
-
-        setFinalFieldValue(clazz, fieldName, instance, value);
-    }
-
     public Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
         try {
             Method method = clazz.getDeclaredMethod(methodName, parameterTypes);

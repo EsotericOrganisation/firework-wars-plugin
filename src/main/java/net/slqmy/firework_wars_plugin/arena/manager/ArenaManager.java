@@ -1,17 +1,14 @@
 package net.slqmy.firework_wars_plugin.arena.manager;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
+import net.slqmy.firework_wars_plugin.arena.structure.ArenaInformation;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
-import net.slqmy.firework_wars_plugin.arena.deserializer.ColorDeserializer;
-import net.slqmy.firework_wars_plugin.arena.structure.ArenaInformation;
-import org.bukkit.Color;
 
 public class ArenaManager {
   private static final String ARENAS_RESOURCE_PATH = "arenas.json";
@@ -37,7 +34,6 @@ public class ArenaManager {
 
     Gson gson = new GsonBuilder()
       .excludeFieldsWithoutExposeAnnotation()
-      .registerTypeAdapter(Color.class, new ColorDeserializer())
       .create();
 
     try (Reader reader = new FileReader(file)) {

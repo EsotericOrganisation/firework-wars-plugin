@@ -5,23 +5,16 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.slqmy.firework_wars_plugin.FireworkWarsPlugin;
 import net.slqmy.firework_wars_plugin.data.player.PlayerProfile;
 import net.slqmy.firework_wars_plugin.util.FileUtil;
-
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-import java.util.Map;
-import java.util.Set;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.io.File;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import java.io.File;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class LanguageManager {
 
@@ -72,7 +65,7 @@ public class LanguageManager {
       String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
 
       String languageMessagesResourcePath = languagesFolderName + File.separator + languageName + ".yaml";
-      plugin.saveResource(languageMessagesResourcePath, false);
+      plugin.saveResource(languageMessagesResourcePath, true);
 
       YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile);
       Map<Message, String> messages = new HashMap<>();
@@ -271,6 +264,18 @@ public class LanguageManager {
   public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
     return getMessage(message, playerProfile, true, arguments);
   }
+
+  // rolyPolyVole start
+
+  public Component[] getMessages(Message message, CommandSender commandSender) {
+    return Arrays
+        .stream(getRawMessageString(message, getLanguage(commandSender), true)
+        .split("\n"))
+        .map(miniMessage::deserialize)
+        .toArray(Component[]::new);
+  }
+
+  // rolyPolyVole end
 
   public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
     commandSender.sendMessage(getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
