@@ -16,6 +16,7 @@ import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.FireworkR
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.RifleAmmo;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.FireworkShotgunItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.ShotgunAmmo;
+import org.esoteric_organisation.firework_wars_plugin.items.misc.PlayerCompassItem;
 import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
 import org.esoteric_organisation.firework_wars_plugin.util.ReflectUtil;
 
@@ -44,6 +45,8 @@ public class CustomItemManager {
 
     registerItem(new FireworkShotgunItem(plugin));
     registerItem(new ShotgunAmmo(plugin));
+
+    registerItem(new PlayerCompassItem(plugin));
   }
 
   public void registerNMSItems() {
