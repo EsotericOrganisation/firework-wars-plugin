@@ -1,6 +1,5 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
