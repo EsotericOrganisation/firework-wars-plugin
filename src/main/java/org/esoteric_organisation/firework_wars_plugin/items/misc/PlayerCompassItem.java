@@ -1,5 +1,7 @@
 package org.esoteric_organisation.firework_wars_plugin.items.misc;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
@@ -145,7 +147,7 @@ public class PlayerCompassItem extends AbstractItem {
                 int distance = (int) player.getLocation().distance(target.getLocation());
 
                 player.sendActionBar(languageManager.getMessage(
-                    actionBarInfo, player, wrapInAqua(target), wrapInAqua(distance + "m")));
+                    actionBarInfo, player, target.displayName(), Component.text(distance + "m").color(NamedTextColor.AQUA)));
             }
         }
 
