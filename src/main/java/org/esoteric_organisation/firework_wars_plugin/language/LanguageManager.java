@@ -200,9 +200,13 @@ public class LanguageManager {
 
     Component output = miniMessage.deserialize(parts[0]);
 
-    for (int i = 1; i < parts.length; i++) {
+    for (int i = 1; i <= parts.length; i++) {
       int argumentIndex = argumentIndexes.get(i - 1);
       output = output.append(arguments[argumentIndex]);
+
+      if (i == parts.length) {
+        break;
+      }
 
       String part = parts[i];
 
