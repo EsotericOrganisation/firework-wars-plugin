@@ -190,6 +190,8 @@ public class LanguageManager {
     List<Integer> argumentIndexes = new ArrayList<>();
 
     while (matcher.find()) {
+      Bukkit.broadcastMessage("Argument index " + matcher.group(1));
+
       argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
     }
 
