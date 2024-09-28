@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin.items.misc;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
@@ -102,6 +103,8 @@ public class PlayerCompassItem extends AbstractItem {
 
         public void setTarget(Player target) {
             this.target = target;
+
+            Bukkit.broadcast(target == null ? Component.text("null") : target.displayName());
 
             if (target != null) {
                 Util.playSound(player, Sound.BLOCK_BEACON_POWER_SELECT);
