@@ -202,6 +202,11 @@ public class LanguageManager {
       output = output.append(arguments[argumentIndex]);
 
       String part = parts[i];
+
+      if (part.isEmpty()) {
+        continue;
+      }
+
       Component component = miniMessage.deserialize(part);
       output = output.append(component);
     }
