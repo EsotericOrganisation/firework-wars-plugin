@@ -104,12 +104,12 @@ public class PlayerCompassItem extends AbstractItem {
             if (target != null) {
                 Util.playSound(player, Sound.BLOCK_BEACON_POWER_SELECT);
 
-                compass.lore(List.of(languageManager.getMessages(loreTracking, player)));
+                compass.lore(List.of(languageManager.getMessage(loreTracking, player, target.displayName())));
                 player.sendMessage(languageManager.getMessage(trackingTarget, player, wrapInAqua(target)));
             } else {
                 Util.playSound(player, Sound.ENTITY_ENDER_EYE_DEATH);
 
-                compass.lore(List.of(languageManager.getMessages(loreNotTracking, player)));
+                compass.lore(List.of(languageManager.getMessage(loreNotTracking, player)));
             }
         }
 
