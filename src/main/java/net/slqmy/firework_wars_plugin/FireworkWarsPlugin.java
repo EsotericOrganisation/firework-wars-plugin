@@ -101,10 +101,8 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
     ItemStack item1 = customItemManager.getItem("firework_shotgun_ammo").getItem(event.getPlayer());
     ItemStack item2 = customItemManager.getItem("firework_shotgun").getItem(event.getPlayer());
 
-    if (event.getPlayer().getName().equals("rolyPolyVole")) {
-      event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle").getItem(event.getPlayer()));
-      event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle_ammo").getItem(event.getPlayer()));
-    }
+    event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle").getItem(event.getPlayer()));
+    event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle_ammo").getItem(event.getPlayer()));
 
     event.getPlayer().getInventory().addItem(item1, item2);
   }
