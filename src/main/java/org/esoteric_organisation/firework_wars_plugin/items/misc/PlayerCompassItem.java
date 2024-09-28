@@ -162,7 +162,7 @@ public class PlayerCompassItem extends AbstractItem {
 
         private boolean hasExactCompass() {
             return Util.testInventory(player.getInventory(), item ->
-              pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID).equals(compassId));
+              compassId.equals(pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID)));
         }
     }
 }
