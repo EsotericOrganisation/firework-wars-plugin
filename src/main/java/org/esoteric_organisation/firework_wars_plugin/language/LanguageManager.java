@@ -1,7 +1,9 @@
 package org.esoteric_organisation.firework_wars_plugin.language;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.data.player.PlayerProfile;
 import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
@@ -12,8 +14,6 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class LanguageManager {
@@ -21,8 +21,6 @@ public class LanguageManager {
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private final FireworkWarsPlugin plugin;
-
-  private final Pattern placeholderPattern = Pattern.compile("\\{(\\d+)}");
 
   private final String languagesFolderName = "languages";
   private final String languagesFolderPath;
@@ -179,46 +177,19 @@ public class LanguageManager {
     return getRawMessageString(message, language, true);
   }
 
-  public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
+  private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component @NonNull ... arguments) {
     String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);
 
-    Bukkit.broadcastMessage("Raw message content for message " + message.name() + ": " + miniMessageString);
+    assert miniMessageString != null;
+    Component result = miniMessage.deserialize(miniMessageString);
 
-    Matcher matcher = placeholderPattern.matcher(miniMessageString);
+    for (int i = 0; i < arguments.length; i++) {
+      final int argumentIndex = i;
 
-    String[] parts = placeholderPattern.split(miniMessageString);
-
-    Bukkit.broadcastMessage(Arrays.toString(parts));
-
-    List<Integer> argumentIndexes = new ArrayList<>();
-
-    while (matcher.find()) {
-      Bukkit.broadcastMessage("Argument index " + matcher.group(1));
-
-      argumentIndexes.add(Integer.parseUnsignedInt(matcher.group(1)));
+      result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{" + i + "}").replacement((matchResult, builder) -> arguments[argumentIndex]).build());
     }
 
-    Component output = miniMessage.deserialize(parts[0]);
-
-    for (int i = 1; i <= parts.length; i++) {
-      int argumentIndex = argumentIndexes.get(i - 1);
-      output = output.append(arguments[argumentIndex]);
-
-      if (i == parts.length) {
-        break;
-      }
-
-      String part = parts[i];
-
-      if (part.isEmpty()) {
-        continue;
-      }
-
-      Component component = miniMessage.deserialize(part);
-      output = output.append(component);
-    }
-
-    return output;
+    return result;
   }
 
   public Component getMessage(Message message, String language, Component... arguments) {
