@@ -22,7 +22,7 @@ fun capitalizeFirstLetter(string: String): String {
 }
 
 fun snakeCase(kebabCaseString: String): String {
-  return kebabCaseString.lowercase().replace(kebabCaseStringSeparator, snakeCaseStringSeparator)
+  return kebabCaseString.lowercase().replace(kebabCaseStringSeparator, snakeCaseStringSeparator).replace(" ", snakeCaseStringSeparator)
 }
 
 fun pascalCase(kebabCaseString: String): String {
@@ -47,7 +47,7 @@ val topLevelDomain = "org"
 val projectNameString = rootProject.name
 val bootstrapperNameString = rootProject.name + "Bootstrapper"
 
-group = topLevelDomain + groupStringSeparator + mainProjectAuthor.lowercase() + groupStringSeparator + snakeCase(projectNameString)
+group = topLevelDomain + groupStringSeparator + snakeCase(mainProjectAuthor.lowercase()) + groupStringSeparator + snakeCase(projectNameString)
 version = "1.0.0"
 
 val buildDirectoryString = buildDir.toString()
