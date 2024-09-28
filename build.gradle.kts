@@ -56,7 +56,7 @@ val projectGroupString = group.toString()
 val projectVersionString = version.toString()
 
 val javaVersion = 21
-val javaVersionEnumMember = JavaVersion.valueOf("VERSION_" + javaVersion)
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
 val paperApiVersion = "1.21"
 
 java {
@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-  paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
   implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.1")
 }
@@ -82,7 +82,7 @@ tasks {
   }
 
   shadowJar {
-    archiveFileName = projectNameString + "-" + projectVersionString + "." + "jar"
+    archiveFileName = "$projectNameString-$projectVersionString.jar"
   }
 
   compileJava {
