@@ -17,7 +17,6 @@ import java.util.List;
 public class FireworkWarsGame {
 
   private final FireworkWarsPlugin plugin;
-  private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
   private final Arena arena;
   private final GameEventListener eventListener;
