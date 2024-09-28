@@ -157,14 +157,6 @@ public class PlayerCompassItem extends AbstractItem {
             compassManagers.remove(pdcManager.getStringValue(compass.getItemMeta(), Keys.PLAYER_COMPASS_ID));
         }
 
-        private String wrapInAqua(Player player) {
-            return "<aqua>" + player.getName() + "</aqua>";
-        }
-
-      private String wrapInAqua(String text) {
-        return "<aqua>" + text + "</aqua>";
-      }
-
         private boolean hasExactCompass() {
             return Util.testInventory(player.getInventory(), item ->
               pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID).equals(compassId));
