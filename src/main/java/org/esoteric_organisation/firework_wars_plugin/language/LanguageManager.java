@@ -187,6 +187,9 @@ public class LanguageManager {
     Matcher matcher = placeholderPattern.matcher(miniMessageString);
 
     String[] parts = placeholderPattern.split(miniMessageString);
+
+    Bukkit.broadcastMessage(Arrays.toString(parts));
+
     List<Integer> argumentIndexes = new ArrayList<>();
 
     while (matcher.find()) {
