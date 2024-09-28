@@ -37,13 +37,13 @@ fun pascalCase(kebabCaseString: String): String {
   return pascalCaseString
 }
 
-description = "A Minecraft Paper plugin that adds a firework-focused PvP gamemode."
+description = "A Minecraft Paper plugin that adds a firework-focused PvP game-mode."
 
-val mainProjectAuthor = "Slqmy"
-val mainestProjectAuthor = "rolyPolyVole"
-val projectAuthors = listOfNotNull(mainProjectAuthor, mainestProjectAuthor)
+val mainProjectAuthor = "Esoteric Organisation"
 
-val topLevelDomain = "net"
+val projectAuthors = listOfNotNull(mainProjectAuthor, "Esoteric Enderman", "rolyPolyVole")
+
+val topLevelDomain = "org"
 val projectNameString = rootProject.name
 val bootstrapperNameString = rootProject.name + "Bootstrapper"
 
