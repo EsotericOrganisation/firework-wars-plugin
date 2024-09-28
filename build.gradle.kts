@@ -45,7 +45,7 @@ val projectAuthors = listOfNotNull(mainProjectAuthor, "Esoteric Enderman", "roly
 
 val topLevelDomain = "org"
 val projectNameString = rootProject.name
-val bootstrapperNameString = rootProject.name + "Bootstrapper"
+val bootstrapperNameString = rootProject.name + "-bootstrapper"
 
 group = topLevelDomain + groupStringSeparator + snakeCase(mainProjectAuthor.lowercase()) + groupStringSeparator + snakeCase(projectNameString)
 version = "1.0.0"
