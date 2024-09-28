@@ -1,6 +1,7 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.ConfiguredTeam;
@@ -128,6 +129,8 @@ public class FireworkWarsGame {
     if (isTeamEliminated(team)) {
       eliminateTeam(team);
       List<FireworkWarsTeam> remainingTeams = getRemainingTeams();
+
+      Bukkit.broadcastMessage("Remaining teams: " + remainingTeams.size());
 
       if (remainingTeams.size() == 1) {
         endGame(remainingTeams.get(0));
