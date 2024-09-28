@@ -104,10 +104,10 @@ public class FireworkWarsGame {
     gameState = GameState.WAITING;
     eventListener.unregister();
 
+    sendMessage(Message.TEAM_WON, winningTeam.getDeserializedTeamName());
+
     teams.clear();
     players.clear();
-
-    sendMessage(Message.TEAM_WON, winningTeam.getDeserializedTeamName());
   }
 
   public void distributePlayersAcrossTeams() {
