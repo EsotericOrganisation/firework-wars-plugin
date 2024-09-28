@@ -180,7 +180,9 @@ public class LanguageManager {
   }
 
   public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component... arguments) {
-    String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);    
+    String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);
+
+    Bukkit.broadcastMessage("Raw message content for message " + message.name() + ": " + miniMessageString);
 
     Matcher matcher = placeholderPattern.matcher(miniMessageString);
 
