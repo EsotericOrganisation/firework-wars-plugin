@@ -90,9 +90,12 @@ public class FireworkRifleItem extends BaseGunItem {
       BlockPos position = new BlockPos(nmsFirework.getBlockX(), nmsFirework.getBlockY(), nmsFirework.getBlockZ());
       BlockState state = nmsFirework.level().getBlockState(position);
 
-      if (nmsFirework.isColliding(position, state) || isCollidingWithAnyEntity()) {
-        shouldDetonate = true;
-        ticksUntilDetonation = 1;
+      if (nmsFirework.isColliding(position, state)) {
+        firework.detonate();
+        cancel();
+      } else if (isCollidingWithAnyEntity()) {
+        this.shouldDetonate = true;
+        this.ticksUntilDetonation = 1;
       }
     }
 
