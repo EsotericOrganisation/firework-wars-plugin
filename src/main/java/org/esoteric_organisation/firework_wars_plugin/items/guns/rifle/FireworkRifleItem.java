@@ -7,6 +7,7 @@ import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
@@ -44,6 +45,7 @@ public class FireworkRifleItem extends BaseGunItem {
     FireworkWarsTeam team = game.getTeam(player);
     ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 4);
 
+    Bukkit.broadcastMessage("Editing ItemMeta");
     event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework)));
   }
 

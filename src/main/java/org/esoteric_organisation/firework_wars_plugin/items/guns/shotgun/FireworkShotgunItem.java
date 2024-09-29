@@ -1,6 +1,7 @@
 package org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
+import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
@@ -33,6 +34,7 @@ public class FireworkShotgunItem extends BaseGunItem {
     FireworkWarsTeam team = game.getTeam(player);
     ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 5);
 
+    Bukkit.broadcastMessage("Editing ItemMeta");
     event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone())));
   }
 
