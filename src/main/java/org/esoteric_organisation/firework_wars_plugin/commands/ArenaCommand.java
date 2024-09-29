@@ -47,7 +47,7 @@ public class ArenaCommand extends CommandAPICommand {
         .executesPlayer((info) -> {
           Integer arenaNumber = (Integer) info.args().get(arenaNumberNodeName);
 
-          if (arenaNumber == null || arenaNumber < 0 || arenaNumber >= arenas.length) {
+          if (arenaNumber == null || arenaNumber <= 0 || arenaNumber - 1 >= arenas.length) {
             plugin.getLanguageManager().sendMessage(Message.INVALID_ARENA, info.sender());
             return;
           }
