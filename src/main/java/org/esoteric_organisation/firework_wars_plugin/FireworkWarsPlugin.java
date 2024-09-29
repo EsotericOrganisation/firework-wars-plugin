@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.SetLanguageCommand;
@@ -107,5 +108,10 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
     ItemStack item3 = customItemManager.getItem("player_compass").getItem(event.getPlayer());
 
     event.getPlayer().getInventory().addItem(item1, item2, item3);
+  }
+
+  @EventHandler
+  public void onPlayerLeave(PlayerQuitEvent event) {
+    event.getPlayer().getInventory().clear();
   }
 }
