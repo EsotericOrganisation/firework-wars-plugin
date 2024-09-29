@@ -12,6 +12,7 @@ import org.esoteric_organisation.firework_wars_plugin.arena.structure.ArenaInfor
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
+import org.esoteric_organisation.firework_wars_plugin.language.Message;
 
 public class ArenaCommand extends CommandAPICommand {
 
@@ -38,7 +39,12 @@ public class ArenaCommand extends CommandAPICommand {
           return suggestions.toArray(String[]::new);
         })))
         .executesPlayer((info) -> {
-          int arenaNumber = (int) info.args().get(arenaNumberNodeName);
+          Integer arenaNumber = (Integer) info.args().get(arenaNumberNodeName);
+
+          if (arenaNumber == null || arenaNumber < 0 || arenaNumber >= arenas.length) {
+            plugin.getLanguageManager().sendMessage(Message.INVALID_ARENA, info.sender());
+            return;
+          }
 
           Arena arena = arenas[arenaNumber - 1];
           FireworkWarsGame game = gameManager.getFireworkWarsGame(arena);

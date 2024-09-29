@@ -23,3 +23,5 @@ GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0
 
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
+
+INVALID_ARENA: "<red>That arena does not exist!</red>"
