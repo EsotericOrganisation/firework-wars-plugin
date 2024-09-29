@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin.items.misc;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
@@ -122,7 +123,7 @@ public class PlayerCompassItem extends AbstractItem {
       } else {
         Util.playSound(player, Sound.ENTITY_ENDER_EYE_DEATH);
 
-        compass.lore(List.of(languageManager.getMessage(loreNotTracking, player)));
+        compass.lore(List.of(languageManager.getMessage(loreNotTracking, player).decoration(TextDecoration.ITALIC, false)));
       }
     }
 
