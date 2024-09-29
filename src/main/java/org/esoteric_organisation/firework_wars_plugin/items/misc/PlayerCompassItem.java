@@ -2,7 +2,6 @@ package org.esoteric_organisation.firework_wars_plugin.items.misc;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
