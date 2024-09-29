@@ -98,7 +98,7 @@ public class FireworkWarsGame {
     eventListener.register();
 
     for (ConfiguredTeam configuredTeam : arena.getTeamInformation()) {
-      teams.add(new FireworkWarsTeam(configuredTeam));
+      teams.add(new FireworkWarsTeam(configuredTeam, plugin));
     }
 
     distributePlayersAcrossTeams();
