@@ -128,8 +128,6 @@ public class FireworkWarsGame {
       eliminateTeam(team);
       List<FireworkWarsTeam> remainingTeams = getRemainingTeams();
 
-      Bukkit.broadcastMessage("Remaining teams: " + remainingTeams.size());
-
       if (remainingTeams.size() == 1) {
         endGame(remainingTeams.get(0));
       }

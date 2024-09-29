@@ -95,10 +95,7 @@ public abstract class BaseGunItem extends AbstractItem {
             return;
         }
 
-        boolean hasAmmo = Util.testInventory(player.getInventory(), item -> {
-            if (item != null) Bukkit.broadcastMessage(item.getType().name());
-            return getAmmoItem().isValidCustomItem(item);
-        });
+        boolean hasAmmo = Util.testInventory(player.getInventory(), item -> getAmmoItem().isValidCustomItem(item));
 
         if (!hasAmmo) {
             return;

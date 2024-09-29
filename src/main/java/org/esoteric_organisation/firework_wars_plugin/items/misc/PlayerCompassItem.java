@@ -104,8 +104,6 @@ public class PlayerCompassItem extends AbstractItem {
         public void setTarget(Player target) {
             this.target = target;
 
-            Bukkit.broadcast(target == null ? Component.text("null") : target.displayName());
-
             if (target != null) {
                 Util.playSound(player, Sound.BLOCK_BEACON_POWER_SELECT);
 
