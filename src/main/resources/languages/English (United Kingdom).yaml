@@ -21,7 +21,7 @@ PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gr
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
 
-YOU_ARE_ON_TEAM: "YOU ARE"
+YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 
