@@ -93,7 +93,7 @@ public class PlayerCompassItem extends AbstractItem {
       compassUpdater.setTarget(nearestEnemy);
     }
 
-    if (compassUpdater.isRunning()) {
+    if (!compassUpdater.isRunning()) {
       compassUpdater.runTaskTimer(plugin, 0L, 1L);
     }
   }
