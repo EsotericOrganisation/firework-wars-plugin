@@ -117,8 +117,8 @@ public class PlayerCompassItem extends AbstractItem {
       if (target != null) {
         Util.playSound(player, Sound.BLOCK_BEACON_POWER_SELECT);
 
-        compass.lore(List.of(languageManager.getMessage(loreTracking, player, target.displayName().color(game.getTeam(player).getTeamColor()))));
-        player.sendMessage(languageManager.getMessage(trackingTarget, player, target.displayName().color(game.getTeam(player).getTeamColor())));
+        compass.lore(List.of(languageManager.getMessage(loreTracking, player, target.displayName().color(game.getTeam(target).getTeamColor()))));
+        player.sendMessage(languageManager.getMessage(trackingTarget, player, target.displayName().color(game.getTeam(target).getTeamColor())));
       } else {
         Util.playSound(player, Sound.ENTITY_ENDER_EYE_DEATH);
 
