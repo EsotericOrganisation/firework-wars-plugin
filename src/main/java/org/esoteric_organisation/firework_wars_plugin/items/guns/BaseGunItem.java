@@ -8,7 +8,6 @@ import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
 import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
 import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.Util;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
