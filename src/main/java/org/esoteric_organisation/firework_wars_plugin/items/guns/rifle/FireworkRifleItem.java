@@ -51,18 +51,24 @@ public class FireworkRifleItem extends BaseGunItem {
 
   @Override
   protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
-    event.getProjectile().setNoPhysics(true);
-    new FireworkRunnable((Firework) event.getProjectile()).runTaskTimer(plugin, 1L, 1L);
+    Firework firework = (Firework) event.getProjectile();
+    firework.setNoPhysics(true);
+
+    new FireworkRunnable(player, firework).runTaskTimer(plugin, 1L, 1L);
   }
 
   private static class FireworkRunnable extends BukkitRunnable {
+    private final Player shooter;
+
     private final Firework firework;
     private final FireworkRocketEntity nmsFirework;
 
     private boolean shouldDetonate;
     private int ticksUntilDetonation;
 
-    public FireworkRunnable(Firework firework) {
+    public FireworkRunnable(Player player, Firework firework) {
+      this.shooter = player;
+
       this.firework = firework;
       this.nmsFirework = ((CraftFirework) firework).getHandle();
     }
@@ -95,6 +101,10 @@ public class FireworkRifleItem extends BaseGunItem {
       AABB entityBoundingBox = nmsFirework.getBoundingBox();
 
       for (Entity otherEntity : world.getEntities().getAll()) {
+        if (otherEntity.getUUID().equals(shooter.getUniqueId())) {
+          continue;
+        }
+
         if (otherEntity != nmsFirework) {
           AABB otherEntityBoundingBox = otherEntity.getBoundingBox();
 
