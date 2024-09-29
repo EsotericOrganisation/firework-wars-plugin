@@ -63,4 +63,10 @@ public abstract class AbstractItem implements Listener {
   }
 
   public abstract ItemStack getItem(Player player);
+
+  public ItemStack getItem(Player player, int amount) {
+    ItemStack item = getItem(player);
+    item.setAmount(amount);
+    return item;
+  }
 }
