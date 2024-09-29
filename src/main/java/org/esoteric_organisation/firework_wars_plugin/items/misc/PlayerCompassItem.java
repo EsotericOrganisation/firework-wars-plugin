@@ -93,15 +93,12 @@ public class PlayerCompassItem extends AbstractItem {
       compassUpdater.setTarget(nearestEnemy);
     }
 
-    if (!compassUpdater.isCancelled()) {
-      compassUpdater.cancel();
+    if (compassUpdater.isRunning()) {
+      compassUpdater.runTaskTimer(plugin, 0L, 1L);
     }
-
-    compassUpdater.runTaskTimer(plugin, 0L, 1L);
   }
 
   private class CompassUpdater extends BukkitRunnable {
-
     private boolean isRunning;
 
     private final FireworkWarsGame game;
@@ -110,6 +107,10 @@ public class PlayerCompassItem extends AbstractItem {
     private final ItemStack compass;
 
     private Player target;
+
+    public boolean isRunning() {
+      return isRunning;
+    }
 
     public void setTarget(Player target) {
       this.target = target;
@@ -164,8 +165,9 @@ public class PlayerCompassItem extends AbstractItem {
 
     @Override
     public void cancel() {
-      isRunning = false;
+      this.isRunning = false;
       super.cancel();
+
       compassManagers.remove(pdcManager.getStringValue(compass.getItemMeta(), Keys.PLAYER_COMPASS_ID));
     }
 
@@ -176,13 +178,8 @@ public class PlayerCompassItem extends AbstractItem {
 
     @Override
     public synchronized @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, long delay, long period) throws IllegalArgumentException, IllegalStateException {
-      isRunning = true;
+      this.isRunning = true;
       return super.runTaskTimer(plugin, delay, period);
-    }
-
-    @Override
-    public synchronized boolean isCancelled() {
-      return !isRunning;
     }
   }
 }
