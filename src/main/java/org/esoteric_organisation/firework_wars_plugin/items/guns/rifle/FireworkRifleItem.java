@@ -52,7 +52,7 @@ public class FireworkRifleItem extends BaseGunItem {
   @Override
   protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
     event.getProjectile().setNoPhysics(true);
-    new FireworkRunnable((Firework) event.getProjectile()).runTaskTimer(plugin, 2L, 1L);
+    new FireworkRunnable((Firework) event.getProjectile()).runTaskTimer(plugin, 1L, 1L);
   }
 
   private static class FireworkRunnable extends BukkitRunnable {
@@ -86,7 +86,7 @@ public class FireworkRifleItem extends BaseGunItem {
 
       if (nmsFirework.isColliding(position, state) || isCollidingWithAnyEntity()) {
         shouldDetonate = true;
-        ticksUntilDetonation = (int) Math.round(Math.random() * 5);
+        ticksUntilDetonation = 1;
       }
     }
 
