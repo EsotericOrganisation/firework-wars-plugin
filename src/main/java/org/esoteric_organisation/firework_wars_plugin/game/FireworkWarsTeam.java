@@ -3,6 +3,7 @@ package org.esoteric_organisation.firework_wars_plugin.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.entity.Player;
 
@@ -42,5 +43,9 @@ public class FireworkWarsTeam {
 
   public Component getDeserializedTeamName() {
     return configuredTeam.getDeserializedTeamName();
+  }
+
+  public TextColor getTeamColor() {
+    return getDeserializedTeamName().color();
   }
 }
