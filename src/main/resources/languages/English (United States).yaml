@@ -25,3 +25,4 @@ TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 
 INVALID_ARENA: "<red>That arena does not exist!</red>"
+GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"

@@ -48,6 +48,12 @@ public class ArenaCommand extends CommandAPICommand {
 
           Arena arena = arenas[arenaNumber - 1];
           FireworkWarsGame game = gameManager.getFireworkWarsGame(arena);
+
+          if (game.isPlaying()) {
+            plugin.getLanguageManager().sendMessage(Message.GAME_ALREADY_PLAYING, info.sender());
+            return;
+          }
+
           game.addPlayer(info.sender());
         })
     );
