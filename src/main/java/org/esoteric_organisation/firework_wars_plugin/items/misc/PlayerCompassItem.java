@@ -90,7 +90,10 @@ public class PlayerCompassItem extends AbstractItem {
             compassUpdater.setTarget(nearestEnemy);
         }
 
-        compassUpdater.cancel();
+        if (!compassUpdater.isCancelled()) {
+          compassUpdater.cancel();
+        }
+
         compassUpdater.runTaskTimer(plugin, 0L, 1L);
     }
 
