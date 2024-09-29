@@ -15,7 +15,7 @@ PLAYER_COMPASS: "<yellow>Player Tracker</yellow>"
 PLAYER_COMPASS_LORE_NOT_TRACKING: "<gray>No player is being tracked.</gray>"
 PLAYER_COMPASS_LORE_TRACKING: "<green>Tracking target: </green>{0}"
 PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
-PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
+PLAYER_COMPASS_TRACKING_TARGET: "<!i><green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
 
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
