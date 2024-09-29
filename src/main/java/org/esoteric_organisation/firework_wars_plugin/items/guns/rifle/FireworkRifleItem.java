@@ -52,7 +52,7 @@ public class FireworkRifleItem extends BaseGunItem {
   @Override
   protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
     event.getProjectile().setNoPhysics(true);
-    new FireworkRunnable((Firework) event.getProjectile()).runTaskTimer(plugin, 0L, 1L);
+    new FireworkRunnable((Firework) event.getProjectile()).runTaskTimer(plugin, 2L, 1L);
   }
 
   private static class FireworkRunnable extends BukkitRunnable {
