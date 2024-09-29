@@ -44,10 +44,7 @@ public class FireworkRifleItem extends BaseGunItem {
     FireworkWarsTeam team = game.getTeam(player);
     ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 4);
 
-    CrossbowMeta crossbowMeta = (CrossbowMeta) event.getCrossbow().getItemMeta();
-
-    crossbowMeta.setChargedProjectiles(List.of(firework));
-    event.getCrossbow().setItemMeta(crossbowMeta);
+    event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework)));
   }
 
   @Override
