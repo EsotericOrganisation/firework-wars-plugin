@@ -1,14 +1,14 @@
 {
     "arenas": [
         {
-            "countDownSeconds": 20,
+            "countDownSeconds": 15,
             "lobbySpawnLocation": {
                 "worldName": "world",
-                "x": 100,
-                "y": 100,
-                "z": 100,
-                "yaw": 90,
-                "pitch": 90
+                "x": 85,
+                "y": 109,
+                "z": 110,
+                "yaw": -120,
+                "pitch": 0
             },
             "teamInformation": [
                 {
@@ -16,11 +16,11 @@
                     "miniMessageString": "<green>Chaos Insurgency</green>",
                     "spawnLocation": {
                         "worldName": "world",
-                        "x": 100,
-                        "y": 100,
-                        "z": 100,
-                        "yaw": 90,
-                        "pitch": 90
+                        "x": 135,
+                        "y": 115,
+                        "z": 66,
+                        "yaw": 0,
+                        "pitch": 0
                     }
                 },
                 {
@@ -28,20 +28,62 @@
                     "miniMessageString": "<blue>SCP Foundation</blue>",
                     "spawnLocation": {
                         "worldName": "world",
-                        "x": 200,
-                        "y": 200,
-                        "z": 200,
-                        "yaw": 90,
-                        "pitch": 90
+                        "x": 141,
+                        "y": 115,
+                        "z": 99,
+                        "yaw": 179,
+                        "pitch": 0
                     }
                 }
             ],
             "chestLocations": [
                 {
                     "worldName": "world",
-                    "x": 110,
-                    "y": 110,
-                    "z": 110
+                    "x": 135,
+                    "y": 115,
+                    "z": 78
+                },
+                {
+                  "worldName": "world",
+                  "x": 137,
+                  "y": 115,
+                  "z": 84
+                },
+                {
+                  "worldName": "world",
+                  "x": 156,
+                  "y": 115,
+                  "z": 72
+                },
+                {
+                  "worldName": "world",
+                  "x": 140,
+                  "y": 115,
+                  "z": 66
+                },
+                {
+                  "worldName": "world",
+                  "x": 124,
+                  "y": 115,
+                  "z": 63
+                },
+                {
+                  "worldName": "world",
+                  "x": 124,
+                  "y": 115,
+                  "z": 90
+                },
+                {
+                  "worldName": "world",
+                  "x": 138,
+                  "y": 115,
+                  "z": 99
+                },
+                {
+                  "worldName": "world",
+                  "x": 151,
+                  "y": 115,
+                  "z": 100
                 }
             ]
         }
