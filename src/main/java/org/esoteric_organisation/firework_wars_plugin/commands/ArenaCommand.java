@@ -33,6 +33,12 @@ public class ArenaCommand extends CommandAPICommand {
           List<String> suggestions = new ArrayList<>();
 
           for (int i = 1; i <= arenas.length; i++) {
+            Arena arena = arenas[i - 1];
+
+            if (gameManager.hasOngoingGame(arena)) {
+              continue;
+            }
+
             suggestions.add(String.valueOf(i));
           }
 

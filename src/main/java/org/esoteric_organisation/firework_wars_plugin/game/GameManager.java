@@ -18,6 +18,10 @@ public class GameManager {
     this.plugin = plugin;
   }
 
+  public boolean hasOngoingGame(Arena arena) {
+    return games.containsKey(arena);
+  }
+
   public FireworkWarsGame getFireworkWarsGame(Arena arena) {
     FireworkWarsGame game = games.get(arena);
 
