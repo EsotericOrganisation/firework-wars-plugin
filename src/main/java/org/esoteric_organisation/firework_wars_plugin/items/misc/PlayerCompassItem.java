@@ -3,6 +3,8 @@ package org.esoteric_organisation.firework_wars_plugin.items.misc;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
@@ -20,6 +22,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +101,9 @@ public class PlayerCompassItem extends AbstractItem {
   }
 
   private class CompassUpdater extends BukkitRunnable {
+
+    private boolean isRunning;
+
     private final FireworkWarsGame game;
     private final String compassId;
     private final Player player;
@@ -158,6 +164,7 @@ public class PlayerCompassItem extends AbstractItem {
 
     @Override
     public void cancel() {
+      isRunning = false;
       super.cancel();
       compassManagers.remove(pdcManager.getStringValue(compass.getItemMeta(), Keys.PLAYER_COMPASS_ID));
     }
@@ -165,6 +172,17 @@ public class PlayerCompassItem extends AbstractItem {
     private boolean hasExactCompass() {
       return Util.testInventory(player.getInventory(),
           item -> compassId.equals(pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID)));
+    }
+
+    @Override
+    public synchronized @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, long delay, long period) throws IllegalArgumentException, IllegalStateException {
+      isRunning = true;
+      return super.runTaskTimer(plugin, delay, period);
+    }
+
+    @Override
+    public synchronized boolean isCancelled() {
+      return !isRunning;
     }
   }
 }
