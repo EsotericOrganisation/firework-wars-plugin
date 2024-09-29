@@ -35,7 +35,7 @@ public class FireworkShotgunItem extends BaseGunItem {
     ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 5);
 
     Bukkit.broadcastMessage("Editing ItemMeta");
-    event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone())));
+    Bukkit.getServer().getScheduler().runTaskLater(plugin, () -> event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone()))), 1L);
   }
 
   @Override
