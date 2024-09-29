@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
@@ -99,19 +100,17 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
 
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent event) {
-    ItemStack item1 = customItemManager.getItem("firework_shotgun_ammo").getItem(event.getPlayer());
-    ItemStack item2 = customItemManager.getItem("firework_shotgun").getItem(event.getPlayer(), 64);
+    Player player = event.getPlayer();
 
-    event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle").getItem(event.getPlayer()));
-    event.getPlayer().getInventory().addItem(customItemManager.getItem("firework_rifle_ammo").getItem(event.getPlayer(), 64));
+    ItemStack item1 = customItemManager.getItem("firework_shotgun").getItem(player);
+    ItemStack item2 = customItemManager.getItem("firework_shotgun_ammo").getItem(player, 64);
 
-    ItemStack item3 = customItemManager.getItem("player_compass").getItem(event.getPlayer());
+    ItemStack item3 = customItemManager.getItem("firework_rifle").getItem(player);
+    ItemStack item4 = customItemManager.getItem("firework_rifle_ammo").getItem(player, 64);
 
-    event.getPlayer().getInventory().addItem(item1, item2, item3);
-  }
+    ItemStack item5 = customItemManager.getItem("player_compass").getItem(player);
 
-  @EventHandler
-  public void onPlayerLeave(PlayerQuitEvent event) {
-    event.getPlayer().getInventory().clear();
+    player.getInventory().clear();
+    player.getInventory().addItem(item1, item2, item3, item4, item5);
   }
 }
