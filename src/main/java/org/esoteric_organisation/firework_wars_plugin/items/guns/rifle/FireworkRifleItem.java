@@ -1,26 +1,17 @@
 package org.esoteric_organisation.firework_wars_plugin.items.guns.rifle;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
-import org.bukkit.craftbukkit.entity.CraftFirework;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 import java.util.function.Consumer;
