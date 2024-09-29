@@ -74,22 +74,29 @@ public abstract class BaseGunItem extends AbstractItem {
   @EventHandler
   public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
     if (!isValidCustomItem(event.getCrossbow())) {
+      Bukkit.broadcastMessage("The crossbow is invalid.");
       return;
     }
 
     if (!(event.getEntity() instanceof Player player)) {
+      Bukkit.broadcastMessage("Entity is not a player.");
       return;
     }
 
     FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
 
     if (game == null || !game.isPlaying()) {
+      Bukkit.broadcastMessage("Game is invalid.");
       return;
     }
 
-    boolean hasAmmo = Util.testInventory(player.getInventory(), item -> getAmmoItem().isValidCustomItem(item));
+    boolean hasAmmo = Util.testInventory(player.getInventory(), item -> {
+      Bukkit.broadcastMessage("Checking item " + item.getType().name());
+      return getAmmoItem().isValidCustomItem(item);
+    });
 
     if (!hasAmmo) {
+      Bukkit.broadcastMessage("Player does not have ammo.");
       return;
     }
 
