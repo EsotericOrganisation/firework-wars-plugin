@@ -57,6 +57,10 @@ public class FireworkWarsGame {
     return players.contains(player) && player.getGameMode() == GameMode.SPECTATOR;
   }
 
+  public boolean containsPlayer(Player player) {
+    return players.contains(player);
+  }
+
   public void setGameState(GameState gameState) {
     this.gameState = gameState;
   }

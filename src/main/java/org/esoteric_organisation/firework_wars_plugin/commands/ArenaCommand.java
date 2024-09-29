@@ -60,6 +60,11 @@ public class ArenaCommand extends CommandAPICommand {
             return;
           }
 
+          if (game.containsPlayer(info.sender())) {
+            plugin.getLanguageManager().sendMessage(Message.GAME_ALREADY_CONTAINS_PLAYER, info.sender());
+            return;
+          }
+
           game.addPlayer(info.sender());
         })
     );
