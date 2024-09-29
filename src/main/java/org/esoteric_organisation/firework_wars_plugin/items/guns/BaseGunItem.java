@@ -73,6 +73,8 @@ public abstract class BaseGunItem extends AbstractItem {
 
   @EventHandler
   public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
+    Bukkit.broadcastMessage("Running onCrossbowLoad method");
+
     if (!isValidCustomItem(event.getCrossbow())) {
       Bukkit.broadcastMessage("The crossbow is invalid.");
       return;
