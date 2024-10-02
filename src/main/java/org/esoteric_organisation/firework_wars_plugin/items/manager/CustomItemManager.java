@@ -14,6 +14,8 @@ import net.minecraft.world.item.Items;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.FireworkRifleItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.RifleAmmo;
+import org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launcher.RocketLauncherAmmo;
+import org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launcher.RocketLauncherItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.FireworkShotgunItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.ShotgunAmmo;
 import org.esoteric_organisation.firework_wars_plugin.items.misc.PlayerCompassItem;
@@ -45,6 +47,9 @@ public class CustomItemManager {
 
     registerItem(new FireworkShotgunItem(plugin));
     registerItem(new ShotgunAmmo(plugin));
+
+    registerItem(new RocketLauncherItem(plugin));
+    registerItem(new RocketLauncherAmmo(plugin));
 
     registerItem(new PlayerCompassItem(plugin));
   }

@@ -11,6 +11,11 @@ FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>S
 FIREWORK_SHOTGUN_AMMO: "<yellow>Shotgun Ammo</yellow>"
 FIREWORK_SHOTGUN_AMMO_LORE: "<gray>1x shotgun ammo</gray>"
 
+ROCKET_LAUNCHER: "<dark_red>Rocket Launcher</dark_red>"
+ROCKET_LAUNCHER_LORE: "<gray>Shoots an explosive firework rocket.</gray>"
+ROCKET_LAUNCHER_AMMO: "<red>Rocket Launcher Ammo</red>"
+ROCKET_LAUNCHER_AMMO_LORE: "<gray>1x rocket launcher ammo</gray>"
+
 PLAYER_COMPASS: "<yellow>Player Tracker</yellow>"
 PLAYER_COMPASS_LORE_NOT_TRACKING: "<gray>No player is being tracked.</gray>"
 PLAYER_COMPASS_LORE_TRACKING: "<green>Tracking target: </green>{0}"
