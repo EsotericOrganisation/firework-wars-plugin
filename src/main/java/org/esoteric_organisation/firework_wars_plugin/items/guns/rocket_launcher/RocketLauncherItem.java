@@ -5,10 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
+import org.esoteric_organisation.firework_wars_plugin.util.Keys;
+import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
 import java.util.List;
 
@@ -25,7 +29,9 @@ public class RocketLauncherItem extends BaseGunItem {
 
   @Override
   protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
+    PersistentDataContainer pdc = event.getProjectile().getPersistentDataContainer();
 
+    pdc.set(Keys.EXPLOSIVE_ROCKET_ENTITY, PersistentDataType.BOOLEAN, true);
   }
 
   @Override
