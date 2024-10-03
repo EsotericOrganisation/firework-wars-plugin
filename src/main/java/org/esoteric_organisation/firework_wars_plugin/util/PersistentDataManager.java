@@ -5,6 +5,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.UUID;
+
 @SuppressWarnings("unused")
 public class PersistentDataManager {
   public boolean hasKey(PersistentDataHolder holder, NamespacedKey key) {
@@ -57,6 +59,13 @@ public class PersistentDataManager {
     return pdc.get(Keys.fromString(key), PersistentDataType.INTEGER_ARRAY);
   }
 
+  public UUID getUUIDValue(PersistentDataHolder holder, NamespacedKey key) {
+    PersistentDataContainer pdc = holder.getPersistentDataContainer();
+    String value = pdc.get(key, PersistentDataType.STRING);
+
+    return value == null ? null : UUID.fromString(value);
+  }
+
   public void setStringValue(PersistentDataHolder holder, NamespacedKey key, String value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
     pdc.set(key, PersistentDataType.STRING, value);
@@ -95,5 +104,10 @@ public class PersistentDataManager {
   public void setIntListValue(PersistentDataHolder holder, String key, int[] value) {
     PersistentDataContainer pdc = holder.getPersistentDataContainer();
     pdc.set(Keys.fromString(key), PersistentDataType.INTEGER_ARRAY, value);
+  }
+
+  public void setUUIDValue(PersistentDataHolder holder, NamespacedKey key, UUID value) {
+    PersistentDataContainer pdc = holder.getPersistentDataContainer();
+    pdc.set(key, PersistentDataType.STRING, value.toString());
   }
 }
