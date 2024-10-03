@@ -27,8 +27,12 @@ public abstract class BaseGunItem extends AbstractItem {
     this.ammoId = ammoId;
   }
 
-  protected ItemBuilder<CrossbowMeta> getItemBuilder() {
-    return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial).setEnchanted(true).setUnbreakable(true);
+  protected ItemBuilder<CrossbowMeta> getBaseCrossbowBuilder() {
+    return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
+      .setEnchanted(true)
+      .setUnbreakable(true)
+      .itemSupplier(this::getCustomCrossbow)
+      .modifyMeta(this::modifyMeta);
   }
 
   protected ItemStack getCustomCrossbow() {
@@ -40,7 +44,7 @@ public abstract class BaseGunItem extends AbstractItem {
   }
 
   protected void modifyMeta(CrossbowMeta meta) {
-    pdcManager.setStringValue(meta, isItemKey, itemId);
+    pdcManager.setStringValue(meta, customItemIdKey, itemId);
     pdcManager.setStringValue(meta, Keys.GUN_ACCEPTED_AMMO_ID, ammoId);
   }
 
