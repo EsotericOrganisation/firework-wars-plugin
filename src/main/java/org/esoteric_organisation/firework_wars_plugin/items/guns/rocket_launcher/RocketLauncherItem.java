@@ -2,8 +2,11 @@ package org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launche
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import org.bukkit.Material;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -13,6 +16,7 @@ import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -49,5 +53,20 @@ public class RocketLauncherItem extends BaseGunItem {
     );
 
     return rocketLauncher;
+  }
+
+  @EventHandler
+  public void onFireworkExplode(@NotNull FireworkExplodeEvent event) {
+    Firework firework = event.getEntity();
+
+    Boolean isRocket = firework.getPersistentDataContainer().get(Keys.EXPLOSIVE_ROCKET_ENTITY, PersistentDataType.BOOLEAN);
+
+    if (isRocket != null && isRocket) {
+      event.setCancelled(true);
+
+      firework.getWorld().createExplosion(firework, firework.getLocation(), 3.5F, false, true);
+
+      firework.remove();
+    }
   }
 }
