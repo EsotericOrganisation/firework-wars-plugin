@@ -3,12 +3,14 @@ package org.esoteric_organisation.firework_wars_plugin.util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.entity.Player;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.esoteric_organisation.firework_wars_plugin.language.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,11 @@ public class ItemBuilder<M extends ItemMeta> {
     return this;
   }
 
+  public ItemBuilder<M> setName(Message message, Player player) {
+    Component component = plugin.getLanguageManager().getMessage(message, player);
+    return this.setName(component);
+  }
+
   public String getName() {
     return name;
   }
@@ -117,6 +124,16 @@ public class ItemBuilder<M extends ItemMeta> {
   public ItemBuilder<M> setLore(Component... lore) {
     this.lore = Stream.of(lore).map(MM::serialize).toList();
     return this;
+  }
+
+  public ItemBuilder<M> setLore(Message message, Player player) {
+    Component[] components = plugin.getLanguageManager().getMessages(message, player);
+    return this.setLore(components);
+  }
+
+  public ItemBuilder<M> setLore(Message message, Player player, Object... args) {
+    Component[] components = plugin.getLanguageManager().getMessages(message, player, args);
+    return this.setLore(components);
   }
 
   public List<String> getLore() {
