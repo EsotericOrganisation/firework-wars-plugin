@@ -47,14 +47,14 @@ public class PlayerCompassItem extends AbstractItem {
   @Override
   public ItemStack getItem(Player player) {
     return new ItemBuilder<CompassMeta>(plugin, itemMaterial)
-        .setName(languageManager.getMessage(Message.PLAYER_COMPASS, player))
-        .setLore(languageManager.getMessages(loreNotTracking, player))
+        .setName(Message.PLAYER_COMPASS, player)
+        .setLore(loreNotTracking, player)
         .modifyMeta(this::modifyMeta)
         .build();
   }
 
   private void modifyMeta(CompassMeta meta) {
-    pdcManager.setStringValue(meta, isItemKey, itemId);
+    pdcManager.setStringValue(meta, customItemIdKey, itemId);
     pdcManager.setStringValue(meta, Keys.PLAYER_COMPASS_ID, UUID.randomUUID().toString());
   }
 
