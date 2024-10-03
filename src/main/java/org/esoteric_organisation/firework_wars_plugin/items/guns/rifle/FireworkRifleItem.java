@@ -25,10 +25,14 @@ public class FireworkRifleItem extends BaseGunItem {
   @Override
   public ItemStack getItem(Player player) {
     Consumer<CrossbowMeta> consumer = this::modifyMeta;
-    Consumer<CrossbowMeta> modifyMeta = consumer.andThen(meta -> meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true));
+    Consumer<CrossbowMeta> modifyMeta = consumer.andThen(meta ->
+      meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true));
 
-    return getItemBuilder().setName(languageManager.getMessage(Message.FIREWORK_RIFLE, player)).setLore(languageManager.getMessages(Message.FIREWORK_RIFLE_LORE, player))
-        .itemSupplier(this::getCustomCrossbow).modifyMeta(modifyMeta).build();
+    return getBaseCrossbowBuilder()
+      .setName(Message.FIREWORK_RIFLE, player)
+      .setLore(Message.FIREWORK_RIFLE_LORE, player)
+      .modifyMeta(modifyMeta)
+      .build();
   }
 
   @Override
