@@ -23,7 +23,7 @@ public abstract class AbstractItem implements Listener {
   protected final String itemId;
   protected final Material itemMaterial;
 
-  protected final NamespacedKey isItemKey;
+  protected final NamespacedKey customItemIdKey;
 
   public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial) {
     this.plugin = plugin;
@@ -35,7 +35,7 @@ public abstract class AbstractItem implements Listener {
     this.itemId = itemId;
     this.itemMaterial = itemMaterial;
 
-    this.isItemKey = Keys.CUSTOM_ITEM_ID;
+    this.customItemIdKey = Keys.CUSTOM_ITEM_ID;
 
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }
@@ -54,7 +54,7 @@ public abstract class AbstractItem implements Listener {
       return false;
     }
 
-    String itemStackItemId = plugin.getPdcManager().getStringValue(itemStack.getItemMeta(), isItemKey);
+    String itemStackItemId = plugin.getPdcManager().getStringValue(itemStack.getItemMeta(), customItemIdKey);
     return itemId.equals(itemStackItemId);
   }
 
