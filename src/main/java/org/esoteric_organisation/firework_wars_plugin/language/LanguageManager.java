@@ -255,11 +255,19 @@ public class LanguageManager {
   // rolyPolyVole start
 
   public Component[] getMessages(Message message, CommandSender commandSender) {
-    return Arrays
-        .stream(getRawMessageString(message, getLanguage(commandSender), true)
-        .split("\n"))
+    String rawMessage = miniMessage.serialize(getMessage(message, commandSender));
+
+    return Arrays.stream(rawMessage.split("\n"))
         .map(miniMessage::deserialize)
         .toArray(Component[]::new);
+  }
+
+  public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
+    String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
+
+    return Arrays.stream(rawMessage.split("\n"))
+      .map(miniMessage::deserialize)
+      .toArray(Component[]::new);
   }
 
   // rolyPolyVole end
