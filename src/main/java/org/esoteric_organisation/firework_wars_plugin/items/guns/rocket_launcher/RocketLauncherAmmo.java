@@ -3,13 +3,11 @@ package org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launche
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CrossbowMeta;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
+import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseAmmoItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
-import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
 
-public class RocketLauncherAmmo extends AbstractItem {
+public class RocketLauncherAmmo extends BaseAmmoItem {
 
   public RocketLauncherAmmo(FireworkWarsPlugin plugin) {
     super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET);
@@ -17,9 +15,9 @@ public class RocketLauncherAmmo extends AbstractItem {
 
   @Override
   public ItemStack getItem(Player player) {
-    return new ItemBuilder<CrossbowMeta>(plugin, Material.CROSSBOW)
-      .setName(plugin.getLanguageManager().getMessage(Message.ROCKET_LAUNCHER_AMMO, player))
-      .setLore(plugin.getLanguageManager().getMessage(Message.ROCKET_LAUNCHER_AMMO_LORE, player))
+    return getBaseAmmoBuilder(player)
+      .setName(Message.ROCKET_LAUNCHER_AMMO, player)
+      .setLore(Message.ROCKET_LAUNCHER_AMMO_LORE, player)
       .build();
   }
 }
