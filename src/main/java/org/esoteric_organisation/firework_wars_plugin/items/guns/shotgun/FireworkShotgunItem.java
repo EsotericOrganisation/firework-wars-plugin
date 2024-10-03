@@ -25,8 +25,10 @@ public class FireworkShotgunItem extends BaseGunItem {
 
   @Override
   public ItemStack getItem(Player player) {
-    return getItemBuilder().setName(languageManager.getMessage(Message.FIREWORK_SHOTGUN, player)).setLore(languageManager.getMessages(Message.FIREWORK_SHOTGUN_LORE, player))
-        .itemSupplier(this::getCustomCrossbow).modifyMeta(this::modifyMeta).build();
+    return getBaseCrossbowBuilder()
+      .setName(Message.FIREWORK_SHOTGUN, player)
+      .setLore(Message.FIREWORK_SHOTGUN_LORE, player)
+      .build();
   }
 
   @Override
