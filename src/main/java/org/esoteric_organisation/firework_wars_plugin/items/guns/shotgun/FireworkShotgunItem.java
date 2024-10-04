@@ -1,12 +1,6 @@
 package org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
-import org.bukkit.Bukkit;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
-import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
-import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +9,11 @@ import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
+import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
+import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
+import org.esoteric_organisation.firework_wars_plugin.language.Message;
 
 import java.util.List;
 
@@ -36,7 +35,8 @@ public class FireworkShotgunItem extends BaseGunItem {
     FireworkWarsTeam team = game.getTeam(player);
     ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 5);
 
-    Bukkit.getServer().getScheduler().runTaskLater(plugin, () -> event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone()))), 1L);
+    plugin.getServer().getScheduler().runTaskLater(plugin, () ->
+        event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone()))), 1L);
   }
 
   @Override
