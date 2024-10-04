@@ -20,9 +20,12 @@ public class ResetInventoryCommand extends CommandAPICommand {
       ItemStack item3 = customItemManager.getItem("firework_rifle").getItem(player);
       ItemStack item4 = customItemManager.getItem("firework_rifle_ammo").getItem(player, 64);
 
-      ItemStack item5 = customItemManager.getItem("player_compass").getItem(player);
+      ItemStack item5 = customItemManager.getItem("rocket_launcher").getItem(player);
+      ItemStack item6 = customItemManager.getItem("rocket_launcher_ammo").getItem(player, 64);
 
-      player.getInventory().addItem(item1, item2, item3, item4, item5);
+      ItemStack item7 = customItemManager.getItem("player_compass").getItem(player);
+
+      player.getInventory().addItem(item1, item2, item3, item4, item5, item6, item7);
     });
 
     register(plugin);
