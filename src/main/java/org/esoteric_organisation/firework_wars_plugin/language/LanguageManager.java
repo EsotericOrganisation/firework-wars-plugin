@@ -3,19 +3,20 @@ package org.esoteric_organisation.firework_wars_plugin.language;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.data.player.PlayerProfile;
-import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.data.player.PlayerProfile;
+import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Stream;
 
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class LanguageManager {
 
   private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -321,7 +322,7 @@ public class LanguageManager {
   }
 
   public Component[] toComponents(Object ...objects) {
-    return Stream.of(objects).map((object) -> toComponent(object)).toArray(Component[]::new);
+    return Stream.of(objects).map(this::toComponent).toArray(Component[]::new);
   }
 
   public Component toComponent(Object object) {
