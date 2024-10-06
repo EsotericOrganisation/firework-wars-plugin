@@ -1,13 +1,6 @@
 package org.esoteric_organisation.firework_wars_plugin.items.guns;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
-import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
-import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
-import org.esoteric_organisation.firework_wars_plugin.util.Keys;
-import org.esoteric_organisation.firework_wars_plugin.util.Util;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
@@ -17,6 +10,13 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
+import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
+import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
+import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
+import org.esoteric_organisation.firework_wars_plugin.util.Keys;
+import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
 public abstract class BaseGunItem extends AbstractItem {
   protected final String ammoId;
@@ -48,13 +48,14 @@ public abstract class BaseGunItem extends AbstractItem {
     pdcManager.setStringValue(meta, Keys.GUN_ACCEPTED_AMMO_ID, ammoId);
   }
 
-  protected ItemStack createFirework(Color color, int stars) {
+  protected ItemStack createFirework(Color color, int stars, int fd) {
     ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
     FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
 
-    plugin.getPdcManager().setStringValue(fireworkMeta, Keys.CUSTOM_ITEM_ID, ammoId);
+    pdcManager.setStringValue(fireworkMeta, Keys.CUSTOM_ITEM_ID, ammoId);
 
     addFireworkStars(fireworkMeta, color, stars);
+    fireworkMeta.setPower(fd);
     firework.setItemMeta(fireworkMeta);
 
     return firework;
