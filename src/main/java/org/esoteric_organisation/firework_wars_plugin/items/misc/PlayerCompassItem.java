@@ -1,18 +1,7 @@
 package org.esoteric_organisation.firework_wars_plugin.items.misc;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsTeam;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
-import org.esoteric_organisation.firework_wars_plugin.language.Message;
-import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
-import org.esoteric_organisation.firework_wars_plugin.util.Keys;
-import org.esoteric_organisation.firework_wars_plugin.util.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -21,7 +10,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
+import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
+import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
+import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
+import org.esoteric_organisation.firework_wars_plugin.language.Message;
+import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
+import org.esoteric_organisation.firework_wars_plugin.util.Keys;
+import org.esoteric_organisation.firework_wars_plugin.util.Util;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static java.util.Comparator.comparingDouble;
+import static net.kyori.adventure.text.Component.text;
 
 public class PlayerCompassItem extends AbstractItem {
   private static final Map<String, CompassUpdater> compassManagers = new HashMap<>();
@@ -61,6 +62,8 @@ public class PlayerCompassItem extends AbstractItem {
   @EventHandler
   public void onPlayerInteract(PlayerInteractEvent event) {
     Player player = event.getPlayer();
+    TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
+
     ItemStack item = event.getItem();
 
     if (!isValidCustomItem(item)) {
@@ -73,13 +76,13 @@ public class PlayerCompassItem extends AbstractItem {
       return;
     }
 
-    FireworkWarsTeam team = game.getTeam(player);
+    FireworkWarsTeam team = teamPlayer.getTeam();
     Location playerLocation = player.getLocation();
 
-    Player nearestEnemy = game.getPlayers()
+    TeamPlayer nearestEnemy = game.getPlayers()
         .stream()
-        .filter(gamePlayer -> !game.getTeam(gamePlayer).equals(team))
-        .min(comparingDouble(enemy -> enemy.getLocation().distanceSquared(playerLocation)))
+        .filter(gamePlayer -> !gamePlayer.getTeam().equals(team))
+        .min(comparingDouble(enemy -> enemy.getPlayer().getLocation().distanceSquared(playerLocation)))
         .orElse(null);
 
     String compassId = pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID);
@@ -106,20 +109,20 @@ public class PlayerCompassItem extends AbstractItem {
     private final Player player;
     private final ItemStack compass;
 
-    private Player target;
+    private TeamPlayer target;
 
     public boolean isRunning() {
       return isRunning;
     }
 
-    public void setTarget(Player target) {
+    public void setTarget(TeamPlayer target) {
       this.target = target;
 
       if (target != null) {
         Util.playSound(player, Sound.BLOCK_BEACON_POWER_SELECT);
 
-        compass.lore(List.of(languageManager.getMessage(loreTracking, player, target.displayName().color(game.getTeam(target).getTeamColor()))));
-        player.sendMessage(languageManager.getMessage(trackingTarget, player, target.displayName().color(game.getTeam(target).getTeamColor())));
+        compass.lore(List.of(languageManager.getMessage(loreTracking, player, target.getColoredName())));
+        player.sendMessage(languageManager.getMessage(trackingTarget, player, target.getColoredName()));
       } else {
         Util.playSound(player, Sound.ENTITY_ENDER_EYE_DEATH);
 
@@ -145,21 +148,23 @@ public class PlayerCompassItem extends AbstractItem {
         return;
       }
 
-      if (!target.isOnline() || game.isSpectator(target)) {
+      Player targetPlayer = target.getPlayer();
+
+      if (!targetPlayer.isOnline() || game.isSpectator(targetPlayer)) {
         setTarget(null);
         return;
       }
 
-      player.setCompassTarget(target.getLocation());
+      player.setCompassTarget(targetPlayer.getLocation());
 
       ItemStack mainHand = player.getInventory().getItemInMainHand();
       ItemStack offHand = player.getInventory().getItemInOffHand();
 
       if (mainHand.equals(compass) || offHand.equals(compass)) {
-        int distance = (int) player.getLocation().distance(target.getLocation());
+        int distance = (int) player.getLocation().distance(targetPlayer.getLocation());
 
         player.sendActionBar(languageManager.getMessage(
-            actionBarInfo, player, target.displayName(), Component.text(distance + "m").color(NamedTextColor.AQUA)));
+            actionBarInfo, player, targetPlayer.displayName(), text(distance + "m").color(NamedTextColor.AQUA)));
       }
     }
 
