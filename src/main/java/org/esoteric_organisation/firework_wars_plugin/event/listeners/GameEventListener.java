@@ -1,12 +1,12 @@
 package org.esoteric_organisation.firework_wars_plugin.event.listeners;
 
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 
 public class GameEventListener implements Listener {
   
@@ -30,14 +30,10 @@ public class GameEventListener implements Listener {
   public void onPlayerDeath(PlayerDeathEvent event) {
     Player player = event.getPlayer();
 
-    if (!isInGame(player)) {
+    if (!game.isAlive(player)) {
       return;
     }
 
     game.onPlayerDeath(event);
-  }
-
-  private boolean isInGame(Player player) {
-    return game.getPlayers().contains(player);
   }
 }
