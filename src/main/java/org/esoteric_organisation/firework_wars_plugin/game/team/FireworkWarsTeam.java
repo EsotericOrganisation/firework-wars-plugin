@@ -1,16 +1,15 @@
-package org.esoteric_organisation.firework_wars_plugin.game;
+package org.esoteric_organisation.firework_wars_plugin.game.team;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.entity.Player;
-
-import net.kyori.adventure.text.Component;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.ConfiguredTeam;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireworkWarsTeam {
 
@@ -18,13 +17,13 @@ public class FireworkWarsTeam {
 
   private final ConfiguredTeam configuredTeam;
 
-  private final List<Player> players = new ArrayList<>();
+  private final List<TeamPlayer> players = new ArrayList<>();
 
   public ConfiguredTeam getConfiguredTeam() {
     return configuredTeam;
   }
 
-  public List<Player> getPlayers() {
+  public List<TeamPlayer> getPlayers() {
     return players;
   }
 
@@ -33,19 +32,22 @@ public class FireworkWarsTeam {
     this.plugin = plugin;
   }
 
-  public void addPlayer(Player player) {
-    players.add(player);
+  public void addPlayer(TeamPlayer teamPlayer) {
+    players.add(teamPlayer);
+    teamPlayer.setTeam(this);
+
+    Player player = teamPlayer.getPlayer();
     player.teleport(configuredTeam.getSpawnLocation().getBukkitLocation());
 
     player.sendTitlePart(TitlePart.TITLE, plugin.getLanguageManager().getMessage(Message.YOU_ARE_ON_TEAM, player));
-    player.sendTitlePart(TitlePart.SUBTITLE, getDeserializedTeamName());
+    player.sendTitlePart(TitlePart.SUBTITLE, getColoredTeamName());
   }
 
-  public Component getDeserializedTeamName() {
+  public Component getColoredTeamName() {
     return configuredTeam.getDeserializedTeamName();
   }
 
   public TextColor getTeamColor() {
-    return getDeserializedTeamName().color();
+    return getColoredTeamName().color();
   }
 }
