@@ -27,13 +27,12 @@ public class RocketLauncherItem extends BaseGunItem {
   @Override
   protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
     plugin.getServer().getScheduler().runTaskLater(plugin, () ->
-      event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(createFirework(Color.RED, 1)))), 1L);
+      event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(createFirework(Color.RED, 1, 2)))), 1L);
   }
 
   @Override
   protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
-    pdcManager.setBooleanValue(
-      event.getProjectile(), Keys.EXPLOSIVE_ROCKET_ENTITY, true);
+
   }
 
   @Override
@@ -47,11 +46,13 @@ public class RocketLauncherItem extends BaseGunItem {
   @EventHandler
   public void onFireworkExplode(@NotNull FireworkExplodeEvent event) {
     Firework firework = event.getEntity();
-    Boolean isRocket = pdcManager.getBooleanValue(firework, Keys.EXPLOSIVE_ROCKET_ENTITY);
 
-    if (isRocket != null && isRocket) {
+    String value = pdcManager.getStringValue(firework.getFireworkMeta(), Keys.CUSTOM_ITEM_ID);
+    boolean isRocket = ammoId.equals(value);
+
+    if (isRocket) {
       firework.getWorld().createExplosion(
-        firework, firework.getLocation(), 2.5F, false, true);
+        firework, firework.getLocation(), 2.0F, false, true);
 
       firework.remove();
       event.setCancelled(true);
