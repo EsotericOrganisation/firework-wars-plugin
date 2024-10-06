@@ -1,4 +1,4 @@
-package org.esoteric_organisation.firework_wars_plugin.data.player;
+package org.esoteric_organisation.firework_wars_plugin.profile;
 
 import com.google.gson.Gson;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
