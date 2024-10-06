@@ -1,12 +1,11 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
+import org.bukkit.entity.Player;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.bukkit.entity.Player;
 
 public class GameManager {
 
@@ -34,12 +33,9 @@ public class GameManager {
   } 
 
   public FireworkWarsGame getFireworkWarsGame(Player player) {
-    for (FireworkWarsGame game : games.values()) {
-      if (game.getPlayers().contains(player)) {
-        return game;
-      }
-    }
-
-    return null;
+    return games.values().stream()
+        .filter(game -> game.containsPlayer(player))
+        .findFirst()
+        .orElse(null);
   }
 }
