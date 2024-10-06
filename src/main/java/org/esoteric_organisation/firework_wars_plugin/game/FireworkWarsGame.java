@@ -1,10 +1,12 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
-import org.bukkit.Bukkit;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
 import org.esoteric_organisation.firework_wars_plugin.arena.structure.ConfiguredTeam;
 import org.esoteric_organisation.firework_wars_plugin.event.listeners.GameEventListener;
+import org.esoteric_organisation.firework_wars_plugin.game.runnables.GameCountdown;
+import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
+import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -12,6 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FireworkWarsGame {
 
@@ -23,7 +26,7 @@ public class FireworkWarsGame {
   private GameState gameState = GameState.WAITING;
 
   private final List<FireworkWarsTeam> teams = new ArrayList<>();
-  private final List<Player> players = new ArrayList<>();
+  private final List<TeamPlayer> players = new ArrayList<>();
 
   public Arena getArena() {
     return arena;
@@ -33,7 +36,7 @@ public class FireworkWarsGame {
     return gameState;
   }
 
-  public List<Player> getPlayers() {
+  public List<TeamPlayer> getPlayers() {
     return players;
   }
 
@@ -50,15 +53,16 @@ public class FireworkWarsGame {
   }
 
   public boolean isAlive(Player player) {
-    return players.contains(player) && player.getGameMode() != GameMode.SPECTATOR;
+    return containsPlayer(player) && player.getGameMode() != GameMode.SPECTATOR;
   }
 
   public boolean isSpectator(Player player) {
-    return players.contains(player) && player.getGameMode() == GameMode.SPECTATOR;
+    return !isAlive(player);
   }
 
   public boolean containsPlayer(Player player) {
-    return players.contains(player);
+    TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
+    return players.contains(teamPlayer);
   }
 
   public void setGameState(GameState gameState) {
@@ -73,19 +77,20 @@ public class FireworkWarsGame {
   }
 
   public void addPlayer(Player player) {
-    players.add(player);
-    player.teleport(arena.getLobbySpawnLocation().getBukkitLocation());
+    TeamPlayer teamPlayer = new TeamPlayer(player.getUniqueId(), this);
 
-    if (gameState == GameState.WAITING) {
-      if (players.size() >= arena.getMinimumPlayerCount()) {
+    players.add(teamPlayer);
+
+    if (isWaiting() && players.size() >= arena.getMinimumPlayerCount()) {
         startCountdown();
-      }
     }
+
+    player.teleport(arena.getLobbySpawnLocation().getBukkitLocation());
   }
 
   public void sendMessage(Message message, Object... arguments) {
-    for (Player player : players) {
-      plugin.getLanguageManager().sendMessage(message, player, arguments);
+    for (TeamPlayer player : players) {
+      plugin.getLanguageManager().sendMessage(message, player.getPlayer(), arguments);
     }
   }
 
@@ -108,7 +113,9 @@ public class FireworkWarsGame {
     gameState = GameState.WAITING;
     eventListener.unregister();
 
-    sendMessage(Message.TEAM_WON, winningTeam.getDeserializedTeamName());
+    sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
+
+    TeamPlayer.unregisterGame(this);
 
     teams.clear();
     players.clear();
@@ -117,6 +124,7 @@ public class FireworkWarsGame {
   public void distributePlayersAcrossTeams() {
     for (int i = 0; i < players.size(); i++) {
       int teamIndex = i % teams.size();
+
       FireworkWarsTeam team = teams.get(teamIndex);
       team.addPlayer(players.get(i));
     }
@@ -126,7 +134,7 @@ public class FireworkWarsGame {
     Player player = event.getPlayer();
     player.setGameMode(GameMode.SPECTATOR);
 
-    FireworkWarsTeam team = getTeam(player);
+    FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
 
     if (isTeamEliminated(team)) {
       eliminateTeam(team);
@@ -142,7 +150,9 @@ public class FireworkWarsGame {
     return team
       .getPlayers()
       .stream()
-      .allMatch(player -> player.getGameMode() == GameMode.SPECTATOR);
+      .map(TeamPlayer::getPlayer)
+      .filter(Objects::nonNull)
+      .allMatch(this::isSpectator);
   }
 
   public List<FireworkWarsTeam> getRemainingTeams() {
@@ -152,16 +162,8 @@ public class FireworkWarsGame {
       .toList();
   }
 
-  public FireworkWarsTeam getTeam(Player player) {
-    return teams
-      .stream()
-      .filter(team -> team.getPlayers().contains(player))
-      .findFirst()
-      .orElse(null);
-  }
-
   public void eliminateTeam(FireworkWarsTeam team) {
-    sendMessage(Message.TEAM_ELIMINATED, team.getDeserializedTeamName());
+    sendMessage(Message.TEAM_ELIMINATED, team.getColoredTeamName());
   }
 
   public enum GameState {
