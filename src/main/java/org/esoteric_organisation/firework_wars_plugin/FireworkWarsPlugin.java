@@ -5,9 +5,10 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
+import org.esoteric_organisation.firework_wars_plugin.commands.HealCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.ResetInventoryCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.SetLanguageCommand;
-import org.esoteric_organisation.firework_wars_plugin.data.player.PlayerDataManager;
+import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.manager.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
@@ -83,6 +84,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     new SetLanguageCommand(this);
     new ArenaCommand(this);
     new ResetInventoryCommand(this);
+    new HealCommand();
   }
 
   @Override
