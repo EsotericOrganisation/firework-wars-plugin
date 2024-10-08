@@ -1,17 +1,14 @@
-package org.esoteric_organisation.firework_wars_plugin.arena.data_type;
+package org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components;
 
-import com.google.gson.annotations.Expose;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
+@SuppressWarnings("unused")
 public class BlockLocation {
-
-  @Expose
   private String worldName;
 
-  @Expose
   private int x;
-  @Expose
   private int y;
-  @Expose
   private int z;
 
   public String getWorldName() {
@@ -28,5 +25,9 @@ public class BlockLocation {
 
   public int getZ() {
     return z;
+  }
+
+  public Location getBukkitLocation() {
+    return new Location(Bukkit.getWorld(worldName), x, y, z);
   }
 }
