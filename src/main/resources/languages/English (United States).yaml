@@ -30,6 +30,8 @@ YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 
+NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
 INVALID_ARENA: "<red>That arena does not exist!</red>"
 GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"
 GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
+GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
