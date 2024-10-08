@@ -3,9 +3,10 @@ package org.esoteric_organisation.firework_wars_plugin.commands;
 import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 
 public class HealCommand extends CommandAPICommand {
-  public HealCommand() {
+  public HealCommand(FireworkWarsPlugin plugin) {
     super("heal");
 
     executesPlayer((player, args) -> {
@@ -16,6 +17,6 @@ public class HealCommand extends CommandAPICommand {
       player.sendMessage(Component.text("You have been healed!").color(NamedTextColor.GREEN));
     });
 
-    register();
+    register(plugin);
   }
 }
