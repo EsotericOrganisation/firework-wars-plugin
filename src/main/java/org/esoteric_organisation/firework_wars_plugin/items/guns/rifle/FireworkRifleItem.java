@@ -41,7 +41,7 @@ public class FireworkRifleItem extends BaseGunItem {
     TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
     FireworkWarsTeam team = teamPlayer.getTeam();
 
-    ItemStack firework = createFirework(team.getConfiguredTeam().getColor(), 4, 2);
+    ItemStack firework = createFirework(team.getTeamData().getColor(), 4, 2);
 
     Bukkit.getServer().getScheduler().runTaskLater(plugin, () ->
         event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework))), 1L);
