@@ -6,13 +6,13 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ChargedProjectiles;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.util.Keys;
-import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.util.Keys;
+import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -21,9 +21,9 @@ import java.util.function.Predicate;
 public class CustomCrossbow extends CrossbowItem {
 
     public static final Item.Properties PROPERTIES = new Item.Properties()
-      .stacksTo(1)
-      .durability(465)
-      .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
+        .stacksTo(1)
+        .durability(465)
+        .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
 
     public CustomCrossbow(Item.Properties settings) {
         super(settings);
@@ -44,8 +44,8 @@ public class CustomCrossbow extends CrossbowItem {
         FireworkWarsPlugin plugin = FireworkWarsPlugin.getInstance();
 
         boolean superResult = offHand
-          ? super.getSupportedHeldProjectiles().test(stack)
-          : super.getAllSupportedProjectiles().test(stack);
+            ? super.getSupportedHeldProjectiles().test(stack)
+            : super.getAllSupportedProjectiles().test(stack);
 
         if (plugin == null) {
             Bukkit.getLogger().severe("Failed to get FireworkWars plugin instance!");

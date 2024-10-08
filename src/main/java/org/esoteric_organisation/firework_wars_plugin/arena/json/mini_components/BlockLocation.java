@@ -5,29 +5,29 @@ import org.bukkit.Location;
 
 @SuppressWarnings("unused")
 public class BlockLocation {
-  private String worldName;
+    private String worldName;
 
-  private int x;
-  private int y;
-  private int z;
+    private int x;
+    private int y;
+    private int z;
 
-  public String getWorldName() {
-    return worldName;
-  }
+    public String getWorldName() {
+        return worldName;
+    }
 
-  public int getX() {
-    return x;
-  }
+    public int getX() {
+        return x;
+    }
 
-  public int getY() {
-    return y;
-  }
+    public int getY() {
+        return y;
+    }
 
-  public int getZ() {
-    return z;
-  }
+    public int getZ() {
+        return z;
+    }
 
-  public Location getBukkitLocation() {
-    return new Location(Bukkit.getWorld(worldName), x, y, z);
-  }
+    public Location getBukkitLocation() {
+        return new Location(Bukkit.getWorld(worldName), x, y, z);
+    }
 }

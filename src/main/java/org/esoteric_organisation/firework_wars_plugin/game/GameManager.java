@@ -13,57 +13,57 @@ import java.util.Map;
 
 public class GameManager implements Listener {
 
-  private final FireworkWarsPlugin plugin;
+    private final FireworkWarsPlugin plugin;
 
-  private final Map<Arena, FireworkWarsGame> games = new HashMap<>();
+    private final Map<Arena, FireworkWarsGame> games = new HashMap<>();
 
-  public GameManager(FireworkWarsPlugin plugin) {
-    this.plugin = plugin;
+    public GameManager(FireworkWarsPlugin plugin) {
+        this.plugin = plugin;
 
-    plugin.getServer().getPluginManager().registerEvents(this, plugin);
-  }
-
-  public boolean hasOngoingGame(Arena arena) {
-    return games.containsKey(arena);
-  }
-
-  public FireworkWarsGame getFireworkWarsGame(Arena arena) {
-    FireworkWarsGame game = games.get(arena);
-
-    if (game == null) {
-      game = new FireworkWarsGame(plugin, arena);
-      games.put(arena, game);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    return games.get(arena);
-  } 
-
-  public FireworkWarsGame getFireworkWarsGame(Player player) {
-    return games.values().stream()
-        .filter(game -> game.containsPlayer(player))
-        .findFirst()
-        .orElse(null);
-  }
-
-  public FireworkWarsGame getFireworkWarsGame(String worldName) {
-    return games.values().stream()
-        .filter(game -> game.usesWorld(worldName))
-        .findFirst()
-        .orElse(null);
-  }
-
-  @EventHandler
-  public void onWorldReload(WorldLoadEvent event) {
-    String worldName = event.getWorld().getName();
-
-    FireworkWarsGame game = getFireworkWarsGame(worldName);
-    if (game == null) return;
-
-    game.getWorldLoadStates().put(worldName, true);
-
-    List<Boolean> values = List.copyOf(game.getWorldLoadStates().values());
-    if (values.stream().allMatch(Boolean::booleanValue)) {
-      game.setGameState(FireworkWarsGame.GameState.WAITING);
+    public boolean hasOngoingGame(Arena arena) {
+        return games.containsKey(arena);
     }
-  }
+
+    public FireworkWarsGame getFireworkWarsGame(Arena arena) {
+        FireworkWarsGame game = games.get(arena);
+
+        if (game == null) {
+            game = new FireworkWarsGame(plugin, arena);
+            games.put(arena, game);
+        }
+
+        return games.get(arena);
+    }
+
+    public FireworkWarsGame getFireworkWarsGame(Player player) {
+        return games.values().stream()
+            .filter(game -> game.containsPlayer(player))
+            .findFirst()
+            .orElse(null);
+    }
+
+    public FireworkWarsGame getFireworkWarsGame(String worldName) {
+        return games.values().stream()
+            .filter(game -> game.usesWorld(worldName))
+            .findFirst()
+            .orElse(null);
+    }
+
+    @EventHandler
+    public void onWorldReload(WorldLoadEvent event) {
+        String worldName = event.getWorld().getName();
+
+        FireworkWarsGame game = getFireworkWarsGame(worldName);
+        if (game == null) return;
+
+        game.getWorldLoadStates().put(worldName, true);
+
+        List<Boolean> values = List.copyOf(game.getWorldLoadStates().values());
+        if (values.stream().allMatch(Boolean::booleanValue)) {
+            game.setGameState(FireworkWarsGame.GameState.WAITING);
+        }
+    }
 }

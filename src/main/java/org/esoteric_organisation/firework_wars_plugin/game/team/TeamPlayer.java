@@ -13,82 +13,82 @@ import java.util.Map;
 import java.util.UUID;
 
 public class TeamPlayer {
-  private final static Map<UUID, TeamPlayer> activePlayers = new HashMap<>();
+    private final static Map<UUID, TeamPlayer> activePlayers = new HashMap<>();
 
-  private final UUID uuid;
-  private final FireworkWarsGame game;
-  private final FireworkWarsPlugin plugin;
+    private final UUID uuid;
+    private final FireworkWarsGame game;
+    private final FireworkWarsPlugin plugin;
 
-  private FireworkWarsTeam team;
+    private FireworkWarsTeam team;
 
-  public static TeamPlayer from(UUID uuid) {
-    return activePlayers.get(uuid);
-  }
-
-  public static TeamPlayer from(Player player) {
-    return from(player.getUniqueId());
-  }
-
-  public TeamPlayer(UUID uuid, FireworkWarsGame game) {
-    this.uuid = uuid;
-    this.game = game;
-    this.plugin = game.getPlugin();
-
-    register();
-  }
-
-  private void register() {
-    activePlayers.forEach((uuid, player) -> {
-        if (uuid.equals(this.uuid)) {
-            player.unregister(true);
-        }
-    });
-
-    activePlayers.put(uuid, this);
-  }
-
-  public void unregister(boolean removeFromGame) {
-    activePlayers.remove(uuid);
-
-    if (removeFromGame) {
-      game.getPlayers().remove(this);
+    public static TeamPlayer from(UUID uuid) {
+        return activePlayers.get(uuid);
     }
-  }
 
-  public void setTeam(FireworkWarsTeam team) {
-    this.team = team;
-  }
+    public static TeamPlayer from(Player player) {
+        return from(player.getUniqueId());
+    }
 
-  public FireworkWarsTeam getTeam() {
-    return team;
-  }
+    public TeamPlayer(UUID uuid, FireworkWarsGame game) {
+        this.uuid = uuid;
+        this.game = game;
+        this.plugin = game.getPlugin();
 
-  public UUID getUuid() {
-    return uuid;
-  }
+        register();
+    }
 
-  public Player getPlayer() {
-    return Bukkit.getOfflinePlayer(uuid).getPlayer();
-  }
+    private void register() {
+        activePlayers.forEach((uuid, player) -> {
+            if (uuid.equals(this.uuid)) {
+                player.unregister(true);
+            }
+        });
 
-  public Component getColoredName() {
-    return getPlayer().displayName().color(team.getTeamColor());
-  }
+        activePlayers.put(uuid, this);
+    }
 
-  public void sendMessage(Component message) {
-    getPlayer().sendMessage(message);
-  }
+    public void unregister(boolean removeFromGame) {
+        activePlayers.remove(uuid);
 
-  public void teleportToWaitingArea() {
-    getPlayer().teleport(game.getArena().getWaitingAreaLocation().getBukkitLocation());
-  }
+        if (removeFromGame) {
+            game.getPlayers().remove(this);
+        }
+    }
 
-  public void teleportToLobby() {
-    Location location = plugin.getArenaManager().getLobbies().get(0).getSpawnLocation().getBukkitLocation();
-    getPlayer().teleport(location);
-  }
+    public void setTeam(FireworkWarsTeam team) {
+        this.team = team;
+    }
 
-  public void becomeSpectator() {
-    getPlayer().setGameMode(GameMode.SPECTATOR);
-  }
+    public FireworkWarsTeam getTeam() {
+        return team;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public Player getPlayer() {
+        return Bukkit.getOfflinePlayer(uuid).getPlayer();
+    }
+
+    public Component getColoredName() {
+        return getPlayer().displayName().color(team.getTeamColor());
+    }
+
+    public void sendMessage(Component message) {
+        getPlayer().sendMessage(message);
+    }
+
+    public void teleportToWaitingArea() {
+        getPlayer().teleport(game.getArena().getWaitingAreaLocation().getBukkitLocation());
+    }
+
+    public void teleportToLobby() {
+        Location location = plugin.getArenaManager().getLobbies().get(0).getSpawnLocation().getBukkitLocation();
+        getPlayer().teleport(location);
+    }
+
+    public void becomeSpectator() {
+        getPlayer().setGameMode(GameMode.SPECTATOR);
+    }
 }

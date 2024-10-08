@@ -6,19 +6,19 @@ import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components
 
 @SuppressWarnings("unused")
 public class TeamData {
-  private String miniMessageString;
-  private TeamColor color;
-  private PlayerLocation spawnLocation;
+    private String miniMessageString;
+    private TeamColor color;
+    private PlayerLocation spawnLocation;
 
-  public String getMiniMessageString() {
-    return miniMessageString;
-  }
+    public String getMiniMessageString() {
+        return miniMessageString;
+    }
 
-  public Color getColor() {
-    return color.toBukkit();
-  }
+    public Color getColor() {
+        return color.toBukkit();
+    }
 
-  public PlayerLocation getSpawnLocation() {
-    return spawnLocation;
-  }
+    public PlayerLocation getSpawnLocation() {
+        return spawnLocation;
+    }
 }

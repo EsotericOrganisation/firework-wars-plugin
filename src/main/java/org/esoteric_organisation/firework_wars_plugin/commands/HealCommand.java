@@ -6,17 +6,17 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 
 public class HealCommand extends CommandAPICommand {
-  public HealCommand(FireworkWarsPlugin plugin) {
-    super("heal");
+    public HealCommand(FireworkWarsPlugin plugin) {
+        super("heal");
 
-    executesPlayer((player, args) -> {
-      player.setHealth(20.0D);
-      player.setFoodLevel(20);
-      player.setSaturation(20.0F);
+        executesPlayer((player, args) -> {
+            player.setHealth(20.0D);
+            player.setFoodLevel(20);
+            player.setSaturation(20.0F);
 
-      player.sendMessage(Component.text("You have been healed!").color(NamedTextColor.GREEN));
-    });
+            player.sendMessage(Component.text("You have been healed!").color(NamedTextColor.GREEN));
+        });
 
-    register(plugin);
-  }
+        register(plugin);
+    }
 }

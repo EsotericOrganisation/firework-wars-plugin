@@ -45,7 +45,7 @@ public final class ReflectUtil {
         try {
             return (T) field.get(instance);
         } catch (IllegalAccessException e) {
-          logger.error("Failed to get field value:" + e.getMessage());
+            logger.error("Failed to get field value:" + e.getMessage());
         }
 
         throw new RuntimeException("Failed to get field value!");
@@ -76,7 +76,7 @@ public final class ReflectUtil {
         try {
             field.set(instance, value);
         } catch (IllegalAccessException e) {
-          logger.error("Failed to set field value:" + e.getMessage());
+            logger.error("Failed to set field value:" + e.getMessage());
         }
     }
 
@@ -107,7 +107,7 @@ public final class ReflectUtil {
             method.setAccessible(true);
             return method;
         } catch (NoSuchMethodException e) {
-          logger.error("Failed to get method:" + e.getMessage());
+            logger.error("Failed to get method:" + e.getMessage());
         }
 
         throw new RuntimeException("Failed to get method!");
@@ -126,7 +126,7 @@ public final class ReflectUtil {
         try {
             return (T) method.invoke(instance, args);
         } catch (Exception e) {
-          logger.error("Failed to invoke method:" + e.getMessage());
+            logger.error("Failed to invoke method:" + e.getMessage());
         }
 
         throw new RuntimeException("Failed to invoke method!");

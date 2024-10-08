@@ -13,42 +13,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FireworkWarsTeam {
-  private final FireworkWarsPlugin plugin;
-  private final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private final FireworkWarsPlugin plugin;
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-  private final TeamData teamData;
+    private final TeamData teamData;
 
-  private final List<TeamPlayer> players = new ArrayList<>();
+    private final List<TeamPlayer> players = new ArrayList<>();
 
-  public TeamData getTeamData() {
-    return teamData;
-  }
+    public TeamData getTeamData() {
+        return teamData;
+    }
 
-  public List<TeamPlayer> getPlayers() {
-    return players;
-  }
+    public List<TeamPlayer> getPlayers() {
+        return players;
+    }
 
-  public FireworkWarsTeam(TeamData teamData, FireworkWarsPlugin plugin) {
-    this.teamData = teamData;
-    this.plugin = plugin;
-  }
+    public FireworkWarsTeam(TeamData teamData, FireworkWarsPlugin plugin) {
+        this.teamData = teamData;
+        this.plugin = plugin;
+    }
 
-  public void addPlayer(TeamPlayer teamPlayer) {
-    players.add(teamPlayer);
-    teamPlayer.setTeam(this);
+    public void addPlayer(TeamPlayer teamPlayer) {
+        players.add(teamPlayer);
+        teamPlayer.setTeam(this);
 
-    Player player = teamPlayer.getPlayer();
-    player.teleport(teamData.getSpawnLocation().getBukkitLocation());
+        Player player = teamPlayer.getPlayer();
+        player.teleport(teamData.getSpawnLocation().getBukkitLocation());
 
-    player.sendTitlePart(TitlePart.TITLE, plugin.getLanguageManager().getMessage(Message.YOU_ARE_ON_TEAM, player));
-    player.sendTitlePart(TitlePart.SUBTITLE, getColoredTeamName());
-  }
+        player.sendTitlePart(TitlePart.TITLE, plugin.getLanguageManager().getMessage(Message.YOU_ARE_ON_TEAM, player));
+        player.sendTitlePart(TitlePart.SUBTITLE, getColoredTeamName());
+    }
 
-  public Component getColoredTeamName() {
-    return miniMessage.deserialize(teamData.getMiniMessageString());
-  }
+    public Component getColoredTeamName() {
+        return miniMessage.deserialize(teamData.getMiniMessageString());
+    }
 
-  public TextColor getTeamColor() {
-    return getColoredTeamName().color();
-  }
+    public TextColor getTeamColor() {
+        return getColoredTeamName().color();
+    }
 }

@@ -9,15 +9,15 @@ import org.esoteric_organisation.firework_wars_plugin.language.Message;
 
 public class RocketLauncherAmmo extends BaseAmmoItem {
 
-  public RocketLauncherAmmo(FireworkWarsPlugin plugin) {
-    super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET);
-  }
+    public RocketLauncherAmmo(FireworkWarsPlugin plugin) {
+        super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET);
+    }
 
-  @Override
-  public ItemStack getItem(Player player) {
-    return getBaseAmmoBuilder(player)
-      .setName(Message.ROCKET_LAUNCHER_AMMO, player)
-      .setLore(Message.ROCKET_LAUNCHER_AMMO_LORE, player)
-      .build();
-  }
+    @Override
+    public ItemStack getItem(Player player) {
+        return getBaseAmmoBuilder(player)
+            .setName(Message.ROCKET_LAUNCHER_AMMO, player)
+            .setLore(Message.ROCKET_LAUNCHER_AMMO_LORE, player)
+            .build();
+    }
 }

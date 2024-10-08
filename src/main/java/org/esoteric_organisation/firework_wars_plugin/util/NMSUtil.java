@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 import java.util.function.Function;
 
 public class NMSUtil {
-  @SuppressWarnings("unchecked")
-  public static <T extends Entity> T toNMSEntity(org.bukkit.entity.Entity bukkit) {
-    return (T) ((CraftEntity) bukkit).getHandle();
-  }
+    @SuppressWarnings("unchecked")
+    public static <T extends Entity> T toNMSEntity(org.bukkit.entity.Entity bukkit) {
+        return (T) ((CraftEntity) bukkit).getHandle();
+    }
 
-  public static void sendPacket(Player player, Function<ServerPlayer, Packet<ClientGamePacketListener>> packetCreator) {
-    ServerPlayer serverPlayer = toNMSEntity(player);
-    serverPlayer.connection.send(packetCreator.apply(serverPlayer));
-  }
+    public static void sendPacket(Player player, Function<ServerPlayer, Packet<ClientGamePacketListener>> packetCreator) {
+        ServerPlayer serverPlayer = toNMSEntity(player);
+        serverPlayer.connection.send(packetCreator.apply(serverPlayer));
+    }
 }

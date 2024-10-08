@@ -7,14 +7,14 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class ArenaInformation {
-  private Lobby[] lobbies;
-  private Arena[] arenas;
+    private Lobby[] lobbies;
+    private Arena[] arenas;
 
-  public List<Lobby> getLobbies() {
-    return lobbies == null ? null : List.of(lobbies);
-  }
+    public List<Lobby> getLobbies() {
+        return lobbies == null ? null : List.of(lobbies);
+    }
 
-  public List<Arena> getArenas() {
-    return arenas == null ? null : List.of(arenas);
-  }
+    public List<Arena> getArenas() {
+        return arenas == null ? null : List.of(arenas);
+    }
 }

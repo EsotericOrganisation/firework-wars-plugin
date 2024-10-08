@@ -9,31 +9,31 @@ import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 
 public class GameEventListener implements Listener {
-  
-  private final FireworkWarsPlugin plugin;
-  private final FireworkWarsGame game;
 
-  public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
-    this.plugin = plugin;
-    this.game = game;
-  }
+    private final FireworkWarsPlugin plugin;
+    private final FireworkWarsGame game;
 
-  public void register() {
-    plugin.getServer().getPluginManager().registerEvents(this, plugin);
-  }
-
-  public void unregister() {
-    HandlerList.unregisterAll(this);
-  }
-
-  @EventHandler
-  public void onPlayerDeath(PlayerDeathEvent event) {
-    Player player = event.getPlayer();
-
-    if (!game.isAlive(player)) {
-      return;
+    public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
+        this.plugin = plugin;
+        this.game = game;
     }
 
-    game.onPlayerDeath(event);
-  }
+    public void register() {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    public void unregister() {
+        HandlerList.unregisterAll(this);
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getPlayer();
+
+        if (!game.isAlive(player)) {
+            return;
+        }
+
+        game.onPlayerDeath(event);
+    }
 }

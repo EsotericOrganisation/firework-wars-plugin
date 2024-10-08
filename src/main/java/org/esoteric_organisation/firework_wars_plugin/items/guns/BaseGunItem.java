@@ -19,104 +19,104 @@ import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
 public abstract class BaseGunItem extends AbstractItem {
-  protected final String ammoId;
+    protected final String ammoId;
 
-  public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId) {
-    super(plugin, itemId, Material.CROSSBOW);
+    public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId) {
+        super(plugin, itemId, Material.CROSSBOW);
 
-    this.ammoId = ammoId;
-  }
-
-  protected ItemBuilder<CrossbowMeta> getBaseCrossbowBuilder() {
-    return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
-      .setEnchanted(true)
-      .setUnbreakable(true)
-      .itemSupplier(this::getCustomCrossbow)
-      .modifyMeta(this::modifyMeta);
-  }
-
-  protected ItemStack getCustomCrossbow() {
-    CustomCrossbow crossbow = (CustomCrossbow) plugin.getCustomItemManager().getNMSItem("crossbow");
-    ItemStack itemStack = crossbow.getDefaultInstance().asBukkitCopy();
-
-    itemStack.setItemMeta(new ItemStack(Material.CROSSBOW).getItemMeta());
-    return itemStack;
-  }
-
-  protected void modifyMeta(CrossbowMeta meta) {
-    pdcManager.setStringValue(meta, customItemIdKey, itemId);
-    pdcManager.setStringValue(meta, Keys.GUN_ACCEPTED_AMMO_ID, ammoId);
-  }
-
-  protected ItemStack createFirework(Color color, int stars, int fd) {
-    ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
-    FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
-
-    pdcManager.setStringValue(fireworkMeta, Keys.CUSTOM_ITEM_ID, ammoId);
-
-    addFireworkStars(fireworkMeta, color, stars);
-    fireworkMeta.setPower(fd);
-    firework.setItemMeta(fireworkMeta);
-
-    return firework;
-  }
-
-  protected void addFireworkStars(FireworkMeta meta, Color color, int amount) {
-    for (int i = 0; i < amount; i++) {
-      meta.addEffect(FireworkEffect.builder().with(FireworkEffect.Type.BURST).withColor(Color.WHITE).withFade(color).withTrail().withFlicker().build());
-    }
-  }
-
-  protected AbstractItem getAmmoItem() {
-    return plugin.getCustomItemManager().getItem(ammoId);
-  }
-
-  protected abstract void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event);
-
-  protected abstract void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event);
-
-  @EventHandler
-  public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
-    if (!isValidCustomItem(event.getCrossbow())) {
-      return;
+        this.ammoId = ammoId;
     }
 
-    if (!(event.getEntity() instanceof Player player)) {
-      return;
+    protected ItemBuilder<CrossbowMeta> getBaseCrossbowBuilder() {
+        return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
+            .setEnchanted(true)
+            .setUnbreakable(true)
+            .itemSupplier(this::getCustomCrossbow)
+            .modifyMeta(this::modifyMeta);
     }
 
-    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+    protected ItemStack getCustomCrossbow() {
+        CustomCrossbow crossbow = (CustomCrossbow) plugin.getCustomItemManager().getNMSItem("crossbow");
+        ItemStack itemStack = crossbow.getDefaultInstance().asBukkitCopy();
 
-    if (game == null || !game.isPlaying()) {
-      return;
+        itemStack.setItemMeta(new ItemStack(Material.CROSSBOW).getItemMeta());
+        return itemStack;
     }
 
-    boolean hasAmmo = Util.testInventory(player.getInventory(), item ->
-      getAmmoItem().isValidCustomItem(item));
-
-    if (!hasAmmo) {
-      return;
+    protected void modifyMeta(CrossbowMeta meta) {
+        pdcManager.setStringValue(meta, customItemIdKey, itemId);
+        pdcManager.setStringValue(meta, Keys.GUN_ACCEPTED_AMMO_ID, ammoId);
     }
 
-    onCrossbowLoad(player, game, event);
-  }
+    protected ItemStack createFirework(Color color, int stars, int fd) {
+        ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET);
+        FireworkMeta fireworkMeta = (FireworkMeta) firework.getItemMeta();
 
-  @EventHandler
-  public void onCrossbowShoot(EntityShootBowEvent event) {
-    if (!isValidCustomItem(event.getBow())) {
-      return;
+        pdcManager.setStringValue(fireworkMeta, Keys.CUSTOM_ITEM_ID, ammoId);
+
+        addFireworkStars(fireworkMeta, color, stars);
+        fireworkMeta.setPower(fd);
+        firework.setItemMeta(fireworkMeta);
+
+        return firework;
     }
 
-    if (!(event.getEntity() instanceof Player player)) {
-      return;
+    protected void addFireworkStars(FireworkMeta meta, Color color, int amount) {
+        for (int i = 0; i < amount; i++) {
+            meta.addEffect(FireworkEffect.builder().with(FireworkEffect.Type.BURST).withColor(Color.WHITE).withFade(color).withTrail().withFlicker().build());
+        }
     }
 
-    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
-
-    if (game == null || !game.isPlaying()) {
-      return;
+    protected AbstractItem getAmmoItem() {
+        return plugin.getCustomItemManager().getItem(ammoId);
     }
 
-    onCrossbowShoot(player, game, event);
-  }
+    protected abstract void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event);
+
+    protected abstract void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event);
+
+    @EventHandler
+    public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
+        if (!isValidCustomItem(event.getCrossbow())) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+
+        if (game == null || !game.isPlaying()) {
+            return;
+        }
+
+        boolean hasAmmo = Util.testInventory(player.getInventory(), item ->
+            getAmmoItem().isValidCustomItem(item));
+
+        if (!hasAmmo) {
+            return;
+        }
+
+        onCrossbowLoad(player, game, event);
+    }
+
+    @EventHandler
+    public void onCrossbowShoot(EntityShootBowEvent event) {
+        if (!isValidCustomItem(event.getBow())) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+
+        if (game == null || !game.isPlaying()) {
+            return;
+        }
+
+        onCrossbowShoot(player, game, event);
+    }
 }

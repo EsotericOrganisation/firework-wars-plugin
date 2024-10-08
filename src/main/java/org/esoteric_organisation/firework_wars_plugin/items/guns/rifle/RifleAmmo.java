@@ -9,15 +9,15 @@ import org.esoteric_organisation.firework_wars_plugin.language.Message;
 
 public class RifleAmmo extends BaseAmmoItem {
 
-  public RifleAmmo(FireworkWarsPlugin plugin) {
-    super(plugin, "firework_rifle_ammo", Material.GHAST_TEAR);
-  }
+    public RifleAmmo(FireworkWarsPlugin plugin) {
+        super(plugin, "firework_rifle_ammo", Material.GHAST_TEAR);
+    }
 
-  @Override
-  public ItemStack getItem(Player player) {
-    return getBaseAmmoBuilder(player)
-      .setName(Message.FIREWORK_RIFLE_AMMO, player)
-      .setLore(Message.FIREWORK_RIFLE_AMMO_LORE, player)
-      .build();
-  }
+    @Override
+    public ItemStack getItem(Player player) {
+        return getBaseAmmoBuilder(player)
+            .setName(Message.FIREWORK_RIFLE_AMMO, player)
+            .setLore(Message.FIREWORK_RIFLE_AMMO_LORE, player)
+            .build();
+    }
 }

@@ -18,37 +18,37 @@ import java.util.List;
 
 public class FireworkRifleItem extends BaseGunItem {
 
-  public FireworkRifleItem(FireworkWarsPlugin plugin) {
-    super(plugin, "firework_rifle", "firework_rifle_ammo");
-  }
+    public FireworkRifleItem(FireworkWarsPlugin plugin) {
+        super(plugin, "firework_rifle", "firework_rifle_ammo");
+    }
 
-  @Override
-  public ItemStack getItem(Player player) {
-    return getBaseCrossbowBuilder()
-      .setName(Message.FIREWORK_RIFLE, player)
-      .setLore(Message.FIREWORK_RIFLE_LORE, player)
-      .build();
-  }
+    @Override
+    public ItemStack getItem(Player player) {
+        return getBaseCrossbowBuilder()
+            .setName(Message.FIREWORK_RIFLE, player)
+            .setLore(Message.FIREWORK_RIFLE_LORE, player)
+            .build();
+    }
 
-  @Override
-  protected void modifyMeta(CrossbowMeta meta) {
-    super.modifyMeta(meta);
-    meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true);
-  }
+    @Override
+    protected void modifyMeta(CrossbowMeta meta) {
+        super.modifyMeta(meta);
+        meta.addEnchant(Enchantment.QUICK_CHARGE, 3, true);
+    }
 
-  @Override
-  protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
-    TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
-    FireworkWarsTeam team = teamPlayer.getTeam();
+    @Override
+    protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
+        TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
+        FireworkWarsTeam team = teamPlayer.getTeam();
 
-    ItemStack firework = createFirework(team.getTeamData().getColor(), 4, 2);
+        ItemStack firework = createFirework(team.getTeamData().getColor(), 4, 2);
 
-    Bukkit.getServer().getScheduler().runTaskLater(plugin, () ->
-        event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework))), 1L);
-  }
+        Bukkit.getServer().getScheduler().runTaskLater(plugin, () ->
+            event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework))), 1L);
+    }
 
-  @Override
-  protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
+    @Override
+    protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
 
-  }
+    }
 }

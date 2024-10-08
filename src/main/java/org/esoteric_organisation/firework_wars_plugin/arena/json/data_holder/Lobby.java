@@ -4,14 +4,14 @@ import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components
 
 @SuppressWarnings("unused")
 public class Lobby {
-  private String world;
-  private PlayerLocation spawnLocation;
+    private String world;
+    private PlayerLocation spawnLocation;
 
-  public String getWorld() {
-    return world;
-  }
+    public String getWorld() {
+        return world;
+    }
 
-  public PlayerLocation getSpawnLocation() {
-    return spawnLocation;
-  }
+    public PlayerLocation getSpawnLocation() {
+        return spawnLocation;
+    }
 }

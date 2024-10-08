@@ -14,7 +14,9 @@
     ],
     "arenas": [
         {
-            "worlds": [ "world" ],
+            "worlds": [
+                "world"
+            ],
             "countDownSeconds": 15,
             "waitingAreaLocation": {
                 "worldName": "world",
@@ -26,7 +28,9 @@
             },
             "teamInformation": [
                 {
-                    "color": { "color": "LIME" },
+                    "color": {
+                        "color": "LIME"
+                    },
                     "miniMessageString": "<green>Chaos Insurgency</green>",
                     "spawnLocation": {
                         "worldName": "world",
@@ -38,7 +42,9 @@
                     }
                 },
                 {
-                    "color": { "color": "BLUE" },
+                    "color": {
+                        "color": "BLUE"
+                    },
                     "miniMessageString": "<blue>SCP Foundation</blue>",
                     "spawnLocation": {
                         "worldName": "world",
@@ -58,46 +64,46 @@
                     "z": 78
                 },
                 {
-                  "worldName": "world",
-                  "x": 137,
-                  "y": 115,
-                  "z": 84
+                    "worldName": "world",
+                    "x": 137,
+                    "y": 115,
+                    "z": 84
                 },
                 {
-                  "worldName": "world",
-                  "x": 156,
-                  "y": 115,
-                  "z": 72
+                    "worldName": "world",
+                    "x": 156,
+                    "y": 115,
+                    "z": 72
                 },
                 {
-                  "worldName": "world",
-                  "x": 140,
-                  "y": 115,
-                  "z": 66
+                    "worldName": "world",
+                    "x": 140,
+                    "y": 115,
+                    "z": 66
                 },
                 {
-                  "worldName": "world",
-                  "x": 124,
-                  "y": 115,
-                  "z": 63
+                    "worldName": "world",
+                    "x": 124,
+                    "y": 115,
+                    "z": 63
                 },
                 {
-                  "worldName": "world",
-                  "x": 124,
-                  "y": 115,
-                  "z": 90
+                    "worldName": "world",
+                    "x": 124,
+                    "y": 115,
+                    "z": 90
                 },
                 {
-                  "worldName": "world",
-                  "x": 138,
-                  "y": 115,
-                  "z": 99
+                    "worldName": "world",
+                    "x": 138,
+                    "y": 115,
+                    "z": 99
                 },
                 {
-                  "worldName": "world",
-                  "x": 151,
-                  "y": 115,
-                  "z": 100
+                    "worldName": "world",
+                    "x": 151,
+                    "y": 115,
+                    "z": 100
                 }
             ]
         }
