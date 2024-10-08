@@ -1,13 +1,17 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.world.WorldLoadEvent;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class GameManager {
+public class GameManager implements Listener {
 
   private final FireworkWarsPlugin plugin;
 
@@ -15,6 +19,8 @@ public class GameManager {
 
   public GameManager(FireworkWarsPlugin plugin) {
     this.plugin = plugin;
+
+    plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }
 
   public boolean hasOngoingGame(Arena arena) {
@@ -37,5 +43,27 @@ public class GameManager {
         .filter(game -> game.containsPlayer(player))
         .findFirst()
         .orElse(null);
+  }
+
+  public FireworkWarsGame getFireworkWarsGame(String worldName) {
+    return games.values().stream()
+        .filter(game -> game.usesWorld(worldName))
+        .findFirst()
+        .orElse(null);
+  }
+
+  @EventHandler
+  public void onWorldReload(WorldLoadEvent event) {
+    String worldName = event.getWorld().getName();
+
+    FireworkWarsGame game = getFireworkWarsGame(worldName);
+    if (game == null) return;
+
+    game.getWorldLoadStates().put(worldName, true);
+
+    List<Boolean> values = List.copyOf(game.getWorldLoadStates().values());
+    if (values.stream().allMatch(Boolean::booleanValue)) {
+      game.setGameState(FireworkWarsGame.GameState.WAITING);
+    }
   }
 }
