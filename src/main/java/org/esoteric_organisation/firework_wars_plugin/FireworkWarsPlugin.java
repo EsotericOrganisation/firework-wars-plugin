@@ -84,7 +84,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     new SetLanguageCommand(this);
     new ArenaCommand(this);
     new ResetInventoryCommand(this);
-    new HealCommand();
+    new HealCommand(this);
   }
 
   @Override
