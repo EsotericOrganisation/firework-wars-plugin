@@ -47,6 +47,16 @@ public class RocketLauncherItem extends BaseGunItem {
   public void onFireworkExplode(@NotNull FireworkExplodeEvent event) {
     Firework firework = event.getEntity();
 
+    if (!(firework.getShooter() instanceof Player player)) {
+      return;
+    }
+
+    FireworkWarsGame game = plugin.getGameManager().getFireworkWarsGame(player);
+
+    if (game == null || !game.isPlaying()) {
+      return;
+    }
+
     String value = pdcManager.getStringValue(firework.getFireworkMeta(), Keys.CUSTOM_ITEM_ID);
     boolean isRocket = ammoId.equals(value);
 
