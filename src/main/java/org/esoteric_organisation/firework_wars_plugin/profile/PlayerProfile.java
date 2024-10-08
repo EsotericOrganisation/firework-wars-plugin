@@ -3,7 +3,6 @@ package org.esoteric_organisation.firework_wars_plugin.profile;
 import java.util.UUID;
 
 public class PlayerProfile {
-
   private final UUID uuid;
 
   private String language;
