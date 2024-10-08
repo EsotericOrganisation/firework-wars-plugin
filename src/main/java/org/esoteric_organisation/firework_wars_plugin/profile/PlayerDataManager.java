@@ -40,6 +40,8 @@ public class PlayerDataManager {
     Gson gson = new Gson();
 
     File[] playerDataFiles = playerDataFolder.listFiles();
+    assert playerDataFiles != null;
+
     for (File playerDataFile : playerDataFiles) {
       String fileName = playerDataFile.getName();
       String playerUuidString = fileName.split("\\.", 2)[0];
