@@ -1,8 +1,22 @@
 {
+    "lobbies": [
+        {
+            "world": "world_nether",
+            "spawnLocation": {
+                "worldName": "world_nether",
+                "x": 85,
+                "y": 109,
+                "z": 110,
+                "yaw": -120,
+                "pitch": 0
+            }
+        }
+    ],
     "arenas": [
         {
+            "worlds": [ "world" ],
             "countDownSeconds": 15,
-            "lobbySpawnLocation": {
+            "waitingAreaLocation": {
                 "worldName": "world",
                 "x": 85,
                 "y": 109,
