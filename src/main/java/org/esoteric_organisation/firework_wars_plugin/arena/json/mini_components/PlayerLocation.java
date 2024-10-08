@@ -1,25 +1,17 @@
-package org.esoteric_organisation.firework_wars_plugin.arena.data_type;
+package org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-import com.google.gson.annotations.Expose;
-
+@SuppressWarnings("unused")
 public class PlayerLocation {
-
-  @Expose
   private String worldName;
 
-  @Expose
   private float x;
-  @Expose
   private float y;
-  @Expose
   private float z;
 
-  @Expose
   private float pitch;
-  @Expose
   private float yaw;
 
   public String getWorldName() {
