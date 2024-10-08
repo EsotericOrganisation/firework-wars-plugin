@@ -1,18 +1,19 @@
 package org.esoteric_organisation.firework_wars_plugin.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.IntegerArgument;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.arena.structure.Arena;
-import org.esoteric_organisation.firework_wars_plugin.arena.structure.ArenaInformation;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class ArenaCommand extends CommandAPICommand {
 
@@ -20,8 +21,7 @@ public class ArenaCommand extends CommandAPICommand {
     super("arena");
 
     ArenaManager arenaManager = plugin.getArenaManager();
-    ArenaInformation arenaInformation = arenaManager.getArenaInformation();
-    Arena[] arenas = arenaInformation.getArenas();
+    List<Arena> arenas = arenaManager.getArenas();
 
     GameManager gameManager = plugin.getGameManager();
 
@@ -32,27 +32,31 @@ public class ArenaCommand extends CommandAPICommand {
         .withArguments(new IntegerArgument(arenaNumberNodeName).includeSuggestions(ArgumentSuggestions.strings((suggestionsInfo) -> {
           List<String> suggestions = new ArrayList<>();
 
-          for (int i = 1; i <= arenas.length; i++) {
-            Arena arena = arenas[i - 1];
+          Predicate<Arena> hasOngoingGame = gameManager::hasOngoingGame;
+          Function<Integer, Integer> increment = i -> ++i;
 
-            if (gameManager.hasOngoingGame(arena)) {
-              continue;
-            }
-
-            suggestions.add(String.valueOf(i));
-          }
+          arenas.stream()
+            .filter(hasOngoingGame.negate())
+            .map(arenas::indexOf).map(increment)
+            .map(String::valueOf)
+            .forEach(suggestions::add);
 
           return suggestions.toArray(String[]::new);
         })))
         .executesPlayer((info) -> {
+          if (!arenaManager.isLobby(info.sender().getWorld())) {
+            plugin.getLanguageManager().sendMessage(Message.NOT_IN_LOBBY, info.sender());
+            return;
+          }
+
           Integer arenaNumber = (Integer) info.args().get(arenaNumberNodeName);
 
-          if (arenaNumber == null || arenaNumber <= 0 || arenaNumber - 1 >= arenas.length) {
+          if (arenaNumber == null || arenaNumber <= 0 || arenaNumber - 1 >= arenas.size()) {
             plugin.getLanguageManager().sendMessage(Message.INVALID_ARENA, info.sender());
             return;
           }
 
-          Arena arena = arenas[arenaNumber - 1];
+          Arena arena = arenas.get(arenaNumber - 1);
           FireworkWarsGame game = gameManager.getFireworkWarsGame(arena);
 
           if (game.isPlaying()) {
@@ -62,6 +66,11 @@ public class ArenaCommand extends CommandAPICommand {
 
           if (game.containsPlayer(info.sender())) {
             plugin.getLanguageManager().sendMessage(Message.GAME_ALREADY_CONTAINS_PLAYER, info.sender());
+            return;
+          }
+
+          if (game.isResetting()) {
+            plugin.getLanguageManager().sendMessage(Message.GAME_RELOADING, info.sender());
             return;
           }
 
