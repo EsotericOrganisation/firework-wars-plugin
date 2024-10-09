@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Lobby;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Lobby;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.ArenaInformation;
 
 import java.io.File;
@@ -49,7 +49,7 @@ public class ArenaManager {
     }
 
     private void loadArenasFromConfig() {
-        plugin.saveResource(ARENAS_RESOURCE_PATH, false);
+        plugin.saveResource(ARENAS_RESOURCE_PATH, true);
 
         String arenasFilePath = plugin.getDataFolder().getPath() + File.separator + ARENAS_RESOURCE_PATH;
         File file = new File(arenasFilePath);
