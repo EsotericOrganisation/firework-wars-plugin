@@ -1,9 +1,9 @@
 {
     "lobbies": [
         {
-            "world": "world_nether",
+            "world": "world",
             "spawnLocation": {
-                "worldName": "world_nether",
+                "worldName": "world",
                 "x": 85,
                 "y": 109,
                 "z": 110,
@@ -15,11 +15,12 @@
     "arenas": [
         {
             "worlds": [
-                "world"
+                "world_arena_1"
             ],
             "countDownSeconds": 15,
+            "gameDurationMinutes": 30,
             "waitingAreaLocation": {
-                "worldName": "world",
+                "worldName": "world_arena_1",
                 "x": 85,
                 "y": 109,
                 "z": 110,
@@ -29,11 +30,11 @@
             "teamInformation": [
                 {
                     "color": {
-                        "color": "LIME"
+                        "color": "GREEN"
                     },
-                    "miniMessageString": "<green>Chaos Insurgency</green>",
+                    "miniMessageString": "<dark_green>Chaos Insurgency</dark_green>",
                     "spawnLocation": {
-                        "worldName": "world",
+                        "worldName": "world_arena_1",
                         "x": 135,
                         "y": 115,
                         "z": 66,
@@ -47,7 +48,7 @@
                     },
                     "miniMessageString": "<blue>SCP Foundation</blue>",
                     "spawnLocation": {
-                        "worldName": "world",
+                        "worldName": "world_arena_1",
                         "x": 141,
                         "y": 115,
                         "z": 99,
@@ -58,54 +59,81 @@
             ],
             "chestLocations": [
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 135,
                     "y": 115,
                     "z": 78
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 137,
                     "y": 115,
                     "z": 84
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 156,
                     "y": 115,
                     "z": 72
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 140,
                     "y": 115,
                     "z": 66
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 124,
                     "y": 115,
                     "z": 63
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 124,
                     "y": 115,
                     "z": 90
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 138,
                     "y": 115,
                     "z": 99
                 },
                 {
-                    "worldName": "world",
+                    "worldName": "world_arena_1",
                     "x": 151,
                     "y": 115,
                     "z": 100
                 }
-            ]
+            ],
+            "supplyDropData": {
+                "supplyDropLocations": [
+                    {
+                        "worldName": "world_arena_1",
+                        "x": 151,
+                        "y": 180,
+                        "z": 100,
+                        "yaw": 0,
+                        "pitch": 0
+                    }
+                ],
+                "supplyDropIntervalTicks": 6000,
+                "supplyDropIntervalRandomness": 1200
+            },
+            "endgameData": {
+                "endgameStartMinutes": 22,
+                "warnBeforeEndgameSeconds": 300,
+                "wardenSpawnLocation": {
+                    "worldName": "world_arena_1",
+                    "x": 135,
+                    "y": 115,
+                    "z": 66,
+                    "yaw": 0,
+                    "pitch": 0
+                },
+                "warnBeforeGameEndSeconds": 300
+            }
         }
     ]
 }
