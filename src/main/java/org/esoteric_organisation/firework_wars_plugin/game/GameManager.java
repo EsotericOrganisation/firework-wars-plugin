@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
 
 import java.util.HashMap;
 import java.util.List;

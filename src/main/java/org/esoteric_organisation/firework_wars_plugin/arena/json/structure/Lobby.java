@@ -1,4 +1,4 @@
-package org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder;
+package org.esoteric_organisation.firework_wars_plugin.arena.json.structure;
 
 import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.PlayerLocation;
 
