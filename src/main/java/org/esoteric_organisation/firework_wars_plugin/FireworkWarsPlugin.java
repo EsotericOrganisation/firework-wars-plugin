@@ -93,4 +93,12 @@ public final class FireworkWarsPlugin extends JavaPlugin {
             playerDataManager.save();
         }
     }
+
+    public void runTaskLater(Runnable runnable, long delay) {
+        getServer().getScheduler().runTaskLater(this, runnable, delay);
+    }
+
+    public void runTaskTimer(Runnable runnable, long delay, long period) {
+        getServer().getScheduler().runTaskTimer(this, runnable, delay, period);
+    }
 }
