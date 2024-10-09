@@ -1,6 +1,8 @@
+# Other Commands
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
+# Custom Items
 FIREWORK_RIFLE: "<red>Firework</red> Rifle"
 FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful.</gray>\n<gray>Shoots one firework at a time.</gray>"
 FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
@@ -23,6 +25,7 @@ PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
 PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
 
+# Game Messages
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
 
@@ -30,8 +33,29 @@ YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 
+EVENT_SUPPLY_DROP: "<yellow>A supply drop has landed at <gold>[<green>x:</green> <aqua>{0}</aqua><gray>,</gray> <green>y:</green> <aqua>{1}</aqua><gray>,</gray> <green>z:</green> <aqua>{2}</aqua>]</gold></yellow>"
+EVENT_ENDGAME: "<red><bold>The Endgame has begun!</bold></red>"
+
+# Arena Command
 NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
 INVALID_ARENA: "<red>That arena does not exist!</red>"
 GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"
 GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
 GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
+
+# Scoreboards
+SB_TITLE: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
+SB_SEPARATOR: "<gray><bold><st>----------------</st></bold></gray>"
+
+SB_TEAM: "{0}: <green>{1}</green>"
+SB_OWN_TEAM: "{0}: <green>{1}</green> <gray>(You)</gray>"
+
+SB_EVENT_SUPPLY_DROP: "Supply drop in: <yellow>{0}</yellow>"
+SB_EVENT_SUPPLY_DROP_SOON: "Supply drop in: <red>{0}</red>"
+SB_EVENT_ENDGAME: "Endgame in: <yellow>{0}</yellow>"
+SB_EVENT_ENDGAME_SOON: "Endgame in: <red>{0}</red>"
+SB_EVENT_GAME_END: "Game ends in: <yellow>{0}</yellow>"
+SB_EVENT_GAME_END_SOON: "Game ends in: <red>{0}</red>"
+
+SB_KILL_COUNT: "Kills: <green>{0}</green>"
+SB_DAMAGE_DEALT: "Damage dealt: <green>{0}</green><red>❤</red>"
