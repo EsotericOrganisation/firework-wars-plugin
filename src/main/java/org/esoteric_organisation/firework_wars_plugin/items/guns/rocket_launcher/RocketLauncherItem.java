@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CrossbowMeta;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.BaseGunItem;
@@ -26,8 +25,8 @@ public class RocketLauncherItem extends BaseGunItem {
 
     @Override
     protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
-        plugin.getServer().getScheduler().runTaskLater(plugin, () ->
-            event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(createFirework(Color.RED, 1, 2)))), 1L);
+        editCrossbowMeta(event.getCrossbow(), meta -> meta
+            .setChargedProjectiles(List.of(createFirework(Color.RED, 1, 2))));
     }
 
     @Override
