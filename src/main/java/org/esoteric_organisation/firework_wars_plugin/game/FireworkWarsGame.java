@@ -205,8 +205,6 @@ public class FireworkWarsGame {
 
         chestMinecart.getInventory().addItem(
             plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
-        chestMinecart.getInventory().addItem(
-            plugin.getCustomItemManager().getItem("rocket_launcher_ammo").getItem(null, 5));
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
