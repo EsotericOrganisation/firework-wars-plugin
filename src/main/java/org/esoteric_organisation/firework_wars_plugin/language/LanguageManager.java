@@ -58,7 +58,7 @@ public class LanguageManager {
         String languagesResourceFolderName = languagesFolderName + "/";
         List<String> languageResourceFileNames = FileUtil.getResourceFolderResourceFileNames(languagesResourceFolderName);
 
-        languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, false));
+        languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, true));
     }
 
     private void loadLanguageMessages() {
