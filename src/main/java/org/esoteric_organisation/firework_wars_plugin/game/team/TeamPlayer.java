@@ -29,7 +29,7 @@ public class TeamPlayer {
     private FireworkWarsScoreboard scoreboard;
 
     private int kills;
-    private int damage;
+    private double damage;
 
     public static TeamPlayer from(UUID uuid) {
         return activePlayers.get(uuid);
@@ -162,10 +162,10 @@ public class TeamPlayer {
             .update();
     }
 
-    public void addDamage(int damage) {
+    public void addDamage(double damage) {
         this.damage += damage;
         getScoreboard()
-            .updateLine(5, Pair.of("%", this.damage + ""))
+            .updateLine(5, Pair.of("%", Math.round(this.damage) + ""))
             .update();
     }
 }
