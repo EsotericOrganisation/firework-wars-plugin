@@ -1,8 +1,5 @@
 package org.esoteric_organisation.firework_wars_plugin.arena.json.structure;
 
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Lobby;
-
 import java.util.List;
 
 @SuppressWarnings("unused")
