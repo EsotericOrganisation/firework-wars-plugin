@@ -1,16 +1,16 @@
 package org.esoteric_organisation.firework_wars_plugin.game;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import net.kyori.adventure.text.Component;
+import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.entity.minecart.StorageMinecart;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.Arena;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.TeamData;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
 import org.esoteric_organisation.firework_wars_plugin.event.listeners.GameEventListener;
 import org.esoteric_organisation.firework_wars_plugin.game.runnables.GameCountdown;
+import org.esoteric_organisation.firework_wars_plugin.game.runnables.GameTickHandler;
 import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
@@ -20,9 +20,10 @@ import java.util.*;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
 public class FireworkWarsGame {
     private final FireworkWarsPlugin plugin;
-
     private final Arena arena;
+
     private final GameEventListener eventListener;
+    private GameTickHandler tickHandler;
 
     private GameState gameState = GameState.WAITING;
     private final Map<String, Boolean> worldLoadStates = new HashMap<>();
@@ -44,6 +45,10 @@ public class FireworkWarsGame {
 
     public Map<String, Boolean> getWorldLoadStates() {
         return worldLoadStates;
+    }
+
+    public List<FireworkWarsTeam> getTeams() {
+        return teams;
     }
 
     public List<TeamPlayer> getPlayers() {
@@ -83,14 +88,28 @@ public class FireworkWarsGame {
         return arena.getWorlds().contains(worldName);
     }
 
+    public boolean isTeamEliminated(FireworkWarsTeam team) {
+        return team.getPlayers().stream()
+            .map(TeamPlayer::getPlayer)
+            .filter(Objects::nonNull)
+            .allMatch(this::isSpectator);
+    }
+
+    public List<FireworkWarsTeam> getRemainingTeams() {
+        return teams
+            .stream()
+            .filter(team -> !isTeamEliminated(team))
+            .toList();
+    }
+
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
     public FireworkWarsGame(FireworkWarsPlugin plugin, Arena arena) {
         this.plugin = plugin;
-
         this.arena = arena;
+
         this.eventListener = new GameEventListener(plugin, this);
 
         for (String worldName : arena.getWorlds()) {
@@ -122,13 +141,18 @@ public class FireworkWarsGame {
 
     public void startGame() {
         gameState = GameState.PLAYING;
+
         eventListener.register();
 
-        for (TeamData configuredTeam : arena.getTeamInformation()) {
-            teams.add(new FireworkWarsTeam(configuredTeam, plugin));
+        tickHandler = new GameTickHandler(plugin, this);
+        tickHandler.start();
+
+        for (TeamData teamData : arena.getTeamInformation()) {
+            teams.add(new FireworkWarsTeam(teamData, plugin));
         }
 
         distributePlayersAcrossTeams();
+        players.forEach(TeamPlayer::showScoreboard);
     }
 
     public void preEndGame(FireworkWarsTeam winningTeam) {
@@ -140,6 +164,7 @@ public class FireworkWarsGame {
 
     public void endGame(FireworkWarsTeam winningTeam) {
         eventListener.unregister();
+        tickHandler.cancel();
 
         players.forEach(TeamPlayer::teleportToLobby);
         players.forEach(player -> player.unregister(false));
@@ -168,43 +193,29 @@ public class FireworkWarsGame {
             int teamIndex = i % teams.size();
 
             FireworkWarsTeam team = teams.get(teamIndex);
-            team.addPlayer(players.get(i));
+            players.get(i).joinTeam(team);
         }
     }
+    
+    public void supplyDrop() {
+        Location location = arena.getSupplyDropData().getRandomLocation().getBukkitLocation();
+        StorageMinecart chestMinecart = (StorageMinecart) location.getWorld().spawnEntity(location, EntityType.CHEST_MINECART);
 
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getPlayer();
-        player.setGameMode(GameMode.SPECTATOR);
+        chestMinecart.customName(Component.text("Supply Drop"));
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> player.spigot().respawn(), 1L);
+        chestMinecart.getInventory().addItem(
+            plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
+        chestMinecart.getInventory().addItem(
+            plugin.getCustomItemManager().getItem("rocket_launcher_ammo").getItem(null, 5));
 
-        FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
-
-        if (isTeamEliminated(team)) {
-            eliminateTeam(team);
-            List<FireworkWarsTeam> remainingTeams = getRemainingTeams();
-
-            if (remainingTeams.size() == 1) {
-                preEndGame(remainingTeams.get(0));
-            }
-        }
+        sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
-    private boolean isTeamEliminated(FireworkWarsTeam team) {
-        return team.getPlayers().stream()
-            .map(TeamPlayer::getPlayer)
-            .filter(Objects::nonNull)
-            .allMatch(this::isSpectator);
+    public void startEndgame() {
+        sendMessage(Message.EVENT_ENDGAME);
     }
 
-    private List<FireworkWarsTeam> getRemainingTeams() {
-        return teams
-            .stream()
-            .filter(team -> !isTeamEliminated(team))
-            .toList();
-    }
-
-    private void eliminateTeam(FireworkWarsTeam team) {
+    public void eliminateTeam(FireworkWarsTeam team) {
         sendMessage(Message.TEAM_ELIMINATED, team.getColoredTeamName());
     }
 
