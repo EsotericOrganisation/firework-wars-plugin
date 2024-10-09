@@ -18,6 +18,8 @@ import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
 import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
+import java.util.function.Consumer;
+
 public abstract class BaseGunItem extends AbstractItem {
     protected final String ammoId;
 
@@ -69,6 +71,10 @@ public abstract class BaseGunItem extends AbstractItem {
 
     protected AbstractItem getAmmoItem() {
         return plugin.getCustomItemManager().getItem(ammoId);
+    }
+
+    protected void editCrossbowMeta(ItemStack crossbow, Consumer<CrossbowMeta> consumer) {
+        plugin.runTaskLater(() -> crossbow.editMeta(meta -> consumer.accept((CrossbowMeta) meta)), 1L);
     }
 
     protected abstract void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event);
