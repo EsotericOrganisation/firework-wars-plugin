@@ -51,7 +51,11 @@ public class GameEventListener implements Listener {
             return;
         }
 
-        TeamPlayer.from(damager).addDamage((int) Math.round(event.getFinalDamage()));
+        if (damager.getUniqueId().equals(player.getUniqueId())) {
+            return;
+        }
+
+        TeamPlayer.from(damager).addDamage(Math.round(event.getFinalDamage()));
     }
 
     @EventHandler
