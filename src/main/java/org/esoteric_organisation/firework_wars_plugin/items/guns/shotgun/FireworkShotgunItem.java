@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
@@ -36,10 +35,15 @@ public class FireworkShotgunItem extends BaseGunItem {
         TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
         FireworkWarsTeam team = teamPlayer.getTeam();
 
-        ItemStack firework = createFirework(team.getTeamData().getColor(), 5, 1);
-
-        plugin.getServer().getScheduler().runTaskLater(plugin, () ->
-            event.getCrossbow().editMeta((meta) -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework, firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone(), firework.clone()))), 1L);
+        ItemStack firework = createFirework(team.getTeamData().getColor(), 7, 1);
+        editCrossbowMeta(event.getCrossbow(), meta -> meta.setChargedProjectiles(List.of(
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone())));
     }
 
     @Override
