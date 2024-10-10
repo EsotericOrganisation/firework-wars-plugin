@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
@@ -183,7 +184,10 @@ public class TeamPlayer {
     }
 
     public void correctWoolColors() {
-        for (ItemStack item : getPlayer().getInventory().getContents()) {
+        Player player = getPlayer();
+        Inventory inventory = player.getInventory();
+
+        for (ItemStack item : inventory.getContents()) {
             if (item == null) {
                 continue;
             }
@@ -191,10 +195,10 @@ public class TeamPlayer {
             if ("wool".equals(plugin.getPdcManager().getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
                 ItemStack newItem = plugin.getCustomItemManager()
                     .getItem("wool")
-                    .getItem(getPlayer(), item.getAmount());
+                    .getItem(player, item.getAmount());
 
-                int index = getPlayer().getInventory().first(item);
-                getPlayer().getInventory().getContents()[index] = newItem;
+                int index = inventory.first(item);
+                inventory.setItem(index, newItem);
             }
         }
     }
