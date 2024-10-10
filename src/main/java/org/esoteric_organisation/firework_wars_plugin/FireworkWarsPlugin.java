@@ -62,6 +62,12 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         LOGGER = getLogger();
 
         this.customItemManager = customItemManager;
+
+        try {
+            saveMaps();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     @Override
@@ -87,12 +93,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         new ArenaCommand(this);
         new ResetInventoryCommand(this);
         new HealCommand(this);
-
-        try {
-            saveMaps();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
     }
 
     @Override
