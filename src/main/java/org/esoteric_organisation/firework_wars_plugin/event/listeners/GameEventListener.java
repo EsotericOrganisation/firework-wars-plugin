@@ -13,7 +13,6 @@ import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
 import org.esoteric_organisation.firework_wars_plugin.util.Pair;
-import org.esoteric_organisation.firework_wars_plugin.util.ReflectUtil;
 
 import java.util.List;
 
@@ -21,13 +20,9 @@ public class GameEventListener implements Listener {
     private final FireworkWarsPlugin plugin;
     private final FireworkWarsGame game;
 
-    private final ReflectUtil reflectUtil;
-
     public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
         this.plugin = plugin;
         this.game = game;
-
-        this.reflectUtil = new ReflectUtil();
     }
 
     public void register() {
