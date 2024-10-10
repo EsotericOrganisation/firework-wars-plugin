@@ -123,3 +123,8 @@ build
 
 # .class files
 bin
+
+# Playit.gg
+!run/plugins/playit-gg
+!run/plugins/playit.gg/*
+!run/plugins/playit-minecraft-plugin.jar
