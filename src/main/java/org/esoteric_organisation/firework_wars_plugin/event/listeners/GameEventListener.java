@@ -1,6 +1,7 @@
 package org.esoteric_organisation.firework_wars_plugin.event.listeners;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -11,6 +12,7 @@ import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
+import org.esoteric_organisation.firework_wars_plugin.util.Pair;
 import org.esoteric_organisation.firework_wars_plugin.util.ReflectUtil;
 
 import java.util.List;
@@ -67,6 +69,10 @@ public class GameEventListener implements Listener {
         }
 
         player.setGameMode(GameMode.SPECTATOR);
+
+        Location location = player.getLocation();
+        player.setRespawnLocation(location);
+
         plugin.runTaskLater(() -> player.spigot().respawn(), 1L);
 
         if (player.getKiller() != null) {
@@ -74,6 +80,12 @@ public class GameEventListener implements Listener {
         }
 
         FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
+
+        for (TeamPlayer teamPlayer : game.getPlayers()) {
+            teamPlayer.getScoreboard()
+                .updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + ""))
+                .update();
+        }
 
         if (game.isTeamEliminated(team)) {
             game.eliminateTeam(team);
