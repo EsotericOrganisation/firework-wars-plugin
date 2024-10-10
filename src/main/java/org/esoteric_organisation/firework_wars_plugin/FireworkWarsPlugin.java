@@ -91,7 +91,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         try {
             saveMaps();
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            exception.printStackTrace();
         }
     }
 
@@ -104,7 +104,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     private void saveMaps() throws IOException {
         saveResource("maps/barracks/barracks.7z", false);
-        FileUtil.extract7z("plugins/" + getName() + "/maps/barracks/barracks.7z", "barracks");
+        FileUtil.extract7z("plugins/" + getName() + "/maps/barracks/barracks.7z", ".");
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
