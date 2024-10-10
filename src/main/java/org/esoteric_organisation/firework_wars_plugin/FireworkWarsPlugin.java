@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
@@ -75,6 +76,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         try {
             saveMaps();
             moveMapsToRoot();
+
+            Bukkit.getServer().shutdown();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
