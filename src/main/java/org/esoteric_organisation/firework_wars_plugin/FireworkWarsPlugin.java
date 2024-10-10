@@ -132,6 +132,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
                     Files.createDirectories(targetPath.getParent());
                     Files.move(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
 
+                    getLogger().info("Moving file " + file + " to " + targetPath + ".");
+
                     return FileVisitResult.CONTINUE;
                 }
 
