@@ -34,7 +34,7 @@ public class FireworkShotgunItem extends BaseGunItem {
         TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
         FireworkWarsTeam team = teamPlayer.getTeam();
 
-        ItemStack firework = createFirework(team.getTeamData().getColor(), 7, 1);
+        ItemStack firework = createFirework(team.getTeamData().getColor(), 6, 1);
         editCrossbowMeta(event.getCrossbow(), meta -> meta.setChargedProjectiles(List.of(
             firework.clone(),
             firework.clone(),
