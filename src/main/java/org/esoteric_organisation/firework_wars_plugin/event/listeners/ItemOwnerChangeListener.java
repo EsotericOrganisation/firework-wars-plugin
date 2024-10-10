@@ -43,11 +43,13 @@ public class ItemOwnerChangeListener implements Listener {
     public void onItemMoveInventory(InventoryMoveItemEvent event) {
         ItemStack item = event.getItem();
 
+        Bukkit.broadcastMessage("inside item move inventory event");
+
         if (!(event.getDestination().getHolder() instanceof Player player)) {
             return;
         }
 
-        Bukkit.broadcastMessage("inside item move inventory event");
+        Bukkit.broadcastMessage("inside item move inventory event fully");
 
         checkAmmoOwner(item, player);
         updateItemLocale(item, player);
@@ -56,8 +58,7 @@ public class ItemOwnerChangeListener implements Listener {
     private void checkAmmoOwner(ItemStack item, Player player) {
         if (pdcManager.hasKey(item.getItemMeta(), Keys.AMMO_OWNER_UUID)) {
             Bukkit.broadcastMessage("identified as ammo");
-            plugin.runTaskLater(() -> pdcManager.setUUIDValue(
-                item.getItemMeta(), Keys.AMMO_OWNER_UUID, player.getUniqueId()), 1L);
+            item.editMeta(meta -> pdcManager.setUUIDValue(meta, Keys.AMMO_OWNER_UUID, player.getUniqueId()));
         }
     }
 
