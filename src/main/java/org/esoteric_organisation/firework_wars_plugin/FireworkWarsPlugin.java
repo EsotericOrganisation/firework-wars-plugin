@@ -152,6 +152,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     private void saveMaps() throws IOException {
         fileManager.saveResourceFileFolder("maps/barracks");
+        saveResource("maps/barracks/level.dat");
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
