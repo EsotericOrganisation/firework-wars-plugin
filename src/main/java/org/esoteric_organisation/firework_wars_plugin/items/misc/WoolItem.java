@@ -26,8 +26,8 @@ public class WoolItem extends AbstractItem {
         }
 
         return new ItemBuilder<>(plugin, material)
-            .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
-            .build();
+                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .build();
     }
 
     @Override

@@ -15,9 +15,9 @@ public class FlintAndSteelItem extends AbstractItem {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-            .setUnbreakable(true)
-            .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
-            .build();
+                .setUnbreakable(true)
+                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .build();
     }
 
     @Override

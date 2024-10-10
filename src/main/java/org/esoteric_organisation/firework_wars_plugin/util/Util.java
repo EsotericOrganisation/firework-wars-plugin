@@ -22,9 +22,9 @@ public class Util {
 
     public static boolean testInventory(Inventory inventory, Predicate<ItemStack> predicate) {
         return Stream
-            .of(inventory.getContents())
-            .filter(Objects::nonNull)
-            .anyMatch(predicate);
+                .of(inventory.getContents())
+                .filter(Objects::nonNull)
+                .anyMatch(predicate);
     }
 
     public static int randomInt(int min, int max) {

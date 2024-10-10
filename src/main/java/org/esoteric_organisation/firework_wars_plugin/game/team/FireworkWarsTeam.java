@@ -52,7 +52,7 @@ public class FireworkWarsTeam {
 
     public List<TeamPlayer> getRemainingPlayers() {
         return players.stream()
-            .filter(TeamPlayer::isAlive)
-            .toList();
+                .filter(TeamPlayer::isAlive)
+                .toList();
     }
 }

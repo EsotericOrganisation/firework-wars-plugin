@@ -48,10 +48,10 @@ public class PlayerCompassItem extends AbstractItem {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<CompassMeta>(plugin, itemMaterial)
-            .setName(Message.PLAYER_COMPASS, player)
-            .setLore(loreNotTracking, player)
-            .modifyMeta(this::modifyMeta)
-            .build();
+                .setName(Message.PLAYER_COMPASS, player)
+                .setLore(loreNotTracking, player)
+                .modifyMeta(this::modifyMeta)
+                .build();
     }
 
     private void modifyMeta(CompassMeta meta) {
@@ -80,14 +80,14 @@ public class PlayerCompassItem extends AbstractItem {
         Location playerLocation = player.getLocation();
 
         TeamPlayer nearestEnemy = game.getPlayers()
-            .stream()
-            .filter(gamePlayer -> !gamePlayer.getTeam().equals(team))
-            .min(comparingDouble(enemy -> enemy.getPlayer().getLocation().distanceSquared(playerLocation)))
-            .orElse(null);
+                .stream()
+                .filter(gamePlayer -> !gamePlayer.getTeam().equals(team))
+                .min(comparingDouble(enemy -> enemy.getPlayer().getLocation().distanceSquared(playerLocation)))
+                .orElse(null);
 
         String compassId = pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID);
         CompassUpdater compassUpdater = compassManagers.computeIfAbsent(
-            compassId, key -> new CompassUpdater(game, player, item));
+                compassId, key -> new CompassUpdater(game, player, item));
 
         if (nearestEnemy == null) {
             player.sendMessage(languageManager.getMessage(noEnemy, player));
@@ -169,7 +169,7 @@ public class PlayerCompassItem extends AbstractItem {
                 int distance = (int) player.getLocation().distance(targetPlayer.getLocation());
 
                 player.sendActionBar(languageManager.getMessage(
-                    actionBarInfo, player, targetPlayer.displayName(), text(distance + "m").color(NamedTextColor.AQUA)));
+                        actionBarInfo, player, targetPlayer.displayName(), text(distance + "m").color(NamedTextColor.AQUA)));
             }
         }
 
@@ -183,7 +183,7 @@ public class PlayerCompassItem extends AbstractItem {
 
         private boolean hasExactCompass() {
             return Util.testInventory(player.getInventory(),
-                item -> compassId.equals(pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID)));
+                    item -> compassId.equals(pdcManager.getStringValue(item.getItemMeta(), Keys.PLAYER_COMPASS_ID)));
         }
 
         @Override

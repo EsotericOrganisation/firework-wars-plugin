@@ -3,11 +3,11 @@ package org.esoteric_organisation.firework_wars_plugin.arena.manager;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.EndgameData;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.SupplyDropData;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Lobby;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.TeamData;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.BlockLocation;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.PlayerLocation;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Lobby;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class ConfigValidator {
             }
 
             supplyDropData.getSupplyDropLocations().forEach(location ->
-                validatePlayerLocation(location, worldNames.toArray(String[]::new)));
+                    validatePlayerLocation(location, worldNames.toArray(String[]::new)));
 
             EndgameData endgameData = arena.getEndgameData();
             if (endgameData == null) {

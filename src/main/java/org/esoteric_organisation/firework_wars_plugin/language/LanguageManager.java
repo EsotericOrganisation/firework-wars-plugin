@@ -9,8 +9,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.profile.PlayerProfile;
 import org.esoteric_organisation.firework_wars_plugin.file.FileUtil;
+import org.esoteric_organisation.firework_wars_plugin.profile.PlayerProfile;
 
 import java.io.File;
 import java.util.*;
@@ -261,78 +261,78 @@ public class LanguageManager {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender));
 
         return Arrays.stream(rawMessage.split("\\n"))
-            .map(miniMessage::deserialize)
-            .toArray(Component[]::new);
+                .map(miniMessage::deserialize)
+                .toArray(Component[]::new);
     }
 
     public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
 
         return Arrays.stream(rawMessage.split("\\n"))
-            .map(miniMessage::deserialize)
-            .toArray(Component[]::new);
+                .map(miniMessage::deserialize)
+                .toArray(Component[]::new);
     }
 
     // rolyPolyVole end
 
     public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
         commandSender.sendMessage(
-            getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
+                getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
     }
 
     public void sendMessage(Message message, CommandSender commandSender, Component... arguments) {
         commandSender.sendMessage(
-            getMessage(message, commandSender, true, arguments));
+                getMessage(message, commandSender, true, arguments));
     }
 
     public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
         commandSender.sendMessage(
-            getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments)));
+                getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments)));
     }
 
     public void sendMessage(Message message, CommandSender commandSender, Object... arguments) {
         commandSender.sendMessage(
-            getMessage(message, commandSender, true, arguments));
+                getMessage(message, commandSender, true, arguments));
     }
 
     public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Component... arguments) {
         requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments));
+                getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments));
     }
 
     public void sendMessage(Message message, UUID uuid, Component... arguments) {
         requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, true, arguments));
+                getMessage(message, uuid, true, arguments));
     }
 
     public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
         requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments)));
+                getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments)));
     }
 
     public void sendMessage(Message message, UUID uuid, Object... arguments) {
         requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, true, arguments));
+                getMessage(message, uuid, true, arguments));
     }
 
     public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
         requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments));
+                getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments));
     }
 
     public void sendMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
         requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, true, arguments));
+                getMessage(message, playerProfile, true, arguments));
     }
 
     public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
         requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments)));
+                getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments)));
     }
 
     public void sendMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
         requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, true, arguments));
+                getMessage(message, playerProfile, true, arguments));
     }
 
     public Component[] toComponents(Object... objects) {

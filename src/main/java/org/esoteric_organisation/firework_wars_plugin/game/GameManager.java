@@ -40,16 +40,16 @@ public class GameManager implements Listener {
 
     public FireworkWarsGame getFireworkWarsGame(Player player) {
         return games.values().stream()
-            .filter(game -> game.containsPlayer(player))
-            .findFirst()
-            .orElse(null);
+                .filter(game -> game.containsPlayer(player))
+                .findFirst()
+                .orElse(null);
     }
 
     public FireworkWarsGame getFireworkWarsGame(String worldName) {
         return games.values().stream()
-            .filter(game -> game.usesWorld(worldName))
-            .findFirst()
-            .orElse(null);
+                .filter(game -> game.usesWorld(worldName))
+                .findFirst()
+                .orElse(null);
     }
 
     @EventHandler

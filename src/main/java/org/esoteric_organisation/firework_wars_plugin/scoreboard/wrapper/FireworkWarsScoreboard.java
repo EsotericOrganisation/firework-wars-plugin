@@ -85,7 +85,7 @@ public class FireworkWarsScoreboard {
 
         for (Pair<String, String> replacement : replacements) {
             line = line.replaceText(config ->
-                config.match(replacement.getLeft()).replacement(replacement.getRight()));
+                    config.match(replacement.getLeft()).replacement(replacement.getRight()));
         }
 
         return setLine(index, line);
@@ -102,7 +102,7 @@ public class FireworkWarsScoreboard {
 
         for (Pair<String, String> replacement : replacements) {
             line = line.replaceText(config ->
-                config.match(replacement.getLeft()).replacement(replacement.getRight()));
+                    config.match(replacement.getLeft()).replacement(replacement.getRight()));
         }
 
         return setTeamLine(team, line);

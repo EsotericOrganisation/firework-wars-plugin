@@ -25,9 +25,9 @@ public class FireworkRifleItem extends BaseGunItem {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseCrossbowBuilder()
-            .setName(Message.FIREWORK_RIFLE, player)
-            .setLore(Message.FIREWORK_RIFLE_LORE, player)
-            .build();
+                .setName(Message.FIREWORK_RIFLE, player)
+                .setLore(Message.FIREWORK_RIFLE_LORE, player)
+                .build();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class FireworkRifleItem extends BaseGunItem {
         ItemStack firework = createFirework(team.getTeamData().getColor(), 4, 2);
 
         Bukkit.getServer().getScheduler().runTaskLater(plugin, () ->
-            event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework))), 1L);
+                event.getCrossbow().editMeta(meta -> ((CrossbowMeta) meta).setChargedProjectiles(List.of(firework))), 1L);
     }
 
     @Override

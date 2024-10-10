@@ -17,8 +17,8 @@ import java.util.stream.Stream;
 public abstract class FastBoardBase<T> {
     private static final Map<Class<?>, Field[]> PACKETS = new HashMap<>(8);
     protected static final String[] COLOUR_CODES = Arrays.stream(ChatColor.values())
-        .map(Object::toString)
-        .toArray(String[]::new);
+            .map(Object::toString)
+            .toArray(String[]::new);
     private static final VersionType VERSION_TYPE;
 
     // Packets and components
@@ -73,16 +73,16 @@ public abstract class FastBoardBase<T> {
             Class<?> packetSbScoreClass = FastReflection.nmsClass(gameProtocolPackage, "PacketPlayOutScoreboardScore");
             Class<?> packetSbTeamClass = FastReflection.nmsClass(gameProtocolPackage, "PacketPlayOutScoreboardTeam");
             Class<?> sbTeamClass = VersionType.V1_17.isHigherOrEqual()
-                ? FastReflection.innerClass(packetSbTeamClass, innerClass -> !innerClass.isEnum()) : null;
+                    ? FastReflection.innerClass(packetSbTeamClass, innerClass -> !innerClass.isEnum()) : null;
             Field playerConnectionField = Arrays.stream(entityPlayerClass.getFields())
-                .filter(field -> field.getType().isAssignableFrom(playerConnectionClass))
-                .findFirst().orElseThrow(NoSuchFieldException::new);
+                    .filter(field -> field.getType().isAssignableFrom(playerConnectionClass))
+                    .findFirst().orElseThrow(NoSuchFieldException::new);
             Method sendPacketMethod = Stream.concat(
-                    Arrays.stream(playerConnectionClass.getSuperclass().getMethods()),
-                    Arrays.stream(playerConnectionClass.getMethods())
-                )
-                .filter(m -> m.getParameterCount() == 1 && m.getParameterTypes()[0] == packetClass)
-                .findFirst().orElseThrow(NoSuchMethodException::new);
+                            Arrays.stream(playerConnectionClass.getSuperclass().getMethods()),
+                            Arrays.stream(playerConnectionClass.getMethods())
+                    )
+                    .filter(m -> m.getParameterCount() == 1 && m.getParameterTypes()[0] == packetClass)
+                    .findFirst().orElseThrow(NoSuchMethodException::new);
             Optional<Class<?>> displaySlotEnum = FastReflection.nmsOptionalClass("world.scores", "DisplaySlot");
             CHAT_COMPONENT_CLASS = FastReflection.nmsClass("network.chat", "IChatBaseComponent");
             CHAT_FORMAT_ENUM = FastReflection.nmsClass(null, "EnumChatFormat");
@@ -115,7 +115,7 @@ public abstract class FastBoardBase<T> {
                 Optional<MethodHandle> optionalScorePacket = FastReflection.optionalConstructor(packetSbScoreClass, lookup, scoreTypeOptional);
                 fixedFormatConstructor = lookup.findConstructor(fixedFormatClass, fixedFormatType);
                 packetSbSetScore = optionalScorePacket.isPresent() ? optionalScorePacket.get()
-                    : lookup.findConstructor(packetSbScoreClass, scoreType);
+                        : lookup.findConstructor(packetSbScoreClass, scoreType);
                 scoreOptionalComponents = optionalScorePacket.isPresent();
                 packetSbResetScore = lookup.findConstructor(resetScoreClass, removeScoreType);
                 blankNumberFormat = blankField.isPresent() ? blankField.get().get(null) : null;
@@ -140,8 +140,8 @@ public abstract class FastBoardBase<T> {
                     continue;
                 }
                 Field[] fields = Arrays.stream(clazz.getDeclaredFields())
-                    .filter(field -> !Modifier.isStatic(field.getModifiers()))
-                    .toArray(Field[]::new);
+                        .filter(field -> !Modifier.isStatic(field.getModifiers()))
+                        .toArray(Field[]::new);
                 for (Field field : fields) {
                     field.setAccessible(true);
                 }
@@ -150,8 +150,8 @@ public abstract class FastBoardBase<T> {
 
             if (VersionType.V1_8.isHigherOrEqual()) {
                 String enumSbActionClass = VersionType.V1_13.isHigherOrEqual()
-                    ? "ScoreboardServer$Action"
-                    : "PacketPlayOutScoreboardScore$EnumScoreboardAction";
+                        ? "ScoreboardServer$Action"
+                        : "PacketPlayOutScoreboardScore$EnumScoreboardAction";
                 ENUM_SB_HEALTH_DISPLAY = FastReflection.nmsClass("world.scores.criteria", "IScoreboardCriteria$EnumScoreboardHealthDisplay");
                 ENUM_SB_ACTION = FastReflection.nmsClass("server", enumSbActionClass);
                 ENUM_SB_HEALTH_DISPLAY_INTEGER = FastReflection.enumValueOf(ENUM_SB_HEALTH_DISPLAY, "INTEGER", 0);
@@ -267,8 +267,8 @@ public abstract class FastBoardBase<T> {
      * Update a single scoreboard line including how its score is displayed.
      * The score will only be displayed on 1.20.3 and higher.
      *
-     * @param line the line number
-     * @param text the new line text
+     * @param line      the line number
+     * @param text      the new line text
      * @param scoreText the new line's score, if null will not change current value
      * @throws IndexOutOfBoundsException if the line is higher than {@link #size() size() + 1}
      */
@@ -354,7 +354,7 @@ public abstract class FastBoardBase<T> {
      * Update the lines and how their score is displayed on the scoreboard.
      * The scores will only be displayed for servers on 1.20.3 and higher.
      *
-     * @param lines the new scoreboard lines
+     * @param lines  the new scoreboard lines
      * @param scores the set for how each line's score should be, if null will fall back to default (blank)
      * @throws IllegalArgumentException if one line is longer than 30 chars on 1.12 or lower
      * @throws IllegalArgumentException if lines and scores are not the same size
@@ -602,7 +602,7 @@ public abstract class FastBoardBase<T> {
 
         if (VersionType.V1_8.isHigherOrEqual()) {
             Object enumAction = action == ScoreboardAction.REMOVE
-                ? ENUM_SB_ACTION_REMOVE : ENUM_SB_ACTION_CHANGE;
+                    ? ENUM_SB_ACTION_REMOVE : ENUM_SB_ACTION_CHANGE;
             setField(packet, ENUM_SB_ACTION, enumAction);
         } else {
             setField(packet, int.class, action.ordinal(), 1); // Action
@@ -619,7 +619,7 @@ public abstract class FastBoardBase<T> {
     private void sendModernScorePacket(int score, ScoreboardAction action) throws Throwable {
         String objName = COLOUR_CODES[score];
         Object enumAction = action == ScoreboardAction.REMOVE
-            ? ENUM_SB_ACTION_REMOVE : ENUM_SB_ACTION_CHANGE;
+                ? ENUM_SB_ACTION_REMOVE : ENUM_SB_ACTION_CHANGE;
 
         if (PACKET_SB_RESET_SCORE == null) { // Pre 1.20.3
             sendPacket(PACKET_SB_SET_SCORE.invoke(enumAction, this.id, objName, score));
@@ -633,11 +633,11 @@ public abstract class FastBoardBase<T> {
 
         T scoreFormat = getLineByScore(this.scores, score);
         Object format = scoreFormat != null
-            ? FIXED_NUMBER_FORMAT.invoke(toMinecraftComponent(scoreFormat))
-            : BLANK_NUMBER_FORMAT;
+                ? FIXED_NUMBER_FORMAT.invoke(toMinecraftComponent(scoreFormat))
+                : BLANK_NUMBER_FORMAT;
         Object scorePacket = SCORE_OPTIONAL_COMPONENTS
-            ? PACKET_SB_SET_SCORE.invoke(objName, this.id, score, Optional.empty(), Optional.of(format))
-            : PACKET_SB_SET_SCORE.invoke(objName, this.id, score, null, format);
+                ? PACKET_SB_SET_SCORE.invoke(objName, this.id, score, Optional.empty(), Optional.of(format))
+                : PACKET_SB_SET_SCORE.invoke(objName, this.id, score, null, format);
 
         sendPacket(scorePacket);
     }
@@ -647,7 +647,7 @@ public abstract class FastBoardBase<T> {
     }
 
     protected void sendTeamPacket(int score, TeamMode mode, T prefix, T suffix)
-        throws Throwable {
+            throws Throwable {
         if (mode == TeamMode.ADD_PLAYERS || mode == TeamMode.REMOVE_PLAYERS) {
             throw new UnsupportedOperationException();
         }
@@ -699,12 +699,12 @@ public abstract class FastBoardBase<T> {
     }
 
     private void setField(Object object, Class<?> fieldType, Object value)
-        throws ReflectiveOperationException {
+            throws ReflectiveOperationException {
         setField(object, fieldType, value, 0);
     }
 
     private void setField(Object packet, Class<?> fieldType, Object value, int count)
-        throws ReflectiveOperationException {
+            throws ReflectiveOperationException {
         int i = 0;
         for (Field field : PACKETS.get(packet.getClass())) {
             if (field.getType() == fieldType && count == i++) {

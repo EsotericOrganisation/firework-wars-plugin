@@ -17,9 +17,9 @@ public class RocketLauncherAmmo extends BaseAmmoItem {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseAmmoBuilder(player)
-            .setName(Message.ROCKET_LAUNCHER_AMMO, player)
-            .setLore(Message.ROCKET_LAUNCHER_AMMO_LORE, player)
-            .build();
+                .setName(Message.ROCKET_LAUNCHER_AMMO, player)
+                .setLore(Message.ROCKET_LAUNCHER_AMMO_LORE, player)
+                .build();
     }
 
     @Override

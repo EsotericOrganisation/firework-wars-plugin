@@ -16,8 +16,8 @@ public class TNTItem extends AbstractItem {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-            .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
-            .build();
+                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .build();
     }
 
     @Override

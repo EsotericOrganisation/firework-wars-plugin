@@ -21,8 +21,8 @@ public final class FastBoard extends FastBoardBase<Component> {
 
     static {
         ADVENTURE_SUPPORT = FastReflection
-            .optionalClass("io.papermc.paper.adventure.PaperAdventure")
-            .isPresent();
+                .optionalClass("io.papermc.paper.adventure.PaperAdventure")
+                .isPresent();
         MethodHandles.Lookup lookup = MethodHandles.lookup();
 
         try {

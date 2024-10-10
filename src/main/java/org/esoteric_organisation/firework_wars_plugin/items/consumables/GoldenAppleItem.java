@@ -20,9 +20,9 @@ public class GoldenAppleItem extends AbstractItem {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-            .setLore(Message.GOLDEN_APPLE_LORE, player)
-            .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
-            .build();
+                .setLore(Message.GOLDEN_APPLE_LORE, player)
+                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .build();
     }
 
     @EventHandler
@@ -32,7 +32,7 @@ public class GoldenAppleItem extends AbstractItem {
         }
 
         event.getPlayer().addPotionEffect(new PotionEffect(
-            PotionEffectType.SPEED, 10 * 20, 0));
+                PotionEffectType.SPEED, 10 * 20, 0));
     }
 
     @Override

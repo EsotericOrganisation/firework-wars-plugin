@@ -10,15 +10,15 @@ import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
 public class ShotgunAmmo extends BaseAmmoItem {
     public ShotgunAmmo(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_shotgun_ammo", Material.NETHER_WART, 4,3);
+        super(plugin, "firework_shotgun_ammo", Material.NETHER_WART, 4, 3);
     }
 
     @Override
     public ItemStack getItem(Player player) {
         return getBaseAmmoBuilder(player)
-            .setName(Message.FIREWORK_SHOTGUN_AMMO, player)
-            .setLore(Message.FIREWORK_SHOTGUN_AMMO_LORE, player)
-            .build();
+                .setName(Message.FIREWORK_SHOTGUN_AMMO, player)
+                .setLore(Message.FIREWORK_SHOTGUN_AMMO_LORE, player)
+                .build();
     }
 
     @Override

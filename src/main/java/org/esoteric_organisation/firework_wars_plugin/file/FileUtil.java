@@ -1,20 +1,20 @@
 package org.esoteric_organisation.firework_wars_plugin.file;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.jar.JarFile;
-import java.util.jar.JarEntry;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.stream.Collectors;
-
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import java.io.*;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 
 public class FileUtil {
 
@@ -74,7 +74,7 @@ public class FileUtil {
 
         File[] files = directory.listFiles();
 
-        if (files == null || files.length == 0) {
+        if (files == null) {
             return true;
         }
 

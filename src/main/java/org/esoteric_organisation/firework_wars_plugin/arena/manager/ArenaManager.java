@@ -6,8 +6,8 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Lobby;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.ArenaInformation;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Lobby;
 
 import java.io.File;
 import java.io.FileReader;
@@ -40,12 +40,12 @@ public class ArenaManager {
 
     public boolean isLobby(World world) {
         return lobbies.stream()
-            .anyMatch(lobby -> lobby.getWorld().equals(world.getName()));
+                .anyMatch(lobby -> lobby.getWorld().equals(world.getName()));
     }
 
     public boolean isArena(World world) {
         return arenas.stream()
-            .anyMatch(arena -> arena.getWorlds().contains(world.getName()));
+                .anyMatch(arena -> arena.getWorlds().contains(world.getName()));
     }
 
     private void loadArenasFromConfig() {
@@ -55,7 +55,7 @@ public class ArenaManager {
         File file = new File(arenasFilePath);
 
         Gson gson = new GsonBuilder()
-            .create();
+                .create();
 
         try (Reader reader = new FileReader(file)) {
             ArenaInformation arenaInformation = gson.fromJson(reader, ArenaInformation.class);

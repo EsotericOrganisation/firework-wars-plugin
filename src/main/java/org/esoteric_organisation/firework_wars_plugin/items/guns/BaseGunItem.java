@@ -31,10 +31,10 @@ public abstract class BaseGunItem extends AbstractItem {
 
     protected ItemBuilder<CrossbowMeta> getBaseCrossbowBuilder() {
         return new ItemBuilder<CrossbowMeta>(plugin, itemMaterial)
-            .setEnchanted(true)
-            .setUnbreakable(true)
-            .itemSupplier(this::getCustomCrossbow)
-            .modifyMeta(this::modifyMeta);
+                .setEnchanted(true)
+                .setUnbreakable(true)
+                .itemSupplier(this::getCustomCrossbow)
+                .modifyMeta(this::modifyMeta);
     }
 
     protected ItemStack getCustomCrossbow() {
@@ -98,7 +98,7 @@ public abstract class BaseGunItem extends AbstractItem {
         }
 
         boolean hasAmmo = Util.testInventory(player.getInventory(), item ->
-            getAmmoItem().isValidCustomItem(item));
+                getAmmoItem().isValidCustomItem(item));
 
         if (!hasAmmo) {
             return;

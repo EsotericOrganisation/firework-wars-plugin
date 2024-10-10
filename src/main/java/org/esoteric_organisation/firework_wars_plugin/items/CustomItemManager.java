@@ -75,9 +75,9 @@ public class CustomItemManager {
 
     public void registerNMSItems() {
         registerNMSItem(
-            "crossbow",
-            new CustomCrossbow(CustomCrossbow.PROPERTIES),
-            Items.CROSSBOW);
+                "crossbow",
+                new CustomCrossbow(CustomCrossbow.PROPERTIES),
+                Items.CROSSBOW);
     }
 
     public Map<String, AbstractItem> getItemRegistry() {
@@ -125,7 +125,7 @@ public class CustomItemManager {
 
     private void overrideItemRegistryEntry(String id, Item item, Item override) {
         ResourceKey<Item> key = ResourceKey.create(
-            BuiltInRegistries.ITEM.key(), ResourceLocation.withDefaultNamespace(id));
+                BuiltInRegistries.ITEM.key(), ResourceLocation.withDefaultNamespace(id));
 
         RegistrationInfo info = RegistrationInfo.BUILT_IN;
 

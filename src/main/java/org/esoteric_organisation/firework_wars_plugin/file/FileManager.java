@@ -1,5 +1,9 @@
 package org.esoteric_organisation.firework_wars_plugin.file;
 
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,10 +13,6 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
-
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
-import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 
 public class FileManager {
 

@@ -21,9 +21,9 @@ import java.util.function.Predicate;
 public class CustomCrossbow extends CrossbowItem {
 
     public static final Item.Properties PROPERTIES = new Item.Properties()
-        .stacksTo(1)
-        .durability(465)
-        .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
+            .stacksTo(1)
+            .durability(465)
+            .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
 
     public CustomCrossbow(Item.Properties settings) {
         super(settings);
@@ -44,8 +44,8 @@ public class CustomCrossbow extends CrossbowItem {
         FireworkWarsPlugin plugin = FireworkWarsPlugin.getInstance();
 
         boolean superResult = offHand
-            ? super.getSupportedHeldProjectiles().test(stack)
-            : super.getAllSupportedProjectiles().test(stack);
+                ? super.getSupportedHeldProjectiles().test(stack)
+                : super.getAllSupportedProjectiles().test(stack);
 
         if (plugin == null) {
             Bukkit.getLogger().severe("Failed to get FireworkWars plugin instance!");

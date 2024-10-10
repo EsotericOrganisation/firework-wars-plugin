@@ -125,10 +125,10 @@ public class GameTickHandler extends BukkitRunnable {
 
             if (startsSoon(ticksUntilSupplyDrop)) {
                 scoreboard.setLine(1, languageManager.getMessage(
-                    Message.SB_EVENT_SUPPLY_DROP_SOON, player, getMinutesAndSeconds(ticksUntilSupplyDrop)));
+                        Message.SB_EVENT_SUPPLY_DROP_SOON, player, getMinutesAndSeconds(ticksUntilSupplyDrop)));
             } else {
                 scoreboard.setLine(1, languageManager.getMessage(
-                    Message.SB_EVENT_SUPPLY_DROP, player, getMinutesAndSeconds(ticksUntilSupplyDrop)));
+                        Message.SB_EVENT_SUPPLY_DROP, player, getMinutesAndSeconds(ticksUntilSupplyDrop)));
             }
 
             if (shouldWarnForEndgame()) {
@@ -137,10 +137,10 @@ public class GameTickHandler extends BukkitRunnable {
 
                 if (startsSoon(ticks)) {
                     scoreboard.setEndgameLine(languageManager.getMessage(
-                        Message.SB_EVENT_ENDGAME_SOON, player, getMinutesAndSeconds(getTicksUntilEndgame())));
+                            Message.SB_EVENT_ENDGAME_SOON, player, getMinutesAndSeconds(getTicksUntilEndgame())));
                 } else {
                     scoreboard.setEndgameLine(languageManager.getMessage(
-                        Message.SB_EVENT_ENDGAME, player, getMinutesAndSeconds(getTicksUntilEndgame())));
+                            Message.SB_EVENT_ENDGAME, player, getMinutesAndSeconds(getTicksUntilEndgame())));
                 }
             }
 
@@ -150,10 +150,10 @@ public class GameTickHandler extends BukkitRunnable {
 
                 if (startsSoon(ticks)) {
                     scoreboard.setEndgameLine(languageManager.getMessage(
-                        Message.SB_EVENT_GAME_END_SOON, player, getMinutesAndSeconds(getTicksUntilGameEnd())));
+                            Message.SB_EVENT_GAME_END_SOON, player, getMinutesAndSeconds(getTicksUntilGameEnd())));
                 } else {
                     scoreboard.setEndgameLine(languageManager.getMessage(
-                        Message.SB_EVENT_GAME_END, player, getMinutesAndSeconds(getTicksUntilGameEnd())));
+                            Message.SB_EVENT_GAME_END, player, getMinutesAndSeconds(getTicksUntilGameEnd())));
                 }
             }
 

@@ -95,16 +95,16 @@ public class FireworkWarsGame {
 
     public boolean isTeamEliminated(FireworkWarsTeam team) {
         return team.getPlayers().stream()
-            .map(TeamPlayer::getPlayer)
-            .filter(Objects::nonNull)
-            .allMatch(this::isSpectator);
+                .map(TeamPlayer::getPlayer)
+                .filter(Objects::nonNull)
+                .allMatch(this::isSpectator);
     }
 
     public List<FireworkWarsTeam> getRemainingTeams() {
         return teams
-            .stream()
-            .filter(team -> !isTeamEliminated(team))
-            .toList();
+                .stream()
+                .filter(team -> !isTeamEliminated(team))
+                .toList();
     }
 
     public void setGameState(GameState gameState) {
@@ -251,7 +251,7 @@ public class FireworkWarsGame {
             }
         }
     }
-    
+
     public void supplyDrop() {
         Location location = arena.getSupplyDropData().getRandomLocation().getBukkitLocation();
         StorageMinecart chestMinecart = (StorageMinecart) location.getWorld().spawnEntity(location, EntityType.CHEST_MINECART);
@@ -259,7 +259,7 @@ public class FireworkWarsGame {
         chestMinecart.customName(Component.text("Supply Drop"));
 
         chestMinecart.getInventory().addItem(
-            plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
+                plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
