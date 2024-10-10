@@ -56,7 +56,6 @@ public class GameTickHandler extends BukkitRunnable {
             startEndgame();
         }
 
-        updateWoolColors();
         updateScoreboards();
     }
 
@@ -70,10 +69,6 @@ public class GameTickHandler extends BukkitRunnable {
         int randomness = supplyDropData.getSupplyDropIntervalRandomness();
 
         return Math.max(1, interval + Util.randomInt(-randomness, randomness));
-    }
-
-    private void updateWoolColors() {
-        game.getPlayers().forEach(TeamPlayer::correctWoolColors);
     }
 
     private void handleSupplyDrops() {
