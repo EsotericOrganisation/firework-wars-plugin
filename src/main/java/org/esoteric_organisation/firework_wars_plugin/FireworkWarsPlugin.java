@@ -18,6 +18,9 @@ import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 public final class FireworkWarsPlugin extends JavaPlugin {
@@ -112,9 +115,39 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         }
     }
 
+    private final Path mapsDirectory = Paths.get("plugins/firework-wars-plugin/maps");
+    private final Path rootDirectory = Paths.get("").toAbsolutePath(); // Root of the process
+
+    public void moveMapsToRoot() throws IOException {
+        // Ensure the maps directory exists
+        if (Files.exists(mapsDirectory)) {
+            // Walk through all files and directories inside the maps directory
+            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    // Move each file to the root directory
+                    Path targetPath = rootDirectory.resolve(mapsDirectory.relativize(file).getFileName());
+                    Files.move(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    // Move each directory to the root directory
+                    Path targetPath = rootDirectory.resolve(mapsDirectory.relativize(dir).getFileName());
+                    if (!Files.exists(targetPath)) {
+                        Files.move(dir, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } else {
+            System.out.println("Maps directory does not exist.");
+        }
+    }
+
     private void saveMaps() throws IOException {
-        saveResource("maps/barracks/barracks.7z", true);
-        FileUtil.extract7z("plugins/" + getName() + "/maps/barracks/barracks.7z", "barracks");
+        fileManager.saveResourceFileFolder("maps");
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
