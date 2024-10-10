@@ -1,4 +1,4 @@
-package org.esoteric_organisation.firework_wars_plugin.items.manager;
+package org.esoteric_organisation.firework_wars_plugin.items;
 
 import com.mojang.serialization.Lifecycle;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -12,26 +12,34 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
+import org.esoteric_organisation.firework_wars_plugin.items.consumables.GoldenAppleItem;
+import org.esoteric_organisation.firework_wars_plugin.items.consumables.HealingPotionItem;
+import org.esoteric_organisation.firework_wars_plugin.items.explosives.TNTItem;
+import org.esoteric_organisation.firework_wars_plugin.items.explosives.ThrowableTNTItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.FireworkRifleItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rifle.RifleAmmo;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launcher.RocketLauncherAmmo;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.rocket_launcher.RocketLauncherItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.FireworkShotgunItem;
 import org.esoteric_organisation.firework_wars_plugin.items.guns.shotgun.ShotgunAmmo;
+import org.esoteric_organisation.firework_wars_plugin.items.misc.FlintAndSteelItem;
 import org.esoteric_organisation.firework_wars_plugin.items.misc.PlayerCompassItem;
+import org.esoteric_organisation.firework_wars_plugin.items.misc.WoolItem;
 import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
 import org.esoteric_organisation.firework_wars_plugin.util.ReflectUtil;
+import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
 import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CustomItemManager {
     private FireworkWarsPlugin plugin;
     private final ReflectUtil reflectUtil;
 
-    private final Map<String, AbstractItem> itemRegistry = new HashMap<>();
-    private final Map<String, Item> nmsItemRegistry = new HashMap<>();
+    private final Map<String, AbstractItem> itemRegistry;
+    private final Map<String, Item> nmsItemRegistry;
 
     public void setPlugin(FireworkWarsPlugin plugin) {
         this.plugin = plugin;
@@ -39,6 +47,9 @@ public class CustomItemManager {
 
     public CustomItemManager(ReflectUtil reflectUtil) {
         this.reflectUtil = reflectUtil;
+
+        this.itemRegistry = new HashMap<>();
+        this.nmsItemRegistry = new HashMap<>();
     }
 
     public void registerCustomItems() {
@@ -52,6 +63,14 @@ public class CustomItemManager {
         registerItem(new RocketLauncherAmmo(plugin));
 
         registerItem(new PlayerCompassItem(plugin));
+        registerItem(new WoolItem(plugin));
+        registerItem(new FlintAndSteelItem(plugin));
+
+        registerItem(new HealingPotionItem(plugin));
+        registerItem(new GoldenAppleItem(plugin));
+
+        registerItem(new TNTItem(plugin));
+        registerItem(new ThrowableTNTItem(plugin));
     }
 
     public void registerNMSItems() {
