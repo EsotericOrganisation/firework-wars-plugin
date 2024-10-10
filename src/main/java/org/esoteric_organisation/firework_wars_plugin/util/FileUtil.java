@@ -48,7 +48,17 @@ public class FileUtil {
         while ((entry = sevenZFile.getNextEntry()) != null) {
             if (!entry.isDirectory()) {
                 File outFile = new File(destination, entry.getName());
+
+                // Ensure the parent directories exist
+                File parentDir = outFile.getParentFile();
+                if (parentDir != null && !parentDir.exists()) {
+                    parentDir.mkdirs();
+                }
+
+                // Create the file
                 outFile.createNewFile();
+
+                // Write content to the file
                 try (FileOutputStream out = new FileOutputStream(outFile)) {
                     byte[] content = new byte[(int) entry.getSize()];
                     sevenZFile.read(content, 0, content.length);
