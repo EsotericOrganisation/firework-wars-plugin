@@ -15,6 +15,7 @@ import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
 import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -63,7 +64,11 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         this.customItemManager = customItemManager;
 
+        new File("Test Folder").mkdir();
+
         try {
+            new File("Test File.txt").createNewFile();
+
             saveMaps();
         } catch (IOException exception) {
             exception.printStackTrace();
