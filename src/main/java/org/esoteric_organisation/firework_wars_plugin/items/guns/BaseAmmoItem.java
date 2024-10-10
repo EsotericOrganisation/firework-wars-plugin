@@ -16,12 +16,14 @@ public abstract class BaseAmmoItem extends AbstractItem {
 
     protected ItemBuilder<ItemMeta> getBaseAmmoBuilder(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-                .modifyMeta(meta -> {
-                    pdcManager.setStringValue(meta, customItemIdKey, itemId);
+            .modifyMeta(meta -> {
+                pdcManager.setStringValue(meta, customItemIdKey, itemId);
 
-                    if (player != null) {
-                        pdcManager.setUUIDValue(meta, Keys.AMMO_OWNER_UUID, player.getUniqueId());
-                    }
-                });
+                if (player != null) {
+                    pdcManager.setUUIDValue(meta, Keys.AMMO_OWNER_UUID, player.getUniqueId());
+                } else {
+                    pdcManager.setStringValue(meta, Keys.AMMO_OWNER_UUID, "");
+                }
+            });
     }
 }
