@@ -1,7 +1,6 @@
 package org.esoteric_organisation.firework_wars_plugin.event.listeners;
 
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -65,11 +64,6 @@ public class GameEventListener implements Listener {
 
         player.setGameMode(GameMode.SPECTATOR);
 
-        Location location = player.getLocation();
-        player.setRespawnLocation(location);
-
-        plugin.runTaskLater(() -> player.spigot().respawn(), 1L);
-
         if (player.getKiller() != null) {
             TeamPlayer.from(player.getKiller()).incrementKills();
         }
@@ -90,5 +84,14 @@ public class GameEventListener implements Listener {
                 game.preEndGame(remainingTeams.get(0));
             }
         }
+
+        game.sendMessage(event.deathMessage());
+        game.playSound(event.getDeathSound());
+
+        event.getPlayer().getInventory().clear();
+        event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
+
+        event.setReviveHealth(20.0D);
+        event.setCancelled(true);
     }
 }

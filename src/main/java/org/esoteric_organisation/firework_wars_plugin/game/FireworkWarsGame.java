@@ -140,6 +140,19 @@ public class FireworkWarsGame {
         }
     }
 
+    public void sendMessage(Component component) {
+        for (TeamPlayer player : players) {
+            player.getPlayer().sendMessage(component);
+        }
+    }
+
+    public void playSound(Sound sound) {
+        for (TeamPlayer player : players) {
+            player.getPlayer().playSound(player.getPlayer().getLocation(), sound, 1.0f, 1.0f);
+        }
+    }
+
+
     private void startCountdown() {
         new GameCountdown(plugin, this);
     }
