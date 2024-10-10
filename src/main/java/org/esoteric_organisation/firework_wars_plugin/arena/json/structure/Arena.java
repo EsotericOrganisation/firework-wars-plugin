@@ -3,7 +3,7 @@ package org.esoteric_organisation.firework_wars_plugin.arena.json.structure;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.EndgameData;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.SupplyDropData;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.TeamData;
-import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.BlockLocation;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.ChestLocation;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.PlayerLocation;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class Arena {
 
     private TeamData[] teamInformation;
 
-    private BlockLocation[] chestLocations;
+    private ChestLocation[] chestLocations;
 
     private SupplyDropData supplyDropData;
 
@@ -60,7 +60,7 @@ public class Arena {
         return List.of(teamInformation);
     }
 
-    public List<BlockLocation> getChestLocations() {
+    public List<ChestLocation> getChestLocations() {
         return List.of(chestLocations);
     }
 
