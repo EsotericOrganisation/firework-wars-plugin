@@ -260,7 +260,7 @@ public class LanguageManager {
     public Component[] getMessages(Message message, CommandSender commandSender) {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender));
 
-        return Arrays.stream(rawMessage.split("\n"))
+        return Arrays.stream(rawMessage.split("\\n"))
             .map(miniMessage::deserialize)
             .toArray(Component[]::new);
     }
@@ -268,7 +268,7 @@ public class LanguageManager {
     public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
 
-        return Arrays.stream(rawMessage.split("\n"))
+        return Arrays.stream(rawMessage.split("\\n"))
             .map(miniMessage::deserialize)
             .toArray(Component[]::new);
     }
