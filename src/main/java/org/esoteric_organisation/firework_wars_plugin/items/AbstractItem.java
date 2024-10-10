@@ -1,4 +1,4 @@
-package org.esoteric_organisation.firework_wars_plugin.items.manager;
+package org.esoteric_organisation.firework_wars_plugin.items;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
@@ -13,7 +13,6 @@ import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager
 import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItem implements Listener {
-
     protected final FireworkWarsPlugin plugin;
     protected final MiniMessage MM;
 
@@ -23,9 +22,12 @@ public abstract class AbstractItem implements Listener {
     protected final String itemId;
     protected final Material itemMaterial;
 
+    protected final int weight;
+    protected final int value;
+
     protected final NamespacedKey customItemIdKey;
 
-    public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial) {
+    public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial, int weight, int value) {
         this.plugin = plugin;
         this.MM = MiniMessage.miniMessage();
 
@@ -35,6 +37,9 @@ public abstract class AbstractItem implements Listener {
         this.itemId = itemId;
         this.itemMaterial = itemMaterial;
 
+        this.weight = weight;
+        this.value = value;
+
         this.customItemIdKey = Keys.CUSTOM_ITEM_ID;
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -42,6 +47,18 @@ public abstract class AbstractItem implements Listener {
 
     public String getItemId() {
         return itemId;
+    }
+
+    public Material getItemMaterial() {
+        return itemMaterial;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Contract("null -> false")
@@ -69,4 +86,6 @@ public abstract class AbstractItem implements Listener {
         item.setAmount(amount);
         return item;
     }
+
+    public abstract int getStackAmount();
 }
