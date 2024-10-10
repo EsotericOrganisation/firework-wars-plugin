@@ -121,25 +121,27 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         // Ensure the maps directory exists
         if (Files.exists(mapsDirectory)) {
             // Walk through all files and directories inside the maps directory
-            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<>() {
+            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    // Move each file to the root directory
-                    Path targetPath = rootDirectory.resolve(mapsDirectory.relativize(file).getFileName());
+                    // Move each file, preserving the folder structure relative to maps directory
+                    Path relativePath = mapsDirectory.relativize(file);
+                    Path targetPath = rootDirectory.resolve(relativePath);
+
+                    // Ensure the target directories exist before moving the file
+                    Files.createDirectories(targetPath.getParent());
                     Files.move(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
+
                     return FileVisitResult.CONTINUE;
                 }
 
                 @Override
                 public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    // Move each directory to the root directory
-                    Path targetPath = rootDirectory.resolve(mapsDirectory.relativize(dir).getFileName());
-                    if (!Files.exists(targetPath)) {
-                        Files.move(dir, targetPath, StandardCopyOption.REPLACE_EXISTING);
-                    }
+                    // Skip moving the directory itself, focus on the files
                     return FileVisitResult.CONTINUE;
                 }
             });
+            System.out.println("All maps moved successfully!");
         } else {
             System.out.println("Maps directory does not exist.");
         }
