@@ -43,6 +43,8 @@ public class ThrowableTNTItem extends AbstractItem {
         item.setAmount(item.getAmount() - 1);
 
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation(), TNTPrimed.class);
+        tnt.setSource(player);
+
         tnt.setVelocity(player.getLocation().getDirection().add(player.getVelocity()));
 
         event.setCancelled(true);
