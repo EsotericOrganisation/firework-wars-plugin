@@ -85,6 +85,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         new ArenaCommand(this);
         new ResetInventoryCommand(this);
         new HealCommand(this);
+
+        saveMaps();
     }
 
     @Override
@@ -92,6 +94,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         if (playerDataManager != null) {
             playerDataManager.save();
         }
+    }
+
+    private void saveMaps() {
+        saveResource("maps/barracks/barracks.7z", false);
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
