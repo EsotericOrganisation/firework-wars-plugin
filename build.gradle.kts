@@ -74,8 +74,7 @@ dependencies {
   paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
   implementation("dev.jorel" , "commandapi-bukkit-shade-mojang-mapped" , "9.5.1")
-  implementation("net.sf", "sevenzipjbinding:sevenzipjbinding", "16.02-2.01")
-  implementation("net.sf", "sevenzipjbinding:sevenzipjbinding-all-platforms", "16.02-2.01")
+  implementation("org.apache.commons", "commons-compress", "1.24.0")
 }
 
 tasks {
