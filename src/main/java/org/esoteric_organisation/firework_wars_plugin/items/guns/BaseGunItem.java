@@ -12,7 +12,7 @@ import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
+import org.esoteric_organisation.firework_wars_plugin.items.AbstractItem;
 import org.esoteric_organisation.firework_wars_plugin.items.nms.CustomCrossbow;
 import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
 import org.esoteric_organisation.firework_wars_plugin.util.Keys;
@@ -23,8 +23,8 @@ import java.util.function.Consumer;
 public abstract class BaseGunItem extends AbstractItem {
     protected final String ammoId;
 
-    public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId) {
-        super(plugin, itemId, Material.CROSSBOW);
+    public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId, int weight, int value) {
+        super(plugin, itemId, Material.CROSSBOW, weight, value);
 
         this.ammoId = ammoId;
     }

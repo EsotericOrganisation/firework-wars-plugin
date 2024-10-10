@@ -20,7 +20,7 @@ import java.util.List;
 public class RocketLauncherItem extends BaseGunItem {
 
     public RocketLauncherItem(FireworkWarsPlugin plugin) {
-        super(plugin, "rocket_launcher", "rocket_launcher_ammo");
+        super(plugin, "rocket_launcher", "rocket_launcher_ammo", 1, 35);
     }
 
     @Override
@@ -66,5 +66,10 @@ public class RocketLauncherItem extends BaseGunItem {
             firework.remove();
             event.setCancelled(true);
         }
+    }
+
+    @Override
+    public int getStackAmount() {
+        return 1;
     }
 }

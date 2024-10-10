@@ -19,7 +19,7 @@ import java.util.List;
 public class FireworkRifleItem extends BaseGunItem {
 
     public FireworkRifleItem(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_rifle", "firework_rifle_ammo");
+        super(plugin, "firework_rifle", "firework_rifle_ammo", 4, 21);
     }
 
     @Override
@@ -50,5 +50,10 @@ public class FireworkRifleItem extends BaseGunItem {
     @Override
     protected void onCrossbowShoot(Player player, FireworkWarsGame game, EntityShootBowEvent event) {
 
+    }
+
+    @Override
+    public int getStackAmount() {
+        return 1;
     }
 }

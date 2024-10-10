@@ -17,7 +17,7 @@ import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.AbstractItem;
+import org.esoteric_organisation.firework_wars_plugin.items.AbstractItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.esoteric_organisation.firework_wars_plugin.util.ItemBuilder;
 import org.esoteric_organisation.firework_wars_plugin.util.Keys;
@@ -42,7 +42,7 @@ public class PlayerCompassItem extends AbstractItem {
     private final Message actionBarInfo = Message.PLAYER_COMPASS_ACTIONBAR_INFO;
 
     public PlayerCompassItem(FireworkWarsPlugin plugin) {
-        super(plugin, "player_compass", Material.COMPASS);
+        super(plugin, "player_compass", Material.COMPASS, 4, 12);
     }
 
     @Override
@@ -99,6 +99,11 @@ public class PlayerCompassItem extends AbstractItem {
         if (!compassUpdater.isRunning()) {
             compassUpdater.runTaskTimer(plugin, 0L, 1L);
         }
+    }
+
+    @Override
+    public int getStackAmount() {
+        return 1;
     }
 
     private class CompassUpdater extends BukkitRunnable {
