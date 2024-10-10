@@ -99,6 +99,7 @@ paperPluginYaml {
 
   main = projectGroupString + groupStringSeparator + pascalCase(projectNameString)
   apiVersion = paperApiVersion
+  description = project.description
 
   bootstrapper = projectGroupString + groupStringSeparator + pascalCase(bootstrapperNameString)
 }

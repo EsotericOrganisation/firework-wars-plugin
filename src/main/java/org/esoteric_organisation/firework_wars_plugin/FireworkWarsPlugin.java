@@ -8,7 +8,6 @@ import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.HealCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.ResetInventoryCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.SetLanguageCommand;
-import org.esoteric_organisation.firework_wars_plugin.event.listeners.ItemOwnerChangeListener;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
@@ -86,8 +85,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         new ArenaCommand(this);
         new ResetInventoryCommand(this);
         new HealCommand(this);
-
-        new ItemOwnerChangeListener(this).register();
     }
 
     @Override
