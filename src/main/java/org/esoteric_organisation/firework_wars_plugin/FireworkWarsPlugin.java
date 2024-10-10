@@ -14,7 +14,7 @@ import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
 import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
-import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
+import org.esoteric_organisation.firework_wars_plugin.file.FileUtil;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
 import java.io.IOException;

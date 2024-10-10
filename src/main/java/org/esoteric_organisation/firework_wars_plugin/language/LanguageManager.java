@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.profile.PlayerProfile;
-import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
+import org.esoteric_organisation.firework_wars_plugin.file.FileUtil;
 
 import java.io.File;
 import java.util.*;
