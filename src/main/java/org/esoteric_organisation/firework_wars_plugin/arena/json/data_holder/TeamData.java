@@ -18,6 +18,10 @@ public class TeamData {
         return color.toBukkit();
     }
 
+    public TeamColor getColorData() {
+        return color;
+    }
+
     public PlayerLocation getSpawnLocation() {
         return spawnLocation;
     }
