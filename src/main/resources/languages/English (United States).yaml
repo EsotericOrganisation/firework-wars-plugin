@@ -25,6 +25,11 @@ PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
 PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
 
+GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> on consumption.</gray>"
+
+THROWABLE_TNT: "<red>Throwable TNT</red>"
+THROWABLE_TNT_LORE: "<gray><yellow><bold>RIGHT CLICK</bold></yellow> to throw in your direction.</gray>"
+
 # Game Messages
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
