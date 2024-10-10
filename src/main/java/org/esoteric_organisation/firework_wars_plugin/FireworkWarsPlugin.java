@@ -2,7 +2,6 @@ package org.esoteric_organisation.firework_wars_plugin;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.manager.ArenaManager;
 import org.esoteric_organisation.firework_wars_plugin.commands.ArenaCommand;
@@ -20,11 +19,17 @@ import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
+@SuppressWarnings("unused")
 public final class FireworkWarsPlugin extends JavaPlugin {
     private static FireworkWarsPlugin instance;
     public static Logger LOGGER;
+
+    private final FileManager fileManager;
+    private final Path mapsDirectory = Paths.get("plugins/firework-wars-plugin/maps");
+    private final Path rootDirectory = Paths.get("").toAbsolutePath();
 
     private final CustomItemManager customItemManager;
     private PlayerDataManager playerDataManager;
@@ -32,7 +37,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private ArenaManager arenaManager;
     private GameManager gameManager;
     private PersistentDataManager pdcManager;
-    private FileManager fileManager;
 
     public static FireworkWarsPlugin getInstance() {
         return instance;
@@ -62,10 +66,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         return this.pdcManager;
     }
 
-    public FileManager getFileManager() {
-        return this.fileManager;
-    }
-
+    @SuppressWarnings("")
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
         instance = this;
         LOGGER = getLogger();
@@ -77,11 +78,44 @@ public final class FireworkWarsPlugin extends JavaPlugin {
             saveMaps();
             moveMapsToRoot();
         } catch (IOException exception) {
-            exception.printStackTrace();
+            getLogger().severe(exception.getMessage() + Arrays.toString(exception.getStackTrace()));
+        }
+    }
+
+    private void saveMaps() throws IOException {
+        fileManager.saveResourceFileFolder("maps/barracks");
+        saveResource("maps/barracks/level.dat", true);
+    }
+
+    private void moveMapsToRoot() throws IOException {
+        if (Files.exists(mapsDirectory)) {
+            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Path relativePath = mapsDirectory.relativize(file);
+                    Path targetPath = rootDirectory.resolve(relativePath);
+
+                    Files.createDirectories(targetPath.getParent());
+                    Files.copy(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
+
+                    getLogger().info("Moving file " + file + " to " + targetPath + ".");
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+
+            getLogger().info("All maps moved successfully!");
+        } else {
+            getLogger().info("Maps directory does not exist.");
         }
     }
 
     @Override
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void onEnable() {
         getDataFolder().mkdir();
         saveDefaultConfig();
@@ -113,46 +147,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         if (playerDataManager != null) {
             playerDataManager.save();
         }
-    }
-
-    private final Path mapsDirectory = Paths.get("plugins/firework-wars-plugin/maps");
-    private final Path rootDirectory = Paths.get("").toAbsolutePath(); // Root of the process
-
-    public void moveMapsToRoot() throws IOException {
-        // Ensure the maps directory exists
-        if (Files.exists(mapsDirectory)) {
-            // Walk through all files and directories inside the maps directory
-            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<Path>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    // Move each file, preserving the folder structure relative to maps directory
-                    Path relativePath = mapsDirectory.relativize(file);
-                    Path targetPath = rootDirectory.resolve(relativePath);
-
-                    // Ensure the target directories exist before moving the file
-                    Files.createDirectories(targetPath.getParent());
-                    Files.copy(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
-
-                    getLogger().info("Moving file " + file + " to " + targetPath + ".");
-
-                    return FileVisitResult.CONTINUE;
-                }
-
-                @Override
-                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    // Skip moving the directory itself, focus on the files
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-            System.out.println("All maps moved successfully!");
-        } else {
-            System.out.println("Maps directory does not exist.");
-        }
-    }
-
-    private void saveMaps() throws IOException {
-        fileManager.saveResourceFileFolder("maps/barracks");
-        saveResource("maps/barracks/level.dat", true);
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
