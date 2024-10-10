@@ -2,6 +2,7 @@ package org.esoteric_organisation.firework_wars_plugin.file;
 
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import org.bukkit.Bukkit;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -59,6 +60,7 @@ public class FileUtil {
             List<String> subFiles = getResourceFileFolderResourceFilePathsRecursively(resourceFilePath);
             if (subFiles.isEmpty()) {
                 paths.add(resourceFilePath);
+                Bukkit.getLogger().info("Adding " + resourceFilePath + ".");
             } else {
                 paths.addAll(subFiles);
             }
