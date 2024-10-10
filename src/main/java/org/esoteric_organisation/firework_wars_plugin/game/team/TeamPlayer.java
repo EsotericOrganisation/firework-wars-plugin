@@ -6,15 +6,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.esoteric_organisation.firework_wars_plugin.scoreboard.api.FastBoard;
 import org.esoteric_organisation.firework_wars_plugin.scoreboard.wrapper.FireworkWarsScoreboard;
-import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.Pair;
 
 import java.util.*;
@@ -181,25 +178,5 @@ public class TeamPlayer {
 
     public boolean isAlive() {
         return game.isAlive(getPlayer());
-    }
-
-    public void correctWoolColors() {
-        Player player = getPlayer();
-        Inventory inventory = player.getInventory();
-
-        for (ItemStack item : inventory.getContents()) {
-            if (item == null) {
-                continue;
-            }
-
-            if ("wool".equals(plugin.getPdcManager().getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
-                ItemStack newItem = plugin.getCustomItemManager()
-                        .getItem("wool")
-                        .getItem(player, item.getAmount());
-
-                int index = inventory.first(item);
-                inventory.setItem(index, newItem);
-            }
-        }
     }
 }
