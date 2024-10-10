@@ -6,12 +6,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.game.FireworkWarsGame;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
 import org.esoteric_organisation.firework_wars_plugin.scoreboard.api.FastBoard;
 import org.esoteric_organisation.firework_wars_plugin.scoreboard.wrapper.FireworkWarsScoreboard;
+import org.esoteric_organisation.firework_wars_plugin.util.Keys;
 import org.esoteric_organisation.firework_wars_plugin.util.Pair;
 
 import java.util.*;
@@ -32,10 +34,18 @@ public class TeamPlayer {
     private double damage;
 
     public static TeamPlayer from(UUID uuid) {
+        if (uuid == null) {
+            return null;
+        }
+
         return activePlayers.get(uuid);
     }
 
     public static TeamPlayer from(Player player) {
+        if (player == null) {
+            return null;
+        }
+
         return from(player.getUniqueId());
     }
 
@@ -98,26 +108,25 @@ public class TeamPlayer {
             languageManager.getMessage(Message.SB_SEPARATOR, player)
         ));
 
-        List<Component> teamList = game.getTeams().stream()
-            .map(team -> {
+        Map<FireworkWarsTeam, Component> teamLines = game.getTeams().stream()
+            .collect(HashMap::new, (map, team) -> {
+                Component component;
                 boolean isOwnTeam = team.equals(this.team);
 
                 if (isOwnTeam) {
-                    return languageManager.getMessage(
+                    component = languageManager.getMessage(
                         Message.SB_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
                 } else {
-                    return languageManager.getMessage(
+                    component = languageManager.getMessage(
                         Message.SB_OWN_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
                 }
-            })
-            .toList();
-
-        lines.addAll(3, teamList);
+                map.put(team, component);
+            }, HashMap::putAll);
 
         board.updateTitle(languageManager.getMessage(Message.SB_TITLE, player));
         board.updateLines(lines);
 
-        this.scoreboard = new FireworkWarsScoreboard(board)
+        this.scoreboard = new FireworkWarsScoreboard(board, teamLines)
             .updateLine(4, Pair.of("%", kills + ""))
             .updateLine(5, Pair.of("%", damage + ""));
         scoreboard.update();
@@ -167,5 +176,26 @@ public class TeamPlayer {
         getScoreboard()
             .updateLine(5, Pair.of("%", Math.round(this.damage) + ""))
             .update();
+    }
+
+    public boolean isAlive() {
+        return game.isAlive(getPlayer());
+    }
+
+    public void correctWoolColors() {
+        for (ItemStack item : getPlayer().getInventory().getContents()) {
+            if (item == null) {
+                continue;
+            }
+
+            if ("wool".equals(plugin.getPdcManager().getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
+                ItemStack newItem = plugin.getCustomItemManager()
+                    .getItem("wool")
+                    .getItem(getPlayer(), item.getAmount());
+
+                int index = getPlayer().getInventory().first(item);
+                getPlayer().getInventory().getContents()[index] = newItem;
+            }
+        }
     }
 }
