@@ -8,7 +8,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class FileUtil {
+
     public static List<String> getResourceFolderResourceFileNames(String resourcePath) {
         ClassLoader classLoader = FileUtil.class.getClassLoader();
 
@@ -31,5 +39,22 @@ public class FileUtil {
             exception.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    public static void extract7z(String source, String destination) throws IOException {
+        SevenZFile sevenZFile = new SevenZFile(new File(source));
+        SevenZArchiveEntry entry;
+
+        while ((entry = sevenZFile.getNextEntry()) != null) {
+            if (!entry.isDirectory()) {
+                File outFile = new File(destination, entry.getName());
+                try (FileOutputStream out = new FileOutputStream(outFile)) {
+                    byte[] content = new byte[(int) entry.getSize()];
+                    sevenZFile.read(content, 0, content.length);
+                    out.write(content);
+                }
+            }
+        }
+        sevenZFile.close();
     }
 }
