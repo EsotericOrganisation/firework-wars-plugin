@@ -131,7 +131,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
                     // Ensure the target directories exist before moving the file
                     Files.createDirectories(targetPath.getParent());
-                    Files.move(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(file, targetPath, StandardCopyOption.REPLACE_EXISTING);
 
                     getLogger().info("Moving file " + file + " to " + targetPath + ".");
 
