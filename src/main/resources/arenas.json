@@ -134,8 +134,8 @@
                         "pitch": 0
                     }
                 ],
-                "supplyDropIntervalTicks": 6000,
-                "supplyDropIntervalRandomness": 1200
+                "supplyDropIntervalTicks": 3000,
+                "supplyDropIntervalRandomness": 600
             },
             "endgameData": {
                 "endgameStartMinutes": 22,
