@@ -12,8 +12,10 @@ import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
 import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
+import org.esoteric_organisation.firework_wars_plugin.util.FileUtil;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public final class FireworkWarsPlugin extends JavaPlugin {
@@ -85,6 +87,12 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         new ArenaCommand(this);
         new ResetInventoryCommand(this);
         new HealCommand(this);
+
+        try {
+            saveMaps();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
@@ -92,6 +100,11 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         if (playerDataManager != null) {
             playerDataManager.save();
         }
+    }
+
+    private void saveMaps() throws IOException {
+        saveResource("maps/barracks/barracks.7z", false);
+        FileUtil.extract7z("plugins/" + getName() + "/maps/barracks/barracks.7z", "maps/barracks");
     }
 
     public void runTaskLater(Runnable runnable, long delay) {
