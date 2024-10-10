@@ -5,7 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.inventory.ItemStack;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
-import org.esoteric_organisation.firework_wars_plugin.items.manager.CustomItemManager;
+import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 
 public class ResetInventoryCommand extends CommandAPICommand {
     public ResetInventoryCommand(FireworkWarsPlugin plugin) {
@@ -26,8 +26,9 @@ public class ResetInventoryCommand extends CommandAPICommand {
             ItemStack item6 = customItemManager.getItem("rocket_launcher_ammo").getItem(player, 64);
 
             ItemStack item7 = customItemManager.getItem("player_compass").getItem(player);
+            ItemStack item8 = customItemManager.getItem("throwable_tnt").getItem(player, 64);
 
-            player.getInventory().addItem(item1, item2, item3, item4, item6, item7);
+            player.getInventory().addItem(item1, item2, item3, item4, item6, item7, item8);
             player.sendMessage(Component.text("Inventory reset!").color(NamedTextColor.GREEN));
         });
 
