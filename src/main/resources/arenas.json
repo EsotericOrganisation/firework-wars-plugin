@@ -15,16 +15,16 @@
     "arenas": [
         {
             "worlds": [
-                "world_arena_1"
+                "barracks"
             ],
             "countDownSeconds": 15,
             "gameDurationMinutes": 30,
             "waitingAreaLocation": {
-                "worldName": "world_arena_1",
-                "x": 85,
-                "y": 109,
-                "z": 110,
-                "yaw": -120,
+                "worldName": "barracks",
+                "x": 126,
+                "y": 63,
+                "z": 115,
+                "yaw": 90,
                 "pitch": 0
             },
             "teamInformation": [
@@ -34,11 +34,11 @@
                     },
                     "miniMessageString": "<dark_green>Chaos Insurgency</dark_green>",
                     "spawnLocation": {
-                        "worldName": "world_arena_1",
-                        "x": 135,
-                        "y": 115,
-                        "z": 66,
-                        "yaw": 0,
+                        "worldName": "barracks",
+                        "x": 22,
+                        "y": 64,
+                        "z": 106,
+                        "yaw": -40,
                         "pitch": 0
                     }
                 },
@@ -48,77 +48,77 @@
                     },
                     "miniMessageString": "<blue>SCP Foundation</blue>",
                     "spawnLocation": {
-                        "worldName": "world_arena_1",
-                        "x": 141,
-                        "y": 115,
-                        "z": 99,
-                        "yaw": 179,
+                        "worldName": "barracks",
+                        "x": 47,
+                        "y": 64,
+                        "z": 133,
+                        "yaw": 140,
                         "pitch": 0
                     }
                 }
             ],
             "chestLocations": [
                 {
-                    "worldName": "world_arena_1",
-                    "x": 135,
-                    "y": 115,
-                    "z": 78,
+                    "worldName": "barracks",
+                    "x": 53,
+                    "y": 64,
+                    "z": 110,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 137,
-                    "y": 115,
-                    "z": 84,
+                    "worldName": "barracks",
+                    "x": 37,
+                    "y": 64,
+                    "z": 104,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 156,
-                    "y": 115,
-                    "z": 72,
+                    "worldName": "barracks",
+                    "x": 21,
+                    "y": 64,
+                    "z": 101,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 140,
-                    "y": 115,
-                    "z": 66,
+                    "worldName": "barracks",
+                    "x": 32,
+                    "y": 64,
+                    "z": 116,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 124,
-                    "y": 115,
-                    "z": 63,
+                    "worldName": "barracks",
+                    "x": 21,
+                    "y": 64,
+                    "z": 128,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 124,
-                    "y": 115,
-                    "z": 90,
+                    "worldName": "barracks",
+                    "x": 34,
+                    "y": 64,
+                    "z": 122,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 138,
-                    "y": 115,
-                    "z": 99,
+                    "worldName": "barracks",
+                    "x": 48,
+                    "y": 64,
+                    "z": 138,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 },
                 {
-                    "worldName": "world_arena_1",
-                    "x": 151,
-                    "y": 115,
-                    "z": 100,
+                    "worldName": "barracks",
+                    "x": 35,
+                    "y": 64,
+                    "z": 137,
                     "maxTotalValue": 30,
                     "maxValuePerItem": 21
                 }
@@ -126,10 +126,10 @@
             "supplyDropData": {
                 "supplyDropLocations": [
                     {
-                        "worldName": "world_arena_1",
-                        "x": 151,
-                        "y": 180,
-                        "z": 100,
+                        "worldName": "barracks",
+                        "x": 47,
+                        "y": 68,
+                        "z": 137,
                         "yaw": 0,
                         "pitch": 0
                     }
@@ -141,11 +141,11 @@
                 "endgameStartMinutes": 22,
                 "warnBeforeEndgameSeconds": 300,
                 "wardenSpawnLocation": {
-                    "worldName": "world_arena_1",
-                    "x": 135,
-                    "y": 115,
-                    "z": 66,
-                    "yaw": 0,
+                    "worldName": "barracks",
+                    "x": 19,
+                    "y": 64,
+                    "z": 122,
+                    "yaw": -90,
                     "pitch": 0
                 },
                 "warnBeforeGameEndSeconds": 300
