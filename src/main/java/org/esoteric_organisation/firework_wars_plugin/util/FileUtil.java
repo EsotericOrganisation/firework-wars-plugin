@@ -48,6 +48,7 @@ public class FileUtil {
         while ((entry = sevenZFile.getNextEntry()) != null) {
             if (!entry.isDirectory()) {
                 File outFile = new File(destination, entry.getName());
+                outFile.createNewFile();
                 try (FileOutputStream out = new FileOutputStream(outFile)) {
                     byte[] content = new byte[(int) entry.getSize()];
                     sevenZFile.read(content, 0, content.length);
