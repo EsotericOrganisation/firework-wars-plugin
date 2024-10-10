@@ -9,6 +9,7 @@ import org.esoteric_organisation.firework_wars_plugin.commands.HealCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.ResetInventoryCommand;
 import org.esoteric_organisation.firework_wars_plugin.commands.SetLanguageCommand;
 import org.esoteric_organisation.firework_wars_plugin.event.listeners.ItemOwnerChangeListener;
+import org.esoteric_organisation.firework_wars_plugin.file.FileManager;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
@@ -29,6 +30,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private ArenaManager arenaManager;
     private GameManager gameManager;
     private PersistentDataManager pdcManager;
+    private FileManager fileManager;
 
     public static FireworkWarsPlugin getInstance() {
         return instance;
@@ -56,6 +58,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public PersistentDataManager getPdcManager() {
         return this.pdcManager;
+    }
+
+    public FileManager getFileManager() {
+        return this.fileManager;
     }
 
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
@@ -86,6 +92,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         this.arenaManager = new ArenaManager(this);
         this.gameManager = new GameManager(this);
         this.pdcManager = new PersistentDataManager();
+        this.fileManager = new FileManager(this);
 
         customItemManager.setPlugin(this);
         customItemManager.registerCustomItems();
