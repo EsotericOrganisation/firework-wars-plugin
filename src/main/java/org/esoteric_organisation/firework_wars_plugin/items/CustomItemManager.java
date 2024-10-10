@@ -77,6 +77,23 @@ public class CustomItemManager {
         return nmsItemRegistry.get(itemId);
     }
 
+    public AbstractItem getWeightedRandomItem() {
+        List<AbstractItem> list = List.copyOf(itemRegistry.values());
+
+        int totalWeight = list.stream().mapToInt(AbstractItem::getWeight).sum();
+        int randomWeight = Util.randomInt(0, totalWeight);
+
+        for (AbstractItem item : list) {
+            randomWeight -= item.getWeight();
+
+            if (randomWeight <= 0) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
     private void registerItem(AbstractItem item) {
         itemRegistry.put(item.getItemId(), item);
     }

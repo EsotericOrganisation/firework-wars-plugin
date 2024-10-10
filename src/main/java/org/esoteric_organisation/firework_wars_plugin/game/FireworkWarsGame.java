@@ -2,22 +2,27 @@ package org.esoteric_organisation.firework_wars_plugin.game;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.*;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
+import org.bukkit.inventory.ItemStack;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.data_holder.TeamData;
+import org.esoteric_organisation.firework_wars_plugin.arena.json.mini_components.ChestLocation;
 import org.esoteric_organisation.firework_wars_plugin.arena.json.structure.Arena;
 import org.esoteric_organisation.firework_wars_plugin.event.listeners.GameEventListener;
 import org.esoteric_organisation.firework_wars_plugin.game.runnables.GameCountdown;
 import org.esoteric_organisation.firework_wars_plugin.game.runnables.GameTickHandler;
 import org.esoteric_organisation.firework_wars_plugin.game.team.FireworkWarsTeam;
 import org.esoteric_organisation.firework_wars_plugin.game.team.TeamPlayer;
+import org.esoteric_organisation.firework_wars_plugin.items.AbstractItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
+import org.esoteric_organisation.firework_wars_plugin.util.Util;
 
 import java.util.*;
 
-@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class FireworkWarsGame {
     private final FireworkWarsPlugin plugin;
     private final Arena arena;
@@ -147,8 +152,14 @@ public class FireworkWarsGame {
         tickHandler = new GameTickHandler(plugin, this);
         tickHandler.start();
 
+        try {
+            fillChests(1.0);
+        } catch (Exception e) {
+            Bukkit.broadcastMessage(e.getMessage());
+        }
+
         for (TeamData teamData : arena.getTeamInformation()) {
-            teams.add(new FireworkWarsTeam(teamData, plugin));
+            teams.add(new FireworkWarsTeam(teamData, this, plugin));
         }
 
         distributePlayersAcrossTeams();
@@ -194,6 +205,37 @@ public class FireworkWarsGame {
 
             FireworkWarsTeam team = teams.get(teamIndex);
             players.get(i).joinTeam(team);
+        }
+    }
+
+    public void fillChests(double valueFactor) {
+        for (ChestLocation chestLocation : arena.getChestLocations()) {
+            Chest chest = (Chest) chestLocation.getChestBlock().getState();
+
+            int maxTotalValue = (int) (chestLocation.getMaxTotalValue() * valueFactor);
+            int maxItemValue = (int) (chestLocation.getMaxValuePerItem() * valueFactor);
+
+            List<ItemStack> itemsToAdd = new ArrayList<>();
+
+            int i = 0;
+            while (i < maxTotalValue) {
+                AbstractItem item = plugin.getCustomItemManager().getWeightedRandomItem();
+
+                if (item.getValue() > maxItemValue) {
+                    continue;
+                }
+
+                itemsToAdd.add(item.getItem(null, item.getStackAmount()));
+                i += item.getValue();
+            }
+
+            List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
+            Collections.shuffle(slots);
+
+            for (ItemStack item : itemsToAdd) {
+                int slot = slots.remove(0);
+                chest.getInventory().setItem(slot, item);
+            }
         }
     }
     
