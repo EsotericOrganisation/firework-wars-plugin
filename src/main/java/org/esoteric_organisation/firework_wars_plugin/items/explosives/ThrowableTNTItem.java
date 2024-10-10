@@ -1,11 +1,14 @@
 package org.esoteric_organisation.firework_wars_plugin.items.explosives;
 
+import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.esoteric_organisation.firework_wars_plugin.FireworkWarsPlugin;
 import org.esoteric_organisation.firework_wars_plugin.items.AbstractItem;
 import org.esoteric_organisation.firework_wars_plugin.language.Message;
@@ -47,7 +50,20 @@ public class ThrowableTNTItem extends AbstractItem {
 
         tnt.setFuseTicks(50);
 
-        tnt.setVelocity(player.getLocation().getDirection().add(player.getVelocity()));
+        CraftPlayer craftPlayer = (CraftPlayer) player;
+
+        ServerPlayer serverPlayer = craftPlayer.getHandle();
+        double lastX = serverPlayer.xo;
+        double lastY = serverPlayer.yo;
+        double lastZ = serverPlayer.zo;
+
+        Vector velocity = new Vector(
+                player.getX() - lastX,
+                player.getY() - lastY,
+                player.getZ() - lastZ
+        );
+
+        tnt.setVelocity(player.getLocation().getDirection().add(velocity));
 
         event.setCancelled(true);
     }
