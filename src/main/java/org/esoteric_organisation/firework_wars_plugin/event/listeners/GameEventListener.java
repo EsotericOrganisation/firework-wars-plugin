@@ -1,5 +1,6 @@
 package org.esoteric_organisation.firework_wars_plugin.event.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,6 +51,8 @@ public class GameEventListener implements Listener {
         if (damager.getUniqueId().equals(player.getUniqueId())) {
             return;
         }
+
+        Bukkit.broadcastMessage(event.getFinalDamage() + "");
 
         TeamPlayer.from(damager).addDamage(Math.round(event.getFinalDamage()));
     }
