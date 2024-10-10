@@ -51,7 +51,7 @@ public class FileUtil {
 
                 // Ensure the parent directories exist
                 File parentDir = outFile.getParentFile();
-                if (parentDir != null && !parentDir.exists()) {
+                if (parentDir != null) {
                     parentDir.mkdirs();
                 }
 
