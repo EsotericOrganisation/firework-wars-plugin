@@ -70,6 +70,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         LOGGER = getLogger();
 
         this.customItemManager = customItemManager;
+        this.fileManager = new FileManager(this);
 
         try {
             saveMaps();
@@ -93,7 +94,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         this.arenaManager = new ArenaManager(this);
         this.gameManager = new GameManager(this);
         this.pdcManager = new PersistentDataManager();
-        this.fileManager = new FileManager(this);
 
         customItemManager.setPlugin(this);
         customItemManager.registerCustomItems();
