@@ -10,7 +10,6 @@ import org.esoteric_organisation.firework_wars_plugin.commands.ResetInventoryCom
 import org.esoteric_organisation.firework_wars_plugin.commands.SetLanguageCommand;
 import org.esoteric_organisation.firework_wars_plugin.event.listeners.ItemOwnerChangeListener;
 import org.esoteric_organisation.firework_wars_plugin.file.FileManager;
-import org.esoteric_organisation.firework_wars_plugin.file.FileUtil;
 import org.esoteric_organisation.firework_wars_plugin.game.GameManager;
 import org.esoteric_organisation.firework_wars_plugin.items.CustomItemManager;
 import org.esoteric_organisation.firework_wars_plugin.language.LanguageManager;
@@ -18,9 +17,8 @@ import org.esoteric_organisation.firework_wars_plugin.profile.PlayerDataManager;
 import org.esoteric_organisation.firework_wars_plugin.util.PersistentDataManager;
 
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.logging.Logger;
 
 public final class FireworkWarsPlugin extends JavaPlugin {
@@ -122,7 +120,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         // Ensure the maps directory exists
         if (Files.exists(mapsDirectory)) {
             // Walk through all files and directories inside the maps directory
-            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     // Move each file to the root directory
