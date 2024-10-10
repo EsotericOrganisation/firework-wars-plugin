@@ -47,8 +47,6 @@ public class FileUtil {
         String jarFilePath = jarPath.substring(jarPathPrefix.length(), exclamationMarkIndex);
 
         try (JarFile jarFile = new JarFile(jarFilePath)) {
-            Bukkit.getLogger().info(Arrays.toString(jarFile.stream().toArray()));
-
             List<String> paths = jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourceFileFolderPath) && !name.equals(resourceFileFolderPath))
                     .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
 
