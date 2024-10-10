@@ -56,7 +56,11 @@ public class FileUtil {
                 }
 
                 // Create the file
-                outFile.createNewFile();
+                try {
+                    outFile.createNewFile();
+                } catch (IOException exception) {
+                    // Fuck this shit.
+                }
 
                 // Write content to the file
                 try (FileOutputStream out = new FileOutputStream(outFile)) {
