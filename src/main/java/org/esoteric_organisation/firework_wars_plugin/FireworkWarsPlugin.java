@@ -74,6 +74,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         try {
             saveMaps();
+            moveMapsToRoot();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
