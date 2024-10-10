@@ -66,7 +66,12 @@ public class ThrowableTNTItem extends AbstractItem {
 
         Bukkit.broadcastMessage(velocity.toString());
 
-        tnt.setVelocity(player.getLocation().getDirection().add(velocity));
+        Vector playerDirection = player.getLocation().getDirection().clone();
+        Vector playerDirectionWithVelocity = playerDirection.clone().add(velocity);
+
+        Bukkit.broadcastMessage(playerDirectionWithVelocity.toString());
+
+        tnt.setVelocity(playerDirectionWithVelocity);
 
         event.setCancelled(true);
     }
