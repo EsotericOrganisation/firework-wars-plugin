@@ -67,6 +67,8 @@ public class FileUtil {
                     byte[] content = new byte[(int) entry.getSize()];
                     sevenZFile.read(content, 0, content.length);
                     out.write(content);
+                } catch (IOException exception) {
+                    // Ignore this error like I ignore my problems
                 }
             }
         }
