@@ -4,12 +4,15 @@ import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.ServerOperator;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
 
 public class ResetInventoryCommand extends CommandAPICommand {
     public ResetInventoryCommand(FireworkWarsPlugin plugin) {
         super("reset");
+
+        withRequirement(ServerOperator::isOp);
 
         CustomItemManager customItemManager = plugin.getCustomItemManager();
 
