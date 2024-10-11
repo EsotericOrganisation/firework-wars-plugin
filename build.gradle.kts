@@ -25,10 +25,10 @@ fun snakeCase(kebabCaseString: String): String {
   return kebabCaseString.lowercase().replace(kebabCaseStringSeparator, snakeCaseStringSeparator).replace(" ", snakeCaseStringSeparator)
 }
 
-fun pascalCase(kebabCaseString: String): String {
+fun pascalCase(string: String): String {
   var pascalCaseString = ""
 
-  val splitString = kebabCaseString.split(kebabCaseStringSeparator)
+  val splitString = string.split(Regex("$kebabCaseStringSeparator| "))
 
   for (part in splitString) {
     pascalCaseString += capitalizeFirstLetter(part)
