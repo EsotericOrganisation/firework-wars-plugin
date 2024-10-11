@@ -175,6 +175,10 @@ public class FireworkWarsGame {
             teams.add(new FireworkWarsTeam(teamData, this, plugin));
         }
 
+        for (TeamPlayer player : getPlayers()) {
+            plugin.getResetInventoryCommand().giveItems(player.getPlayer());
+        }
+
         distributePlayersAcrossTeams();
         players.forEach(TeamPlayer::showScoreboard);
     }
