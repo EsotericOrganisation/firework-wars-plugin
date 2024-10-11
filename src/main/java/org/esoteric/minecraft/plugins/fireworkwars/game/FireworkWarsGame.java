@@ -177,6 +177,7 @@ public class FireworkWarsGame {
 
         for (TeamPlayer player : getPlayers()) {
             plugin.getResetInventoryCommand().giveItems(player.getPlayer());
+            plugin.getHealCommand().healPlayer(player.getPlayer());
         }
 
         distributePlayersAcrossTeams();

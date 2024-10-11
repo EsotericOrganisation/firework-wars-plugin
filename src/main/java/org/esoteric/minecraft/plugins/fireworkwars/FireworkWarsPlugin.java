@@ -39,6 +39,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private PersistentDataManager pdcManager;
 
     private ResetInventoryCommand resetInventoryCommand;
+    private HealCommand healCommand;
 
     public static FireworkWarsPlugin getInstance() {
         return instance;
@@ -70,6 +71,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public ResetInventoryCommand getResetInventoryCommand() {
         return this.resetInventoryCommand;
+    }
+
+    public HealCommand getHealCommand() {
+        return this.healCommand;
     }
 
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
