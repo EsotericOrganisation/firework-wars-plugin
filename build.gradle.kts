@@ -40,6 +40,7 @@ fun pascalCase(kebabCaseString: String): String {
 description = "A Minecraft Paper plugin that adds a firework-focused PvP game-mode."
 
 val mainProjectAuthor = "Esoteric Organisation"
+val simplifiedMainProjectAuthor = "Esoteric"
 
 val projectAuthors = listOfNotNull(mainProjectAuthor, "Esoteric Enderman", "rolyPolyVole")
 
@@ -47,7 +48,7 @@ val topLevelDomain = "org"
 val projectNameString = rootProject.name
 val bootstrapperNameString = rootProject.name + "-bootstrapper"
 
-group = topLevelDomain + groupStringSeparator + snakeCase(mainProjectAuthor.lowercase()) + groupStringSeparator + snakeCase(projectNameString)
+group = topLevelDomain + groupStringSeparator + simplifiedMainProjectAuthor.lowercase().replace(" ", "")
 version = "1.0.0"
 
 val buildDirectoryString = layout.buildDirectory.toString()
