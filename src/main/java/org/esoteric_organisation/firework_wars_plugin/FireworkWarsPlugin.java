@@ -66,7 +66,6 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         return this.pdcManager;
     }
 
-    @SuppressWarnings("")
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
         instance = this;
         LOGGER = getLogger();
