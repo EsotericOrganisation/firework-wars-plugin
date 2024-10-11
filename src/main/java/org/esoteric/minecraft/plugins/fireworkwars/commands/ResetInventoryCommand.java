@@ -31,7 +31,7 @@ public class ResetInventoryCommand extends CommandAPICommand {
             ItemStack item7 = customItemManager.getItem("player_compass").getItem(player);
             ItemStack item8 = customItemManager.getItem("throwable_tnt").getItem(player, 64);
 
-            player.getInventory().addItem(item1, item2, item3, item4, item6, item7, item8);
+            player.getInventory().addItem(item3, item1, item8, item7, item6, item4, item2);
             player.sendMessage(Component.text("Inventory reset!").color(NamedTextColor.GREEN));
         });
 
