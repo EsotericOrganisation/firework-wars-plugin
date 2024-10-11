@@ -100,7 +100,7 @@ tasks {
 val projectName = providers.gradleProperty("projectName").get()
 
 paperPluginYaml {
-  name = projectName.replace(Regex(" Plugin$"), "")
+  name = pascalCase(projectName).replace(Regex(" Plugin$"), "")
   authors = projectAuthors
 
   main = projectGroupString + groupStringSeparator + pascalCase(projectNameString)
