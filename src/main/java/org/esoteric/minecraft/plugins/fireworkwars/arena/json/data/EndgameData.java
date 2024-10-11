@@ -1,6 +1,6 @@
-package org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder;
+package org.esoteric.minecraft.plugins.fireworkwars.arena.json.data;
 
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components.PlayerLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.PlayerLocation;
 
 @SuppressWarnings("unused")
 public class EndgameData {

@@ -1,10 +1,10 @@
 package org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure;
 
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder.EndgameData;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder.SupplyDropData;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder.TeamData;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components.ChestLocation;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components.PlayerLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.EndgameData;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.SupplyDropData;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.PlayerLocation;
 
 import java.util.List;
 

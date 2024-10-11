@@ -1,8 +1,8 @@
-package org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder;
+package org.esoteric.minecraft.plugins.fireworkwars.arena.json.data;
 
 import org.bukkit.Color;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components.PlayerLocation;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components.TeamColor;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.PlayerLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.TeamColor;
 
 @SuppressWarnings("unused")
 public class TeamData {

@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.fireworkwars.arena.json.mini_components;
+package org.esoteric.minecraft.plugins.fireworkwars.arena.json.components;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

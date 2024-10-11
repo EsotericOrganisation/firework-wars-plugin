@@ -5,7 +5,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data_holder.TeamData;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 
 import java.util.ArrayList;
