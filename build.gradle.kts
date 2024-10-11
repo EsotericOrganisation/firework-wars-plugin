@@ -103,11 +103,11 @@ paperPluginYaml {
   name = pascalCase(projectName).replace(Regex(" Plugin$"), "")
   authors = projectAuthors
 
-  main = projectGroupString + groupStringSeparator + pascalCase(projectNameString)
+  main = projectGroupString + groupStringSeparator + "minecraft.plugins.fireworkwars" + pascalCase(projectNameString)
   apiVersion = paperApiVersion
   description = project.description
 
-  bootstrapper = projectGroupString + groupStringSeparator + pascalCase(bootstrapperNameString)
+  bootstrapper = projectGroupString + groupStringSeparator + "minecraft.plugins.fireworkwars" + pascalCase(bootstrapperNameString)
 }
 
 publishing {
