@@ -90,6 +90,8 @@ public class TeamPlayer {
 
         player.sendTitlePart(TitlePart.TITLE, plugin.getLanguageManager().getMessage(Message.YOU_ARE_ON_TEAM, player));
         player.sendTitlePart(TitlePart.SUBTITLE, team.getColoredTeamName());
+
+        player.setGameMode(GameMode.SURVIVAL);
     }
 
     public void showScoreboard() {
@@ -113,10 +115,10 @@ public class TeamPlayer {
 
                     if (isOwnTeam) {
                         component = languageManager.getMessage(
-                                Message.SB_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
+                            Message.SB_OWN_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
                     } else {
                         component = languageManager.getMessage(
-                                Message.SB_OWN_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
+                            Message.SB_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
                     }
                     map.put(team, component);
                 }, HashMap::putAll);
@@ -157,6 +159,7 @@ public class TeamPlayer {
     public void teleportToLobby() {
         Location location = plugin.getArenaManager().getLobbies().get(0).getSpawnLocation().getBukkitLocation();
         getPlayer().teleport(location);
+        getPlayer().setGameMode(GameMode.ADVENTURE);
     }
 
     public void becomeSpectator() {

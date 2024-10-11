@@ -75,8 +75,8 @@ public class GameEventListener implements Listener {
 
         for (TeamPlayer teamPlayer : game.getPlayers()) {
             teamPlayer.getScoreboard()
-                    .updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + ""))
-                    .update();
+                .updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + ""))
+                .update();
         }
 
         if (game.isTeamEliminated(team)) {

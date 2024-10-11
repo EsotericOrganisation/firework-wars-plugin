@@ -132,6 +132,7 @@ public class FireworkWarsGame {
         }
 
         teamPlayer.teleportToWaitingArea();
+        player.setGameMode(GameMode.ADVENTURE);
     }
 
     public void sendMessage(Message message, Object... arguments) {
@@ -168,7 +169,7 @@ public class FireworkWarsGame {
         try {
             fillChests(1.0);
         } catch (Exception e) {
-            Bukkit.broadcastMessage(e.getMessage());
+            plugin.getLogger().warning(e.getMessage());
         }
 
         for (TeamData teamData : arena.getTeamInformation()) {

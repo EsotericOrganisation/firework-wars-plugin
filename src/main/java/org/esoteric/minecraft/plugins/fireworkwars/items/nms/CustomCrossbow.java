@@ -70,6 +70,11 @@ public class CustomCrossbow extends CrossbowItem {
         }
 
         UUID ownerUuid = pdcManager.getUUIDValue(meta, Keys.AMMO_OWNER_UUID);
+        
+        if (ownerUuid == null) {
+            return superResult;
+        }
+        
         Player owner = plugin.getServer().getPlayer(ownerUuid);
 
         if (owner == null) {
