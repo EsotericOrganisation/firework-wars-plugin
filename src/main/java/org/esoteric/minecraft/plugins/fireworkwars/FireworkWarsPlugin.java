@@ -2,13 +2,15 @@ package org.esoteric.minecraft.plugins.fireworkwars;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import net.kyori.adventure.text.Component;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.manager.ArenaManager;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.ArenaCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.HealCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.ResetInventoryCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.SetLanguageCommand;
-import org.esoteric.minecraft.plugins.fireworkwars.events.ItemOwnerChangeListener;
+import org.esoteric.minecraft.plugins.fireworkwars.events.global.ItemOwnerChangeListener;
+import org.esoteric.minecraft.plugins.fireworkwars.events.global.PlayerLoseHungerListener;
 import org.esoteric.minecraft.plugins.fireworkwars.file.FileManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.GameManager;
 import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
@@ -156,6 +158,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         this.healCommand = new HealCommand(this);
 
         new ItemOwnerChangeListener(this).register();
+        new PlayerLoseHungerListener(this).register();
     }
 
     @Override
@@ -171,5 +174,9 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public void runTaskTimer(Runnable runnable, long delay, long period) {
         getServer().getScheduler().runTaskTimer(this, runnable, delay, period);
+    }
+
+    public void logLoudly(String message) {
+        this.getServer().broadcast(Component.text(message));
     }
 }
