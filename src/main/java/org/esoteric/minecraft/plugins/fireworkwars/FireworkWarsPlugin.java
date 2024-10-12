@@ -13,6 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.file.FileManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.GameManager;
 import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
+import org.esoteric.minecraft.plugins.fireworkwars.manager.PlayerVelocityManager;
 import org.esoteric.minecraft.plugins.fireworkwars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.fireworkwars.util.PersistentDataManager;
 
@@ -37,6 +38,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private ArenaManager arenaManager;
     private GameManager gameManager;
     private PersistentDataManager pdcManager;
+    private PlayerVelocityManager playerVelocityManager;
 
     private ResetInventoryCommand resetInventoryCommand;
     private HealCommand healCommand;
@@ -67,6 +69,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public PersistentDataManager getPdcManager() {
         return this.pdcManager;
+    }
+
+    public PlayerVelocityManager getPlayerVelocityManager() {
+        return this.playerVelocityManager;
     }
 
     public ResetInventoryCommand getResetInventoryCommand() {
@@ -139,6 +145,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         this.arenaManager = new ArenaManager(this);
         this.gameManager = new GameManager(this);
         this.pdcManager = new PersistentDataManager();
+        this.playerVelocityManager = new PlayerVelocityManager(this);
 
         customItemManager.setPlugin(this);
         customItemManager.registerCustomItems();
