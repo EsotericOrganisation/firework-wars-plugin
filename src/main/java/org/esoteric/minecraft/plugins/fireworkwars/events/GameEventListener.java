@@ -73,11 +73,10 @@ public class GameEventListener implements Listener {
 
         FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
 
-        for (TeamPlayer teamPlayer : game.getPlayers()) {
+        game.getPlayers().forEach(teamPlayer ->
             teamPlayer.getScoreboard()
                 .updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + ""))
-                .update();
-        }
+                .update());
 
         if (game.isTeamEliminated(team)) {
             game.eliminateTeam(team);
