@@ -1,6 +1,5 @@
 package org.esoteric.minecraft.plugins.fireworkwars.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,15 +13,22 @@ import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Pair;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GameEventListener implements Listener {
     private final FireworkWarsPlugin plugin;
     private final FireworkWarsGame game;
 
+    private final Map<UUID, Pair<Double, Integer>> lastDamagePerPlayer;
+
     public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
         this.plugin = plugin;
         this.game = game;
+
+        this.lastDamagePerPlayer = new HashMap<>();
     }
 
     public void register() {
@@ -52,9 +58,21 @@ public class GameEventListener implements Listener {
             return;
         }
 
-        Bukkit.broadcastMessage(event.getFinalDamage() + "");
+        double finalDamage = event.getFinalDamage();
+        int currentTick = plugin.getServer().getCurrentTick();
 
-        TeamPlayer.from(damager).addDamage(Math.round(event.getFinalDamage()));
+        Pair<Double, Integer> lastDamageInfo = lastDamagePerPlayer.getOrDefault(
+            player.getUniqueId(), Pair.of(0.0D, currentTick));
+
+        double lastDamage = lastDamageInfo.getLeft();
+        int lastDamageTime = lastDamageInfo.getRight();
+
+        if (finalDamage < lastDamage && currentTick - lastDamageTime < 10) {
+            return;
+        }
+
+        TeamPlayer.from(damager).addDamage(Math.round(finalDamage));
+        lastDamagePerPlayer.put(player.getUniqueId(), Pair.of(finalDamage, currentTick));
     }
 
     @EventHandler
