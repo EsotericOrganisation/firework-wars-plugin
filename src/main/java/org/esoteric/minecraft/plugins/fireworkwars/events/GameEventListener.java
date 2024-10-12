@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.fireworkwars.event.listeners;
+package org.esoteric.minecraft.plugins.fireworkwars.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
