@@ -15,8 +15,8 @@ public class PlayerVelocityManager {
     private final Map<UUID, Vector> playerVelocityMap = new HashMap<>();
     private final Map<UUID, Vector> playerPreviousPositionMap = new HashMap<>();
 
-    public PlayerVelocityManager(FireworkWarsPlugin plugin) {
-        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+    public PlayerVelocityManager(@NotNull FireworkWarsPlugin plugin) {
+        plugin.runTaskTimer(() -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 Vector previousPosition = playerPreviousPositionMap.get(player.getUniqueId());
 
