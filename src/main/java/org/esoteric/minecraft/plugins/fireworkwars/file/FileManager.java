@@ -15,7 +15,6 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class FileManager {
-
     private final FireworkWarsPlugin plugin;
 
     public FileManager(FireworkWarsPlugin plugin) {
