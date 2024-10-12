@@ -1,6 +1,5 @@
-package org.esoteric.minecraft.plugins.fireworkwars.event.listeners;
+package org.esoteric.minecraft.plugins.fireworkwars.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
@@ -46,8 +46,13 @@ public class ItemOwnerChangeListener implements Listener {
         ItemStack cursorItem = event.getCursor();
 
         Player player = (Player) event.getWhoClicked();
+        InventoryAction action = event.getAction();
 
-        if (!event.getInventory().equals(event.getClickedInventory()) && event.getAction() != InventoryAction.MOVE_TO_OTHER_INVENTORY) {
+        if (event.getInventory().getType() == InventoryType.CRAFTING) {
+            return;
+        }
+
+        if (!event.getInventory().equals(event.getClickedInventory()) && action != InventoryAction.MOVE_TO_OTHER_INVENTORY) {
             return;
         }
 
@@ -59,7 +64,7 @@ public class ItemOwnerChangeListener implements Listener {
             return;
         }
 
-        switch (event.getAction()) {
+        switch (action) {
             case NOTHING, UNKNOWN, DROP_ALL_SLOT, DROP_ONE_SLOT, DROP_ALL_CURSOR, DROP_ONE_CURSOR -> {} //works
             case PLACE_ALL ->
                 updateItem(cursorItem, null);
@@ -68,7 +73,7 @@ public class ItemOwnerChangeListener implements Listener {
             case PICKUP_SOME, PICKUP_HALF, PICKUP_ONE -> plugin.runTaskLater(() ->
                 updateItem(player.getOpenInventory().getCursor(), player), 1L);
             case PLACE_SOME, PLACE_ONE -> plugin.runTaskLater(() ->
-                updateItem(player.getOpenInventory().getTopInventory().getItem(event.getSlot()), player), 1L);
+                updateItem(player.getOpenInventory().getTopInventory().getItem(event.getSlot()), null), 1L);
             case HOTBAR_SWAP -> {
                 updateItem(item, player);
                 updateItem(player.getInventory().getItem(event.getHotbarButton()), null);
@@ -116,7 +121,6 @@ public class ItemOwnerChangeListener implements Listener {
                 item.editMeta(meta -> pdcManager.setUUIDValue(
                     meta, Keys.AMMO_OWNER_UUID, player.getUniqueId()));
             } else {
-                Bukkit.broadcastMessage("Updating ammo owner to none set");
                 item.editMeta(meta -> pdcManager.setStringValue(
                     meta, Keys.AMMO_OWNER_UUID, ""));
             }
