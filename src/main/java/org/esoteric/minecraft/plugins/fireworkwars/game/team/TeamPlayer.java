@@ -115,10 +115,10 @@ public class TeamPlayer {
 
                     if (isOwnTeam) {
                         component = languageManager.getMessage(
-                            Message.SB_OWN_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
+                            Message.SB_OWN_TEAM, player, team.getColoredTeamName(), "%");
                     } else {
                         component = languageManager.getMessage(
-                            Message.SB_TEAM, player, team.getColoredTeamName(), team.getPlayers().size());
+                            Message.SB_TEAM, player, team.getColoredTeamName(), "%");
                     }
                     map.put(team, component);
                 }, HashMap::putAll);
@@ -126,9 +126,15 @@ public class TeamPlayer {
         board.updateTitle(languageManager.getMessage(Message.SB_TITLE, player));
         board.updateLines(lines);
 
-        this.scoreboard = new FireworkWarsScoreboard(board, teamLines)
-                .updateLine(4, Pair.of("%", kills + ""))
-                .updateLine(5, Pair.of("%", damage + ""));
+        this.scoreboard = new FireworkWarsScoreboard(board, teamLines);
+
+        scoreboard
+            .updateLine(4, Pair.of("%", kills + ""))
+            .updateLine(5, Pair.of("%", damage + ""));
+
+        game.getTeams().forEach(team ->
+            scoreboard.updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + "")));
+
         scoreboard.update();
     }
 
