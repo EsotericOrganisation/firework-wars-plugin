@@ -23,6 +23,7 @@ public class ResetInventoryCommand extends CommandAPICommand {
 
         executesPlayer((player, args) -> {
             giveItems(player);
+            player.sendMessage(Component.text("Inventory reset!").color(NamedTextColor.GREEN));
         });
 
         register(plugin);
@@ -44,6 +45,5 @@ public class ResetInventoryCommand extends CommandAPICommand {
         ItemStack item8 = manager.getItem("throwable_tnt").getItem(player, 64);
 
         player.getInventory().addItem(item3, item1, item8, item7, item6, item4, item2);
-        player.sendMessage(Component.text("Inventory reset!").color(NamedTextColor.GREEN));
     }
 }

@@ -16,6 +16,7 @@ public class HealCommand extends CommandAPICommand {
 
         executesPlayer((player, args) -> {
             healPlayer(player);
+            player.sendMessage(Component.text("You have been healed!").color(NamedTextColor.GREEN));
         });
 
         register(plugin);
@@ -25,7 +26,5 @@ public class HealCommand extends CommandAPICommand {
         player.setHealth(20.0D);
         player.setFoodLevel(20);
         player.setSaturation(20.0F);
-
-        player.sendMessage(Component.text("You have been healed!").color(NamedTextColor.GREEN));
     }
 }
