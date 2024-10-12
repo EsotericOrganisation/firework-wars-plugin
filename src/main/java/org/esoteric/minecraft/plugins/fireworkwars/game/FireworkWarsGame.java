@@ -1,6 +1,8 @@
 package org.esoteric.minecraft.plugins.fireworkwars.game;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
+import net.kyori.adventure.title.TitlePart;
 import org.bukkit.*;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.EntityType;
@@ -193,6 +195,14 @@ public class FireworkWarsGame {
     }
 
     public void endGame(FireworkWarsTeam winningTeam) {
+        winningTeam.getPlayers().forEach((teamPlayer -> {
+            Player player = teamPlayer.getPlayer();
+
+            Title title = Title.title(plugin.getLanguageManager().getMessage(Message.YOU_WIN, player), Component.empty());
+
+            player.sendTitlePart(TitlePart.TITLE, title.title());
+        }));
+
         eventListener.unregister();
         tickHandler.cancel();
 

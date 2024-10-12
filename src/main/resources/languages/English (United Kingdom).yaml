@@ -67,3 +67,5 @@ SB_DAMAGE_DEALT: "Damage dealt: <green>{0}</green><red>❤</red>"
 
 YOU_DIED: "<red>YOU DIED!</red>"
 YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
+
+YOU_WIN: "<yellow>VICTORY!</yellow>"

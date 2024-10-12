@@ -65,5 +65,6 @@ public enum Message {
     SB_DAMAGE_DEALT,
 
     YOU_DIED,
-    YOU_ARE_NOW_SPECTATOR
+    YOU_ARE_NOW_SPECTATOR,
+    YOU_WIN
 }
