@@ -27,6 +27,7 @@ public class PlayerVelocityManager {
 
                 Vector velocity = player.getLocation().toVector().subtract(previousPosition);
                 playerVelocityMap.put(player.getUniqueId(), velocity);
+                playerPreviousPositionMap.put(player.getUniqueId(), player.getLocation().toVector());
             }
         }, 0L, 1L);
     }
