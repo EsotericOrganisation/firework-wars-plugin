@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.fireworkwars.events;
+package org.esoteric.minecraft.plugins.fireworkwars.events.global;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

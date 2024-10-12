@@ -86,8 +86,8 @@ public class GameTickHandler extends BukkitRunnable {
         int seconds = (ticks % 1200) / 20;
         boolean soon = startsSoon(ticks);
 
-        if (minutes == 0) {
-            return String.format("%02d", seconds) + (soon ? "s" : "");
+        if (minutes == 0 && soon) {
+            return String.format("%02d", seconds) + "s";
         } else {
             return String.format("%02d:%02d", minutes, seconds);
         }
