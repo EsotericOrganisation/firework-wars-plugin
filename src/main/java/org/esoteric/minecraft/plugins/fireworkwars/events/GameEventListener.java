@@ -1,5 +1,7 @@
 package org.esoteric.minecraft.plugins.fireworkwars.events;
 
+import net.kyori.adventure.title.Title;
+import net.kyori.adventure.title.TitlePart;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,6 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Pair;
 
 import java.util.HashMap;
@@ -113,5 +116,9 @@ public class GameEventListener implements Listener {
 
         event.setReviveHealth(20.0D);
         event.setCancelled(true);
+
+        Title title = Title.title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
+        event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
+        event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
     }
 }

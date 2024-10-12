@@ -64,3 +64,6 @@ SB_EVENT_GAME_END_SOON: "Game ends in: <red>{0}</red>"
 
 SB_KILL_COUNT: "Kills: <green>{0}</green>"
 SB_DAMAGE_DEALT: "Damage dealt: <green>{0}</green><red>❤</red>"
+
+YOU_DIED: "<red>YOU DIED!</red>"
+YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
