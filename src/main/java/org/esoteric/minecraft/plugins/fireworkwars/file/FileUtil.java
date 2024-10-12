@@ -18,9 +18,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class FileUtil {
-
     private static final String FILE_EXTENSION_SEPARATOR = ".";
-
     private static final String FILE_MIME_TYPE_TYPE_SUBTYPE_SEPARATOR = "/";
 
     public static String getFileExtensionSeparator() {
