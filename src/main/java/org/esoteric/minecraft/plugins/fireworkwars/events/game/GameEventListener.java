@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.fireworkwars.events;
+package org.esoteric.minecraft.plugins.fireworkwars.events.game;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -67,7 +67,13 @@ public class GameEventListener implements Listener {
         double lastDamage = lastDamageInfo.getLeft();
         int lastDamageTime = lastDamageInfo.getRight();
 
+        plugin.logLoudly("Last damage: " + lastDamage);
+        plugin.logLoudly("Current damage: " + finalDamage);
+        plugin.logLoudly("Last damage tick: " + lastDamageTime);
+        plugin.logLoudly("Current damage tick: " + currentTick);
+
         if (finalDamage < lastDamage && currentTick - lastDamageTime < 10) {
+            plugin.logLoudly("Damage cancelled");
             return;
         }
 
