@@ -8,7 +8,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.commands.ArenaCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.HealCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.ResetInventoryCommand;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.SetLanguageCommand;
-import org.esoteric.minecraft.plugins.fireworkwars.event.listeners.ItemOwnerChangeListener;
+import org.esoteric.minecraft.plugins.fireworkwars.events.ItemOwnerChangeListener;
 import org.esoteric.minecraft.plugins.fireworkwars.file.FileManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.GameManager;
 import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
@@ -146,7 +146,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         new SetLanguageCommand(this);
         new ArenaCommand(this);
         this.resetInventoryCommand = new ResetInventoryCommand(this);
-        new HealCommand(this);
+        this.healCommand = new HealCommand(this);
 
         new ItemOwnerChangeListener(this).register();
     }
