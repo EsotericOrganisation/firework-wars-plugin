@@ -31,7 +31,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     public static Logger LOGGER;
 
     private final FileManager fileManager;
-    private final Path mapsDirectory = Paths.get("plugins/firework-wars-plugin/maps");
+    private final Path mapsDirectory = Paths.get("plugins/FireworkWarsPlugin/maps");
     private final Path rootDirectory = Paths.get("").toAbsolutePath();
 
     private final CustomItemManager customItemManager;
