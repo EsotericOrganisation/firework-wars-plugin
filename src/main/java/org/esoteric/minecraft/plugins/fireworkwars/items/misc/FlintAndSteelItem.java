@@ -10,7 +10,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class FlintAndSteelItem extends AbstractItem<ItemMeta> {
     public FlintAndSteelItem(FireworkWarsPlugin plugin) {
-        super(plugin, "flint_and_steel", Material.FLINT_AND_STEEL, 5, 5);
+        super(plugin, "flint_and_steel", Material.FLINT_AND_STEEL, 4, 5);
     }
 
     @Override
