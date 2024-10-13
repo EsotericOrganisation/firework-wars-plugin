@@ -14,6 +14,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.arena.manager.ArenaManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.GameManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,12 @@ public class ArenaCommand extends CommandAPICommand {
         withSubcommand(
             new CommandAPICommand("join")
                 .withArguments(this.getArenaArguments())
-                .executesPlayer(this::onPlayerExecution));
+                .executesPlayer(this::onPlayerJoinExecution));
+
+        withSubcommand(
+            new CommandAPICommand("leave")
+                .executesPlayer(this::onPlayerLeaveExecution)
+        );
 
         register(plugin);
     }
@@ -64,7 +70,7 @@ public class ArenaCommand extends CommandAPICommand {
         }));
     }
 
-    private void onPlayerExecution(ExecutionInfo<Player, BukkitPlayer> info) {
+    private void onPlayerJoinExecution(ExecutionInfo<Player, BukkitPlayer> info) {
         Player player = info.sender();
         Integer arenaNumber = (Integer) info.args().get(arenaNumberNodeName);
 
@@ -101,5 +107,8 @@ public class ArenaCommand extends CommandAPICommand {
         }
 
         game.addPlayer(player);
+    }
+
+    private void onPlayerLeaveExecution(@NotNull ExecutionInfo<Player, BukkitPlayer> info) {
     }
 }
