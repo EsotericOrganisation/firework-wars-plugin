@@ -21,6 +21,8 @@ import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -31,6 +33,8 @@ public class FireworkWarsGame {
 
     private final GameEventListener eventListener;
     private GameTickHandler tickHandler;
+
+    private @Nullable GameCountdown countdown;
 
     private GameState gameState = GameState.WAITING;
     private final Map<String, Boolean> worldLoadStates = new HashMap<>();
@@ -135,6 +139,20 @@ public class FireworkWarsGame {
 
         teamPlayer.teleportToWaitingArea();
         player.setGameMode(GameMode.ADVENTURE);
+
+        sendMessage(Message.ARENA_JOIN);
+    }
+
+    public void removePlayer(@NotNull TeamPlayer player) {
+        player.unregister(true);
+
+        if (players.size() < arena.getMinimumPlayerCount()) {
+            if (countdown != null) {
+                countdown.cancel();
+            }
+        }
+
+        player.teleportToLobby();
     }
 
     public void sendMessage(Message message, Object... arguments) {
@@ -157,7 +175,7 @@ public class FireworkWarsGame {
 
 
     private void startCountdown() {
-        new GameCountdown(plugin, this);
+        countdown = new GameCountdown(plugin, this);
     }
 
     public void startGame() {
