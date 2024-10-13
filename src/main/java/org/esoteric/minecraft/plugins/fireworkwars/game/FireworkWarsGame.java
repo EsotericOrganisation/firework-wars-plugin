@@ -143,6 +143,18 @@ public class FireworkWarsGame {
         sendMessage(Message.ARENA_JOIN);
     }
 
+    public void removePlayer(@NotNull TeamPlayer player) {
+        player.unregister(true);
+
+        if (players.size() < arena.getMinimumPlayerCount()) {
+            if (countdown != null) {
+                countdown.cancel();
+            }
+        }
+
+        player.teleportToLobby();
+    }
+
     public void sendMessage(Message message, Object... arguments) {
         for (TeamPlayer player : players) {
             plugin.getLanguageManager().sendMessage(message, player.getPlayer(), arguments);
