@@ -135,6 +135,8 @@ public class FireworkWarsGame {
 
         teamPlayer.teleportToWaitingArea();
         player.setGameMode(GameMode.ADVENTURE);
+
+        sendMessage(Message.ARENA_JOIN);
     }
 
     public void sendMessage(Message message, Object... arguments) {

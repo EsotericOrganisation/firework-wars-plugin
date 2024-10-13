@@ -69,3 +69,5 @@ YOU_DIED: "<red>YOU DIED!</red>"
 YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
 
 YOU_WIN: "<yellow>VICTORY!</yellow>"
+
+ARENA_JOIN: "{0}<yellow> has joined the game! (</yellow><red>{1}</red><yellow>/</yellow><red>{2}</red><yellow>)</yellow>"

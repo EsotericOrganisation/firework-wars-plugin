@@ -66,5 +66,7 @@ public enum Message {
 
     YOU_DIED,
     YOU_ARE_NOW_SPECTATOR,
-    YOU_WIN
+    YOU_WIN,
+
+    ARENA_JOIN
 }
