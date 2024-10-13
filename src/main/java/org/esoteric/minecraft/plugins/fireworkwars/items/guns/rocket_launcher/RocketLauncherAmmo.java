@@ -24,6 +24,6 @@ public class RocketLauncherAmmo extends BaseAmmoItem {
 
     @Override
     public int getStackAmount() {
-        return Util.randomInt(1, 3);
+        return Util.randomInt(1, 2);
     }
 }
