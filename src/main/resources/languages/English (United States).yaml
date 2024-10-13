@@ -78,5 +78,5 @@ YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
 YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
 YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
 
-ARENA_JOIN: "<aqua>{0}</aqua><yellow> has joined the game! (</yellow><red>{1}</red><yellow>/</yellow><red>{2}</red><yellow>)</yellow>"
-ARENA_LEAVE: "<aqua>{0}</aqua><yellow> has left the game! (</yellow><red>{1}</red><yellow>/</yellow><red>{2}</red><yellow>)</yellow>"
+ARENA_JOIN: "<yellow>{0} has joined the game! (</yellow><aqua>{1}</aqua><yellow>/</yellow><aqua>{2}</aqua><yellow>)</yellow>"
+ARENA_LEAVE: "<yellow>{0} has left the game! (</yellow><aqua>{1}</aqua><yellow>/</yellow><aqua>{2}</aqua><yellow>)</yellow>"
