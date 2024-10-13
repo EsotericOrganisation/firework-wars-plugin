@@ -160,6 +160,7 @@ public class FireworkWarsGame {
         if (players.size() < arena.getMinimumPlayerCount()) {
             if (countdown != null) {
                 countdown.cancel();
+                gameState = GameState.WAITING;
             }
         }
 
@@ -179,6 +180,7 @@ public class FireworkWarsGame {
 
     private void startCountdown() {
         countdown = new GameCountdown(plugin, this);
+        countdown.start();
     }
 
     public void startGame() {

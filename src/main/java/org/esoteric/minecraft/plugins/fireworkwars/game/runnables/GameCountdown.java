@@ -19,7 +19,6 @@ public class GameCountdown extends BukkitRunnable {
         this.game = game;
 
         this.countDownSeconds = game.getArena().getCountDownSeconds();
-        start();
     }
 
     public void start() {
