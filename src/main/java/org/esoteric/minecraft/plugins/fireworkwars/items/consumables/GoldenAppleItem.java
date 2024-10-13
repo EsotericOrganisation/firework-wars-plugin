@@ -12,6 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
+import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     public GoldenAppleItem(FireworkWarsPlugin plugin) {
@@ -33,11 +34,11 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
         }
 
         event.getPlayer().addPotionEffect(new PotionEffect(
-                PotionEffectType.SPEED, 10 * 20, 0));
+                PotionEffectType.SPEED, 10 * 20, 1));
     }
 
     @Override
     public int getStackAmount() {
-        return 1;
+        return Util.randomInt(1, 2);
     }
 }
