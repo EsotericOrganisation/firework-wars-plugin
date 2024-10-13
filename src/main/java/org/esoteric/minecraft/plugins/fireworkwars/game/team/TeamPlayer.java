@@ -48,6 +48,10 @@ public class TeamPlayer {
         return from(player.getUniqueId());
     }
 
+    public FireworkWarsGame getGame() {
+        return game;
+    }
+
     public FireworkWarsScoreboard getScoreboard() {
         return scoreboard;
     }
