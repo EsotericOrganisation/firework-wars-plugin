@@ -195,6 +195,7 @@ public class FireworkWarsGame {
             fillChests(1.0D);
         } catch (Exception e) {
             plugin.getLogger().warning(e.getMessage());
+            plugin.getLogger().warning(Arrays.toString(e.getStackTrace()));
         }
 
         for (TeamData teamData : arena.getTeamInformation()) {
@@ -276,22 +277,29 @@ public class FireworkWarsGame {
             int maxItemValue = (int) (chestLocation.getMaxValuePerItem() * valueFactor);
 
             List<ItemStack> itemsToAdd = new ArrayList<>();
+            Map<AbstractItem<? extends ItemMeta>, Integer> weightAdjustments = new HashMap<>();
 
             int i = 0;
             while (i < maxTotalValue) {
-                AbstractItem<? extends ItemMeta> item = customItemManager.getWeightedRandomItem();
+                AbstractItem<? extends ItemMeta> item = customItemManager.getWeightedRandomItem(weightAdjustments);
 
                 if (item.getValue() > maxItemValue) {
+                    i++;
                     continue;
                 }
 
                 if (i + item.getValue() > maxTotalValue) {
+                    i++;
                     continue;
                 }
 
                 itemsToAdd.add(item.getItem(null, item.getStackAmount()));
+                weightAdjustments.put(item, weightAdjustments.getOrDefault(item, 0) - 1);
+
                 i += item.getValue();
             }
+
+            plugin.logLoudly("=== End of chest ===");
 
             List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
             Collections.shuffle(slots);

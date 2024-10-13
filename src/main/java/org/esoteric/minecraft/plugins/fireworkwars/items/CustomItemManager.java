@@ -32,10 +32,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.nms.CustomCrossbow;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ReflectUtil;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("unused")
 public class CustomItemManager {
@@ -103,20 +100,25 @@ public class CustomItemManager {
         return nmsItemRegistry.get(itemId);
     }
 
-    public AbstractItem<? extends ItemMeta> getWeightedRandomItem() {
-        List<AbstractItem<? extends ItemMeta>> list = List.copyOf(itemRegistry.values());
+    public AbstractItem<? extends ItemMeta> getWeightedRandomItem(Map<AbstractItem<? extends ItemMeta>, Integer> adjustments) {
+        List<AbstractItem<? extends ItemMeta>> list = new ArrayList<>(itemRegistry.values());
+        Collections.shuffle(list);
 
-        int totalWeight = list.stream().mapToInt(AbstractItem::getWeight).sum();
+        int totalWeight = list.stream()
+            .mapToInt(item -> item.getWeight() + adjustments.getOrDefault(item, 0))
+            .sum();
         int randomWeight = Util.randomInt(0, totalWeight);
 
         for (AbstractItem<? extends ItemMeta> item : list) {
-            randomWeight -= item.getWeight();
+            randomWeight -= (item.getWeight() + adjustments.getOrDefault(item, 0));
 
             if (randomWeight <= 0) {
+                plugin.logLoudly("Weight for item " + item.getItemId() + " is " + (item.getWeight() + adjustments.getOrDefault(item, 0)));
                 return item;
             }
         }
 
+        plugin.logLoudly("Failed to get weighted random item");
         return null;
     }
 
