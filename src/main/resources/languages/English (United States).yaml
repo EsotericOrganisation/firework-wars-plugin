@@ -9,12 +9,12 @@ FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
 FIREWORK_RIFLE_AMMO_LORE: "<gray>1x rifle ammo</gray>"
 
 FIREWORK_SHOTGUN: "<red>Firework</red> Shotgun"
-FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>Shoots 7 fireworks at a time.</gray>"
+FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>Fires multiple shots at once.</gray>"
 FIREWORK_SHOTGUN_AMMO: "<yellow>Shotgun Ammo</yellow>"
 FIREWORK_SHOTGUN_AMMO_LORE: "<gray>1x shotgun ammo</gray>"
 
 ROCKET_LAUNCHER: "<dark_red>Rocket Launcher</dark_red>"
-ROCKET_LAUNCHER_LORE: "<gray>Shoots an explosive firework rocket.</gray>"
+ROCKET_LAUNCHER_LORE: "<gray>Launches explosive firework rockets!</gray>"
 ROCKET_LAUNCHER_AMMO: "<red>Rocket Launcher Ammo</red>"
 ROCKET_LAUNCHER_AMMO_LORE: "<gray>1x rocket launcher ammo</gray>"
 
