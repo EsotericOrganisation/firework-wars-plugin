@@ -1,9 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.items.explosives;
 
-import net.minecraft.server.level.ServerPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -53,12 +50,8 @@ public class ThrowableTNTItem extends AbstractItem {
 
         Vector velocity = plugin.getPlayerVelocityManager().getPlayerVelocity(player);
 
-        Bukkit.broadcastMessage(velocity.toString());
-
         Vector playerDirection = player.getLocation().getDirection().clone();
         Vector playerDirectionWithVelocity = playerDirection.clone().add(velocity);
-
-        Bukkit.broadcastMessage(playerDirectionWithVelocity.toString());
 
         tnt.setVelocity(playerDirectionWithVelocity.multiply(0.75D));
 
