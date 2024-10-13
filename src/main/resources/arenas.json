@@ -19,6 +19,8 @@
             ],
             "countDownSeconds": 15,
             "gameDurationMinutes": 30,
+            "minimumPlayerCount": 2,
+            "maximumPlayerCount": 20,
             "waitingAreaLocation": {
                 "worldName": "barracks",
                 "x": 126,
