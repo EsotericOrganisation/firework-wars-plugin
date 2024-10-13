@@ -60,7 +60,7 @@ public class FireworkShotgunItem extends BaseGunItem {
                 .multiply(new Vector(1.0D, Util.randomDouble(0.9D, 1.1D), 1.0D));
 
         firework.setVelocity(newVelocity);
-        firework.setTicksToDetonate(12 + Util.randomInt(-2, 2));
+        firework.setTicksToDetonate((int) Math.round(9 + Util.randomDouble(-1.5, 1.5)));
     }
 
     @Override
