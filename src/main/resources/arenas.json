@@ -4,9 +4,9 @@
             "world": "world",
             "spawnLocation": {
                 "worldName": "world",
-                "x": 85,
+                "x": 72,
                 "y": 109,
-                "z": 110,
+                "z": 121,
                 "yaw": -120,
                 "pitch": 0
             }
@@ -130,6 +130,38 @@
                         "x": 47,
                         "y": 100,
                         "z": 137,
+                        "yaw": 0,
+                        "pitch": 0
+                    },
+                    {
+                        "worldName": "barracks",
+                        "x": 22,
+                        "y": 100,
+                        "z": 102,
+                        "yaw": 0,
+                        "pitch": 0
+                    },
+                    {
+                        "worldName": "barracks",
+                        "x": 49,
+                        "y": 100,
+                        "z": 119,
+                        "yaw": 0,
+                        "pitch": 0
+                    },
+                    {
+                        "worldName": "barracks",
+                        "x": 32,
+                        "y": 100,
+                        "z": 114,
+                        "yaw": 0,
+                        "pitch": 0
+                    },
+                    {
+                        "worldName": "barracks",
+                        "x": 34,
+                        "y": 100,
+                        "z": 125,
                         "yaw": 0,
                         "pitch": 0
                     }
