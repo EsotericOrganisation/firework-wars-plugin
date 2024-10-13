@@ -13,6 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.manager.ArenaManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.GameManager;
+import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.jetbrains.annotations.NotNull;
 
@@ -110,5 +111,16 @@ public class ArenaCommand extends CommandAPICommand {
     }
 
     private void onPlayerLeaveExecution(@NotNull ExecutionInfo<Player, BukkitPlayer> info) {
+        Player player = info.sender();
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
+
+        FireworkWarsGame game = gameManager.getFireworkWarsGame(player);
+
+        if (game == null) {
+            plugin.getLanguageManager().sendMessage(Message.NOT_IN_GAME, player);
+            return;
+        }
+
+        game.removePlayer(teamPlayer);
     }
 }
