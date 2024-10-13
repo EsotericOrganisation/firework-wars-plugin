@@ -61,23 +61,26 @@ public class GameEventListener implements Listener {
         double finalDamage = event.getFinalDamage();
         int currentTick = plugin.getServer().getCurrentTick();
 
+        plugin.logLoudly(event.isCancelled() + "");
+        plugin.logLoudly(finalDamage + "");
+
         Pair<Double, Integer> lastDamageInfo = lastDamagePerPlayer.getOrDefault(
             player.getUniqueId(), Pair.of(0.0D, currentTick));
 
         double lastDamage = lastDamageInfo.getLeft();
         int lastDamageTime = lastDamageInfo.getRight();
 
-        plugin.logLoudly("Last damage: " + lastDamage);
-        plugin.logLoudly("Current damage: " + finalDamage);
-        plugin.logLoudly("Last damage tick: " + lastDamageTime);
-        plugin.logLoudly("Current damage tick: " + currentTick);
-
         if (finalDamage < lastDamage && currentTick - lastDamageTime < 10) {
-            plugin.logLoudly("Damage cancelled");
             return;
         }
 
-        TeamPlayer.from(damager).addDamage(Math.round(finalDamage));
+        TeamPlayer teamPlayer = TeamPlayer.from(damager);
+
+        if (currentTick - lastDamageTime < 10) {
+            teamPlayer.changeDamageDealt(-lastDamage);
+        }
+
+        teamPlayer.changeDamageDealt(Math.round(finalDamage));
         lastDamagePerPlayer.put(player.getUniqueId(), Pair.of(finalDamage, currentTick));
     }
 
@@ -98,9 +101,8 @@ public class GameEventListener implements Listener {
         FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
 
         game.getPlayers().forEach(teamPlayer ->
-            teamPlayer.getScoreboard()
-                .updateTeamLine(team, Pair.of("%", team.getRemainingPlayers().size() + ""))
-                .update());
+            teamPlayer.getScoreboard().updateTeamLine(
+                team, Pair.of("%", team.getRemainingPlayers().size() + "")));
 
         if (game.isTeamEliminated(team)) {
             game.eliminateTeam(team);
@@ -110,9 +112,6 @@ public class GameEventListener implements Listener {
                 game.preEndGame(remainingTeams.get(0));
             }
         }
-
-        game.sendMessage(event.deathMessage());
-        game.playSound(event.getDeathSound());
 
         event.getPlayer().getInventory().clear();
         event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
