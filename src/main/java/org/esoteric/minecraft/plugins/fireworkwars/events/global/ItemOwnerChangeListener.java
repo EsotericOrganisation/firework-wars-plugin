@@ -65,7 +65,7 @@ public class ItemOwnerChangeListener implements Listener {
         }
 
         switch (action) {
-            case NOTHING, UNKNOWN, DROP_ALL_SLOT, DROP_ONE_SLOT, DROP_ALL_CURSOR, DROP_ONE_CURSOR -> {} //works
+            case NOTHING, UNKNOWN, DROP_ALL_SLOT, DROP_ONE_SLOT, DROP_ALL_CURSOR, DROP_ONE_CURSOR -> {}
             case PLACE_ALL ->
                 updateItem(cursorItem, null);
             case PICKUP_ALL, COLLECT_TO_CURSOR ->
@@ -82,7 +82,7 @@ public class ItemOwnerChangeListener implements Listener {
                 updateItem(cursorItem, null);
                 updateItem(item, player);
             }
-            case MOVE_TO_OTHER_INVENTORY -> { //works
+            case MOVE_TO_OTHER_INVENTORY -> {
                 if (event.getInventory().equals(event.getClickedInventory())) {
                     updateItem(item, player);
                 } else {
@@ -104,9 +104,13 @@ public class ItemOwnerChangeListener implements Listener {
 
     @SuppressWarnings("deprecation")
     private void updateWoolColor(ItemStack item, Player player) {
-        if ("wool".equals(pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
-            TeamPlayer teamPlayer = TeamPlayer.from(player);
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
 
+        if (player != null && teamPlayer == null) {
+            return;
+        }
+
+        if (item.getType().name().endsWith("_WOOL")) {
             if (teamPlayer != null) {
                 item.setType(teamPlayer.getTeam().getWoolMaterial());
             } else {
