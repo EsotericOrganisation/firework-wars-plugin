@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.events.global;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +10,7 @@ import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
@@ -35,9 +37,7 @@ public class ItemOwnerChangeListener implements Listener {
             return;
         }
 
-        updateWoolColor(item, player);
-        updateAmmoOwner(item, player);
-        updateItemLocale(item, player);
+        updateItem(item, player);
     }
 
     @EventHandler
@@ -98,6 +98,7 @@ public class ItemOwnerChangeListener implements Listener {
         }
 
         updateWoolColor(item, player);
+        updateLeatherArmorColor(item, player);
         updateAmmoOwner(item, player);
         updateItemLocale(item, player);
     }
@@ -115,6 +116,23 @@ public class ItemOwnerChangeListener implements Listener {
                 item.setType(teamPlayer.getTeam().getWoolMaterial());
             } else {
                 item.setType(Material.WHITE_WOOL);
+            }
+        }
+    }
+
+    private void updateLeatherArmorColor(ItemStack item, Player player) {
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
+
+        if (player != null && teamPlayer == null) {
+            return;
+        }
+
+        if ("heavy_armor".equals(pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
+            if (teamPlayer != null) {
+                Color color = teamPlayer.getTeam().getTeamData().getColor();
+                item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(color));
+            } else {
+                item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(null));
             }
         }
     }
