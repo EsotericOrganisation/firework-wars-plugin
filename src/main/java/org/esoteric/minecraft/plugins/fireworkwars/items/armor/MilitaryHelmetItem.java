@@ -37,7 +37,7 @@ public class MilitaryHelmetItem extends AbstractItem<ArmorMeta> {
 
         AttributeModifier modifier = new AttributeModifier(
             Keys.MILITARY_HELMET_ATTRIBUTE_MOD,
-            2,
+            4,
             AttributeModifier.Operation.ADD_NUMBER,
             EquipmentSlotGroup.HEAD);
 
