@@ -67,7 +67,11 @@ public abstract class BaseGunItem extends AbstractItem<CrossbowMeta> {
 
     protected void addFireworkStars(FireworkMeta meta, Color color, int amount) {
         for (int i = 0; i < amount; i++) {
-            meta.addEffect(FireworkEffect.builder().with(FireworkEffect.Type.BURST).withColor(Color.WHITE).withFade(color).withTrail().withFlicker().build());
+            meta.addEffect(FireworkEffect.builder()
+                .with(FireworkEffect.Type.BURST)
+                .withColor(Color.WHITE)
+                .withFade(color)
+                .build());
         }
     }
 
