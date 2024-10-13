@@ -26,7 +26,7 @@ public class RocketLauncherItem extends BaseGunItem {
     @Override
     protected void onCrossbowLoad(Player player, FireworkWarsGame game, EntityLoadCrossbowEvent event) {
         editCrossbowMeta(event.getCrossbow(), meta -> meta
-                .setChargedProjectiles(List.of(createFirework(Color.RED, 1, 2))));
+            .setChargedProjectiles(List.of(createFirework(Color.RED, 1, 2))));
     }
 
     @Override
@@ -37,9 +37,9 @@ public class RocketLauncherItem extends BaseGunItem {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseCrossbowBuilder()
-                .setName(Message.ROCKET_LAUNCHER, player)
-                .setLore(Message.ROCKET_LAUNCHER_LORE, player)
-                .build();
+            .setName(Message.ROCKET_LAUNCHER, player)
+            .setLore(Message.ROCKET_LAUNCHER_LORE, player)
+            .build();
     }
 
     @EventHandler

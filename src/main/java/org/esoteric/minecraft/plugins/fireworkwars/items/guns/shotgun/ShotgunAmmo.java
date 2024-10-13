@@ -17,9 +17,9 @@ public class ShotgunAmmo extends BaseAmmoItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseAmmoBuilder(player)
-                .setName(Message.FIREWORK_SHOTGUN_AMMO, player)
-                .setLore(Message.FIREWORK_SHOTGUN_AMMO_LORE, player)
-                .build();
+            .setName(Message.FIREWORK_SHOTGUN_AMMO, player)
+            .setLore(Message.FIREWORK_SHOTGUN_AMMO_LORE, player)
+            .build();
     }
 
     @Override

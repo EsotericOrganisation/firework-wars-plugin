@@ -16,7 +16,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 
 public class MilitaryHelmetItem extends AbstractItem<ArmorMeta> {
     public MilitaryHelmetItem(FireworkWarsPlugin plugin) {
-        super(plugin, "military_helmet", Material.TURTLE_HELMET, 4, 15);
+        super(plugin, "military_helmet", Material.TURTLE_HELMET, 3, 15);
     }
 
     @Override

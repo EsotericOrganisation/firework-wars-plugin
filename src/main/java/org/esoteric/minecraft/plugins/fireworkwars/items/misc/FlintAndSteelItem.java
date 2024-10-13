@@ -16,9 +16,9 @@ public class FlintAndSteelItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-                .setUnbreakable(true)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .setUnbreakable(true)
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @Override

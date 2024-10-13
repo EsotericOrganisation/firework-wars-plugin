@@ -18,9 +18,9 @@ public class RifleAmmo extends BaseAmmoItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseAmmoBuilder(player)
-                .setName(Message.FIREWORK_RIFLE_AMMO, player)
-                .setLore(Message.FIREWORK_RIFLE_AMMO_LORE, player)
-                .build();
+            .setName(Message.FIREWORK_RIFLE_AMMO, player)
+            .setLore(Message.FIREWORK_RIFLE_AMMO_LORE, player)
+            .build();
     }
 
     @Override

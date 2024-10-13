@@ -48,10 +48,10 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<CompassMeta>(plugin, itemMaterial)
-                .setName(Message.PLAYER_COMPASS, player)
-                .setLore(loreNotTracking, player)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .setName(Message.PLAYER_COMPASS, player)
+            .setLore(loreNotTracking, player)
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @Override

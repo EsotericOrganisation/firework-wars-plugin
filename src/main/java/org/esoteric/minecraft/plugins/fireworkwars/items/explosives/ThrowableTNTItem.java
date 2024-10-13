@@ -22,11 +22,11 @@ public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-                .setName(Message.THROWABLE_TNT, player)
-                .setLore(Message.THROWABLE_TNT_LORE, player)
-                .setEnchanted(true)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .setName(Message.THROWABLE_TNT, player)
+            .setLore(Message.THROWABLE_TNT_LORE, player)
+            .setEnchanted(true)
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @EventHandler

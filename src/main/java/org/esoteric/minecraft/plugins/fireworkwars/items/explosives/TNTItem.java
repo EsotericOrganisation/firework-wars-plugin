@@ -17,8 +17,8 @@ public class TNTItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @Override

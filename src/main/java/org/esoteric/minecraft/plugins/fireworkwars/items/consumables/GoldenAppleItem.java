@@ -22,9 +22,9 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
-                .setLore(Message.GOLDEN_APPLE_LORE, player)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .setLore(Message.GOLDEN_APPLE_LORE, player)
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @EventHandler

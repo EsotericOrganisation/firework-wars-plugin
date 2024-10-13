@@ -17,11 +17,11 @@ public class HealingPotionItem extends AbstractItem<PotionMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<PotionMeta>(plugin, itemMaterial)
-                .modifyMeta(meta -> {
-                    meta.setBasePotionType(PotionType.STRONG_HEALING);
-                    pdcManager.setStringValue(meta, customItemIdKey, itemId);
-                })
-                .build();
+            .modifyMeta(meta -> {
+                meta.setBasePotionType(PotionType.STRONG_HEALING);
+                pdcManager.setStringValue(meta, customItemIdKey, itemId);
+            })
+            .build();
     }
 
     @Override

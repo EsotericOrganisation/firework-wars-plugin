@@ -24,9 +24,9 @@ public class FireworkShotgunItem extends BaseGunItem {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseCrossbowBuilder()
-                .setName(Message.FIREWORK_SHOTGUN, player)
-                .setLore(Message.FIREWORK_SHOTGUN_LORE, player)
-                .build();
+            .setName(Message.FIREWORK_SHOTGUN, player)
+            .setLore(Message.FIREWORK_SHOTGUN_LORE, player)
+            .build();
     }
 
     @Override
@@ -36,13 +36,13 @@ public class FireworkShotgunItem extends BaseGunItem {
 
         ItemStack firework = createFirework(team.getTeamData().getColor(), 6, 1);
         editCrossbowMeta(event.getCrossbow(), meta -> meta.setChargedProjectiles(List.of(
-                firework.clone(),
-                firework.clone(),
-                firework.clone(),
-                firework.clone(),
-                firework.clone(),
-                firework.clone(),
-                firework.clone())));
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone(),
+            firework.clone())));
     }
 
     @Override
@@ -56,8 +56,8 @@ public class FireworkShotgunItem extends BaseGunItem {
         }
 
         Vector newVelocity = firework.getVelocity().clone()
-                .rotateAroundY(Util.randomDouble(-Math.PI / 12.0D, Math.PI / 12.0D))
-                .multiply(new Vector(1.0D, Util.randomDouble(0.9D, 1.1D), 1.0D));
+            .rotateAroundY(Util.randomDouble(-Math.PI / 12.0D, Math.PI / 12.0D))
+            .multiply(new Vector(1.0D, Util.randomDouble(0.9D, 1.1D), 1.0D));
 
         firework.setVelocity(newVelocity);
         firework.setTicksToDetonate((int) Math.round(9 + Util.randomDouble(-1.5, 1.5)));
