@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
@@ -19,6 +20,8 @@ import org.esoteric.minecraft.plugins.fireworkwars.game.runnables.GameTickHandle
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
+import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +29,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static net.kyori.adventure.title.Title.title;
+
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class FireworkWarsGame {
     private final FireworkWarsPlugin plugin;
+    private final LanguageManager languageManager;
+    private final CustomItemManager customItemManager;
+
     private final Arena arena;
 
     private final GameEventListener eventListener;
@@ -119,6 +127,9 @@ public class FireworkWarsGame {
 
     public FireworkWarsGame(FireworkWarsPlugin plugin, Arena arena) {
         this.plugin = plugin;
+        this.languageManager = plugin.getLanguageManager();
+        this.customItemManager = plugin.getCustomItemManager();
+
         this.arena = arena;
 
         this.eventListener = new GameEventListener(plugin, this);
@@ -140,7 +151,7 @@ public class FireworkWarsGame {
         teamPlayer.teleportToWaitingArea();
         player.setGameMode(GameMode.ADVENTURE);
 
-        sendMessage(Message.ARENA_JOIN);
+        sendMessage(Message.ARENA_JOIN, player.getName(), players.size(), arena.getMaximumPlayerCount());
     }
 
     public void removePlayer(@NotNull TeamPlayer player) {
@@ -153,17 +164,12 @@ public class FireworkWarsGame {
         }
 
         player.teleportToLobby();
+        sendMessage(Message.ARENA_LEAVE, player.getPlayer().getName(), players.size(), arena.getMaximumPlayerCount());
     }
 
     public void sendMessage(Message message, Object... arguments) {
         for (TeamPlayer player : players) {
-            plugin.getLanguageManager().sendMessage(message, player.getPlayer(), arguments);
-        }
-    }
-
-    public void sendMessage(Component component) {
-        for (TeamPlayer player : players) {
-            player.getPlayer().sendMessage(component);
+            languageManager.sendMessage(message, player.getPlayer(), arguments);
         }
     }
 
@@ -172,7 +178,6 @@ public class FireworkWarsGame {
             player.getPlayer().playSound(player.getPlayer().getLocation(), sound, 1.0f, 1.0f);
         }
     }
-
 
     private void startCountdown() {
         countdown = new GameCountdown(plugin, this);
@@ -207,20 +212,26 @@ public class FireworkWarsGame {
 
     public void preEndGame(FireworkWarsTeam winningTeam) {
         sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
+
         players.forEach(TeamPlayer::becomeSpectator);
 
-        winningTeam.getPlayers().forEach((teamPlayer -> {
+        for (TeamPlayer teamPlayer : getPlayers()) {
             Player player = teamPlayer.getPlayer();
+            Title title;
 
-            Title title = Title.title(plugin.getLanguageManager().getMessage(Message.YOU_WIN, player), Component.empty());
+            if (teamPlayer.getTeam().equals(winningTeam)) {
+                title = title(languageManager.getMessage(Message.YOU_WIN, player), Component.empty());
+            } else {
+                title = title(languageManager.getMessage(Message.YOU_LOSE, player), Component.empty());
+            }
 
             player.sendTitlePart(TitlePart.TITLE, title.title());
-        }));
+        }
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> endGame(winningTeam), 20 * 10L);
+        plugin.runTaskLater(this::endGame, 20 * 10L);
     }
 
-    public void endGame(FireworkWarsTeam winningTeam) {
+    public void endGame() {
         eventListener.unregister();
         tickHandler.cancel();
 
@@ -231,7 +242,7 @@ public class FireworkWarsGame {
         players.clear();
 
         gameState = GameState.RESETTING;
-        plugin.getServer().getScheduler().runTaskLater(plugin, this::resetMap, 1L);
+        plugin.runTaskLater(this::resetMap, 1L);
     }
 
     private void resetMap() {
@@ -266,7 +277,7 @@ public class FireworkWarsGame {
 
             int i = 0;
             while (i < maxTotalValue) {
-                AbstractItem item = plugin.getCustomItemManager().getWeightedRandomItem();
+                AbstractItem<? extends ItemMeta> item = customItemManager.getWeightedRandomItem();
 
                 if (item.getValue() > maxItemValue) {
                     continue;
@@ -298,13 +309,14 @@ public class FireworkWarsGame {
 
         chestMinecart.getInventory().setItem(
             Util.randomInt(0, chestMinecart.getInventory().getSize() - 1),
-            plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
+            customItemManager.getItem("rocket_launcher").getItem(null));
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
     public void startEndgame() {
         sendMessage(Message.EVENT_ENDGAME);
+        playSound(Sound.ENTITY_ENDER_DRAGON_GROWL);
     }
 
     public void eliminateTeam(FireworkWarsTeam team) {
