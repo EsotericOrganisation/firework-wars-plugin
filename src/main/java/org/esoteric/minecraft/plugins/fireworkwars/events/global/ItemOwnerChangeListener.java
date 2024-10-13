@@ -64,6 +64,10 @@ public class ItemOwnerChangeListener implements Listener {
             return;
         }
 
+        if (TeamPlayer.from(player) == null) {
+            return;
+        }
+
         switch (action) {
             case NOTHING, UNKNOWN, DROP_ALL_SLOT, DROP_ONE_SLOT, DROP_ALL_CURSOR, DROP_ONE_CURSOR -> {}
             case PLACE_ALL ->
@@ -107,10 +111,6 @@ public class ItemOwnerChangeListener implements Listener {
     private void updateWoolColor(ItemStack item, Player player) {
         TeamPlayer teamPlayer = TeamPlayer.from(player);
 
-        if (player != null && teamPlayer == null) {
-            return;
-        }
-
         if (item.getType().name().endsWith("_WOOL")) {
             if (teamPlayer != null) {
                 item.setType(teamPlayer.getTeam().getWoolMaterial());
@@ -122,10 +122,6 @@ public class ItemOwnerChangeListener implements Listener {
 
     private void updateLeatherArmorColor(ItemStack item, Player player) {
         TeamPlayer teamPlayer = TeamPlayer.from(player);
-
-        if (player != null && teamPlayer == null) {
-            return;
-        }
 
         if ("heavy_armor".equals(pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
             if (teamPlayer != null) {
