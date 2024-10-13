@@ -11,7 +11,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
+import org.esoteric.minecraft.plugins.fireworkwars.items.armor.HeavyArmorItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.armor.MilitaryHelmetItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.consumables.GoldenAppleItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.consumables.HealingPotionItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.explosives.TNTItem;
@@ -34,11 +37,12 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class CustomItemManager {
     private FireworkWarsPlugin plugin;
     private final ReflectUtil reflectUtil;
 
-    private final Map<String, AbstractItem> itemRegistry;
+    private final Map<String, AbstractItem<? extends ItemMeta>> itemRegistry;
     private final Map<String, Item> nmsItemRegistry;
 
     public void setPlugin(FireworkWarsPlugin plugin) {
@@ -71,6 +75,9 @@ public class CustomItemManager {
 
         registerItem(new TNTItem(plugin));
         registerItem(new ThrowableTNTItem(plugin));
+
+        registerItem(new MilitaryHelmetItem(plugin));
+        registerItem(new HeavyArmorItem(plugin));
     }
 
     public void registerNMSItems() {
@@ -80,7 +87,7 @@ public class CustomItemManager {
                 Items.CROSSBOW);
     }
 
-    public Map<String, AbstractItem> getItemRegistry() {
+    public Map<String, AbstractItem<? extends ItemMeta>> getItemRegistry() {
         return itemRegistry;
     }
 
@@ -88,7 +95,7 @@ public class CustomItemManager {
         return nmsItemRegistry;
     }
 
-    public AbstractItem getItem(String itemId) {
+    public AbstractItem<? extends ItemMeta> getItem(String itemId) {
         return itemRegistry.get(itemId);
     }
 
@@ -96,13 +103,13 @@ public class CustomItemManager {
         return nmsItemRegistry.get(itemId);
     }
 
-    public AbstractItem getWeightedRandomItem() {
-        List<AbstractItem> list = List.copyOf(itemRegistry.values());
+    public AbstractItem<? extends ItemMeta> getWeightedRandomItem() {
+        List<AbstractItem<? extends ItemMeta>> list = List.copyOf(itemRegistry.values());
 
         int totalWeight = list.stream().mapToInt(AbstractItem::getWeight).sum();
         int randomWeight = Util.randomInt(0, totalWeight);
 
-        for (AbstractItem item : list) {
+        for (AbstractItem<? extends ItemMeta> item : list) {
             randomWeight -= item.getWeight();
 
             if (randomWeight <= 0) {
@@ -113,10 +120,11 @@ public class CustomItemManager {
         return null;
     }
 
-    private void registerItem(AbstractItem item) {
+    private void registerItem(AbstractItem<? extends ItemMeta> item) {
         itemRegistry.put(item.getItemId(), item);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void registerNMSItem(String id, Item item, Item override) {
         overrideItemRegistryEntry(id, item, override);
 
