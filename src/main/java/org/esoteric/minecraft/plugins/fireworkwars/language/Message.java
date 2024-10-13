@@ -53,6 +53,7 @@ public enum Message {
     GAME_ALREADY_PLAYING,
     GAME_ALREADY_CONTAINS_PLAYER,
     GAME_RELOADING,
+    NOT_IN_GAME,
 
     SB_TITLE,
     SB_SEPARATOR,
@@ -72,7 +73,10 @@ public enum Message {
 
     YOU_DIED,
     YOU_ARE_NOW_SPECTATOR,
-    YOU_WIN,
 
-    ARENA_JOIN
+    YOU_WIN,
+    YOU_LOSE,
+
+    ARENA_JOIN,
+    ARENA_LEAVE,
 }
