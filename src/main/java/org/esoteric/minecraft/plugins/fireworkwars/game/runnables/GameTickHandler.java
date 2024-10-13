@@ -111,7 +111,7 @@ public class GameTickHandler extends BukkitRunnable {
     }
 
     private boolean startsSoon(int ticks) {
-        return ticks <= 10 * 20;
+        return ticks < 11 * 20;
     }
 
     private void updateScoreboards() {
