@@ -210,13 +210,13 @@ public class ItemBuilder<M extends ItemMeta> {
         if (!lore.isEmpty())
             meta.lore(lore.stream().map(this::nonItalicDeserialize).toList());
 
-        if (lore.size() > 1) plugin.logLoudly(lore.toString());
-
         if (enchanted)
             addEnchantGlint(meta);
 
-        if (unbreakable)
+        if (unbreakable) {
             meta.setUnbreakable(true);
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        }
 
         if (customStringData != null)
             addStringData(meta, customStringData);
@@ -226,6 +226,8 @@ public class ItemBuilder<M extends ItemMeta> {
 
         if (metaModifier != null)
             metaModifier.accept((M) meta);
+
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
 
         item.setItemMeta(meta);
         return item;
