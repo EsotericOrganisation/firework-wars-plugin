@@ -254,6 +254,10 @@ public class FireworkWarsGame {
                     continue;
                 }
 
+                if (i + item.getValue() > maxTotalValue) {
+                    continue;
+                }
+
                 itemsToAdd.add(item.getItem(null, item.getStackAmount()));
                 i += item.getValue();
             }
