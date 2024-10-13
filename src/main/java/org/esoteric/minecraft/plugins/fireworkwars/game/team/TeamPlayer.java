@@ -51,6 +51,14 @@ public class TeamPlayer {
         return scoreboard;
     }
 
+    public int getKills() {
+        return kills;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
     public TeamPlayer(UUID uuid, FireworkWarsGame game) {
         this.uuid = uuid;
         this.game = game;
@@ -173,16 +181,11 @@ public class TeamPlayer {
     }
 
     public void incrementKills() {
-        getScoreboard()
-                .updateLine(4, Pair.of("%", ++this.kills + ""))
-                .update();
+        this.kills++;
     }
 
-    public void addDamage(double damage) {
+    public void changeDamageDealt(double damage) {
         this.damage += damage;
-        getScoreboard()
-                .updateLine(5, Pair.of("%", Math.round(this.damage) + ""))
-                .update();
     }
 
     public boolean isAlive() {
