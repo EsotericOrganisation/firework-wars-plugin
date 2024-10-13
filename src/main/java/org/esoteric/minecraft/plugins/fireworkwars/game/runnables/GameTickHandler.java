@@ -11,6 +11,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.scoreboard.wrapper.FireworkWarsScoreboard;
+import org.esoteric.minecraft.plugins.fireworkwars.util.Pair;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class GameTickHandler extends BukkitRunnable {
@@ -117,6 +118,9 @@ public class GameTickHandler extends BukkitRunnable {
         for (TeamPlayer teamPlayer : game.getPlayers()) {
             FireworkWarsScoreboard scoreboard = teamPlayer.getScoreboard();
             Player player = teamPlayer.getPlayer();
+
+            scoreboard.updateLine(4, Pair.of("%", teamPlayer.getKills() + ""));
+            scoreboard.updateLine(5, Pair.of("%", (int) (teamPlayer.getDamage()) + ""));
 
             if (startsSoon(ticksUntilSupplyDrop)) {
                 scoreboard.setLine(1, languageManager.getMessage(
