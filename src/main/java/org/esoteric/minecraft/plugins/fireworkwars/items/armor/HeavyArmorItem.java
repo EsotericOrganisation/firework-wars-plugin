@@ -7,6 +7,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
@@ -48,11 +49,12 @@ public class HeavyArmorItem extends AbstractItem<LeatherArmorMeta> {
 
         AttributeModifier modifier = new AttributeModifier(
             Keys.HEAVY_ARMOR_ATTRIBUTE_MOD,
-            5,
+            8,
             AttributeModifier.Operation.ADD_NUMBER,
             EquipmentSlotGroup.CHEST);
 
         meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+        meta.addItemFlags(ItemFlag.HIDE_DYE);
     }
 
     @Override
