@@ -83,7 +83,9 @@ public class TeamPlayer {
     public void unregister(boolean removeFromGame) {
         activePlayers.remove(uuid);
 
-        scoreboard.delete();
+        if (scoreboard != null) {
+            scoreboard.delete();
+        }
 
         if (removeFromGame) {
             game.getPlayers().remove(this);
