@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class WoolItem extends AbstractItem<ItemMeta> {
     public WoolItem(FireworkWarsPlugin plugin) {
-        super(plugin, "wool", Material.WHITE_WOOL, 15, 1);
+        super(plugin, "wool", Material.WHITE_WOOL, 12, 1);
     }
 
     @Override
