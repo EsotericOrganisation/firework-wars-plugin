@@ -30,6 +30,12 @@ GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> on consumption.</gray>"
 THROWABLE_TNT: "<red>Throwable TNT</red>"
 THROWABLE_TNT_LORE: "<gray><yellow><bold>RIGHT CLICK</bold></yellow> to throw in your direction.</gray>"
 
+MILITARY_HELMET: "<dark_green>Military Helmet</dark_green>"
+MILITARY_HELMET_LORE: "<gray>Provides some light protection.</gray>"
+
+HEAVY_ARMOR: "<dark_green>Heavy Armor</dark_green>"
+HEAVY_ARMOR_LORE: "<gray>A sturdy piece of armor.</gray>"
+
 # Game Messages
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
