@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static net.kyori.adventure.title.Title.title;
+
 public class GameEventListener implements Listener {
     private final FireworkWarsPlugin plugin;
     private final FireworkWarsGame game;
@@ -119,7 +121,7 @@ public class GameEventListener implements Listener {
         event.setReviveHealth(20.0D);
         event.setCancelled(true);
 
-        Title title = Title.title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
+        Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
         event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
         event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
     }
