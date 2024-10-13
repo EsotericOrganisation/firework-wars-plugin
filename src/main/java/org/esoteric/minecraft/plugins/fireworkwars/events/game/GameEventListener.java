@@ -3,6 +3,7 @@ package org.esoteric.minecraft.plugins.fireworkwars.events.game;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -80,6 +81,8 @@ public class GameEventListener implements Listener {
 
         if (currentTick - lastDamageTime < 10) {
             teamPlayer.changeDamageDealt(-lastDamage);
+        } else {
+            teamPlayer.playSound(Sound.ENTITY_PLAYER_HURT);
         }
 
         teamPlayer.changeDamageDealt(Math.round(finalDamage));
@@ -106,12 +109,15 @@ public class GameEventListener implements Listener {
             teamPlayer.getScoreboard().updateTeamLine(
                 team, Pair.of("%", team.getRemainingPlayers().size() + "")));
 
+        boolean gameEnded = false;
+
         if (game.isTeamEliminated(team)) {
             game.eliminateTeam(team);
             List<FireworkWarsTeam> remainingTeams = game.getRemainingTeams();
 
             if (remainingTeams.size() == 1) {
                 game.preEndGame(remainingTeams.get(0));
+                gameEnded = true;
             }
         }
 
@@ -121,8 +127,12 @@ public class GameEventListener implements Listener {
         event.setReviveHealth(20.0D);
         event.setCancelled(true);
 
-        Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
-        event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
-        event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
+        game.getPlayers().forEach(teamPlayer -> teamPlayer.playSound(Sound.ENTITY_SKELETON_DEATH));
+
+        if (!gameEnded) {
+            Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
+            event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
+            event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
+        }
     }
 }
