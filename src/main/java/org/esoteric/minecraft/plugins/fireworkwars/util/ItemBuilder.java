@@ -210,6 +210,8 @@ public class ItemBuilder<M extends ItemMeta> {
         if (!lore.isEmpty())
             meta.lore(lore.stream().map(this::nonItalicDeserialize).toList());
 
+        if (lore.size() > 1) plugin.logLoudly(lore.toString());
+
         if (enchanted)
             addEnchantGlint(meta);
 
@@ -226,7 +228,6 @@ public class ItemBuilder<M extends ItemMeta> {
             metaModifier.accept((M) meta);
 
         item.setItemMeta(meta);
-
         return item;
     }
 
@@ -236,11 +237,11 @@ public class ItemBuilder<M extends ItemMeta> {
     }
 
     protected void addStringData(ItemMeta meta, String data) {
-        pdcManager.setStringValue(meta, "custom_item_data", data);
+        pdcManager.setStringValue(meta, Keys.CUSTOM_ITEM_DATA, data);
     }
 
     protected void addBooleanData(ItemMeta meta, boolean data) {
-        pdcManager.setBooleanValue(meta, "custom_item_data", data);
+        pdcManager.setBooleanValue(meta, Keys.CUSTOM_ITEM_DATA, data);
     }
 
     protected Component nonItalicDeserialize(String message) {
