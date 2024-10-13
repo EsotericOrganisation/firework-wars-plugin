@@ -278,8 +278,9 @@ public class FireworkWarsGame {
 
         chestMinecart.customName(Component.text("Supply Drop"));
 
-        chestMinecart.getInventory().addItem(
-                plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
+        chestMinecart.getInventory().setItem(
+            Util.randomInt(0, chestMinecart.getInventory().getSize() - 1),
+            plugin.getCustomItemManager().getItem("rocket_launcher").getItem(null));
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
