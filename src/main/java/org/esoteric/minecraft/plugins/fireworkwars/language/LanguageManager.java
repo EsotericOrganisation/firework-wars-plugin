@@ -20,7 +20,6 @@ import static java.util.Objects.requireNonNull;
 
 @SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class LanguageManager {
-
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final FireworkWarsPlugin plugin;
