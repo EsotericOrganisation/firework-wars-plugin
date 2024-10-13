@@ -256,16 +256,10 @@ public class LanguageManager {
 
     // rolyPolyVole start
 
-    public Component[] getMessages(Message message, CommandSender commandSender) {
-        String rawMessage = miniMessage.serialize(getMessage(message, commandSender));
-
-        return Arrays.stream(rawMessage.split("\\n"))
-                .map(miniMessage::deserialize)
-                .toArray(Component[]::new);
-    }
-
     public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
+
+        plugin.logLoudly(rawMessage);
 
         return Arrays.stream(rawMessage.split("\\n"))
                 .map(miniMessage::deserialize)
