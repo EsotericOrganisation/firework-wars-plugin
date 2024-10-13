@@ -79,4 +79,4 @@ YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
 YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
 
 ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
-ARENA_LEAVE: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
+ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
