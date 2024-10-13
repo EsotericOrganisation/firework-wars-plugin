@@ -32,7 +32,7 @@ import java.util.UUID;
 import static java.util.Comparator.comparingDouble;
 import static net.kyori.adventure.text.Component.text;
 
-public class PlayerCompassItem extends AbstractItem {
+public class PlayerCompassItem extends AbstractItem<CompassMeta> {
     private static final Map<String, CompassUpdater> compassManagers = new HashMap<>();
 
     private final Message loreNotTracking = Message.PLAYER_COMPASS_LORE_NOT_TRACKING;
@@ -54,8 +54,9 @@ public class PlayerCompassItem extends AbstractItem {
                 .build();
     }
 
-    private void modifyMeta(CompassMeta meta) {
-        pdcManager.setStringValue(meta, customItemIdKey, itemId);
+    @Override
+    protected void modifyMeta(CompassMeta meta) {
+        super.modifyMeta(meta);
         pdcManager.setStringValue(meta, Keys.PLAYER_COMPASS_ID, UUID.randomUUID().toString());
     }
 

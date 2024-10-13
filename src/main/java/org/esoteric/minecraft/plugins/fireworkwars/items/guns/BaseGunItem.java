@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
@@ -20,7 +21,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 import java.util.function.Consumer;
 
-public abstract class BaseGunItem extends AbstractItem {
+public abstract class BaseGunItem extends AbstractItem<CrossbowMeta> {
     protected final String ammoId;
 
     public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId, int weight, int value) {
@@ -45,8 +46,9 @@ public abstract class BaseGunItem extends AbstractItem {
         return itemStack;
     }
 
+    @Override
     protected void modifyMeta(CrossbowMeta meta) {
-        pdcManager.setStringValue(meta, customItemIdKey, itemId);
+        super.modifyMeta(meta);
         pdcManager.setStringValue(meta, Keys.GUN_ACCEPTED_AMMO_ID, ammoId);
     }
 
@@ -69,7 +71,7 @@ public abstract class BaseGunItem extends AbstractItem {
         }
     }
 
-    protected AbstractItem getAmmoItem() {
+    protected AbstractItem<? extends ItemMeta> getAmmoItem() {
         return plugin.getCustomItemManager().getItem(ammoId);
     }
 

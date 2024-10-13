@@ -6,6 +6,7 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
@@ -13,7 +14,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
-public class ThrowableTNTItem extends AbstractItem {
+public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     public ThrowableTNTItem(FireworkWarsPlugin plugin) {
         super(plugin, "throwable_tnt", Material.TNT, 4, 9);
     }
@@ -24,7 +25,7 @@ public class ThrowableTNTItem extends AbstractItem {
                 .setName(Message.THROWABLE_TNT, player)
                 .setLore(Message.THROWABLE_TNT_LORE, player)
                 .setEnchanted(true)
-                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .modifyMeta(this::modifyMeta)
                 .build();
     }
 

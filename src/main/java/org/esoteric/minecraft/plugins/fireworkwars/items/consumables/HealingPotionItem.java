@@ -9,7 +9,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
-public class HealingPotionItem extends AbstractItem {
+public class HealingPotionItem extends AbstractItem<PotionMeta> {
     public HealingPotionItem(FireworkWarsPlugin plugin) {
         super(plugin, "healing_potion", Material.SPLASH_POTION, 7, 5);
     }
@@ -22,6 +22,12 @@ public class HealingPotionItem extends AbstractItem {
                     pdcManager.setStringValue(meta, customItemIdKey, itemId);
                 })
                 .build();
+    }
+
+    @Override
+    protected void modifyMeta(PotionMeta meta) {
+        super.modifyMeta(meta);
+        meta.setBasePotionType(PotionType.STRONG_HEALING);
     }
 
     @Override

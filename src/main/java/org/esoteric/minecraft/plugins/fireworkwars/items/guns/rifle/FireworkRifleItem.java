@@ -25,9 +25,9 @@ public class FireworkRifleItem extends BaseGunItem {
     @Override
     public ItemStack getItem(Player player) {
         return getBaseCrossbowBuilder()
-                .setName(Message.FIREWORK_RIFLE, player)
-                .setLore(Message.FIREWORK_RIFLE_LORE, player)
-                .build();
+            .setName(Message.FIREWORK_RIFLE, player)
+            .setLore(Message.FIREWORK_RIFLE_LORE, player)
+            .build();
     }
 
     @Override

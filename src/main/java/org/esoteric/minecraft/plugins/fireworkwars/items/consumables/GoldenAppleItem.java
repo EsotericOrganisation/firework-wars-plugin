@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
@@ -12,7 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
-public class GoldenAppleItem extends AbstractItem {
+public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     public GoldenAppleItem(FireworkWarsPlugin plugin) {
         super(plugin, "golden_apple", Material.GOLDEN_APPLE, 5, 8);
     }
@@ -21,7 +22,7 @@ public class GoldenAppleItem extends AbstractItem {
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
                 .setLore(Message.GOLDEN_APPLE_LORE, player)
-                .modifyMeta(meta -> pdcManager.setStringValue(meta, customItemIdKey, itemId))
+                .modifyMeta(this::modifyMeta)
                 .build();
     }
 

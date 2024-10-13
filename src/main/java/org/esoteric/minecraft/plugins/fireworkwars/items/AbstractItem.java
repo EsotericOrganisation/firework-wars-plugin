@@ -6,13 +6,14 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 import org.esoteric.minecraft.plugins.fireworkwars.util.PersistentDataManager;
 import org.jetbrains.annotations.Contract;
 
-public abstract class AbstractItem implements Listener {
+public abstract class AbstractItem<M extends ItemMeta> implements Listener {
     protected final FireworkWarsPlugin plugin;
     protected final MiniMessage MM;
 
@@ -77,6 +78,10 @@ public abstract class AbstractItem implements Listener {
 
     protected ItemStack getBaseItemStack() {
         return new ItemStack(itemMaterial);
+    }
+
+    protected void modifyMeta(M meta) {
+        pdcManager.setStringValue(meta, customItemIdKey, itemId);
     }
 
     public abstract ItemStack getItem(Player player);

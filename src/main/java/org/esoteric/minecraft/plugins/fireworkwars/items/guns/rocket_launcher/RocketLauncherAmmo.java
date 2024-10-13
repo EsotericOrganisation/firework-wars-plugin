@@ -3,12 +3,13 @@ package org.esoteric.minecraft.plugins.fireworkwars.items.guns.rocket_launcher;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.guns.BaseAmmoItem;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
-public class RocketLauncherAmmo extends BaseAmmoItem {
+public class RocketLauncherAmmo extends BaseAmmoItem<FireworkMeta> {
 
     public RocketLauncherAmmo(FireworkWarsPlugin plugin) {
         super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET, 3, 4);

@@ -8,7 +8,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 
-public abstract class BaseAmmoItem extends AbstractItem {
+public abstract class BaseAmmoItem<M extends ItemMeta> extends AbstractItem<M> {
 
     public BaseAmmoItem(FireworkWarsPlugin plugin, String ammoId, Material ammoMaterial, int weight, int value) {
         super(plugin, ammoId, ammoMaterial, weight, value);
