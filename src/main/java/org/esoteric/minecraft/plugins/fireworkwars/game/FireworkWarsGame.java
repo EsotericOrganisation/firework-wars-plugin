@@ -191,10 +191,6 @@ public class FireworkWarsGame {
         sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
         players.forEach(TeamPlayer::becomeSpectator);
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> endGame(winningTeam), 20 * 10L);
-    }
-
-    public void endGame(FireworkWarsTeam winningTeam) {
         winningTeam.getPlayers().forEach((teamPlayer -> {
             Player player = teamPlayer.getPlayer();
 
@@ -203,6 +199,10 @@ public class FireworkWarsGame {
             player.sendTitlePart(TitlePart.TITLE, title.title());
         }));
 
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> endGame(winningTeam), 20 * 10L);
+    }
+
+    public void endGame(FireworkWarsTeam winningTeam) {
         eventListener.unregister();
         tickHandler.cancel();
 
