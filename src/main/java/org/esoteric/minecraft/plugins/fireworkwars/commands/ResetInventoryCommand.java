@@ -32,18 +32,9 @@ public class ResetInventoryCommand extends CommandAPICommand {
     public void giveItems(@NotNull Player player) {
         player.getInventory().clear();
 
-        ItemStack item1 = manager.getItem("firework_shotgun").getItem(player);
-        ItemStack item2 = manager.getItem("firework_shotgun_ammo").getItem(player, 64);
+        ItemStack item1 = manager.getItem("firework_rifle").getItem(player);
+        ItemStack item2 = manager.getItem("firework_rifle_ammo").getItem(player, 5);
 
-        ItemStack item3 = manager.getItem("firework_rifle").getItem(player);
-        ItemStack item4 = manager.getItem("firework_rifle_ammo").getItem(player, 64);
-
-//            ItemStack item5 = manager.getItem("rocket_launcher").getItem(player);
-        ItemStack item6 = manager.getItem("rocket_launcher_ammo").getItem(player, 64);
-
-        ItemStack item7 = manager.getItem("player_compass").getItem(player);
-        ItemStack item8 = manager.getItem("throwable_tnt").getItem(player, 64);
-
-        player.getInventory().addItem(item3, item1, item8, item7, item6, item4, item2);
+        player.getInventory().addItem(item1, item2);
     }
 }
