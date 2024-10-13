@@ -174,9 +174,7 @@ public class FireworkWarsGame {
     }
 
     public void playSound(Sound sound) {
-        for (TeamPlayer player : players) {
-            player.getPlayer().playSound(player.getPlayer().getLocation(), sound, 1.0f, 1.0f);
-        }
+        players.forEach(player -> player.playSound(sound));
     }
 
     private void startCountdown() {
@@ -221,6 +219,7 @@ public class FireworkWarsGame {
 
             if (teamPlayer.getTeam().equals(winningTeam)) {
                 title = title(languageManager.getMessage(Message.YOU_WIN, player), Component.empty());
+                teamPlayer.playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
             } else {
                 title = title(languageManager.getMessage(Message.YOU_LOSE, player), Component.empty());
             }
