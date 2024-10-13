@@ -261,7 +261,7 @@ public class LanguageManager {
 
         plugin.logLoudly(rawMessage);
 
-        return Arrays.stream(rawMessage.split("\\n"))
+        return Arrays.stream(rawMessage.split("\\n|<br>"))
                 .map(miniMessage::deserialize)
                 .toArray(Component[]::new);
     }
