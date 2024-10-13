@@ -91,7 +91,7 @@ public class FireworkWarsGame {
     }
 
     public boolean isAlive(Player player) {
-        return containsPlayer(player) && player.getGameMode() != GameMode.SPECTATOR;
+        return gameState == GameState.PLAYING && containsPlayer(player) && player.getGameMode() != GameMode.SPECTATOR;
     }
 
     public boolean isSpectator(Player player) {
