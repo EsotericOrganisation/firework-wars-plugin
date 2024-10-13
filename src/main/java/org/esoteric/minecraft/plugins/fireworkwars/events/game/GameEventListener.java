@@ -64,9 +64,6 @@ public class GameEventListener implements Listener {
         double finalDamage = event.getFinalDamage();
         int currentTick = plugin.getServer().getCurrentTick();
 
-        plugin.logLoudly(event.isCancelled() + "");
-        plugin.logLoudly(finalDamage + "");
-
         Pair<Double, Integer> lastDamageInfo = lastDamagePerPlayer.getOrDefault(
             player.getUniqueId(), Pair.of(0.0D, currentTick));
 
