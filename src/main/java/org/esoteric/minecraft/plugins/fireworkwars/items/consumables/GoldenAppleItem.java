@@ -34,7 +34,7 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
         }
 
         event.getPlayer().addPotionEffect(new PotionEffect(
-                PotionEffectType.SPEED, 10 * 20, 1));
+                PotionEffectType.SPEED, 5 * 20, 1));
     }
 
     @Override
