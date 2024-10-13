@@ -5,6 +5,7 @@ import net.kyori.adventure.title.TitlePart;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
@@ -107,29 +108,29 @@ public class TeamPlayer {
         FastBoard board = new FastBoard(player);
 
         List<Component> lines = new ArrayList<>(List.of(
-                languageManager.getMessage(Message.SB_SEPARATOR, player),
-                languageManager.getMessage(Message.SB_EVENT_SUPPLY_DROP, player, "%"),
-                Component.empty(),
-                Component.empty(),
-                languageManager.getMessage(Message.SB_KILL_COUNT, player, "%"),
-                languageManager.getMessage(Message.SB_DAMAGE_DEALT, player, "%"),
-                languageManager.getMessage(Message.SB_SEPARATOR, player)
+            languageManager.getMessage(Message.SB_SEPARATOR, player),
+            languageManager.getMessage(Message.SB_EVENT_SUPPLY_DROP, player, "%"),
+            Component.empty(),
+            Component.empty(),
+            languageManager.getMessage(Message.SB_KILL_COUNT, player, "%"),
+            languageManager.getMessage(Message.SB_DAMAGE_DEALT, player, "%"),
+            languageManager.getMessage(Message.SB_SEPARATOR, player)
         ));
 
         Map<FireworkWarsTeam, Component> teamLines = game.getTeams().stream()
-                .collect(HashMap::new, (map, team) -> {
-                    Component component;
-                    boolean isOwnTeam = team.equals(this.team);
+            .collect(HashMap::new, (map, team) -> {
+                Component component;
+                boolean isOwnTeam = team.equals(this.team);
 
-                    if (isOwnTeam) {
-                        component = languageManager.getMessage(
-                            Message.SB_OWN_TEAM, player, team.getColoredTeamName(), "%");
-                    } else {
-                        component = languageManager.getMessage(
-                            Message.SB_TEAM, player, team.getColoredTeamName(), "%");
-                    }
-                    map.put(team, component);
-                }, HashMap::putAll);
+                if (isOwnTeam) {
+                    component = languageManager.getMessage(
+                        Message.SB_OWN_TEAM, player, team.getColoredTeamName(), "%");
+                } else {
+                    component = languageManager.getMessage(
+                        Message.SB_TEAM, player, team.getColoredTeamName(), "%");
+                }
+                map.put(team, component);
+            }, HashMap::putAll);
 
         board.updateTitle(languageManager.getMessage(Message.SB_TITLE, player));
         board.updateLines(lines);
@@ -178,6 +179,14 @@ public class TeamPlayer {
 
     public void becomeSpectator() {
         getPlayer().setGameMode(GameMode.SPECTATOR);
+    }
+
+    public void playSound(Sound sound, float volume, float pitch) {
+        getPlayer().playSound(getPlayer().getLocation(), sound, volume, pitch);
+    }
+
+    public void playSound(Sound sound) {
+        playSound(sound, 1.0F, 1.0F);
     }
 
     public void incrementKills() {
