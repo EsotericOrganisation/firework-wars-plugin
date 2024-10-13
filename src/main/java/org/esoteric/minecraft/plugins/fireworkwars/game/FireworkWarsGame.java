@@ -190,7 +190,7 @@ public class FireworkWarsGame {
         tickHandler.start();
 
         try {
-            fillChests(1.0);
+            fillChests(1.0D);
         } catch (Exception e) {
             plugin.getLogger().warning(e.getMessage());
         }
@@ -212,6 +212,7 @@ public class FireworkWarsGame {
         sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
 
         players.forEach(TeamPlayer::becomeSpectator);
+        players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
 
         for (TeamPlayer teamPlayer : getPlayers()) {
             Player player = teamPlayer.getPlayer();
@@ -316,6 +317,8 @@ public class FireworkWarsGame {
     public void startEndgame() {
         sendMessage(Message.EVENT_ENDGAME);
         playSound(Sound.ENTITY_ENDER_DRAGON_GROWL);
+
+        fillChests(1.5D);
     }
 
     public void eliminateTeam(FireworkWarsTeam team) {
