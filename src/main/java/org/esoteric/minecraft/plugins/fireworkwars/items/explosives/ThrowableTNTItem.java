@@ -45,8 +45,8 @@ public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
         item.setAmount(item.getAmount() - 1);
 
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation(), TNTPrimed.class);
-        tnt.setSource(player);
 
+        tnt.setSource(player);
         tnt.setFuseTicks(50);
 
         Vector velocity = plugin.getPlayerVelocityManager().getPlayerVelocity(player);
