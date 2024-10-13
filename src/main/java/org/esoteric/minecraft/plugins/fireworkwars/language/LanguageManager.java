@@ -259,6 +259,8 @@ public class LanguageManager {
     public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
         String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
 
+        plugin.logLoudly(rawMessage);
+
         return Arrays.stream(rawMessage.split("\\n"))
                 .map(miniMessage::deserialize)
                 .toArray(Component[]::new);
