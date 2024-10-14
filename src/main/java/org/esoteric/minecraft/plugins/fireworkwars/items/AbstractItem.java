@@ -26,9 +26,11 @@ public abstract class AbstractItem<M extends ItemMeta> implements Listener {
     protected final int weight;
     protected final int value;
 
+    protected final ItemType type;
+
     protected final NamespacedKey customItemIdKey;
 
-    public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial, int weight, int value) {
+    public AbstractItem(FireworkWarsPlugin plugin, String itemId, Material itemMaterial, int weight, int value, ItemType type) {
         this.plugin = plugin;
         this.MM = MiniMessage.miniMessage();
 
@@ -40,6 +42,8 @@ public abstract class AbstractItem<M extends ItemMeta> implements Listener {
 
         this.weight = weight;
         this.value = value;
+
+        this.type = type;
 
         this.customItemIdKey = Keys.CUSTOM_ITEM_ID;
 
@@ -60,6 +64,14 @@ public abstract class AbstractItem<M extends ItemMeta> implements Listener {
 
     public int getValue() {
         return value;
+    }
+
+    public ItemType getType() {
+        return type;
+    }
+
+    public boolean isConsumable() {
+        return type == ItemType.CONSUMABLE;
     }
 
     @Contract("null -> false")
