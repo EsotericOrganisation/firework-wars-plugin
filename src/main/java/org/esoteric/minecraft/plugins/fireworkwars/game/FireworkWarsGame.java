@@ -151,7 +151,7 @@ public class FireworkWarsGame {
         teamPlayer.teleportToWaitingArea();
         player.setGameMode(GameMode.ADVENTURE);
 
-        sendMessage(Message.ARENA_JOIN, player.getName(), players.size(), arena.getMaximumPlayerCount());
+        sendMessage(Message.ARENA_JOIN, player.displayName(), players.size(), arena.getMaximumPlayerCount());
     }
 
     public void removePlayer(@NotNull TeamPlayer player) {
@@ -165,7 +165,7 @@ public class FireworkWarsGame {
         }
 
         player.teleportToLobby();
-        sendMessage(Message.ARENA_LEAVE, player.getPlayer().getName(), players.size(), arena.getMaximumPlayerCount());
+        sendMessage(Message.ARENA_LEAVE, player.getPlayer().displayName(), players.size(), arena.getMaximumPlayerCount());
     }
 
     public void sendMessage(Message message, Object... arguments) {
