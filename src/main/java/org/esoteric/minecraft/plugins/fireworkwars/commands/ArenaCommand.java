@@ -40,7 +40,7 @@ public class ArenaCommand extends CommandAPICommand {
 
         withSubcommand(
             new CommandAPICommand("join")
-                .withArguments(this.getArenaArguments())
+                .withArguments(this.getArenaArgument())
                 .executesPlayer(this::onPlayerJoinExecution));
 
         withSubcommand(
@@ -51,7 +51,7 @@ public class ArenaCommand extends CommandAPICommand {
         register(plugin);
     }
 
-    private Argument<Integer> getArenaArguments() {
+    private Argument<Integer> getArenaArgument() {
         return new IntegerArgument(arenaNumberNodeName)
             .includeSuggestions(ArgumentSuggestions.strings((suggestionsInfo) -> {
                 List<String> suggestions = new ArrayList<>();
