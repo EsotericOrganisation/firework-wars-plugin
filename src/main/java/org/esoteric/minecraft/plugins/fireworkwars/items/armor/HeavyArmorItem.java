@@ -28,7 +28,7 @@ public class HeavyArmorItem extends AbstractItem<LeatherArmorMeta> {
         Color color;
 
         if (teamPlayer == null) {
-            color = null;
+            color = Color.WHITE;
         } else {
             color = teamPlayer.getTeam().getTeamData().getColor();
         }

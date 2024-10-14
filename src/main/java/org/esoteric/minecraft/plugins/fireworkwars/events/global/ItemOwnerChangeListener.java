@@ -128,7 +128,7 @@ public class ItemOwnerChangeListener implements Listener {
                 Color color = teamPlayer.getTeam().getTeamData().getColor();
                 item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(color));
             } else {
-                item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(null));
+                item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(Color.WHITE));
             }
         }
     }
