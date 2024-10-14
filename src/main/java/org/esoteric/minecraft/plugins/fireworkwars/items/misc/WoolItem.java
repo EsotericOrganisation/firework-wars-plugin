@@ -7,12 +7,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
+import java.util.List;
+
 public class WoolItem extends AbstractItem<ItemMeta> {
     public WoolItem(FireworkWarsPlugin plugin) {
-        super(plugin, "wool", Material.WHITE_WOOL, 10, 2);
+        super(plugin, "wool", Material.WHITE_WOOL, 10, 2, ItemType.MISC);
     }
 
     @Override
@@ -33,6 +36,6 @@ public class WoolItem extends AbstractItem<ItemMeta> {
 
     @Override
     public int getStackAmount() {
-        return Util.randomInt(16, 32);
+        return List.of(32, 48, 64).get(Util.randomInt(0, 2));
     }
 }

@@ -13,13 +13,14 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 
 public class HeavyArmorItem extends AbstractItem<LeatherArmorMeta> {
     public HeavyArmorItem(FireworkWarsPlugin plugin) {
-        super(plugin, "heavy_armor", Material.LEATHER_CHESTPLATE, 3, 20);
+        super(plugin, "heavy_armor", Material.LEATHER_CHESTPLATE, 3, 20, ItemType.ARMOR);
     }
 
     @Override

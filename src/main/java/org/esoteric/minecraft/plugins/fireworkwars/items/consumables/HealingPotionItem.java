@@ -7,11 +7,12 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionType;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class HealingPotionItem extends AbstractItem<PotionMeta> {
     public HealingPotionItem(FireworkWarsPlugin plugin) {
-        super(plugin, "healing_potion", Material.SPLASH_POTION, 7, 5);
+        super(plugin, "healing_potion", Material.SPLASH_POTION, 7, 5, ItemType.CONSUMABLE);
     }
 
     @Override

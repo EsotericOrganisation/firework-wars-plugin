@@ -10,13 +10,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     public ThrowableTNTItem(FireworkWarsPlugin plugin) {
-        super(plugin, "throwable_tnt", Material.TNT, 4, 9);
+        super(plugin, "throwable_tnt", Material.TNT, 4, 9, ItemType.EXPLOSIVE);
     }
 
     @Override

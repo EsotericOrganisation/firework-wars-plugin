@@ -10,13 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 
 public class MilitaryHelmetItem extends AbstractItem<ArmorMeta> {
     public MilitaryHelmetItem(FireworkWarsPlugin plugin) {
-        super(plugin, "military_helmet", Material.TURTLE_HELMET, 3, 15);
+        super(plugin, "military_helmet", Material.TURTLE_HELMET, 3, 18, ItemType.ARMOR);
     }
 
     @Override

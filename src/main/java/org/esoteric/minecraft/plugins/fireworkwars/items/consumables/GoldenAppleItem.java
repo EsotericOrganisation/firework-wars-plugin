@@ -10,13 +10,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     public GoldenAppleItem(FireworkWarsPlugin plugin) {
-        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 5, 8);
+        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 5, 8, ItemType.CONSUMABLE);
     }
 
     @Override

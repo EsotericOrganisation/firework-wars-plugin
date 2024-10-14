@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.items.nms.CustomCrossbow;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
@@ -25,7 +26,7 @@ public abstract class BaseGunItem extends AbstractItem<CrossbowMeta> {
     protected final String ammoId;
 
     public BaseGunItem(FireworkWarsPlugin plugin, String itemId, String ammoId, int weight, int value) {
-        super(plugin, itemId, Material.CROSSBOW, weight, value);
+        super(plugin, itemId, Material.CROSSBOW, weight, value, ItemType.GUN);
 
         this.ammoId = ammoId;
     }

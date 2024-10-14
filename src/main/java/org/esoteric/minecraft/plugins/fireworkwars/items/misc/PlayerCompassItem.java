@@ -18,6 +18,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
@@ -42,7 +43,7 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
     private final Message actionBarInfo = Message.PLAYER_COMPASS_ACTIONBAR_INFO;
 
     public PlayerCompassItem(FireworkWarsPlugin plugin) {
-        super(plugin, "player_compass", Material.COMPASS, 3, 12);
+        super(plugin, "player_compass", Material.COMPASS, 3, 12, ItemType.MISC);
     }
 
     @Override

@@ -6,12 +6,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class TNTItem extends AbstractItem<ItemMeta> {
     public TNTItem(FireworkWarsPlugin plugin) {
-        super(plugin, "tnt", Material.TNT, 4, 9);
+        super(plugin, "tnt", Material.TNT, 4, 9, ItemType.EXPLOSIVE);
     }
 
     @Override

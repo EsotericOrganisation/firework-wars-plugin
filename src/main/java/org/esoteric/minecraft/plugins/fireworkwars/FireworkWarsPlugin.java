@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 @SuppressWarnings("unused")
 public final class FireworkWarsPlugin extends JavaPlugin {
     private static FireworkWarsPlugin instance;
-    public static Logger LOGGER;
+    private static Logger logger;
 
     private final FileManager fileManager;
     private final Path mapsDirectory = Paths.get("plugins/FireworkWarsPlugin/maps");
@@ -44,6 +44,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public static FireworkWarsPlugin getInstance() {
         return instance;
+    }
+
+    public static Logger logger() {
+        return logger;
     }
 
     public PlayerDataManager getPlayerDataManager() {
@@ -83,8 +87,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     }
 
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
-        instance = this;
-        LOGGER = getLogger();
+        FireworkWarsPlugin.instance = this;
+        FireworkWarsPlugin.logger = getLogger();
 
         this.customItemManager = customItemManager;
         this.fileManager = new FileManager(this);
