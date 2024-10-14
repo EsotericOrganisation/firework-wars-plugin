@@ -5,10 +5,7 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.kyori.adventure.text.Component;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.manager.ArenaManager;
-import org.esoteric.minecraft.plugins.fireworkwars.commands.ArenaCommand;
-import org.esoteric.minecraft.plugins.fireworkwars.commands.HealCommand;
-import org.esoteric.minecraft.plugins.fireworkwars.commands.ResetInventoryCommand;
-import org.esoteric.minecraft.plugins.fireworkwars.commands.SetLanguageCommand;
+import org.esoteric.minecraft.plugins.fireworkwars.commands.*;
 import org.esoteric.minecraft.plugins.fireworkwars.events.global.ItemOwnerChangeListener;
 import org.esoteric.minecraft.plugins.fireworkwars.events.global.PlayerLoseHungerListener;
 import org.esoteric.minecraft.plugins.fireworkwars.file.FileManager;
@@ -154,6 +151,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         new SetLanguageCommand(this);
         new ArenaCommand(this);
+        new GiveItemCommand(this);
         this.resetInventoryCommand = new ResetInventoryCommand(this);
         this.healCommand = new HealCommand(this);
 
