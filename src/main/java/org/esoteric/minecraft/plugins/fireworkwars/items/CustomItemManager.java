@@ -105,15 +105,15 @@ public class CustomItemManager {
         Collections.shuffle(list);
 
         int totalWeight = list.stream()
-            .mapToInt(item -> item.getWeight() + adjustments.getOrDefault(item, 0))
+            .mapToInt(item -> adjustments.getOrDefault(item, item.getWeight()))
             .sum();
         int randomWeight = Util.randomInt(0, totalWeight);
 
         for (AbstractItem<? extends ItemMeta> item : list) {
-            randomWeight -= (item.getWeight() + adjustments.getOrDefault(item, 0));
+            int weight = adjustments.getOrDefault(item, item.getWeight());
+            randomWeight -= weight;
 
             if (randomWeight <= 0) {
-                plugin.logLoudly("Weight for item " + item.getItemId() + " is " + (item.getWeight() + adjustments.getOrDefault(item, 0)));
                 return item;
             }
         }
