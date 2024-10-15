@@ -74,6 +74,10 @@ public abstract class AbstractItem<M extends ItemMeta> implements Listener {
         return type == ItemType.CONSUMABLE;
     }
 
+    public boolean isAmmo() {
+        return type == ItemType.AMMO;
+    }
+
     @Contract("null -> false")
     public boolean isValidCustomItem(ItemStack itemStack) {
         if (itemStack == null) {
