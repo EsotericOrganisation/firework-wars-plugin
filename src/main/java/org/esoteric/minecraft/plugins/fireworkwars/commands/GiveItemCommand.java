@@ -13,6 +13,8 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
+import static java.util.Comparator.comparingInt;
+
 public class GiveItemCommand extends CommandAPICommand {
     private final FireworkWarsPlugin plugin;
 
@@ -44,6 +46,7 @@ public class GiveItemCommand extends CommandAPICommand {
         return new IntegerArgument(amountNodeName)
             .includeSuggestions((ArgumentSuggestions.strings((suggestionsInfo) ->
                 Util.orderedNumberList(1, 64).stream()
+                    .sorted(comparingInt(Integer::intValue))
                     .map(Object::toString)
                     .toArray(String[]::new)
             )));
