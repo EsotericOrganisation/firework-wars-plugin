@@ -16,7 +16,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     public GoldenAppleItem(FireworkWarsPlugin plugin) {
-        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 6, 7, ItemType.CONSUMABLE);
+        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 6, 8, ItemType.CONSUMABLE);
     }
 
     @Override
@@ -44,6 +44,8 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
             new PotionEffect(PotionEffectType.ABSORPTION, 20 * 120, 0), 1.0F);
         foodComponent.addEffect(
             new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 1), 1.0F);
+        foodComponent.addEffect(
+            new PotionEffect(PotionEffectType.RESISTANCE, 30, 1), 1.0F);
 
         meta.setFood(foodComponent);
     }
