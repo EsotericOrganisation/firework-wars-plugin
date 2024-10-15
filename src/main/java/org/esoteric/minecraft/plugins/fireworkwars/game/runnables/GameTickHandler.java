@@ -64,7 +64,7 @@ public class GameTickHandler extends BukkitRunnable {
             startEndgame();
         }
 
-        if (ticksElapsed % chestRefillInterval == chestRefillInterval - 10) {
+        if (ticksElapsed % chestRefillInterval == chestRefillInterval - 10 * 20) {
             game.sendMessage(Message.EVENT_CHEST_REFILL_WARNING, 10);
         }
 
@@ -144,6 +144,8 @@ public class GameTickHandler extends BukkitRunnable {
 
             scoreboard.updateLine(4, Pair.of("%", teamPlayer.getKills() + ""));
             scoreboard.updateLine(5, Pair.of("%", (int) (teamPlayer.getDamage()) + ""));
+
+            scoreboard.setIncludeSecondEventLine(false);
 
             if (startsSoon(ticksUntilSupplyDrop)) {
                 scoreboard.setLine(1, languageManager.getMessage(
