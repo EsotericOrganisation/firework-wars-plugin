@@ -29,6 +29,7 @@ import java.util.*;
 
 import static net.kyori.adventure.title.Title.title;
 import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomDouble;
+import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomInt;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class FireworkWarsGame {
@@ -288,8 +289,10 @@ public class FireworkWarsGame {
             Location randomLocation = location.clone().add(
                 randomDouble(-5.0D, 5.0D), 0.0D, randomDouble(-5.0D, 5.0D));
 
-            location.getWorld().spawn(randomLocation, Firework.class, firework ->
-                firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta())));
+            location.getWorld().spawn(randomLocation, Firework.class, firework -> {
+                firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
+                firework.setTicksToDetonate(randomInt(12, 24));
+            });
         }
     }
 
