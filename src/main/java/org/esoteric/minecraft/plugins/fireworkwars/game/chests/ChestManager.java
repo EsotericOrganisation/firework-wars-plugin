@@ -26,7 +26,9 @@ public class ChestManager {
 
     public void refillChests(double valueFactor) {
         for (ChestLocation chestLocation : arena.getChestLocations()) {
-            Chest chest = (Chest) chestLocation.getChestBlock().getState();
+            if (!(chestLocation.getChestBlock().getState() instanceof Chest chest)) {
+                continue;
+            }
 
             int maxTotalValue = (int) (chestLocation.getMaxTotalValue() * valueFactor);
             int maxItemValue = (int) (chestLocation.getMaxValuePerItem() * valueFactor);
@@ -84,6 +86,8 @@ public class ChestManager {
     private void addItemsToChest(List<AbstractItem<? extends ItemMeta>> itemList, Chest chest, int maxTotalValue) {
         List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
         Collections.shuffle(slots);
+
+        chest.getInventory().clear();
 
         if (Util.randomChance(0.4D)) {
             AbstractItem<? extends ItemMeta> item = itemList.stream()
