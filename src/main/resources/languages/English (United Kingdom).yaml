@@ -3,12 +3,12 @@ SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 # Custom Items
-FIREWORK_RIFLE: "<red>Firework</red> Rifle"
+FIREWORK_RIFLE: "<red>Firework</red> <aqua>Rifle</aqua>"
 FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful.</gray>\n<gray>Shoots one firework at a time.</gray>"
 FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
 FIREWORK_RIFLE_AMMO_LORE: "<gray>1x rifle ammo</gray>"
 
-FIREWORK_SHOTGUN: "<red>Firework</red> Shotgun"
+FIREWORK_SHOTGUN: "<red>Firework</red> <aqua>Shotgun</aqua>"
 FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>Fires multiple shots at once.</gray>"
 FIREWORK_SHOTGUN_AMMO: "<yellow>Shotgun Ammo</yellow>"
 FIREWORK_SHOTGUN_AMMO_LORE: "<gray>1x shotgun ammo</gray>"
