@@ -11,6 +11,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
@@ -156,5 +157,17 @@ public class GameEventListener implements Listener {
             event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
             event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
         }
+    }
+
+    @EventHandler
+    public void onPlayerWorldChange(PlayerChangedWorldEvent event) {
+        Player player = event.getPlayer();
+
+        if (!game.isAlive(player)) {
+            return;
+        }
+
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
+        teamPlayer.showWorldBorder();
     }
 }
