@@ -175,12 +175,6 @@ public class FireworkWarsGame {
         }
     }
 
-    public void sendMessage(Message message) {
-        for (TeamPlayer player : players) {
-            languageManager.sendMessage(message, player.getPlayer());
-        }
-    }
-
     public void playSound(Sound sound) {
         players.forEach(player -> player.playSound(sound));
     }
