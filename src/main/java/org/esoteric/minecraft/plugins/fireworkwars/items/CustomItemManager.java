@@ -28,7 +28,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.guns.shotgun.ShotgunAmm
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.FlintAndSteelItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.PlayerCompassItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.ShearsItem;
-import org.esoteric.minecraft.plugins.fireworkwars.items.misc.WoolItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.blocks.WoolItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.nms.CustomCrossbow;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ReflectUtil;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
