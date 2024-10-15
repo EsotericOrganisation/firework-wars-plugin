@@ -2,10 +2,9 @@ package org.esoteric.minecraft.plugins.fireworkwars.items.consumables;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
@@ -28,14 +27,18 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
             .build();
     }
 
-    @EventHandler
-    public void onConsume(PlayerItemConsumeEvent event) {
-        if (!isValidCustomItem(event.getItem())) {
-            return;
-        }
+    @Override
+    @SuppressWarnings("UnstableApiUsage")
+    public void modifyMeta(ItemMeta meta) {
+        super.modifyMeta(meta);
 
-        event.getPlayer().addPotionEffect(new PotionEffect(
-                PotionEffectType.SPEED, 5 * 20, 1));
+        FoodComponent foodComponent = meta.getFood();
+        foodComponent.setEatSeconds(1.2F);
+        foodComponent.setSaturation(14.4F);
+        foodComponent.addEffect(
+            new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1), 1.0F);
+
+        meta.setFood(foodComponent);
     }
 
     @Override
