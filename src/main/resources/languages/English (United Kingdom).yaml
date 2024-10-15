@@ -62,6 +62,8 @@ SB_SEPARATOR: "<gray><bold><st>-------------------</st></bold></gray>"
 
 SB_TEAM: "{0}: <green>{1}</green>"
 SB_OWN_TEAM: "{0}: <green>{1}</green> <gray>(You)</gray>"
+SB_ELIMINATED_TEAM: "{0}: <red>✖</red>"
+SB_ELIMINATED_OWN_TEAM: "{0}: <red>✖</red> <gray>(You)</gray>"
 
 SB_EVENT_SUPPLY_DROP: "Supply drop in: <yellow>{0}</yellow>"
 SB_EVENT_SUPPLY_DROP_SOON: "Supply drop in: <red>{0}</red>"
