@@ -295,7 +295,7 @@ public class FireworkWarsGame {
         for (int i = 0; i < 5; i++) {
             location.getWorld().spawn(location, Firework.class, firework -> {
                 firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
-                firework.setTicksToDetonate(randomInt(36, 44));
+                firework.setTicksToDetonate(randomInt(30, 40));
 
                 firework.setNoPhysics(true);
             });
