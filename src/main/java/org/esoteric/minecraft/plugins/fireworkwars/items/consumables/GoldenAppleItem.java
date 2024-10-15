@@ -33,10 +33,17 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
         super.modifyMeta(meta);
 
         FoodComponent foodComponent = meta.getFood();
+        foodComponent.setNutrition(4);
+        foodComponent.setCanAlwaysEat(true);
         foodComponent.setEatSeconds(1.2F);
         foodComponent.setSaturation(14.4F);
+
         foodComponent.addEffect(
             new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1), 1.0F);
+        foodComponent.addEffect(
+            new PotionEffect(PotionEffectType.ABSORPTION, 20 * 120, 0), 1.0F);
+        foodComponent.addEffect(
+            new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 1), 1.0F);
 
         meta.setFood(foodComponent);
     }
