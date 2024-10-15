@@ -29,7 +29,7 @@ public class GameCountdown extends BukkitRunnable {
     @Override
     public void run() {
         if (countDownSeconds == 0) {
-            game.sendMessage(Message.GAME_STARTING);
+            game.sendMessage(Message.GAME_STARTED);
         } else if (countDownSeconds == 1) {
             game.sendMessage(Message.GAME_STARTING_IN_TIME_SINGULAR, countDownSeconds);
         } else {
