@@ -8,16 +8,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class ShearsItem extends AbstractItem<ItemMeta> {
     public ShearsItem(FireworkWarsPlugin plugin) {
-        super(plugin, "shears", Material.SHEARS, 4, 8, ItemType.MISC);
+        super(plugin, "shears", Material.SHEARS, 3, 8, ItemType.MISC);
     }
 
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
+            .setLore(Message.SHEARS_LORE, player)
             .setUnbreakable(true)
             .modifyMeta(this::modifyMeta)
             .build();
