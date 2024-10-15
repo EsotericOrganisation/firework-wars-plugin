@@ -29,7 +29,7 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
-    public void modifyMeta(ItemMeta meta) {
+    protected void modifyMeta(ItemMeta meta) {
         super.modifyMeta(meta);
 
         FoodComponent foodComponent = meta.getFood();
