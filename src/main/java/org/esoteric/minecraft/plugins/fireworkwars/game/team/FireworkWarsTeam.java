@@ -55,4 +55,8 @@ public class FireworkWarsTeam {
                 .filter(TeamPlayer::isAlive)
                 .toList();
     }
+
+    public boolean isEliminated() {
+        return getRemainingPlayers().isEmpty();
+    }
 }
