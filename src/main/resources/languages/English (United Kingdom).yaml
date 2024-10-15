@@ -39,6 +39,7 @@ HEAVY_ARMOR_LORE: "<gray>A sturdy piece of armor.</gray>"
 # Game Messages
 GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
 GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
+GAME_STARTED: "<yellow>The game has started!</yellow>"
 
 YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
