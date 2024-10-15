@@ -299,7 +299,7 @@ public class FireworkWarsGame {
                 firework.setNoPhysics(true);
 
                 firework.setVelocity(firework.getVelocity().add(new Vector(
-                    randomDouble(-0.025D, 0.025D), 0.0D, randomDouble(-0.025D, 0.025D))));
+                    randomDouble(-0.01D, 0.01D), 0.0D, randomDouble(-0.01D, 0.01D))));
             });
         }
     }
