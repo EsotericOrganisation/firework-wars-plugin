@@ -6,7 +6,7 @@ public enum ItemType {
     EXPLOSIVE(0.3D),
     GUN(1.0D),
     AMMO(0.2D),
-    MISC(0.5D);
+    MISC(0.4D);
 
     private final double maxChestValue;
 
