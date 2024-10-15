@@ -105,23 +105,29 @@ public class ChestManager {
         }
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private void addItemsToChest(List<AbstractItem<? extends ItemMeta>> itemList, InventoryHolder chest, int maxTotalValue) {
         List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
         Collections.shuffle(slots);
 
         chest.getInventory().clear();
 
+        int i = 0;
+
         if (Util.randomChance(0.4D)) {
-            AbstractItem<? extends ItemMeta> item = itemList.stream()
-                .max(comparingInt(AbstractItem::getValue))
-                .get();
+            Comparator<AbstractItem<? extends ItemMeta>> comparator = comparingInt(AbstractItem::getValue);
+            List<AbstractItem<? extends ItemMeta>> highestValueItems = itemList.stream()
+                .filter(item -> item.getValue() >= 15)
+                .sorted(comparator.reversed())
+                .toList();
+
+            AbstractItem<? extends ItemMeta> item = Util.randomElement(highestValueItems);
 
             this.putItemInChest(item, chest, slots.removeFirst());
             itemList.remove(item);
+
+            i += item.getValue();
         }
 
-        int i = 0;
         while (i < maxTotalValue) {
             if (itemList.isEmpty()) {
                 break;
