@@ -25,6 +25,6 @@ public class RifleAmmo extends BaseAmmoItem<ItemMeta> {
 
     @Override
     public int getStackAmount() {
-        return Util.randomInt(8, 12);
+        return Util.randomInt(12, 16);
     }
 }
