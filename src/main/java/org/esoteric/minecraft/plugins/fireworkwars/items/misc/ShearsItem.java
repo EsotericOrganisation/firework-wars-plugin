@@ -1,6 +1,7 @@
 package org.esoteric.minecraft.plugins.fireworkwars.items.misc;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,6 +21,11 @@ public class ShearsItem extends AbstractItem<ItemMeta> {
             .setUnbreakable(true)
             .modifyMeta(this::modifyMeta)
             .build();
+    }
+
+    @Override
+    protected void modifyMeta(ItemMeta meta) {
+        meta.addEnchant(Enchantment.EFFICIENCY, 3, true);
     }
 
     @Override
