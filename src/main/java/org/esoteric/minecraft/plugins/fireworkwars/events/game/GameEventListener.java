@@ -127,6 +127,7 @@ public class GameEventListener implements Listener {
         event.setReviveHealth(20.0D);
         event.setCancelled(true);
 
+        game.getPlayers().forEach(teamPlayer -> teamPlayer.sendMessage(event.deathMessage()));
         game.getPlayers().forEach(teamPlayer -> teamPlayer.playSound(Sound.ENTITY_SKELETON_DEATH));
 
         if (!gameEnded) {
