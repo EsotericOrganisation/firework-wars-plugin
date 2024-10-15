@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.game.runnables;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
@@ -27,6 +28,9 @@ public class GameTickHandler extends BukkitRunnable {
     private int ticksElapsed;
     private int ticksUntilSupplyDrop;
 
+    private int chestRefillInterval;
+    private int totalChestRefills;
+
     private boolean endgameStarted;
 
     public GameTickHandler(FireworkWarsPlugin plugin, FireworkWarsGame game) {
@@ -35,6 +39,9 @@ public class GameTickHandler extends BukkitRunnable {
 
         this.game = game;
         this.arena = game.getArena();
+
+        this.chestRefillInterval = arena.getChestRefillIntervalTicks();
+        this.totalChestRefills = 0;
 
         this.supplyDropData = arena.getSupplyDropData();
         this.endgameData = arena.getEndgameData();
@@ -57,6 +64,14 @@ public class GameTickHandler extends BukkitRunnable {
             startEndgame();
         }
 
+        if (ticksElapsed % chestRefillInterval == chestRefillInterval - 10) {
+            game.sendMessage(Message.EVENT_CHEST_REFILL_WARNING, 10);
+        }
+
+        if (ticksElapsed % chestRefillInterval == 0) {
+            handleChestRefill();
+        }
+
         updateScoreboards();
     }
 
@@ -70,6 +85,14 @@ public class GameTickHandler extends BukkitRunnable {
         int randomness = supplyDropData.getSupplyDropIntervalRandomness();
 
         return Math.max(1, interval + Util.randomInt(-randomness, randomness));
+    }
+
+    private void handleChestRefill() {
+        totalChestRefills++;
+        game.getChestManager().refillChests(1.0D + totalChestRefills / 10.0D);
+
+        game.sendMessage(Message.EVENT_CHEST_REFILL);
+        game.playSound(Sound.BLOCK_CHEST_OPEN);
     }
 
     private void handleSupplyDrops() {
