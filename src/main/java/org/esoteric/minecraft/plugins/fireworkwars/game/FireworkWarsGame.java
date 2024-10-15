@@ -282,6 +282,9 @@ public class FireworkWarsGame {
             customItemManager.getItem("rocket_launcher").getItem(null));
 
         sendSupplyDropFireworks(location);
+        plugin.runTaskLater(() -> sendSupplyDropFireworks(location), 20L);
+        plugin.runTaskLater(() -> sendSupplyDropFireworks(location), 40L);
+
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
@@ -292,7 +295,7 @@ public class FireworkWarsGame {
                 firework.setTicksToDetonate(randomInt(12, 24));
 
                 firework.setVelocity(firework.getVelocity().add(new Vector(
-                    randomDouble(-0.4D, 0.4D), 0.0D, randomDouble(-0.4D, 0.4D))));
+                    randomDouble(-0.15D, 0.15D), 0.0D, randomDouble(-0.15D, 0.15D))));
             });
         }
     }
