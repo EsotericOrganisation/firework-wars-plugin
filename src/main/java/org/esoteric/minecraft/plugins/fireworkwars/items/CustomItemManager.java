@@ -27,6 +27,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.guns.shotgun.FireworkSh
 import org.esoteric.minecraft.plugins.fireworkwars.items.guns.shotgun.ShotgunAmmo;
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.FlintAndSteelItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.PlayerCompassItem;
+import org.esoteric.minecraft.plugins.fireworkwars.items.misc.ShearsItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.misc.WoolItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.nms.CustomCrossbow;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ReflectUtil;
@@ -66,6 +67,7 @@ public class CustomItemManager {
         registerItem(new PlayerCompassItem(plugin));
         registerItem(new WoolItem(plugin));
         registerItem(new FlintAndSteelItem(plugin));
+        registerItem(new ShearsItem(plugin));
 
         registerItem(new HealingPotionItem(plugin));
         registerItem(new GoldenAppleItem(plugin));
