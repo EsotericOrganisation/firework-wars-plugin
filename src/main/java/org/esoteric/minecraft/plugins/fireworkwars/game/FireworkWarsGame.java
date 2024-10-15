@@ -281,9 +281,11 @@ public class FireworkWarsGame {
             Util.randomInt(0, chestMinecart.getInventory().getSize() - 1),
             customItemManager.getItem("rocket_launcher").getItem(null));
 
-        sendSupplyDropFireworks(location);
-        plugin.runTaskLater(() -> sendSupplyDropFireworks(location), 20L);
-        plugin.runTaskLater(() -> sendSupplyDropFireworks(location), 40L);
+        Location fireworkLocation = location.getWorld().getHighestBlockAt(location).getLocation();
+
+        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 1L);
+        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 20L);
+        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 40L);
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
@@ -292,10 +294,12 @@ public class FireworkWarsGame {
         for (int i = 0; i < 5; i++) {
             location.getWorld().spawn(location, Firework.class, firework -> {
                 firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
-                firework.setTicksToDetonate(randomInt(12, 24));
+                firework.setTicksToDetonate(randomInt(30, 50));
+
+                firework.setNoPhysics(true);
 
                 firework.setVelocity(firework.getVelocity().add(new Vector(
-                    randomDouble(-0.05D, 0.05D), 0.0D, randomDouble(-0.05D, 0.05D))));
+                    randomDouble(-0.025D, 0.025D), 0.0D, randomDouble(-0.025D, 0.025D))));
             });
         }
     }
