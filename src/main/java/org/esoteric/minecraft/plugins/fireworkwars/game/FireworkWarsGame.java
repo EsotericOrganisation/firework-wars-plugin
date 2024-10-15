@@ -4,22 +4,18 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.*;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
-import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
 import org.esoteric.minecraft.plugins.fireworkwars.events.game.GameEventListener;
+import org.esoteric.minecraft.plugins.fireworkwars.game.chests.ChestManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.runnables.GameCountdown;
 import org.esoteric.minecraft.plugins.fireworkwars.game.runnables.GameTickHandler;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
-import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
@@ -38,6 +34,7 @@ public class FireworkWarsGame {
     private final CustomItemManager customItemManager;
 
     private final Arena arena;
+    private final ChestManager chestManager;
 
     private final GameEventListener eventListener;
     private GameTickHandler tickHandler;
@@ -131,6 +128,7 @@ public class FireworkWarsGame {
         this.customItemManager = plugin.getCustomItemManager();
 
         this.arena = arena;
+        this.chestManager = new ChestManager(plugin, this);
 
         this.eventListener = new GameEventListener(plugin, this);
 
@@ -192,7 +190,7 @@ public class FireworkWarsGame {
         tickHandler.start();
 
         try {
-            fillChests(1.0D);
+            chestManager.refillChests(1.0D);
         } catch (Exception e) {
             plugin.getLogger().warning(e.getMessage());
             plugin.getLogger().warning(Arrays.toString(e.getStackTrace()));
@@ -269,48 +267,6 @@ public class FireworkWarsGame {
         }
     }
 
-    public void fillChests(double valueFactor) {
-        for (ChestLocation chestLocation : arena.getChestLocations()) {
-            Chest chest = (Chest) chestLocation.getChestBlock().getState();
-
-            int maxTotalValue = (int) (chestLocation.getMaxTotalValue() * valueFactor);
-            int maxItemValue = (int) (chestLocation.getMaxValuePerItem() * valueFactor);
-
-            List<ItemStack> itemsToAdd = new ArrayList<>();
-            Map<AbstractItem<? extends ItemMeta>, Integer> weightAdjustments = new HashMap<>();
-
-            int i = 0;
-            while (i < maxTotalValue) {
-                AbstractItem<? extends ItemMeta> item = customItemManager.getWeightedRandomItem(weightAdjustments);
-
-                if (item.getValue() > maxItemValue) {
-                    i++;
-                    continue;
-                }
-
-                if (i + item.getValue() > maxTotalValue) {
-                    i++;
-                    continue;
-                }
-
-                itemsToAdd.add(item.getItem(null, item.getStackAmount()));
-                weightAdjustments.put(item, weightAdjustments.getOrDefault(item, 0) - 1);
-
-                i += item.getValue();
-            }
-
-            plugin.logLoudly("=== End of chest ===");
-
-            List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
-            Collections.shuffle(slots);
-
-            for (ItemStack item : itemsToAdd) {
-                int slot = slots.remove(0);
-                chest.getInventory().setItem(slot, item);
-            }
-        }
-    }
-
     public void supplyDrop() {
         Location location = arena.getSupplyDropData().getRandomLocation().getBukkitLocation();
         StorageMinecart chestMinecart = (StorageMinecart) location.getWorld().spawnEntity(location, EntityType.CHEST_MINECART);
@@ -328,7 +284,7 @@ public class FireworkWarsGame {
         sendMessage(Message.EVENT_ENDGAME);
         playSound(Sound.ENTITY_ENDER_DRAGON_GROWL);
 
-        fillChests(1.5D);
+        chestManager.refillChests(1.5D);
     }
 
     public void eliminateTeam(FireworkWarsTeam team) {
