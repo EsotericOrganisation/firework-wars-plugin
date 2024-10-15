@@ -62,7 +62,7 @@ public class Arena {
     }
 
     public int getChestRefillIntervalTicks() {
-        return (int) (gameDurationMinutes * 60 * 20 / totalChestRefills);
+        return (int) ((endgameData.getEndgameStartMinutes() * 60 * 20) / totalChestRefills);
     }
 
     public int getGameDurationTicks() {
