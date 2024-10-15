@@ -287,7 +287,7 @@ public class FireworkWarsGame {
         plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 20L);
         plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 40L);
 
-        sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+        sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), fireworkLocation.getBlockY(), location.getBlockZ());
     }
 
     private void sendSupplyDropFireworks(Location location) {
