@@ -16,18 +16,12 @@ import java.util.*;
 import static java.util.Comparator.comparingInt;
 
 public class ChestManager {
-    private final FireworkWarsPlugin plugin;
+    private final Arena arena;
     private final CustomItemManager itemManager;
 
-    private final FireworkWarsGame game;
-    private final Arena arena;
-
     public ChestManager(FireworkWarsPlugin plugin, FireworkWarsGame game) {
-        this.plugin = plugin;
-        this.itemManager = plugin.getCustomItemManager();
-
-        this.game = game;
         this.arena = game.getArena();
+        this.itemManager = plugin.getCustomItemManager();
     }
 
     public void refillChests(double valueFactor) {
@@ -50,7 +44,6 @@ public class ChestManager {
             }
 
             this.addItemsToChest(itemsToAdd, chest, maxTotalValue);
-            plugin.logLoudly("=== END OF CHEST ===");
         }
     }
 
@@ -74,8 +67,6 @@ public class ChestManager {
 
             itemList.add(item);
             i += item.getValue();
-
-            plugin.logLoudly("Weight for " + item.getItemId() + ": " + item.getWeight() + " -> " + weightAdjustments.getOrDefault(item, item.getWeight()));
 
             if (item.isConsumable() || item.isAmmo()) {
                 weightAdjustments.put(
