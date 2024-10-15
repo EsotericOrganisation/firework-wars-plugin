@@ -109,6 +109,15 @@ public class GameEventListener implements Listener {
             teamPlayer.getScoreboard().updateTeamLine(
                 team, Pair.of("%", team.getRemainingPlayers().size() + "")));
 
+        event.getPlayer().getInventory().clear();
+        event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
+
+        event.setReviveHealth(20.0D);
+        event.setCancelled(true);
+
+        game.getPlayers().forEach(teamPlayer -> teamPlayer.sendMessage(event.deathMessage()));
+        game.getPlayers().forEach(teamPlayer -> teamPlayer.playSound(Sound.ENTITY_SKELETON_DEATH));
+
         boolean gameEnded = false;
 
         if (game.isTeamEliminated(team)) {
@@ -120,15 +129,6 @@ public class GameEventListener implements Listener {
                 gameEnded = true;
             }
         }
-
-        event.getPlayer().getInventory().clear();
-        event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
-
-        event.setReviveHealth(20.0D);
-        event.setCancelled(true);
-
-        game.getPlayers().forEach(teamPlayer -> teamPlayer.sendMessage(event.deathMessage()));
-        game.getPlayers().forEach(teamPlayer -> teamPlayer.playSound(Sound.ENTITY_SKELETON_DEATH));
 
         if (!gameEnded) {
             Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
