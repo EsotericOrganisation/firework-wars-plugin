@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.fireworkwars.items.misc;
+package org.esoteric.minecraft.plugins.fireworkwars.items.blocks;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class WoolItem extends AbstractItem<ItemMeta> {
     public WoolItem(FireworkWarsPlugin plugin) {
-        super(plugin, "wool", Material.WHITE_WOOL, 10, 2, ItemType.MISC);
+        super(plugin, "wool", Material.WHITE_WOOL, 10, 2, ItemType.BLOCK);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class WoolItem extends AbstractItem<ItemMeta> {
         }
 
         return new ItemBuilder<>(plugin, material)
-                .modifyMeta(this::modifyMeta)
-                .build();
+            .modifyMeta(this::modifyMeta)
+            .build();
     }
 
     @Override
