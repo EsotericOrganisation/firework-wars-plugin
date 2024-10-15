@@ -275,9 +275,12 @@ public class FireworkWarsGame {
 
         chestMinecart.customName(Component.text("Supply Drop"));
 
+        int slot = randomInt(0, chestMinecart.getInventory().getSize() - 2);
+
         chestMinecart.getInventory().setItem(
-            Util.randomInt(0, chestMinecart.getInventory().getSize() - 1),
-            customItemManager.getItem("rocket_launcher").getItem(null));
+            slot, customItemManager.getItem("rocket_launcher").getItem(null));
+        chestMinecart.getInventory().setItem(
+            slot + 1, customItemManager.getItem("rocket_launcher_ammo").getItem(null, 2));
 
         Location fireworkLocation = location.getWorld().getHighestBlockAt(location).getLocation();
 
