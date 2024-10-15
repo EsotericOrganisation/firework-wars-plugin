@@ -153,6 +153,10 @@ public class TeamPlayer {
         scoreboard.update();
     }
 
+    public void showWorldBorder() {
+        getPlayer().setWorldBorder(null);
+    }
+
     public FireworkWarsTeam getTeam() {
         return team;
     }
