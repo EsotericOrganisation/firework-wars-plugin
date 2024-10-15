@@ -28,7 +28,7 @@ public class GameTickHandler extends BukkitRunnable {
     private int ticksElapsed;
     private int ticksUntilSupplyDrop;
 
-    private int chestRefillInterval;
+    private final int chestRefillInterval;
     private int totalChestRefills;
 
     private boolean endgameStarted;
