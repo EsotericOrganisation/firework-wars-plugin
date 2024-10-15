@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.events.game;
 
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.GameMode;
@@ -113,13 +114,15 @@ public class GameEventListener implements Listener {
             Player p = teamPlayer.getPlayer();
             FireworkWarsScoreboard scoreboard = teamPlayer.getScoreboard();
 
+            Component teamName = team.getColoredTeamName();
+
             if (team.isEliminated()) {
                 if (teamPlayer.getTeam().equals(team)) {
                     scoreboard.setTeamLine(
-                        team, languageManager.getMessage(Message.SB_ELIMINATED_OWN_TEAM, p));
+                        team, languageManager.getMessage(Message.SB_ELIMINATED_OWN_TEAM, p, teamName));
                 } else {
                     scoreboard.setTeamLine(
-                        team, languageManager.getMessage(Message.SB_ELIMINATED_TEAM, p));
+                        team, languageManager.getMessage(Message.SB_ELIMINATED_TEAM, p, teamName));
                 }
             } else {
                 scoreboard.updateTeamLine(
