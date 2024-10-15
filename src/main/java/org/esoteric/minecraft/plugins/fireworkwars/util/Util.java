@@ -35,6 +35,14 @@ public class Util {
         return Math.random() * (max - min) + min;
     }
 
+    public static boolean randomChance(double chance) {
+        return Math.random() < chance;
+    }
+
+    public static boolean randomChance() {
+        return randomChance(0.5D);
+    }
+
     public static List<Integer> orderedNumberList(int start, int end) {
         List<Integer> list = new ArrayList<>();
 
