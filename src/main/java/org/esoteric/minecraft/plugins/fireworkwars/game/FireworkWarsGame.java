@@ -9,6 +9,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scheduler.BukkitTask;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.WorldBorderData;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import static net.kyori.adventure.title.Title.title;
 import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomInt;
@@ -53,6 +55,8 @@ public class FireworkWarsGame {
 
     private final List<FireworkWarsTeam> teams = new ArrayList<>();
     private final List<TeamPlayer> players = new ArrayList<>();
+
+    private final List<BukkitTask> tasks = new ArrayList<>();
 
     public FireworkWarsPlugin getPlugin() {
         return plugin;
@@ -233,7 +237,7 @@ public class FireworkWarsGame {
         players.forEach(TeamPlayer::becomeSpectator);
         players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
 
-        for (TeamPlayer teamPlayer : getPlayers()) {
+        for (TeamPlayer teamPlayer : players) {
             Player player = teamPlayer.getPlayer();
             Title title;
 
@@ -253,6 +257,13 @@ public class FireworkWarsGame {
     public void endGame() {
         eventListener.unregister();
         tickHandler.cancel();
+
+        tasks.stream()
+            .filter(Predicate.not(BukkitTask::isCancelled))
+            .forEach(BukkitTask::cancel);
+        tasks.clear();
+
+        chestManager.getSupplyDropMinecarts().clear();
 
         players.forEach(TeamPlayer::teleportToLobby);
         players.forEach(player -> player.unregister(false));
@@ -300,13 +311,13 @@ public class FireworkWarsGame {
 
         Location fireworkLocation = location.getWorld().getHighestBlockAt(location).getLocation();
 
-        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 1L);
-        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 20L);
-        plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 40L);
+        runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 1L);
+        runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 20L);
+        runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 40L);
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), fireworkLocation.getBlockY(), location.getBlockZ());
 
-        plugin.runTaskLater(() -> {
+        runTaskLater(() -> {
             if (chestMinecart.isValid()) {
                 chestManager.getSupplyDropMinecarts().add(chestMinecart);
             }
@@ -359,6 +370,11 @@ public class FireworkWarsGame {
 
     public void eliminateTeam(FireworkWarsTeam team) {
         sendMessage(Message.TEAM_ELIMINATED, team.getColoredTeamName());
+    }
+
+    public void runTaskLater(Runnable runnable, long delay) {
+        BukkitTask task = plugin.runTaskLater(runnable, delay);
+        tasks.add(task);
     }
 
     public enum GameState {

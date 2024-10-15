@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.kyori.adventure.text.Component;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.manager.ArenaManager;
 import org.esoteric.minecraft.plugins.fireworkwars.commands.*;
 import org.esoteric.minecraft.plugins.fireworkwars.events.global.ItemOwnerChangeListener;
@@ -170,8 +171,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         }
     }
 
-    public void runTaskLater(Runnable runnable, long delay) {
-        getServer().getScheduler().runTaskLater(this, runnable, delay);
+    public BukkitTask runTaskLater(Runnable runnable, long delay) {
+        return getServer().getScheduler().runTaskLater(this, runnable, delay);
     }
 
     public void runTaskTimer(Runnable runnable, long delay, long period) {
