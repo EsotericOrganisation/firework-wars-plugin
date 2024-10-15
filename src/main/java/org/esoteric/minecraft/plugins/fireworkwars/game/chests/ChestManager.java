@@ -94,7 +94,7 @@ public class ChestManager {
         List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
         Collections.shuffle(slots);
 
-        if (Util.randomChance(0.35D)) {
+        if (Util.randomChance(0.4D)) {
             AbstractItem<? extends ItemMeta> item = itemList.stream()
                 .max(comparingInt(AbstractItem::getValue))
                 .get();
