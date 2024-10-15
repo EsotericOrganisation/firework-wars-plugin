@@ -305,6 +305,12 @@ public class FireworkWarsGame {
         plugin.runTaskLater(() -> sendSupplyDropFireworks(fireworkLocation), 40L);
 
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), fireworkLocation.getBlockY(), location.getBlockZ());
+
+        plugin.runTaskLater(() -> {
+            if (chestMinecart.isValid()) {
+                chestManager.getSupplyDropMinecarts().add(chestMinecart);
+            }
+        }, 20L * 30);
     }
 
     private void sendSupplyDropFireworks(Location location) {

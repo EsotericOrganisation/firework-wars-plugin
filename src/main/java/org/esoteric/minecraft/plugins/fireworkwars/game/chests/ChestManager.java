@@ -1,6 +1,8 @@
 package org.esoteric.minecraft.plugins.fireworkwars.game.chests;
 
-import org.bukkit.block.Chest;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.minecart.StorageMinecart;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
@@ -19,34 +21,55 @@ public class ChestManager {
     private final Arena arena;
     private final CustomItemManager itemManager;
 
+    private final List<StorageMinecart> supplyDropMinecarts;
+
     public ChestManager(FireworkWarsPlugin plugin, FireworkWarsGame game) {
         this.arena = game.getArena();
         this.itemManager = plugin.getCustomItemManager();
+
+        this.supplyDropMinecarts = new ArrayList<>();
+    }
+
+    public List<StorageMinecart> getSupplyDropMinecarts() {
+        return supplyDropMinecarts;
     }
 
     public void refillChests(double valueFactor) {
+        supplyDropMinecarts.removeIf(Entity::isDead);
+
+        for (InventoryHolder minecart : supplyDropMinecarts) {
+            int maxTotalValue = (int) (40 * valueFactor);
+            int maxValuePerItem = (int) (35 * valueFactor);
+
+            this.refillChest(minecart, maxTotalValue, maxValuePerItem);
+        }
+
         for (ChestLocation chestLocation : arena.getChestLocations()) {
-            if (!(chestLocation.getChestBlock().getState() instanceof Chest chest)) {
+            if (!(chestLocation.getChestBlock().getState() instanceof InventoryHolder chest)) {
                 continue;
             }
 
-            int maxTotalValue = (int) (chestLocation.getMaxTotalValue() * valueFactor);
-            int maxItemValue = (int) (chestLocation.getMaxValuePerItem() * valueFactor);
+            int maxTotalValue = (int) (40 * valueFactor);
+            int maxValuePerItem = (int) (35 * valueFactor);
 
-            List<AbstractItem<? extends ItemMeta>> itemsToAdd = new ArrayList<>();
-
-            this.addRandomItemsToList(
-                itemsToAdd,
-                maxItemValue, maxTotalValue,
-                chest.getInventory().getSize(),
-                new HashMap<>(), new EnumMap<>(ItemType.class));
-
-            if (itemsToAdd.isEmpty()) {
-                return;
-            }
-
-            this.addItemsToChest(itemsToAdd, chest, maxTotalValue);
+            this.refillChest(chest, maxTotalValue, maxValuePerItem);
         }
+    }
+
+    private void refillChest(InventoryHolder chest, int maxTotalValue, int maxItemValue) {
+        List<AbstractItem<? extends ItemMeta>> itemsToAdd = new ArrayList<>();
+
+        this.addRandomItemsToList(
+            itemsToAdd,
+            maxItemValue, maxTotalValue,
+            chest.getInventory().getSize(),
+            new HashMap<>(), new EnumMap<>(ItemType.class));
+
+        if (itemsToAdd.isEmpty()) {
+            return;
+        }
+
+        this.addItemsToChest(itemsToAdd, chest, maxTotalValue);
     }
 
     private void addRandomItemsToList(List<AbstractItem<? extends ItemMeta>> itemList, int maxItemValue, int maxTotalValue, int maxChestCapacity, Map<AbstractItem<? extends ItemMeta>, Integer> weightAdjustments, Map<ItemType, Integer> weightPerItemType) {
@@ -83,7 +106,7 @@ public class ChestManager {
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    private void addItemsToChest(List<AbstractItem<? extends ItemMeta>> itemList, Chest chest, int maxTotalValue) {
+    private void addItemsToChest(List<AbstractItem<? extends ItemMeta>> itemList, InventoryHolder chest, int maxTotalValue) {
         List<Integer> slots = Util.orderedNumberList(0, chest.getInventory().getSize() - 1);
         Collections.shuffle(slots);
 
@@ -115,7 +138,7 @@ public class ChestManager {
         }
     }
 
-    private void putItemInChest(AbstractItem<? extends ItemMeta> item, Chest chest, int slot) {
+    private void putItemInChest(AbstractItem<? extends ItemMeta> item, InventoryHolder chest, int slot) {
         chest.getInventory().setItem(slot, item.getItem(null, item.getStackAmount()));
     }
 }
