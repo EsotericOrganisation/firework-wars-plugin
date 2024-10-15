@@ -9,7 +9,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.util.Vector;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
@@ -29,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static net.kyori.adventure.title.Title.title;
-import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomDouble;
 import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomInt;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -294,12 +292,9 @@ public class FireworkWarsGame {
         for (int i = 0; i < 5; i++) {
             location.getWorld().spawn(location, Firework.class, firework -> {
                 firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
-                firework.setTicksToDetonate(randomInt(30, 50));
+                firework.setTicksToDetonate(randomInt(20, 24));
 
                 firework.setNoPhysics(true);
-
-                firework.setVelocity(firework.getVelocity().add(new Vector(
-                    randomDouble(-0.01D, 0.01D), 0.0D, randomDouble(-0.01D, 0.01D))));
             });
         }
     }
