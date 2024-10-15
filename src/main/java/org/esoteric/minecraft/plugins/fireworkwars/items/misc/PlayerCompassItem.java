@@ -63,6 +63,10 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (!event.getAction().isRightClick()) {
+            return;
+        }
+
         Player player = event.getPlayer();
         TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
 
