@@ -14,7 +14,9 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.FireworkWarsTeam;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
+import org.esoteric.minecraft.plugins.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
+import org.esoteric.minecraft.plugins.fireworkwars.scoreboard.wrapper.FireworkWarsScoreboard;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Pair;
 
 import java.util.HashMap;
@@ -26,12 +28,14 @@ import static net.kyori.adventure.title.Title.title;
 
 public class GameEventListener implements Listener {
     private final FireworkWarsPlugin plugin;
+    private final LanguageManager languageManager;
     private final FireworkWarsGame game;
 
     private final Map<UUID, Pair<Double, Integer>> lastDamagePerPlayer;
 
     public GameEventListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
         this.plugin = plugin;
+        this.languageManager = plugin.getLanguageManager();
         this.game = game;
 
         this.lastDamagePerPlayer = new HashMap<>();
@@ -105,9 +109,23 @@ public class GameEventListener implements Listener {
 
         FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
 
-        game.getPlayers().forEach(teamPlayer ->
-            teamPlayer.getScoreboard().updateTeamLine(
-                team, Pair.of("%", team.getRemainingPlayers().size() + "")));
+        for (TeamPlayer teamPlayer : game.getPlayers()) {
+            Player p = teamPlayer.getPlayer();
+            FireworkWarsScoreboard scoreboard = teamPlayer.getScoreboard();
+
+            if (team.isEliminated()) {
+                if (teamPlayer.getTeam().equals(team)) {
+                    scoreboard.setTeamLine(
+                        team, languageManager.getMessage(Message.SB_ELIMINATED_OWN_TEAM, p));
+                } else {
+                    scoreboard.setTeamLine(
+                        team, languageManager.getMessage(Message.SB_ELIMINATED_TEAM, p));
+                }
+            } else {
+                scoreboard.updateTeamLine(
+                    team, Pair.of("%", team.getRemainingPlayers().size() + ""));
+            }
+        }
 
         event.getPlayer().getInventory().clear();
         event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
@@ -120,7 +138,7 @@ public class GameEventListener implements Listener {
 
         boolean gameEnded = false;
 
-        if (game.isTeamEliminated(team)) {
+        if (team.isEliminated()) {
             game.eliminateTeam(team);
             List<FireworkWarsTeam> remainingTeams = game.getRemainingTeams();
 
