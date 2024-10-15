@@ -93,7 +93,7 @@ public class ChestManager {
             itemList.add(item);
             i += item.getValue();
 
-            if (item.isConsumable() || item.isAmmo()) {
+            if (item.isConsumable() || item.isAmmo() || item.isBlock()) {
                 weightAdjustments.put(
                     item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.65F));
             } else {
