@@ -107,19 +107,12 @@ public class FireworkWarsGame {
         return arena.getWorlds().contains(worldName);
     }
 
-    public boolean isTeamEliminated(FireworkWarsTeam team) {
-        return team.getPlayers().stream()
-                .map(TeamPlayer::getPlayer)
-                .filter(Objects::nonNull)
-                .allMatch(this::isSpectator);
-    }
-
     public List<FireworkWarsTeam> getRemainingTeams() {
         return teams
-                .stream()
-                .filter(team -> !isTeamEliminated(team))
-                .toList();
-    }
+            .stream()
+            .filter(team -> !team.isEliminated())
+            .toList();
+}
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
@@ -295,7 +288,7 @@ public class FireworkWarsGame {
         for (int i = 0; i < 5; i++) {
             location.getWorld().spawn(location, Firework.class, firework -> {
                 firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
-                firework.setTicksToDetonate(randomInt(30, 40));
+                firework.setTicksToDetonate(randomInt(30, 32));
 
                 firework.setNoPhysics(true);
             });
