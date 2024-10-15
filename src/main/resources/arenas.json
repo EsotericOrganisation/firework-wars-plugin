@@ -89,8 +89,8 @@
                     "x": 32,
                     "y": 64,
                     "z": 116,
-                    "maxTotalValue": 35,
-                    "maxValuePerItem": 28
+                    "maxTotalValue": 50,
+                    "maxValuePerItem": 35
                 },
                 {
                     "worldName": "barracks",
@@ -105,8 +105,8 @@
                     "x": 34,
                     "y": 64,
                     "z": 122,
-                    "maxTotalValue": 35,
-                    "maxValuePerItem": 28
+                    "maxTotalValue": 50,
+                    "maxValuePerItem": 35
                 },
                 {
                     "worldName": "barracks",
