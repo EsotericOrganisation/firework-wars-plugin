@@ -220,7 +220,7 @@ public class FireworkWarsGame {
             WorldBorder border = world.getWorldBorder();
 
             border.setCenter(borderData.getCenter(world));
-            border.setSize(borderData.getRadius() * 2);
+            border.setSize(borderData.getDiameter());
             border.setDamageAmount(1.0D);
             border.setDamageBuffer(1.0D);
             border.setWarningDistance(8);
@@ -338,7 +338,17 @@ public class FireworkWarsGame {
         sendMessage(Message.EVENT_ENDGAME);
         playSound(Sound.ENTITY_ENDER_DRAGON_GROWL);
 
-        chestManager.refillChests(1.5D);
+        for (String worldName : arena.getWorlds()) {
+            World world = Bukkit.getWorld(worldName);
+            assert world != null;
+
+            WorldBorderData borderData = arena.getWorldBorderInformation();
+            WorldBorder border = world.getWorldBorder();
+
+            border.setSize(
+                borderData.getEndgameDiameter(),
+                borderData.getSecondsToReachEndgameRadius());
+        }
     }
 
     public void eliminateTeam(FireworkWarsTeam team) {
