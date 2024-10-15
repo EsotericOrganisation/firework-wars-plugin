@@ -45,8 +45,19 @@ YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 
+EVENT_CHEST_REFILL: "<yellow>Chests have been refilled!</yellow>"
+EVENT_CHEST_REFILL_WARNING: "<yellow>Chests will be refilled in </yellow><red>{0}</red><yellow> seconds!</yellow>"
 EVENT_SUPPLY_DROP: "<yellow>A supply drop has landed at <gold>[<green>x:</green> <aqua>{0}</aqua><gray>,</gray> <green>y:</green> <aqua>{1}</aqua><gray>,</gray> <green>z:</green> <aqua>{2}</aqua>]</gold></yellow>"
 EVENT_ENDGAME: "<red><bold>The Endgame has begun!</bold></red>"
+
+YOU_DIED: "<red>YOU DIED!</red>"
+YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
+
+YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
+YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
+
+ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
+ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
 
 # Arena Command
 NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
@@ -74,12 +85,3 @@ SB_EVENT_GAME_END_SOON: "Game ends in: <red>{0}</red>"
 
 SB_KILL_COUNT: "Kills: <green>{0}</green>"
 SB_DAMAGE_DEALT: "Damage dealt: <green>{0}</green><red>❤</red>"
-
-YOU_DIED: "<red>YOU DIED!</red>"
-YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
-
-YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
-YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
-
-ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
-ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"

@@ -43,6 +43,8 @@ public enum Message {
 
     YOU_ARE_ON_TEAM,
 
+    EVENT_CHEST_REFILL,
+    EVENT_CHEST_REFILL_WARNING,
     EVENT_SUPPLY_DROP,
     EVENT_ENDGAME,
 
