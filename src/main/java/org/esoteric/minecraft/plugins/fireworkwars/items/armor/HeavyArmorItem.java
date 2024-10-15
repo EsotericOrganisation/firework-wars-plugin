@@ -50,7 +50,7 @@ public class HeavyArmorItem extends AbstractItem<LeatherArmorMeta> {
 
         AttributeModifier modifier = new AttributeModifier(
             Keys.HEAVY_ARMOR_ATTRIBUTE_MOD,
-            8,
+            7,
             AttributeModifier.Operation.ADD_NUMBER,
             EquipmentSlotGroup.CHEST);
 
