@@ -192,8 +192,7 @@ public class FireworkWarsGame {
         try {
             chestManager.refillChests(1.0D);
         } catch (Exception e) {
-            plugin.getLogger().warning(e.getMessage());
-            plugin.getLogger().warning(Arrays.toString(e.getStackTrace()));
+            e.printStackTrace();
         }
 
         for (TeamData teamData : arena.getTeamInformation()) {
