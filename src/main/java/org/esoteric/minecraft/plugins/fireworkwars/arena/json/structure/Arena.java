@@ -5,6 +5,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.SupplyDropDat
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.PlayerLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.WorldBorderData;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class Arena {
 
     private int countDownSeconds = 15;
     private double gameDurationMinutes = 30;
+
+    private int totalChestRefills;
+
+    private WorldBorderData worldBorderInformation;
 
     private TeamData[] teamInformation;
 
@@ -52,8 +57,20 @@ public class Arena {
         return gameDurationMinutes;
     }
 
+    public int getTotalChestRefills() {
+        return totalChestRefills;
+    }
+
+    public int getChestRefillIntervalTicks() {
+        return (int) (gameDurationMinutes * 60 * 20 / totalChestRefills);
+    }
+
     public int getGameDurationTicks() {
         return (int) (gameDurationMinutes * 60 * 20);
+    }
+
+    public WorldBorderData getWorldBorderInformation() {
+        return worldBorderInformation;
     }
 
     public List<TeamData> getTeamInformation() {

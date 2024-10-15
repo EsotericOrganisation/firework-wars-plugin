@@ -19,6 +19,7 @@
             ],
             "countDownSeconds": 15,
             "gameDurationMinutes": 30,
+            "totalChestRefills": 10,
             "minimumPlayerCount": 2,
             "maximumPlayerCount": 20,
             "waitingAreaLocation": {
@@ -28,6 +29,11 @@
                 "z": 115,
                 "yaw": 90,
                 "pitch": 0
+            },
+            "worldBorderInformation": {
+                "centerX": 33,
+                "centerZ": 119,
+                "radius": 70
             },
             "teamInformation": [
                 {

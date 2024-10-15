@@ -1,11 +1,13 @@
 package org.esoteric.minecraft.plugins.fireworkwars.arena.manager;
 
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.ChestLocation;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.EndgameData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.SupplyDropData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.BlockLocation;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.components.PlayerLocation;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.WorldBorderData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Lobby;
 
@@ -94,6 +96,15 @@ public class ConfigValidator {
 
             validatePlayerLocation(arena.getWaitingAreaLocation(), worldNames.toArray(String[]::new));
 
+            WorldBorderData worldBorderData = arena.getWorldBorderInformation();
+            if (worldBorderData == null) {
+                throw new InvalidConfigurationException("Invalid arena configuration: No world border data set.");
+            }
+
+            if (worldBorderData.getRadius() < 1) {
+                throw new InvalidConfigurationException("Invalid world border configuration: Radius must be greater than 0.");
+            }
+
             for (TeamData teamData : arena.getTeamInformation()) {
                 try {
                     teamData.getColor();
@@ -105,8 +116,16 @@ public class ConfigValidator {
                 validateString(teamData.getMiniMessageString(), "Invalid team configuration: No team name set.");
             }
 
-            for (BlockLocation chestLocation : arena.getChestLocations()) {
+            for (ChestLocation chestLocation : arena.getChestLocations()) {
                 validateBlockLocation(chestLocation, worldNames.toArray(String[]::new));
+
+                if (chestLocation.getMaxValuePerItem() < 2) {
+                    throw new InvalidConfigurationException("Invalid chest location configuration: Max value per item cannot be less than 2.");
+                }
+
+                if (chestLocation.getMaxTotalValue() < 2) {
+                    throw new InvalidConfigurationException("Invalid chest location configuration: Max total value cannot be less than 2.");
+                }
             }
 
             SupplyDropData supplyDropData = arena.getSupplyDropData();
