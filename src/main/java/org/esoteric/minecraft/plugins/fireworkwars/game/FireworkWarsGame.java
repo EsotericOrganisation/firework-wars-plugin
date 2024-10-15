@@ -11,6 +11,7 @@ import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
+import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.WorldBorderData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
 import org.esoteric.minecraft.plugins.fireworkwars.events.game.GameEventListener;
 import org.esoteric.minecraft.plugins.fireworkwars.game.chests.ChestManager;
@@ -25,7 +26,10 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.kyori.adventure.title.Title.title;
 import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomInt;
@@ -56,6 +60,10 @@ public class FireworkWarsGame {
 
     public Arena getArena() {
         return arena;
+    }
+
+    public ChestManager getChestManager() {
+        return chestManager;
     }
 
     public GameState getGameState() {
@@ -185,11 +193,9 @@ public class FireworkWarsGame {
         tickHandler = new GameTickHandler(plugin, this);
         tickHandler.start();
 
-        try {
-            chestManager.refillChests(1.0D);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        chestManager.refillChests(1.0D);
+
+        createWorldBorder();
 
         for (TeamData teamData : arena.getTeamInformation()) {
             teams.add(new FireworkWarsTeam(teamData, this, plugin));
@@ -202,6 +208,23 @@ public class FireworkWarsGame {
 
         distributePlayersAcrossTeams();
         players.forEach(TeamPlayer::showScoreboard);
+        players.forEach(TeamPlayer::showWorldBorder);
+    }
+
+    private void createWorldBorder() {
+        for (String worldName : arena.getWorlds()) {
+            World world = Bukkit.getWorld(worldName);
+            assert world != null;
+
+            WorldBorderData borderData = arena.getWorldBorderInformation();
+            WorldBorder border = world.getWorldBorder();
+
+            border.setCenter(borderData.getCenter(world));
+            border.setSize(borderData.getRadius() * 2);
+            border.setDamageAmount(1.0D);
+            border.setDamageBuffer(1.0D);
+            border.setWarningDistance(8);
+        }
     }
 
     public void preEndGame(FireworkWarsTeam winningTeam) {
