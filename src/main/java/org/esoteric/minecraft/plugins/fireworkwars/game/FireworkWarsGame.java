@@ -295,7 +295,7 @@ public class FireworkWarsGame {
                 firework.setTicksToDetonate(randomInt(12, 24));
 
                 firework.setVelocity(firework.getVelocity().add(new Vector(
-                    randomDouble(-0.15D, 0.15D), 0.0D, randomDouble(-0.15D, 0.15D))));
+                    randomDouble(-0.05D, 0.05D), 0.0D, randomDouble(-0.05D, 0.05D))));
             });
         }
     }
