@@ -292,7 +292,7 @@ public class FireworkWarsGame {
         for (int i = 0; i < 5; i++) {
             location.getWorld().spawn(location, Firework.class, firework -> {
                 firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta()));
-                firework.setTicksToDetonate(randomInt(20, 24));
+                firework.setTicksToDetonate(randomInt(36, 44));
 
                 firework.setNoPhysics(true);
             });
@@ -300,15 +300,15 @@ public class FireworkWarsGame {
     }
 
     private FireworkMeta addRandomFireworkEffect(FireworkMeta meta) {
-        FireworkEffect.Type type = Util.randomElement(List.of(
-            FireworkEffect.Type.BURST, FireworkEffect.Type.STAR, FireworkEffect.Type.BALL));
+        FireworkEffect.Type type = Util.randomElement(
+            List.of(FireworkEffect.Type.BURST, FireworkEffect.Type.STAR));
 
-        Color color = Util.randomRainbowColor();
-        Color fade = Util.randomRainbowColor();
+        Color fade = Util.randomElement(
+            List.of(Color.BLUE, Color.PURPLE, Color.AQUA));
 
         meta.addEffect(FireworkEffect.builder()
             .with(type)
-            .withColor(color)
+            .withColor(Color.WHITE)
             .withFade(fade)
             .build());
 
