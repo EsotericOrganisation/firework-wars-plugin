@@ -105,6 +105,10 @@ public class ConfigValidator {
                 throw new InvalidConfigurationException("Invalid world border configuration: Radius must be greater than 0.");
             }
 
+            if (worldBorderData.getEndgameRadius() < 1) {
+                throw new InvalidConfigurationException("Invalid world border configuration: Endgame radius must be greater than 0.");
+            }
+
             for (TeamData teamData : arena.getTeamInformation()) {
                 try {
                     teamData.getColor();
@@ -171,6 +175,10 @@ public class ConfigValidator {
 
             if (endgameData.getWardenSpawnLocation() != null) {
                 validatePlayerLocation(endgameData.getWardenSpawnLocation(), worldNames.toArray(String[]::new));
+            }
+
+            if (worldBorderData.getSecondsToReachEndgameRadius() > arena.getEndgameDurationTicks() / 20) {
+                throw new InvalidConfigurationException("Invalid world border configuration: Seconds to reach endgame radius must be less than endgame duration.");
             }
         }
     }

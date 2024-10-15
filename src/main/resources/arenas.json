@@ -33,7 +33,9 @@
             "worldBorderInformation": {
                 "centerX": 33,
                 "centerZ": 119,
-                "radius": 70
+                "radius": 50,
+                "endgameRadius": 20,
+                "secondsToReachEndgameRadius": 300
             },
             "teamInformation": [
                 {
