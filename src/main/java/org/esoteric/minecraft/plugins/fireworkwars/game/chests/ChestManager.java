@@ -50,6 +50,7 @@ public class ChestManager {
             }
 
             this.addItemsToChest(itemsToAdd, chest, maxTotalValue);
+            plugin.logLoudly("=== END OF CHEST ===");
         }
     }
 
@@ -74,12 +75,14 @@ public class ChestManager {
             itemList.add(item);
             i += item.getValue();
 
+            plugin.logLoudly("Weight for " + item.getItemId() + ": " + item.getWeight() + " -> " + weightAdjustments.getOrDefault(item, item.getWeight()));
+
             if (item.isConsumable() || item.isAmmo()) {
                 weightAdjustments.put(
-                    item, Math.round(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.65F));
+                    item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.65F));
             } else {
                 weightAdjustments.put(
-                    item, Math.round(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.5F));
+                    item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.5F));
             }
 
             weightPerItemType.put(type, newTotalTypeWeight);
@@ -97,10 +100,15 @@ public class ChestManager {
                 .get();
 
             this.putItemInChest(item, chest, slots.removeFirst());
+            itemList.remove(item);
         }
 
         int i = 0;
         while (i < maxTotalValue) {
+            if (itemList.isEmpty()) {
+                break;
+            }
+
             AbstractItem<? extends ItemMeta> item = itemList.removeFirst();
 
             if (i + item.getValue() > maxTotalValue) {
