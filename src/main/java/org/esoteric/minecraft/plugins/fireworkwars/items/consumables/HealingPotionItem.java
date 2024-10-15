@@ -18,10 +18,7 @@ public class HealingPotionItem extends AbstractItem<PotionMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<PotionMeta>(plugin, itemMaterial)
-            .modifyMeta(meta -> {
-                meta.setBasePotionType(PotionType.STRONG_HEALING);
-                pdcManager.setStringValue(meta, customItemIdKey, itemId);
-            })
+            .modifyMeta(this::modifyMeta)
             .build();
     }
 
@@ -29,6 +26,7 @@ public class HealingPotionItem extends AbstractItem<PotionMeta> {
     protected void modifyMeta(PotionMeta meta) {
         super.modifyMeta(meta);
         meta.setBasePotionType(PotionType.STRONG_HEALING);
+        meta.setMaxStackSize(3);
     }
 
     @Override
