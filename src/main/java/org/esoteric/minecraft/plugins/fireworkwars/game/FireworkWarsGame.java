@@ -5,8 +5,10 @@ import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.StorageMinecart;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static net.kyori.adventure.title.Title.title;
+import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.randomDouble;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class FireworkWarsGame {
@@ -276,7 +279,32 @@ public class FireworkWarsGame {
             Util.randomInt(0, chestMinecart.getInventory().getSize() - 1),
             customItemManager.getItem("rocket_launcher").getItem(null));
 
+        sendSupplyDropFireworks(location);
         sendMessage(Message.EVENT_SUPPLY_DROP, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+    }
+
+    private void sendSupplyDropFireworks(Location location) {
+        for (int i = 0; i < 5; i++) {
+            Location randomLocation = location.clone().add(
+                randomDouble(-5.0D, 5.0D), 0.0D, randomDouble(-5.0D, 5.0D));
+
+            location.getWorld().spawn(randomLocation, Firework.class, firework ->
+                firework.setFireworkMeta(addRandomFireworkEffect(firework.getFireworkMeta())));
+        }
+    }
+
+    private FireworkMeta addRandomFireworkEffect(FireworkMeta meta) {
+        FireworkEffect.Type type = Util.randomElement(List.of(FireworkEffect.Type.values()));
+        Color color = Util.randomRainbowColor();
+        Color fade = Util.randomRainbowColor();
+
+        meta.addEffect(FireworkEffect.builder()
+            .with(type)
+            .withColor(color)
+            .withFade(fade)
+            .build());
+
+        return meta;
     }
 
     public void startEndgame() {
