@@ -82,7 +82,7 @@ public class ChestManager {
                     item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.65F));
             } else {
                 weightAdjustments.put(
-                    item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) * 0.5F));
+                    item, (int) Math.floor(weightAdjustments.getOrDefault(item, item.getWeight()) / 2.0F));
             }
 
             weightPerItemType.put(type, newTotalTypeWeight);
