@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.util;
 
+import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -51,5 +52,15 @@ public class Util {
         }
 
         return list;
+    }
+
+    public static <E> E randomElement(List<E> list) {
+        return list.get(randomInt(0, list.size() - 1));
+    }
+
+    public static Color randomRainbowColor() {
+        return List
+            .of(Color.RED, Color.ORANGE, Color.YELLOW, Color.LIME, Color.AQUA, Color.BLUE, Color.PURPLE)
+            .get(randomInt(0, 6));
     }
 }
