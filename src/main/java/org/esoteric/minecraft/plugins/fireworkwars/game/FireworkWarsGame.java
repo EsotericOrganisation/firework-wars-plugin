@@ -252,6 +252,7 @@ public class FireworkWarsGame {
         players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
 
         resetWorldBorder();
+        players.forEach(TeamPlayer::showWorldBorder);
 
         for (TeamPlayer teamPlayer : players) {
             Player player = teamPlayer.getPlayer();
@@ -324,6 +325,8 @@ public class FireworkWarsGame {
 
             assert world != null;
             world.setAutoSave(false);
+
+            world.getWorldBorder().reset();
         }
     }
 
