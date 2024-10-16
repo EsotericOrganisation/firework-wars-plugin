@@ -44,7 +44,6 @@ public class WoolItem extends AbstractItem<ItemMeta> {
 
     @Override
     public void updateItemTexts(ItemStack item, Player player) {
-        super.updateItemTexts(item, player);
-        item.editMeta(this::modifyMeta);
+        item.setItemMeta(getItem(player).getItemMeta());
     }
 }
