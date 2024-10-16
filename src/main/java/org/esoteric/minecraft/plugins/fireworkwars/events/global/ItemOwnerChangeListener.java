@@ -128,7 +128,7 @@ public class ItemOwnerChangeListener implements Listener {
     private void updateLeatherArmorColor(ItemStack item, Player player) {
         TeamPlayer teamPlayer = TeamPlayer.from(player);
 
-        if ("heavy_armor".equals(pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID))) {
+        if ("heavy_armor".equals(getCustomItemId(item))) {
             if (teamPlayer != null) {
                 Color color = teamPlayer.getTeam().getTeamData().getColor();
                 item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(color));
@@ -157,6 +157,10 @@ public class ItemOwnerChangeListener implements Listener {
             return;
         }
 
+        if ("throwable_tnt".equals(getCustomItemId(item))) {
+            return;
+        }
+
         if (item.getType() == Material.TNT) {
             itemManager.getItem("tnt").updateItemTexts(item, player);
         }
@@ -168,8 +172,12 @@ public class ItemOwnerChangeListener implements Listener {
                 return; // Easter egg
             }
 
-            String itemId = pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID);
+            String itemId = getCustomItemId(item);
             itemManager.getItem(itemId).updateItemTexts(item, player);
         }
+    }
+
+    private String getCustomItemId(ItemStack item) {
+        return pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID);
     }
 }
