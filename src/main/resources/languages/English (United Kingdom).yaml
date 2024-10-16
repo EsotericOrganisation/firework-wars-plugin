@@ -35,7 +35,7 @@ HEALING_POTION: "<yellow>Healing Potion</yellow>"
 HEALING_POTION_LORE: "<gray>Instant health replenishment.</gray>"
 
 TNT: "<red>TNT</red>"
-TNT_LORE: "<gray>Ignite with <aqua>flint and steel</aqua> to explode.</gray>"
+TNT_LORE: "<gray>Ignite with <aqua>Flint and Steel</aqua> to explode.</gray>"
 
 THROWABLE_TNT: "<red>Throwable TNT</red>"
 THROWABLE_TNT_LORE: "<gray><yellow><bold>RIGHT CLICK</bold></yellow> to throw in your direction.</gray>"
