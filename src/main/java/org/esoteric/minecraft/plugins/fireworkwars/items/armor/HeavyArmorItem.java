@@ -20,7 +20,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 
 public class HeavyArmorItem extends AbstractItem<LeatherArmorMeta> {
     public HeavyArmorItem(FireworkWarsPlugin plugin) {
-        super(plugin, "heavy_armor", Material.LEATHER_CHESTPLATE, 3, 20, ItemType.ARMOR);
+        super(plugin, "heavy_armor", Material.LEATHER_CHESTPLATE, 30, 20, ItemType.ARMOR);
     }
 
     @Override
