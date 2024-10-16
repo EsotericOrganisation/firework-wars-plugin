@@ -17,7 +17,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     public ThrowableTNTItem(FireworkWarsPlugin plugin) {
-        super(plugin, "throwable_tnt", Material.TNT, 5, 9, ItemType.EXPLOSIVE);
+        super(plugin, "throwable_tnt", Material.TNT, 55, 9, ItemType.EXPLOSIVE);
     }
 
     @Override

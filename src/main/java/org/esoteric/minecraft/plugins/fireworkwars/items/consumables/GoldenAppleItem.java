@@ -16,7 +16,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class GoldenAppleItem extends AbstractItem<ItemMeta> {
     public GoldenAppleItem(FireworkWarsPlugin plugin) {
-        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 6, 8, ItemType.CONSUMABLE);
+        super(plugin, "golden_apple", Material.GOLDEN_APPLE, 60, 8, ItemType.CONSUMABLE);
     }
 
     @Override

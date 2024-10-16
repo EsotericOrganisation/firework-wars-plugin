@@ -13,7 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class ShearsItem extends AbstractItem<ItemMeta> {
     public ShearsItem(FireworkWarsPlugin plugin) {
-        super(plugin, "shears", Material.SHEARS, 3, 8, ItemType.MISC);
+        super(plugin, "shears", Material.SHEARS, 35, 8, ItemType.MISC);
     }
 
     @Override

@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 public class RocketLauncherAmmo extends BaseAmmoItem<FireworkMeta> {
 
     public RocketLauncherAmmo(FireworkWarsPlugin plugin) {
-        super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET, 3, 4);
+        super(plugin, "rocket_launcher_ammo", Material.FIREWORK_ROCKET, 35, 4);
     }
 
     @Override

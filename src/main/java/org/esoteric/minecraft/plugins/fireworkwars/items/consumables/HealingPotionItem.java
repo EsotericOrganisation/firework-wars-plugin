@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class HealingPotionItem extends AbstractItem<PotionMeta> {
     public HealingPotionItem(FireworkWarsPlugin plugin) {
-        super(plugin, "healing_potion", Material.SPLASH_POTION, 7, 5, ItemType.CONSUMABLE);
+        super(plugin, "healing_potion", Material.SPLASH_POTION, 75, 5, ItemType.CONSUMABLE);
     }
 
     @Override

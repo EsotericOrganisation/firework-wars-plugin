@@ -15,7 +15,7 @@ import java.util.List;
 
 public class WoolItem extends AbstractItem<ItemMeta> {
     public WoolItem(FireworkWarsPlugin plugin) {
-        super(plugin, "wool", Material.WHITE_WOOL, 10, 2, ItemType.BLOCK);
+        super(plugin, "wool", Material.WHITE_WOOL, 105, 2, ItemType.BLOCK);
     }
 
     @Override

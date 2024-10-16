@@ -11,7 +11,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class ShotgunAmmo extends BaseAmmoItem<ItemMeta> {
     public ShotgunAmmo(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_shotgun_ammo", Material.NETHER_WART, 4, 3);
+        super(plugin, "firework_shotgun_ammo", Material.NETHER_WART, 45, 3);
     }
 
     @Override

@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 public class RifleAmmo extends BaseAmmoItem<ItemMeta> {
 
     public RifleAmmo(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_rifle_ammo", Material.GHAST_TEAR, 8, 2);
+        super(plugin, "firework_rifle_ammo", Material.GHAST_TEAR, 85, 2);
     }
 
     @Override

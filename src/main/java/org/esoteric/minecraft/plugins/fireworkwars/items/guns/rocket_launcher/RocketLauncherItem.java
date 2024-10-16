@@ -20,7 +20,7 @@ import java.util.List;
 public class RocketLauncherItem extends BaseGunItem {
 
     public RocketLauncherItem(FireworkWarsPlugin plugin) {
-        super(plugin, "rocket_launcher", "rocket_launcher_ammo", 1, 35);
+        super(plugin, "rocket_launcher", "rocket_launcher_ammo", 10, 35);
     }
 
     @Override

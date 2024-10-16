@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FireworkShotgunItem extends BaseGunItem {
     public FireworkShotgunItem(FireworkWarsPlugin plugin) {
-        super(plugin, "firework_shotgun", "firework_shotgun_ammo", 2, 28);
+        super(plugin, "firework_shotgun", "firework_shotgun_ammo", 20, 28);
     }
 
     @Override

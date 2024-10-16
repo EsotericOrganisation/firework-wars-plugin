@@ -43,7 +43,7 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
     private final Message actionBarInfo = Message.PLAYER_COMPASS_ACTIONBAR_INFO;
 
     public PlayerCompassItem(FireworkWarsPlugin plugin) {
-        super(plugin, "player_compass", Material.COMPASS, 3, 12, ItemType.MISC);
+        super(plugin, "player_compass", Material.COMPASS, 35, 12, ItemType.MISC);
     }
 
     @Override

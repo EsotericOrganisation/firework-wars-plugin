@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
 public class TNTItem extends AbstractItem<ItemMeta> {
     public TNTItem(FireworkWarsPlugin plugin) {
-        super(plugin, "tnt", Material.TNT, 4, 9, ItemType.EXPLOSIVE);
+        super(plugin, "tnt", Material.TNT, 45, 9, ItemType.EXPLOSIVE);
     }
 
     @Override
