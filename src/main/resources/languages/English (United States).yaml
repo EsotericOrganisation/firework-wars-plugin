@@ -29,7 +29,7 @@ PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
 
 GOLDEN_APPLE: "<yellow>Golden Apple</yellow>"
-GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> and a short <yellow>damage resistance</yellow> on consumption.</gray>"
+GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> and a short</gray>\n<gray><yellow>damage resistance</yellow> on consumption.</gray>"
 
 HEALING_POTION: "<yellow>Healing Potion</yellow>"
 HEALING_POTION_LORE: "<gray>Instant health replenishment.</gray>"
