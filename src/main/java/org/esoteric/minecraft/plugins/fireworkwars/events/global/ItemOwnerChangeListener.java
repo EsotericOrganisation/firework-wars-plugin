@@ -17,6 +17,8 @@ import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 import org.esoteric.minecraft.plugins.fireworkwars.util.PersistentDataManager;
 
+import static org.esoteric.minecraft.plugins.fireworkwars.util.Util.getItemCustomId;
+
 public class ItemOwnerChangeListener implements Listener {
     private final FireworkWarsPlugin plugin;
     private final PersistentDataManager pdcManager;
@@ -128,7 +130,7 @@ public class ItemOwnerChangeListener implements Listener {
     private void updateLeatherArmorColor(ItemStack item, Player player) {
         TeamPlayer teamPlayer = TeamPlayer.from(player);
 
-        if ("heavy_armor".equals(getCustomItemId(item))) {
+        if ("heavy_armor".equals(getItemCustomId(item))) {
             if (teamPlayer != null) {
                 Color color = teamPlayer.getTeam().getTeamData().getColor();
                 item.editMeta(meta -> ((LeatherArmorMeta) meta).setColor(color));
@@ -157,7 +159,7 @@ public class ItemOwnerChangeListener implements Listener {
             return;
         }
 
-        if ("throwable_tnt".equals(getCustomItemId(item))) {
+        if ("throwable_tnt".equals(getItemCustomId(item))) {
             return;
         }
 
@@ -172,12 +174,8 @@ public class ItemOwnerChangeListener implements Listener {
                 return; // Easter egg
             }
 
-            String itemId = getCustomItemId(item);
+            String itemId = getItemCustomId(item);
             itemManager.getItem(itemId).updateItemTexts(item, player);
         }
-    }
-
-    private String getCustomItemId(ItemStack item) {
-        return pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID);
     }
 }
