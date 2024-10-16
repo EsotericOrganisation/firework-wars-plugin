@@ -29,4 +29,10 @@ public class TNTItem extends AbstractItem<ItemMeta> {
     public int getStackAmount() {
         return Util.randomInt(3, 5);
     }
+
+    @Override
+    public void updateItemTexts(ItemStack item, Player player) {
+        super.updateItemTexts(item, player);
+        item.editMeta(this::modifyMeta);
+    }
 }

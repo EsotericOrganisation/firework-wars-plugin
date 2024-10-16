@@ -41,4 +41,10 @@ public class WoolItem extends AbstractItem<ItemMeta> {
     public int getStackAmount() {
         return List.of(32, 48, 64).get(Util.randomInt(0, 2));
     }
+
+    @Override
+    public void updateItemTexts(ItemStack item, Player player) {
+        super.updateItemTexts(item, player);
+        item.editMeta(this::modifyMeta);
+    }
 }
