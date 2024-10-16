@@ -1,5 +1,6 @@
 package org.esoteric.minecraft.plugins.fireworkwars.events.game;
 
+import com.destroystokyo.paper.event.player.PlayerSetSpawnEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
@@ -11,6 +12,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.FireworkWarsGame;
@@ -169,5 +171,27 @@ public class GameEventListener implements Listener {
 
         TeamPlayer teamPlayer = TeamPlayer.from(player);
         teamPlayer.showWorldBorder();
+    }
+
+    @EventHandler
+    public void onPlayerSleep(PlayerBedEnterEvent event) {
+        Player player = event.getPlayer();
+
+        if (!game.isAlive(player)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlayerSpawnChange(PlayerSetSpawnEvent event) {
+        Player player = event.getPlayer();
+
+        if (!game.isAlive(player)) {
+            return;
+        }
+
+        event.setCancelled(true);
     }
 }
