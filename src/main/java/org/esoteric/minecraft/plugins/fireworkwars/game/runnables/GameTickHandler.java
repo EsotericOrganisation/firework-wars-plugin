@@ -60,16 +60,23 @@ public class GameTickHandler extends BukkitRunnable {
             handleSupplyDrops();
         }
 
-        if (ticksElapsed >= endgameData.getEndgameStartTicks() && !endgameStarted) {
+        if (ticksElapsed >= endgameData.getEndgameStartTicks() - 20 && !endgameStarted) {
             startEndgame();
         }
 
-        if (ticksElapsed % chestRefillInterval == chestRefillInterval - 10 * 20) {
-            game.sendMessage(Message.EVENT_CHEST_REFILL_WARNING, 10);
+        if (ticksElapsed >= arena.getGameDurationTicks()) {
+            game.preEndGame();
+            return;
         }
 
-        if (ticksElapsed % chestRefillInterval == 0) {
-            handleChestRefill();
+        if (totalChestRefills < 10) {
+            if (ticksElapsed % chestRefillInterval == chestRefillInterval - 11 * 20) {
+                game.sendMessage(Message.EVENT_CHEST_REFILL_WARNING, 10);
+            }
+
+            if (ticksElapsed % chestRefillInterval == 0) {
+                handleChestRefill();
+            }
         }
 
         updateScoreboards();
