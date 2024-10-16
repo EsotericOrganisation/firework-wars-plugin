@@ -62,13 +62,15 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
     }
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getAction().isRightClick()) {
             return;
         }
 
-//        PlayerInteractEvent.Result result = event.useInteractedBlock();
-//        plugin.logLoudly(result.name());
+        if (event.getClickedBlock() != null && event.getClickedBlock().getType().isInteractable()) {
+            return;
+        }
 
         Player player = event.getPlayer();
         TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
@@ -76,6 +78,10 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
         ItemStack item = event.getItem();
 
         if (!isValidCustomItem(item)) {
+            return;
+        }
+
+        if (Util.usedInteractableItem(event)) {
             return;
         }
 

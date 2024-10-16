@@ -3,9 +3,9 @@ package org.esoteric.minecraft.plugins.fireworkwars.items.explosives;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
@@ -32,22 +32,31 @@ public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     }
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onRightClick(PlayerInteractEvent event) {
-        ItemStack item = event.getItem();
-        Player player = event.getPlayer();
-
-//        PlayerInteractEvent.Result result = event.useInteractedBlock();
-//        plugin.logLoudly(result.name());
-
-        Event.Result result1 = event.useItemInHand();
-        plugin.logLoudly(result1.name());
-
         if (!event.getAction().isRightClick()) {
             return;
         }
 
+        if (event.getClickedBlock() != null && event.getClickedBlock().getType().isInteractable()) {
+            return;
+        }
+
+        ItemStack item = event.getItem();
+        Player player = event.getPlayer();
+
         if (!isValidCustomItem(item)) {
             return;
+        }
+
+        if (Util.usedInteractableItem(event)) {
+            return;
+        }
+
+        if (event.getHand() == EquipmentSlot.OFF_HAND) {
+            if (player.getInventory().getItemInMainHand().getType().isInteractable()) {
+                return;
+            }
         }
 
         item.setAmount(item.getAmount() - 1);
