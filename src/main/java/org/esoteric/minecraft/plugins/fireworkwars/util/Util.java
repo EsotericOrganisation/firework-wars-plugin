@@ -1,8 +1,12 @@
 package org.esoteric.minecraft.plugins.fireworkwars.util;
 
 import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -62,5 +66,56 @@ public class Util {
         return List
             .of(Color.RED, Color.ORANGE, Color.YELLOW, Color.LIME, Color.AQUA, Color.BLUE, Color.PURPLE)
             .get(randomInt(0, 6));
+    }
+
+    public static boolean usedInteractableItem(PlayerInteractEvent event) {
+        ItemStack item = event.getItem();
+        Block block = event.getClickedBlock();
+
+        if (event.getHand() == EquipmentSlot.HAND) {
+            return false;
+        }
+
+        if (item == null) {
+            return false;
+        }
+
+        Material material = item.getType();
+
+        if (material.isEdible()) {
+            return true;
+        }
+
+        List<Material> usableItems = List.of(Material.BOW, Material.CROSSBOW, Material.SNOWBALL, Material.EGG, Material.ENDER_PEARL, Material.ENDER_EYE, Material.TRIDENT, Material.SPLASH_POTION, Material.LINGERING_POTION, Material.POTION, Material.ELYTRA, Material.FISHING_ROD, Material.CARROT_ON_A_STICK, Material.WARPED_FUNGUS_ON_A_STICK, Material.SHEARS, Material.MILK_BUCKET, Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS, Material.GOLDEN_BOOTS, Material.DIAMOND_BOOTS, Material.NETHERITE_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS, Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS, Material.NETHERITE_LEGGINGS, Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE, Material.IRON_CHESTPLATE, Material.GOLDEN_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.NETHERITE_CHESTPLATE, Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET, Material.DIAMOND_HELMET, Material.NETHERITE_HELMET, Material.SHIELD, Material.TURTLE_HELMET, Material.COMPASS);
+
+        if (usableItems.contains(material)) {
+            return true;
+        }
+
+        if (block == null) {
+            return false;
+        }
+
+        if (material.isBlock()) {
+            return true;
+        }
+
+        List<Material> axes = List.of(Material.WOODEN_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLDEN_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE);
+        List<Material> woods = List.of(Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG, Material.JUNGLE_LOG, Material.ACACIA_LOG, Material.DARK_OAK_LOG, Material.CRIMSON_STEM, Material.WARPED_STEM, Material.OAK_WOOD, Material.SPRUCE_WOOD, Material.BIRCH_WOOD, Material.JUNGLE_WOOD, Material.ACACIA_WOOD, Material.DARK_OAK_WOOD, Material.CRIMSON_HYPHAE, Material.WARPED_HYPHAE);
+
+        if (axes.contains(material) && woods.contains(block.getType())) {
+            return true;
+        }
+
+        List<Material> shovels = List.of(Material.WOODEN_SHOVEL, Material.STONE_SHOVEL, Material.IRON_SHOVEL, Material.GOLDEN_SHOVEL, Material.DIAMOND_SHOVEL, Material.NETHERITE_SHOVEL);
+        List<Material> dirt = List.of(Material.DIRT, Material.COARSE_DIRT, Material.PODZOL, Material.GRASS_BLOCK, Material.MYCELIUM);
+
+        if (shovels.contains(material) && dirt.contains(block.getType())) {
+            return true;
+        }
+
+        List<Material> usableOnBlocks = List.of(Material.FLINT_AND_STEEL, Material.FIRE_CHARGE, Material.FIREWORK_ROCKET, Material.PUFFERFISH_BUCKET, Material.SALMON_BUCKET, Material.COD_BUCKET, Material.TROPICAL_FISH_BUCKET, Material.BUCKET, Material.WATER_BUCKET, Material.LAVA_BUCKET);
+
+        return usableOnBlocks.contains(material);
     }
 }
