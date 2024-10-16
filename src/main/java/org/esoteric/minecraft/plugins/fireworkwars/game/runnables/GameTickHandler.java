@@ -56,7 +56,7 @@ public class GameTickHandler extends BukkitRunnable {
     public void run() {
         ticksElapsed++;
 
-        if (ticksUntilSupplyDrop-- <= 0) {
+        if (--ticksUntilSupplyDrop <= 20) {
             handleSupplyDrops();
         }
 
