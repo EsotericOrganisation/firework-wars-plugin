@@ -47,7 +47,7 @@ HEAVY_ARMOR: "<dark_green>Heavy Armor</dark_green>"
 HEAVY_ARMOR_LORE: "<gray>A sturdy piece of armor.</gray>"
 
 FLINT_AND_STEEL: "<aqua>Flint and Steel</aqua>"
-FLINT_AND_STEEL_LORE: "<gray>Ignites most blocks, including TNT.</gray>"
+FLINT_AND_STEEL_LORE: "<gray>Ignites most blocks, including <red>TNT</red>.</gray>"
 
 SHEARS: "<aqua>Shears</aqua>"
 SHEARS_LORE: "<gray>Efficiently cuts through wool.</gray>"
