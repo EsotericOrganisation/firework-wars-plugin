@@ -231,11 +231,27 @@ public class FireworkWarsGame {
         }
     }
 
-    public void preEndGame(FireworkWarsTeam winningTeam) {
-        sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
+    private void resetWorldBorder() {
+        for (String worldName : arena.getWorlds()) {
+            World world = Bukkit.getWorld(worldName);
+            assert world != null;
+
+            WorldBorder border = world.getWorldBorder();
+            border.reset();
+        }
+    }
+
+    public void preEndGame(@Nullable FireworkWarsTeam winningTeam) {
+        if (winningTeam != null) {
+            sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
+        } else {
+            sendMessage(Message.DRAW);
+        }
 
         players.forEach(TeamPlayer::becomeSpectator);
         players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
+
+        resetWorldBorder();
 
         for (TeamPlayer teamPlayer : players) {
             Player player = teamPlayer.getPlayer();
@@ -244,6 +260,8 @@ public class FireworkWarsGame {
             if (teamPlayer.getTeam().equals(winningTeam)) {
                 title = title(languageManager.getMessage(Message.YOU_WIN, player), Component.empty());
                 teamPlayer.playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
+            } else if (winningTeam == null) {
+                title = title(languageManager.getMessage(Message.DRAW, player), Component.empty());
             } else {
                 title = title(languageManager.getMessage(Message.YOU_LOSE, player), Component.empty());
             }
@@ -252,6 +270,28 @@ public class FireworkWarsGame {
         }
 
         plugin.runTaskLater(this::endGame, 20 * 10L);
+    }
+
+    public void preEndGame() {
+        int mostRemainingPlayers = getRemainingTeams().stream()
+            .mapToInt(FireworkWarsTeam::getRemainingPlayerCount)
+            .max()
+            .orElse(0);
+
+        if (mostRemainingPlayers == 0) {
+            preEndGame(null);
+            return;
+        }
+
+        List<FireworkWarsTeam> winningTeams = getRemainingTeams().stream()
+            .filter(team -> team.getRemainingPlayerCount() == mostRemainingPlayers)
+            .toList();
+
+        if (winningTeams.size() == 1) {
+            preEndGame(winningTeams.get(0));
+        } else {
+            preEndGame(null);
+        }
     }
 
     public void endGame() {
