@@ -46,7 +46,7 @@ public class GoldenAppleItem extends AbstractItem<ItemMeta> {
         foodComponent.addEffect(
             new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 1), 1.0F);
         foodComponent.addEffect(
-            new PotionEffect(PotionEffectType.RESISTANCE, 30, 1), 1.0F);
+            new PotionEffect(PotionEffectType.RESISTANCE, 35, 1), 1.0F);
 
         meta.setFood(foodComponent);
     }
