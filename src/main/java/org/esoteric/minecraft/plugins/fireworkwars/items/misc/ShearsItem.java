@@ -28,6 +28,7 @@ public class ShearsItem extends AbstractItem<ItemMeta> {
 
     @Override
     protected void modifyMeta(ItemMeta meta) {
+        super.modifyMeta(meta);
         meta.addEnchant(Enchantment.EFFICIENCY, 3, true);
     }
 
