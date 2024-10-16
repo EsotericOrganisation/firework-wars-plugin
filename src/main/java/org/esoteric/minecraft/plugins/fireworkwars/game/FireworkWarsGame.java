@@ -4,9 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
 import org.bukkit.*;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitTask;
@@ -149,13 +147,14 @@ public class FireworkWarsGame {
         TeamPlayer teamPlayer = new TeamPlayer(player.getUniqueId(), this);
 
         players.add(teamPlayer);
+        teamPlayer.teleportToWaitingArea();
 
         if (isWaiting() && players.size() >= arena.getMinimumPlayerCount()) {
             startCountdown();
         }
 
-        teamPlayer.teleportToWaitingArea();
         player.setGameMode(GameMode.ADVENTURE);
+        plugin.getHealCommand().healPlayer(player);
 
         sendMessage(Message.ARENA_JOIN, player.displayName(), players.size(), arena.getMaximumPlayerCount());
     }
@@ -200,6 +199,7 @@ public class FireworkWarsGame {
         chestManager.refillChests(1.0D);
 
         createWorldBorder();
+        clearDroppedItems();
 
         for (TeamData teamData : arena.getTeamInformation()) {
             teams.add(new FireworkWarsTeam(teamData, this, plugin));
@@ -241,6 +241,15 @@ public class FireworkWarsGame {
         }
     }
 
+    private void clearDroppedItems() {
+        for (String worldName : arena.getWorlds()) {
+            World world = Bukkit.getWorld(worldName);
+            assert world != null;
+
+            world.getEntitiesByClass(Item.class).forEach(Entity::remove);
+        }
+    }
+
     public void preEndGame(@Nullable FireworkWarsTeam winningTeam) {
         if (winningTeam != null) {
             sendMessage(Message.TEAM_WON, winningTeam.getColoredTeamName());
@@ -252,7 +261,7 @@ public class FireworkWarsGame {
         players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
 
         resetWorldBorder();
-        players.forEach(TeamPlayer::showWorldBorder);
+        clearDroppedItems();
 
         for (TeamPlayer teamPlayer : players) {
             Player player = teamPlayer.getPlayer();
@@ -305,6 +314,10 @@ public class FireworkWarsGame {
         tasks.clear();
 
         chestManager.getSupplyDropMinecarts().clear();
+
+        for (TeamPlayer player : getPlayers()) {
+            plugin.getHealCommand().healPlayer(player.getPlayer());
+        }
 
         players.forEach(TeamPlayer::teleportToLobby);
         players.forEach(player -> player.unregister(false));
