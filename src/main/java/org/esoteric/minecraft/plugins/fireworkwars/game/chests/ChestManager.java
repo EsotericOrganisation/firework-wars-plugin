@@ -120,12 +120,14 @@ public class ChestManager {
                 .sorted(comparator.reversed())
                 .toList();
 
-            AbstractItem<? extends ItemMeta> item = Util.randomElement(highestValueItems);
+            if (!highestValueItems.isEmpty()) {
+                AbstractItem<? extends ItemMeta> item = Util.randomElement(highestValueItems);
 
-            this.putItemInChest(item, chest, slots.removeFirst());
-            itemList.remove(item);
+                this.putItemInChest(item, chest, slots.removeFirst());
+                itemList.remove(item);
 
-            i += item.getValue();
+                i += item.getValue();
+            }
         }
 
         while (i < maxTotalValue) {
