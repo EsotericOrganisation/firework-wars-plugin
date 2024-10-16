@@ -8,6 +8,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
@@ -30,6 +31,8 @@ public class WoolItem extends AbstractItem<ItemMeta> {
         }
 
         return new ItemBuilder<>(plugin, material)
+            .setName(Message.WOOL, player)
+            .setLore(Message.WOOL_LORE, player)
             .modifyMeta(this::modifyMeta)
             .build();
     }

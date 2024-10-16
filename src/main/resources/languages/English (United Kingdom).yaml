@@ -3,6 +3,9 @@ SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 # Custom Items
+WOOL: "<yellow>Wool</yellow>"
+WOOL_LORE: "<gray>Useful defensive block.</gray>"
+
 FIREWORK_RIFLE: "<red>Firework</red> <aqua>Rifle</aqua>"
 FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful.</gray>\n<gray>Shoots one firework at a time.</gray>"
 FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
@@ -20,12 +23,19 @@ ROCKET_LAUNCHER_AMMO_LORE: "<gray>1x rocket launcher ammo</gray>"
 
 PLAYER_COMPASS: "<yellow>Player Tracker</yellow>"
 PLAYER_COMPASS_LORE_NOT_TRACKING: "<gray>No player is being tracked.</gray>"
-PLAYER_COMPASS_LORE_TRACKING: "<green>Tracking target: </green>{0}"
+PLAYER_COMPASS_LORE_TRACKING: "<!i><gray>Tracking target: </gray>{0}</!i>"
 PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
 PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
 
+GOLDEN_APPLE: "<yellow>Golden Apple</yellow>"
 GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> and a short <yellow>damage resistance</yellow> on consumption.</gray>"
+
+HEALING_POTION: "<yellow>Healing Potion</yellow>"
+HEALING_POTION_LORE: "<gray>Instant health replenishment.</gray>"
+  
+TNT: "<red>TNT</red>"
+TNT_LORE: "<gray>Ignite with <aqua>flint and steel</aqua> to explode.</gray>"
 
 THROWABLE_TNT: "<red>Throwable TNT</red>"
 THROWABLE_TNT_LORE: "<gray><yellow><bold>RIGHT CLICK</bold></yellow> to throw in your direction.</gray>"
@@ -36,6 +46,10 @@ MILITARY_HELMET_LORE: "<gray>Provides some light protection.</gray>"
 HEAVY_ARMOR: "<dark_green>Heavy Armor</dark_green>"
 HEAVY_ARMOR_LORE: "<gray>A sturdy piece of armor.</gray>"
 
+FLINT_AND_STEEL: "<aqua>Flint and Steel</aqua>"
+FLINT_AND_STEEL_LORE: "<gray>Ignites most blocks, including TNT.</gray>"
+
+SHEARS: "<aqua>Shears</aqua>"
 SHEARS_LORE: "<gray>Efficiently cuts through wool.</gray>"
 
 # Game Messages

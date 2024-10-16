@@ -7,6 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
@@ -18,6 +19,8 @@ public class TNTItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
+            .setName(Message.TNT, player)
+            .setLore(Message.TNT_LORE, player)
             .modifyMeta(this::modifyMeta)
             .build();
     }

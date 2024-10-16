@@ -19,6 +19,7 @@ public class ShearsItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
+            .setName(Message.SHEARS, player)
             .setLore(Message.SHEARS_LORE, player)
             .setUnbreakable(true)
             .modifyMeta(this::modifyMeta)

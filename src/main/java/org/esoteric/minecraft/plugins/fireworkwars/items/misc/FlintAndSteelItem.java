@@ -7,6 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class FlintAndSteelItem extends AbstractItem<ItemMeta> {
@@ -17,6 +18,8 @@ public class FlintAndSteelItem extends AbstractItem<ItemMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<>(plugin, itemMaterial)
+            .setName(Message.FLINT_AND_STEEL, player)
+            .setLore(Message.FLINT_AND_STEEL_LORE, player)
             .setUnbreakable(true)
             .modifyMeta(this::modifyMeta)
             .build();

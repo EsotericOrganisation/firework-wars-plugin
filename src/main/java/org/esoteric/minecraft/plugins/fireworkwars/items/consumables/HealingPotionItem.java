@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionType;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.items.AbstractItem;
 import org.esoteric.minecraft.plugins.fireworkwars.items.ItemType;
+import org.esoteric.minecraft.plugins.fireworkwars.language.Message;
 import org.esoteric.minecraft.plugins.fireworkwars.util.ItemBuilder;
 
 public class HealingPotionItem extends AbstractItem<PotionMeta> {
@@ -18,6 +19,8 @@ public class HealingPotionItem extends AbstractItem<PotionMeta> {
     @Override
     public ItemStack getItem(Player player) {
         return new ItemBuilder<PotionMeta>(plugin, itemMaterial)
+            .setName(Message.HEALING_POTION, player)
+            .setLore(Message.HEALING_POTION_LORE, player)
             .modifyMeta(this::modifyMeta)
             .build();
     }
