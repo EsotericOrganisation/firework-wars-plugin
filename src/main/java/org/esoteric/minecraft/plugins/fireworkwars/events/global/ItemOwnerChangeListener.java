@@ -13,16 +13,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.fireworkwars.game.team.TeamPlayer;
+import org.esoteric.minecraft.plugins.fireworkwars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Keys;
 import org.esoteric.minecraft.plugins.fireworkwars.util.PersistentDataManager;
 
 public class ItemOwnerChangeListener implements Listener {
     private final FireworkWarsPlugin plugin;
     private final PersistentDataManager pdcManager;
+    private final CustomItemManager itemManager;
 
     public ItemOwnerChangeListener(FireworkWarsPlugin plugin) {
         this.plugin = plugin;
         this.pdcManager = plugin.getPdcManager();
+        this.itemManager = plugin.getCustomItemManager();
     }
 
     public void register() {
@@ -104,6 +107,7 @@ public class ItemOwnerChangeListener implements Listener {
         updateWoolColor(item, player);
         updateLeatherArmorColor(item, player);
         updateAmmoOwner(item, player);
+        updateTNTText(item, player);
         updateItemLocale(item, player);
     }
 
@@ -114,6 +118,7 @@ public class ItemOwnerChangeListener implements Listener {
         if (item.getType().name().endsWith("_WOOL")) {
             if (teamPlayer != null) {
                 item.setType(teamPlayer.getTeam().getWoolMaterial());
+                itemManager.getItem("wool").updateItemTexts(item, player);
             } else {
                 item.setType(Material.WHITE_WOOL);
             }
@@ -145,6 +150,18 @@ public class ItemOwnerChangeListener implements Listener {
         }
     }
 
+    private void updateTNTText(ItemStack item, Player player) {
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
+
+        if (teamPlayer == null) {
+            return;
+        }
+
+        if (item.getType() == Material.TNT) {
+            itemManager.getItem("tnt").updateItemTexts(item, player);
+        }
+    }
+
     private void updateItemLocale(ItemStack item, Player player) {
         if (pdcManager.hasKey(item.getItemMeta(), Keys.CUSTOM_ITEM_ID)) {
             if (item.getType() == Material.CROSSBOW) {
@@ -152,12 +169,7 @@ public class ItemOwnerChangeListener implements Listener {
             }
 
             String itemId = pdcManager.getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID);
-            ItemStack newItem = plugin.getCustomItemManager().getItem(itemId).getItem(player);
-
-            item.editMeta(meta -> {
-                meta.displayName(newItem.getItemMeta().displayName());
-                meta.lore(newItem.getItemMeta().lore());
-            });
+            itemManager.getItem(itemId).updateItemTexts(item, player);
         }
     }
 }
