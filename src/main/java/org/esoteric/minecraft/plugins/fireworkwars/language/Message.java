@@ -66,6 +66,7 @@ public enum Message {
 
     TEAM_ELIMINATED,
     TEAM_WON,
+    DRAW,
 
     NOT_IN_LOBBY,
     INVALID_ARENA,
@@ -97,6 +98,7 @@ public enum Message {
 
     YOU_WIN,
     YOU_LOSE,
+    GAME_DRAWN,
 
     ARENA_JOIN,
     ARENA_LEAVE,
