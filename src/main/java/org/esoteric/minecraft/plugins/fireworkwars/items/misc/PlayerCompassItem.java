@@ -67,6 +67,9 @@ public class PlayerCompassItem extends AbstractItem<CompassMeta> {
             return;
         }
 
+//        PlayerInteractEvent.Result result = event.useInteractedBlock();
+//        plugin.logLoudly(result.name());
+
         Player player = event.getPlayer();
         TeamPlayer teamPlayer = TeamPlayer.from(player.getUniqueId());
 

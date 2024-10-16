@@ -3,6 +3,7 @@ package org.esoteric.minecraft.plugins.fireworkwars.items.explosives;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -34,6 +35,12 @@ public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
     public void onRightClick(PlayerInteractEvent event) {
         ItemStack item = event.getItem();
         Player player = event.getPlayer();
+
+//        PlayerInteractEvent.Result result = event.useInteractedBlock();
+//        plugin.logLoudly(result.name());
+
+        Event.Result result1 = event.useItemInHand();
+        plugin.logLoudly(result1.name());
 
         if (!event.getAction().isRightClick()) {
             return;
