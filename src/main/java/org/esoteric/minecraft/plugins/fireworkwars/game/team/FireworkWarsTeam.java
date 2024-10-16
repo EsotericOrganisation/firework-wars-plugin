@@ -56,6 +56,10 @@ public class FireworkWarsTeam {
                 .toList();
     }
 
+    public int getRemainingPlayerCount() {
+        return getRemainingPlayers().size();
+    }
+
     public boolean isEliminated() {
         return getRemainingPlayers().isEmpty();
     }
