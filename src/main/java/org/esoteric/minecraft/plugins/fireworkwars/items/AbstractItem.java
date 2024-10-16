@@ -106,11 +106,24 @@ public abstract class AbstractItem<M extends ItemMeta> implements Listener {
 
     public abstract ItemStack getItem(Player player);
 
+    public abstract int getStackAmount();
+
     public ItemStack getItem(Player player, int amount) {
         ItemStack item = getItem(player);
         item.setAmount(amount);
         return item;
     }
 
-    public abstract int getStackAmount();
+    public void updateItemTexts(ItemStack item) {
+        updateItemTexts(item, null);
+    }
+
+    public void updateItemTexts(ItemStack item, Player player) {
+        ItemStack defaultItem = getItem(player);
+
+        item.editMeta(meta -> {
+            meta.displayName(defaultItem.getItemMeta().displayName());
+            meta.lore(defaultItem.lore());
+        });
+    }
 }
