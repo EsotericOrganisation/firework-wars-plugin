@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
@@ -51,12 +50,6 @@ public class ThrowableTNTItem extends AbstractItem<ItemMeta> {
 
         if (Util.usedInteractableItem(event)) {
             return;
-        }
-
-        if (event.getHand() == EquipmentSlot.OFF_HAND) {
-            if (player.getInventory().getItemInMainHand().getType().isInteractable()) {
-                return;
-            }
         }
 
         item.setAmount(item.getAmount() - 1);

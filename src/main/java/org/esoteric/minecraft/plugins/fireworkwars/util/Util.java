@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+@SuppressWarnings("unused")
 public class Util {
     public static void playSound(Player player, Sound sound) {
         player.playSound(player.getLocation(), sound, 1.0F, 1.0F);
@@ -69,14 +71,15 @@ public class Util {
     }
 
     public static boolean usedInteractableItem(PlayerInteractEvent event) {
-        ItemStack item = event.getItem();
-        Block block = event.getClickedBlock();
-
-        if (event.getHand() == EquipmentSlot.HAND) {
+        if (event.getHand() != EquipmentSlot.OFF_HAND) {
             return false;
         }
 
-        if (item == null) {
+        Player player = event.getPlayer();
+        ItemStack item = player.getInventory().getItemInMainHand();
+        Block block = event.getClickedBlock();
+
+        if (item.isEmpty()) {
             return false;
         }
 
@@ -86,9 +89,17 @@ public class Util {
             return true;
         }
 
-        List<Material> usableItems = List.of(Material.BOW, Material.CROSSBOW, Material.SNOWBALL, Material.EGG, Material.ENDER_PEARL, Material.ENDER_EYE, Material.TRIDENT, Material.SPLASH_POTION, Material.LINGERING_POTION, Material.POTION, Material.ELYTRA, Material.FISHING_ROD, Material.CARROT_ON_A_STICK, Material.WARPED_FUNGUS_ON_A_STICK, Material.SHEARS, Material.MILK_BUCKET, Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS, Material.GOLDEN_BOOTS, Material.DIAMOND_BOOTS, Material.NETHERITE_BOOTS, Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS, Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS, Material.NETHERITE_LEGGINGS, Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE, Material.IRON_CHESTPLATE, Material.GOLDEN_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.NETHERITE_CHESTPLATE, Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET, Material.DIAMOND_HELMET, Material.NETHERITE_HELMET, Material.SHIELD, Material.TURTLE_HELMET, Material.COMPASS);
+        List<Material> usableItems = List.of(Material.BOW, Material.CROSSBOW, Material.SNOWBALL, Material.EGG, Material.ENDER_PEARL, Material.ENDER_EYE, Material.TRIDENT, Material.SPLASH_POTION, Material.LINGERING_POTION, Material.POTION, Material.ELYTRA, Material.FISHING_ROD, Material.CARROT_ON_A_STICK, Material.WARPED_FUNGUS_ON_A_STICK, Material.SHEARS, Material.MILK_BUCKET, Material.SHIELD);
 
         if (usableItems.contains(material)) {
+            return true;
+        }
+
+        if ("throwable_tnt".equals(getItemCustomId(item))) {
+            return true;
+        }
+
+        if ("player_compass".equals(getItemCustomId(item))) {
             return true;
         }
 
@@ -114,8 +125,33 @@ public class Util {
             return true;
         }
 
+        List<Material> boots = List.of(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.IRON_BOOTS, Material.GOLDEN_BOOTS, Material.DIAMOND_BOOTS, Material.NETHERITE_BOOTS);
+        List<Material> leggings = List.of(Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS, Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS, Material.NETHERITE_LEGGINGS);
+        List<Material> chestplates = List.of(Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE, Material.IRON_CHESTPLATE, Material.GOLDEN_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.NETHERITE_CHESTPLATE);
+        List<Material> helmets = List.of(Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET, Material.IRON_HELMET, Material.GOLDEN_HELMET, Material.DIAMOND_HELMET, Material.NETHERITE_HELMET, Material.TURTLE_HELMET);
+
+        if (boots.contains(material) && !item.equals(player.getInventory().getItem(EquipmentSlot.FEET))) {
+            return true;
+        }
+
+        if (leggings.contains(material) && !item.equals(player.getInventory().getItem(EquipmentSlot.LEGS))) {
+            return true;
+        }
+
+        if (chestplates.contains(material) && !item.equals(player.getInventory().getItem(EquipmentSlot.CHEST))) {
+            return true;
+        }
+
+        if (helmets.contains(material) && !item.equals(player.getInventory().getItem(EquipmentSlot.HEAD))) {
+            return true;
+        }
+
         List<Material> usableOnBlocks = List.of(Material.FLINT_AND_STEEL, Material.FIRE_CHARGE, Material.FIREWORK_ROCKET, Material.PUFFERFISH_BUCKET, Material.SALMON_BUCKET, Material.COD_BUCKET, Material.TROPICAL_FISH_BUCKET, Material.BUCKET, Material.WATER_BUCKET, Material.LAVA_BUCKET);
 
         return usableOnBlocks.contains(material);
+    }
+
+    public static String getItemCustomId(ItemStack item) {
+        return FireworkWarsPlugin.getInstance().getPdcManager().getStringValue(item.getItemMeta(), Keys.CUSTOM_ITEM_ID);
     }
 }
