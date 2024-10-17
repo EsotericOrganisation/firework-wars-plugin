@@ -114,12 +114,21 @@ public class GameEventListener implements Listener {
         performDeath(player, event.deathMessage(), false);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     public void performDeath(Player player, Component deathMessage, boolean disconnected) {
         TeamPlayer teamPlayer = TeamPlayer.from(player);
         FireworkWarsTeam team = teamPlayer.getTeam();
 
         if (disconnected) {
             teamPlayer.unregister(true);
+        }
+
+        if (disconnected && player.getLastDamageCause().getDamageSource().getCausingEntity() instanceof Player killer) {
+            TeamPlayer killerTeamPlayer = TeamPlayer.from(killer);
+
+            if (killerTeamPlayer != null && !team.equals(killerTeamPlayer.getTeam())) {
+                killerTeamPlayer.incrementKills();
+            }
         }
 
         player.setGameMode(GameMode.SPECTATOR);
