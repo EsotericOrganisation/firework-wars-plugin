@@ -96,7 +96,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         isFirstRun = !getDataFolder().exists();
 
-        if (!isFirstRun && Files.exists(Paths.get("world"))) {
+        if (!isFirstRun && Files.exists(Paths.get("maps/world"))) {
             throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
         }
 
@@ -106,21 +106,9 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         try {
             saveMaps();
             moveMapsToRoot();
-
-            saveLobby();
-            moveLobbyToRoot();
         } catch (IOException exception) {
             getLogger().severe(exception.getMessage() + Arrays.toString(exception.getStackTrace()));
         }
-    }
-
-    private void saveLobby() throws IOException {
-        fileManager.saveResourceFileFolder("world");
-        saveResource("world/level.dat", true);
-    }
-
-    private void moveLobbyToRoot() throws IOException {
-        moveFolderToRoot(Paths.get("plugins/FireworkWarsPlugin/world"));
     }
 
     private void saveMaps() throws IOException {
@@ -131,6 +119,9 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         fileManager.saveResourceFileFolder("maps/barracks");
         saveResource("maps/barracks/level.dat", true);
+
+        fileManager.saveResourceFileFolder("maps/world");
+        saveResource("maps/world/level.dat", true);
     }
 
     private void moveMapsToRoot() throws IOException {
