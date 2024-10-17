@@ -182,7 +182,7 @@ public class TeamPlayer {
     }
 
     public void teleportToLobby() {
-        Location location = plugin.getArenaManager().getLobbies().get(0).getSpawnLocation().getBukkitLocation();
+        Location location = plugin.getArenaManager().getFirstLobbySpawnLocation();
         getPlayer().teleport(location);
         getPlayer().setGameMode(GameMode.ADVENTURE);
     }
