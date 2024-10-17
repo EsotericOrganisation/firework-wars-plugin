@@ -179,7 +179,7 @@ public class FireworkWarsGame {
 
     public void sendMessage(Message message, Object... arguments) {
         for (TeamPlayer player : players) {
-            if (player == null || !player.getPlayer().isOnline()) {
+            if (player == null || player.getPlayer() == null || !player.getPlayer().isOnline()) {
                 continue;
             }
             languageManager.sendMessage(message, player.getPlayer(), arguments);
