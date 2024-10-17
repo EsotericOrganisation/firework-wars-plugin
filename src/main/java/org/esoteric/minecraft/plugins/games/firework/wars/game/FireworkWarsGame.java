@@ -113,6 +113,10 @@ public class FireworkWarsGame {
         return players.contains(teamPlayer);
     }
 
+    public GameEventListener getEventListener() {
+        return eventListener;
+    }
+
     public boolean usesWorld(String worldName) {
         return arena.getWorlds().contains(worldName);
     }
