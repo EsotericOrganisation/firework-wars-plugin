@@ -71,6 +71,8 @@ public class PlayerConnectionListener implements Listener {
 
             disconnectedPlayers.put(player.getUniqueId(), teamPlayer);
         }
+
+        event.quitMessage(null);
     }
 
     @EventHandler
