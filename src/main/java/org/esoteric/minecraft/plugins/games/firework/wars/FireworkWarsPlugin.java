@@ -101,16 +101,12 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
         FireworkWarsPlugin.instance = this;
         FireworkWarsPlugin.logger = getLogger();
 
-        try {
-            FileUtils.deleteDirectory(new File("world"));
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-
         this.customItemManager = customItemManager;
         this.fileManager = new FileManager(this);
 
         try {
+            FileUtils.deleteDirectory(new File("world"));
+
             saveMaps();
             moveMapsToRoot();
         } catch (IOException exception) {
