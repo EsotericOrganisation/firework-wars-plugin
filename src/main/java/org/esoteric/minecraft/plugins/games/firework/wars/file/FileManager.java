@@ -22,10 +22,8 @@ public class FileManager {
     }
 
     public File saveResourceFileFolder(String resourceFileFolderPath, boolean shouldReplaceExistingFiles) {
-        plugin.getLogger().info("Saving resource file folder " + resourceFileFolderPath + ".");
         try {
             FileUtil.getResourceFileFolderResourceFilePathsRecursively(resourceFileFolderPath).forEach((resourceFilePath) -> {
-                plugin.getLogger().info("Saving resource file " + resourceFilePath + ".");
                 plugin.saveResource(resourceFilePath, shouldReplaceExistingFiles);
             });
             return new File(plugin.getDataPath() + File.separator + resourceFileFolderPath);

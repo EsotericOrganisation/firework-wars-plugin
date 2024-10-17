@@ -47,8 +47,6 @@ public class FileUtil {
             List<String> paths = jarFile.stream().map(JarEntry::getName).filter(name -> name.startsWith(resourceFileFolderPath) && !name.equals(resourceFileFolderPath))
                     .map(name -> name.substring(resourceFileFolderPath.length())).filter(name -> !"/".equals(name)).map(name -> resourceFileFolderPath + name).toList();
 
-            Bukkit.getLogger().info(paths.toString());
-
             return paths;
         }
     }
@@ -60,7 +58,6 @@ public class FileUtil {
             List<String> subFiles = getResourceFileFolderResourceFilePathsRecursively(resourceFilePath);
             if (subFiles.isEmpty()) {
                 paths.add(resourceFilePath);
-                Bukkit.getLogger().info("Adding " + resourceFilePath + ".");
             } else {
                 paths.addAll(subFiles);
             }
