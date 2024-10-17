@@ -25,7 +25,6 @@ import org.esoteric.minecraft.plugins.games.firework.wars.managers.PlayerVelocit
 import org.esoteric.minecraft.plugins.games.firework.wars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.util.PersistentDataManager;
 import org.jetbrains.annotations.NotNull;
-import javax.swing.filechooser.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +37,6 @@ import java.util.logging.Logger;
 public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
     private static FireworkWarsPlugin instance;
     private static Logger logger;
-
-    private final boolean isFirstRun;
 
     private final FileManager fileManager;
     private final Path mapsDirectory = Paths.get("plugins/FireworkWarsPlugin/maps");
@@ -104,22 +101,10 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
         FireworkWarsPlugin.instance = this;
         FireworkWarsPlugin.logger = getLogger();
 
-        isFirstRun = !getDataFolder().exists();
-
-        if (isFirstRun) {
-            getLogger().info("Starting plugin for the first time.");
-        } else {
-            getLogger().info("Starting plugin.");
-        }
-
         try {
             FileUtils.deleteDirectory(new File("world"));
         } catch (IOException exception) {
             throw new RuntimeException(exception);
-        }
-
-        if (isFirstRun && Files.exists(Paths.get("world"))) {
-            throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
         }
 
         this.customItemManager = customItemManager;
