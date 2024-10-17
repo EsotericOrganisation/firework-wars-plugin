@@ -85,8 +85,10 @@ public class PlayerConnectionListener implements Listener {
         }
 
         switch (game.getGameState()) {
-            case WAITING, STARTING ->
+            case WAITING, STARTING -> {
                 game.addPlayer(player);
+                event.joinMessage(null);
+            }
             case PLAYING -> {
                 if (!disconnectedPlayers.contains(player.getUniqueId())) {
                     return;
