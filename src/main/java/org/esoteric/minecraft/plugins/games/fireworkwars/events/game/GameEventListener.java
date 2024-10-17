@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.esoteric.minecraft.plugins.games.fireworkwars.FireworkWarsPlugin;
@@ -123,7 +124,8 @@ public class GameEventListener implements Listener {
             teamPlayer.unregister(true);
         }
 
-        if (disconnected && player.getLastDamageCause().getDamageSource().getCausingEntity() instanceof Player killer) {
+        EntityDamageEvent lastDamageCause = player.getLastDamageCause();
+        if (lastDamageCause != null && disconnected && lastDamageCause.getDamageSource().getCausingEntity() instanceof Player killer) {
             TeamPlayer killerTeamPlayer = TeamPlayer.from(killer);
 
             if (killerTeamPlayer != null && !team.equals(killerTeamPlayer.getTeam())) {
