@@ -52,7 +52,7 @@ val projectNameString = rootProject.name
 val bootstrapperNameString = rootProject.name + "-bootstrapper"
 
 group = topLevelDomain + groupStringSeparator + simplifiedMainProjectAuthor.lowercase().replace(" ", "")
-version = "1.0.0"
+version = "0.1.0"
 
 val buildDirectoryString = layout.buildDirectory.toString()
 
