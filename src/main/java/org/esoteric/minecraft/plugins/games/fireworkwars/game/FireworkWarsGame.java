@@ -269,9 +269,6 @@ public class FireworkWarsGame {
         players.forEach(TeamPlayer::becomeSpectator);
         players.forEach(teamPlayer -> teamPlayer.getPlayer().getInventory().clear());
 
-        resetWorldBorder();
-        clearDroppedItems();
-
         for (TeamPlayer teamPlayer : players) {
             Player player = teamPlayer.getPlayer();
             Title title;
