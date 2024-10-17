@@ -105,12 +105,10 @@ public class GameEventListener implements Listener {
             return;
         }
 
-        if (player.isOnline()) {
-            player.setGameMode(GameMode.SPECTATOR);
+        player.setGameMode(GameMode.SPECTATOR);
 
-            if (player.getKiller() != null) {
-                TeamPlayer.from(player.getKiller()).incrementKills();
-            }
+        if (player.getKiller() != null) {
+            TeamPlayer.from(player.getKiller()).incrementKills();
         }
 
         FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
@@ -135,10 +133,7 @@ public class GameEventListener implements Listener {
             }
         }
 
-        if (player.isOnline()) {
-            event.getPlayer().getInventory().clear();
-        }
-
+        event.getPlayer().getInventory().clear();
         event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
 
         event.setReviveHealth(20.0D);
@@ -161,11 +156,8 @@ public class GameEventListener implements Listener {
 
         if (!gameEnded) {
             Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
-
-            if (player.isOnline()) {
-                event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
-                event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
-            }
+            event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
+            event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
         }
     }
 
