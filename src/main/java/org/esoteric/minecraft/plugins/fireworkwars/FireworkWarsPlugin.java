@@ -96,6 +96,10 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         isFirstRun = !getDataFolder().exists();
 
+        if (!isFirstRun && Files.exists(Paths.get("world"))) {
+            throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
+        }
+
         this.customItemManager = customItemManager;
         this.fileManager = new FileManager(this);
 
