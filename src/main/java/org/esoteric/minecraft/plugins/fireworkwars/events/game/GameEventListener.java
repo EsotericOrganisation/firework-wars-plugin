@@ -127,8 +127,12 @@ public class GameEventListener implements Listener {
         player.getInventory().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
         player.getInventory().clear();
 
+        Sound sound = disconnected
+            ? Sound.ENTITY_LIGHTNING_BOLT_THUNDER
+            : Sound.ENTITY_SKELETON_DEATH;
+
         game.getPlayers().forEach(tp -> tp.sendMessage(deathMessage));
-        game.getPlayers().forEach(tp -> tp.playSound(Sound.ENTITY_SKELETON_DEATH));
+        game.getPlayers().forEach(tp -> tp.playSound(sound));
 
         for (TeamPlayer tp : game.getPlayers()) {
             Player p = tp.getPlayer();
