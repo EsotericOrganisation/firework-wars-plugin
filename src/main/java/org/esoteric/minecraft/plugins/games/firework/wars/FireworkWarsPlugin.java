@@ -3,6 +3,11 @@ package org.esoteric.minecraft.plugins.games.firework.wars;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.esoteric.minecraft.plugins.games.firework.wars.arena.manager.ArenaManager;
@@ -10,12 +15,14 @@ import org.esoteric.minecraft.plugins.games.firework.wars.commands.*;
 import org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.global.ItemOwnerChangeListener;
 import org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.global.PlayerLoseHungerListener;
 import org.esoteric.minecraft.plugins.games.firework.wars.file.FileManager;
+import org.esoteric.minecraft.plugins.games.firework.wars.game.FireworkWarsGame;
 import org.esoteric.minecraft.plugins.games.firework.wars.game.GameManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.managers.PlayerVelocityManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.util.PersistentDataManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +32,7 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 @SuppressWarnings("unused")
-public final class FireworkWarsPlugin extends JavaPlugin {
+public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
     private static FireworkWarsPlugin instance;
     private static Logger logger;
 
@@ -186,6 +193,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
         new ItemOwnerChangeListener(this).register();
         new PlayerLoseHungerListener(this).register();
+
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
 
     @Override
@@ -205,5 +214,18 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     public void logLoudly(String message) {
         this.getServer().broadcast(Component.text(message));
+    }
+
+    @EventHandler
+    public void onDamage(@NotNull EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player player)) {
+           return;
+        }
+
+        FireworkWarsGame game = gameManager.getFireworkWarsGame(player);
+
+        if (game == null) {
+            event.setCancelled(true);
+        }
     }
 }
