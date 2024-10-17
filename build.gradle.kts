@@ -1,4 +1,6 @@
 import org.gradle.api.JavaVersion
+import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.resourcefactory.paper.PaperPluginYaml
 
 plugins {
   java
@@ -6,11 +8,11 @@ plugins {
 
   `maven-publish`
 
-  id("io.papermc.paperweight.userdev") version "1.7.2"
-  id("xyz.jpenilla.resource-factory-paper-convention") version "1.1.2"
-  id("xyz.jpenilla.run-paper") version "2.3.0"
+  id("io.papermc.paperweight.userdev") version "1.7.3"
+  id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
+  id("xyz.jpenilla.run-paper") version "2.3.1"
 
-  id("io.github.goooler.shadow") version "8.1.7"
+  id("io.github.goooler.shadow") version "8.1.8"
 }
 
 val groupStringSeparator = "."
