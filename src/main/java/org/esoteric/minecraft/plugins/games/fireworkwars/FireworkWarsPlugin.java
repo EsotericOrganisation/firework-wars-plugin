@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.esoteric.minecraft.plugins.games.fireworkwars.arena.manager.ArenaManager;
-import org.esoteric.minecraft.plugins.games.firework.wars.commands.*;
+import org.esoteric.minecraft.plugins.games.fireworkwars.commands.*;
 import org.esoteric.minecraft.plugins.games.fireworkwars.events.global.ItemOwnerChangeListener;
 import org.esoteric.minecraft.plugins.games.fireworkwars.events.global.PlayerLoseHungerListener;
 import org.esoteric.minecraft.plugins.games.fireworkwars.file.FileManager;
@@ -24,7 +24,6 @@ import org.esoteric.minecraft.plugins.games.fireworkwars.language.LanguageManage
 import org.esoteric.minecraft.plugins.games.fireworkwars.managers.PlayerVelocityManager;
 import org.esoteric.minecraft.plugins.games.fireworkwars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.games.fireworkwars.util.PersistentDataManager;
-import org.esoteric.minecraft.plugins.games.fireworkwars.commands.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
