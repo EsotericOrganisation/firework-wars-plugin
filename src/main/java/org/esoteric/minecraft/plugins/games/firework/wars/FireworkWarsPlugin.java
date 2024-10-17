@@ -7,13 +7,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.esoteric.minecraft.plugins.games.firework.wars.arena.manager.ArenaManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.commands.*;
-import org.esoteric.minecraft.plugins.games.firework.wars.events.global.ItemOwnerChangeListener;
-import org.esoteric.minecraft.plugins.games.firework.wars.events.global.PlayerLoseHungerListener;
+import org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.global.ItemOwnerChangeListener;
+import org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.global.PlayerLoseHungerListener;
 import org.esoteric.minecraft.plugins.games.firework.wars.file.FileManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.game.GameManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.CustomItemManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.language.LanguageManager;
-import org.esoteric.minecraft.plugins.games.firework.wars.manager.PlayerVelocityManager;
+import org.esoteric.minecraft.plugins.games.firework.wars.managers.PlayerVelocityManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.util.PersistentDataManager;
 

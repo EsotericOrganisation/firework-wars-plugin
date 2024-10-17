@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rocket_launcher;
+package org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rpg;
 
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import org.bukkit.Color;

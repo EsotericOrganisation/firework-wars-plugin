@@ -21,8 +21,8 @@ import org.esoteric.minecraft.plugins.games.firework.wars.items.explosives.TNTIt
 import org.esoteric.minecraft.plugins.games.firework.wars.items.explosives.ThrowableTNTItem;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rifle.FireworkRifleItem;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rifle.RifleAmmo;
-import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rocket_launcher.RocketLauncherAmmo;
-import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rocket_launcher.RocketLauncherItem;
+import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rpg.RocketLauncherAmmo;
+import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.rpg.RocketLauncherItem;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.shotgun.FireworkShotgunItem;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.guns.shotgun.ShotgunAmmo;
 import org.esoteric.minecraft.plugins.games.firework.wars.items.misc.FlintAndSteelItem;

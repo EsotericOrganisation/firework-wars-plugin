@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.games.firework.wars.manager;
+package org.esoteric.minecraft.plugins.games.firework.wars.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

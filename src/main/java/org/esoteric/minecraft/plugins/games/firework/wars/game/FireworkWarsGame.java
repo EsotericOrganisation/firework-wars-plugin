@@ -12,7 +12,7 @@ import org.esoteric.minecraft.plugins.games.firework.wars.FireworkWarsPlugin;
 import org.esoteric.minecraft.plugins.games.firework.wars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.games.firework.wars.arena.json.data.WorldBorderData;
 import org.esoteric.minecraft.plugins.games.firework.wars.arena.json.structure.Arena;
-import org.esoteric.minecraft.plugins.games.firework.wars.events.game.GameEventListener;
+import org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.game.GameEventListener;
 import org.esoteric.minecraft.plugins.games.firework.wars.game.chests.ChestManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.game.runnables.GameCountdown;
 import org.esoteric.minecraft.plugins.games.firework.wars.game.runnables.GameTickHandler;

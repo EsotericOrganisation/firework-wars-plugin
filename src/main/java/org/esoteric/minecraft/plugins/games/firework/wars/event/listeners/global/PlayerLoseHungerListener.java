@@ -1,4 +1,4 @@
-package org.esoteric.minecraft.plugins.games.firework.wars.events.global;
+package org.esoteric.minecraft.plugins.games.firework.wars.event.listeners.global;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
