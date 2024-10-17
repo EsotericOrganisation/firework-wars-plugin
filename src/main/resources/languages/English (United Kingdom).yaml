@@ -61,7 +61,7 @@ YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
 TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
 
 PLAYER_DISCONNECTED: "{0} <gray>has disconnected!</gray>"
-PLAYER_KILLED_BY_DISCONNECTION: "{0} <gray> died because they disconnected.</gray>"
+PLAYER_KILLED_BY_DISCONNECTION: "{0} <gray>died because they disconnected.</gray>"
 
 TEAM_WON: "{0}<yellow> has won the game!</yellow>"
 DRAW: "<dark_gray>The game ended in a draw!</dark_gray>"
