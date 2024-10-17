@@ -111,7 +111,7 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
             getLogger().info("Starting plugin.");
         }
 
-        Arrays.stream(FileSystemView.getFileSystemView().getHomeDirectory().listFiles()).forEach((file) -> getLogger().info(file.getName()));
+        Arrays.stream(new File(System.getProperty("user.dir")).listFiles()).forEach((file) -> getLogger().info(file.getName()));
 
         if (isFirstRun && Files.exists(Paths.get("world"))) {
             throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
