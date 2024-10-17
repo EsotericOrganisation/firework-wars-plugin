@@ -110,8 +110,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     }
 
     private void saveLobby() throws IOException {
-        fileManager.saveResourceFileFolder("lobby");
-        moveFolderToRoot(Paths.get("plugins/FireworkWarsPlugin/lobby"));
+        fileManager.saveResourceFileFolder("world");
+        moveFolderToRoot(Paths.get("plugins/FireworkWarsPlugin/world"));
     }
 
     private void saveMaps() throws IOException {
