@@ -102,9 +102,15 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         try {
             saveMaps();
             moveMapsToRoot();
+
+            saveLobby();
         } catch (IOException exception) {
             getLogger().severe(exception.getMessage() + Arrays.toString(exception.getStackTrace()));
         }
+    }
+
+    private void saveLobby() {
+        fileManager.saveResourceFileFolder("lobby");
     }
 
     private void saveMaps() throws IOException {
