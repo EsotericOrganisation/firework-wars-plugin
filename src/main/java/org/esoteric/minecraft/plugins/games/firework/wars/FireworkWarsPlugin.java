@@ -3,6 +3,7 @@ package org.esoteric.minecraft.plugins.games.firework.wars;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.kyori.adventure.text.Component;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -112,6 +113,12 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
         }
 
         Arrays.stream(new File(System.getProperty("user.dir")).listFiles()).forEach((file) -> getLogger().info(file.getName()));
+
+        try {
+            FileUtils.deleteDirectory(new File("world"));
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
 
         if (isFirstRun && Files.exists(Paths.get("world"))) {
             throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
