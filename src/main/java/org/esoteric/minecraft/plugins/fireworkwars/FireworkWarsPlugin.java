@@ -114,14 +114,17 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private void saveMaps() throws IOException {
         if (new File("barracks").exists()) {
             getLogger().info("Barracks map already exists, skipping saving procedure.");
-            return;
+        } else {
+            fileManager.saveResourceFileFolder("maps/barracks");
+            saveResource("maps/barracks/level.dat", true);
         }
 
-        fileManager.saveResourceFileFolder("maps/barracks");
-        saveResource("maps/barracks/level.dat", true);
-
-        fileManager.saveResourceFileFolder("maps/world");
-        saveResource("maps/world/level.dat", true);
+        if (new File("world").exists()) {
+            getLogger().info("Lobby already exists, skipping saving procedure.");
+        } else {
+            fileManager.saveResourceFileFolder("maps/world");
+            saveResource("maps/world/level.dat", true);
+        }
     }
 
     private void moveMapsToRoot() throws IOException {
