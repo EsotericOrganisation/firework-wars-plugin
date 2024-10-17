@@ -104,22 +104,40 @@ public class GameEventListener implements Listener {
             return;
         }
 
-        player.setGameMode(GameMode.SPECTATOR);
-
         if (player.getKiller() != null) {
             TeamPlayer.from(player.getKiller()).incrementKills();
         }
 
-        FireworkWarsTeam team = TeamPlayer.from(player.getUniqueId()).getTeam();
+        event.setReviveHealth(20.0D);
+        event.setCancelled(true);
 
-        for (TeamPlayer teamPlayer : game.getPlayers()) {
-            Player p = teamPlayer.getPlayer();
-            FireworkWarsScoreboard scoreboard = teamPlayer.getScoreboard();
+        performDeath(player, event.deathMessage(), false);
+    }
+
+    public void performDeath(Player player, Component deathMessage, boolean disconnected) {
+        TeamPlayer teamPlayer = TeamPlayer.from(player);
+        FireworkWarsTeam team = teamPlayer.getTeam();
+
+        if (disconnected) {
+            teamPlayer.unregister(true);
+        }
+
+        player.setGameMode(GameMode.SPECTATOR);
+
+        player.getInventory().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
+        player.getInventory().clear();
+
+        game.getPlayers().forEach(tp -> tp.sendMessage(deathMessage));
+        game.getPlayers().forEach(tp -> tp.playSound(Sound.ENTITY_SKELETON_DEATH));
+
+        for (TeamPlayer tp : game.getPlayers()) {
+            Player p = tp.getPlayer();
+            FireworkWarsScoreboard scoreboard = tp.getScoreboard();
 
             Component teamName = team.getColoredTeamName();
 
             if (team.isEliminated()) {
-                if (teamPlayer.getTeam().equals(team)) {
+                if (tp.getTeam().equals(team)) {
                     scoreboard.setTeamLine(
                         team, languageManager.getMessage(Message.SB_ELIMINATED_OWN_TEAM, p, teamName));
                 } else {
@@ -131,15 +149,6 @@ public class GameEventListener implements Listener {
                     team, Pair.of("%", team.getRemainingPlayers().size() + ""));
             }
         }
-
-        event.getPlayer().getInventory().clear();
-        event.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
-
-        event.setReviveHealth(20.0D);
-        event.setCancelled(true);
-
-        game.getPlayers().forEach(teamPlayer -> teamPlayer.sendMessage(event.deathMessage()));
-        game.getPlayers().forEach(teamPlayer -> teamPlayer.playSound(Sound.ENTITY_SKELETON_DEATH));
 
         boolean gameEnded = false;
 
@@ -153,11 +162,21 @@ public class GameEventListener implements Listener {
             }
         }
 
-        if (!gameEnded) {
-            Title title = title(plugin.getLanguageManager().getMessage(Message.YOU_DIED, event.getPlayer()), plugin.getLanguageManager().getMessage(Message.YOU_ARE_NOW_SPECTATOR, event.getPlayer()));
-            event.getPlayer().sendTitlePart(TitlePart.TITLE, title.title());
-            event.getPlayer().sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
+        if (!gameEnded && !disconnected) {
+            Title title = title(
+                languageManager.getMessage(Message.YOU_DIED, player),
+                languageManager.getMessage(Message.YOU_ARE_NOW_SPECTATOR, player));
+
+            player.sendTitlePart(TitlePart.TITLE, title.title());
+            player.sendTitlePart(TitlePart.SUBTITLE, title.subtitle());
         }
+    }
+
+    public void performDisconnectionDeath(Player player, Component displayName) {
+        Component deathMessage = languageManager.getMessage(
+            Message.PLAYER_KILLED_BY_DISCONNECTION, player, displayName);
+
+        performDeath(player, deathMessage, true);
     }
 
     @EventHandler
