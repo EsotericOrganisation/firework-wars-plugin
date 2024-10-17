@@ -17,6 +17,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.manager.PlayerVelocityManager
 import org.esoteric.minecraft.plugins.fireworkwars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.fireworkwars.util.PersistentDataManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -103,6 +104,11 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     }
 
     private void saveMaps() throws IOException {
+        if (new File("barracks").exists()) {
+            getLogger().info("Barracks map already exists, skipping saving procedure.");
+            return;
+        }
+
         fileManager.saveResourceFileFolder("maps/barracks");
         saveResource("maps/barracks/level.dat", true);
     }
