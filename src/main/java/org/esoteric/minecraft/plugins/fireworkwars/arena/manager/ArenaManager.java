@@ -2,6 +2,7 @@ package org.esoteric.minecraft.plugins.fireworkwars.arena.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.esoteric.minecraft.plugins.fireworkwars.FireworkWarsPlugin;
@@ -31,21 +32,25 @@ public class ArenaManager {
         return arenas;
     }
 
+    public boolean isLobby(World world) {
+        return lobbies.stream()
+            .anyMatch(lobby -> lobby.getWorld().equals(world.getName()));
+    }
+
+    public boolean isArena(World world) {
+        return arenas.stream()
+            .anyMatch(arena -> arena.getWorlds().contains(world.getName()));
+    }
+
+    public Location getFirstLobbySpawnLocation() {
+        return lobbies.get(0).getSpawnLocation().getBukkitLocation();
+    }
+
     public ArenaManager(FireworkWarsPlugin plugin) {
         this.plugin = plugin;
 
         loadArenasFromConfig();
         loadWorldsWithoutAutoSave();
-    }
-
-    public boolean isLobby(World world) {
-        return lobbies.stream()
-                .anyMatch(lobby -> lobby.getWorld().equals(world.getName()));
-    }
-
-    public boolean isArena(World world) {
-        return arenas.stream()
-                .anyMatch(arena -> arena.getWorlds().contains(world.getName()));
     }
 
     private void loadArenasFromConfig() {
