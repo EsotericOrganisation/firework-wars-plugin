@@ -24,6 +24,7 @@ import org.esoteric.minecraft.plugins.games.firework.wars.managers.PlayerVelocit
 import org.esoteric.minecraft.plugins.games.firework.wars.profile.PlayerDataManager;
 import org.esoteric.minecraft.plugins.games.firework.wars.util.PersistentDataManager;
 import org.jetbrains.annotations.NotNull;
+import javax.swing.filechooser.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,7 +111,7 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
             getLogger().info("Starting plugin.");
         }
 
-        Arrays.stream(new File("").listFiles()).forEach((file) -> getLogger().info(file.getName()));
+        Arrays.stream(FileSystemView.getFileSystemView().getHomeDirectory().listFiles()).forEach((file) -> getLogger().info(file.getName()));
 
         if (isFirstRun && Files.exists(Paths.get("world"))) {
             throw new RuntimeException("'world' folder already exists on first run! Please delete the folder and run the plugin again!");
