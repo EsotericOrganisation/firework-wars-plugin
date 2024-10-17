@@ -1,5 +1,6 @@
 import org.gradle.api.JavaVersion
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
 import xyz.jpenilla.resourcefactory.paper.PaperPluginYaml
 
 plugins {
@@ -110,6 +111,10 @@ paperPluginYaml {
   description = project.description
 
   bootstrapper = projectGroupString + groupStringSeparator + "minecraft.plugins.games.firework.wars" + groupStringSeparator + pascalCase(bootstrapperNameString)
+}
+
+bukkitPluginYaml {
+  load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
 
 publishing {
