@@ -124,8 +124,12 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     }
 
     private void moveMapsToRoot() throws IOException {
-        if (Files.exists(mapsDirectory)) {
-            Files.walkFileTree(mapsDirectory, new SimpleFileVisitor<>() {
+        moveFolderToRoot(mapsDirectory);
+    }
+
+    private void moveFolderToRoot(Path path) throws IOException {
+        if (Files.exists(path)) {
+            Files.walkFileTree(path, new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     Path relativePath = mapsDirectory.relativize(file);
@@ -143,9 +147,9 @@ public final class FireworkWarsPlugin extends JavaPlugin {
                 }
             });
 
-            getLogger().info("All maps moved successfully!");
+            getLogger().info("All files moved successfully!");
         } else {
-            getLogger().info("Maps directory does not exist.");
+            getLogger().info("Directory does not exist.");
         }
     }
 
