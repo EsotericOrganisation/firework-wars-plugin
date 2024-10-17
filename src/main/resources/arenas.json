@@ -4,10 +4,10 @@
             "world": "world",
             "spawnLocation": {
                 "worldName": "world",
-                "x": 72,
-                "y": 125,
-                "z": 121,
-                "yaw": -120,
+                "x": -233,
+                "y": 73,
+                "z": -65,
+                "yaw": 90,
                 "pitch": 0
             }
         }
