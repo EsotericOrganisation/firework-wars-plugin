@@ -112,8 +112,6 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
             getLogger().info("Starting plugin.");
         }
 
-        Arrays.stream(new File(System.getProperty("user.dir")).listFiles()).forEach((file) -> getLogger().info(file.getName()));
-
         try {
             FileUtils.deleteDirectory(new File("world"));
         } catch (IOException exception) {
