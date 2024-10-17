@@ -91,6 +91,8 @@ public class TeamPlayer {
             scoreboard.delete();
         }
 
+        team.getPlayers().remove(this);
+
         if (removeFromGame) {
             game.getPlayers().remove(this);
         }

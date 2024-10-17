@@ -19,9 +19,7 @@ import org.esoteric.minecraft.plugins.games.fireworkwars.game.team.TeamPlayer;
 import org.esoteric.minecraft.plugins.games.fireworkwars.language.LanguageManager;
 import org.esoteric.minecraft.plugins.games.fireworkwars.language.Message;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static net.kyori.adventure.title.Title.title;
 
@@ -33,7 +31,7 @@ public class PlayerConnectionListener implements Listener {
     private final ArenaManager arenaManager;
     private final LanguageManager languageManager;
 
-    private final List<UUID> disconnectedPlayers;
+    private final Map<UUID, TeamPlayer> disconnectedPlayers;
 
     public PlayerConnectionListener(FireworkWarsPlugin plugin, FireworkWarsGame game) {
         this.plugin = plugin;
@@ -43,10 +41,10 @@ public class PlayerConnectionListener implements Listener {
         this.arenaManager = plugin.getArenaManager();
         this.languageManager = plugin.getLanguageManager();
 
-        this.disconnectedPlayers = new ArrayList<>();
+        this.disconnectedPlayers = new HashMap<>();
     }
 
-    public List<UUID> getDisconnectedPlayers() {
+    public Map<UUID, TeamPlayer> getDisconnectedPlayers() {
         return disconnectedPlayers;
     }
 
@@ -71,7 +69,7 @@ public class PlayerConnectionListener implements Listener {
             game.sendMessage(Message.PLAYER_DISCONNECTED, name);
             game.getEventListener().performDisconnectionDeath(player, name);
 
-            disconnectedPlayers.add(player.getUniqueId());
+            disconnectedPlayers.put(player.getUniqueId(), teamPlayer);
         }
     }
 
@@ -90,9 +88,15 @@ public class PlayerConnectionListener implements Listener {
                 event.joinMessage(null);
             }
             case PLAYING -> {
-                if (!disconnectedPlayers.contains(player.getUniqueId())) {
+                UUID uuid = player.getUniqueId();
+
+                if (!disconnectedPlayers.containsKey(uuid)) {
                     return;
                 }
+
+                TeamPlayer teamPlayer = disconnectedPlayers.remove(uuid);
+                teamPlayer.getTeam().getPlayers().add(teamPlayer);
+                game.getPlayers().add(teamPlayer);
 
                 Title title = title(
                     languageManager.getMessage(Message.YOU_DIED, player),

@@ -11,6 +11,7 @@ import org.esoteric.minecraft.plugins.games.fireworkwars.game.FireworkWarsGame;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class FireworkWarsTeam {
     private final TeamData teamData;
     private final FireworkWarsGame game;
@@ -20,6 +21,12 @@ public class FireworkWarsTeam {
 
     private final List<TeamPlayer> players = new ArrayList<>();
 
+    public FireworkWarsTeam(TeamData teamData, FireworkWarsGame game, FireworkWarsPlugin plugin) {
+        this.teamData = teamData;
+        this.game = game;
+        this.plugin = plugin;
+    }
+
     public TeamData getTeamData() {
         return teamData;
     }
@@ -28,10 +35,8 @@ public class FireworkWarsTeam {
         return players;
     }
 
-    public FireworkWarsTeam(TeamData teamData, FireworkWarsGame game, FireworkWarsPlugin plugin) {
-        this.teamData = teamData;
-        this.game = game;
-        this.plugin = plugin;
+    public int getPlayerCount() {
+        return players.size();
     }
 
     public void addPlayer(TeamPlayer teamPlayer) {
