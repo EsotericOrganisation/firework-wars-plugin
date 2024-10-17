@@ -116,6 +116,7 @@ public final class FireworkWarsPlugin extends JavaPlugin {
 
     private void saveLobby() throws IOException {
         fileManager.saveResourceFileFolder("world");
+        saveResource("world/level.dat", true);
     }
 
     private void moveLobbyToRoot() throws IOException {
