@@ -13,6 +13,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.TeamData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.data.WorldBorderData;
 import org.esoteric.minecraft.plugins.fireworkwars.arena.json.structure.Arena;
 import org.esoteric.minecraft.plugins.fireworkwars.events.game.GameEventListener;
+import org.esoteric.minecraft.plugins.fireworkwars.events.game.PlayerConnectionListener;
 import org.esoteric.minecraft.plugins.fireworkwars.game.chests.ChestManager;
 import org.esoteric.minecraft.plugins.fireworkwars.game.runnables.GameCountdown;
 import org.esoteric.minecraft.plugins.fireworkwars.game.runnables.GameTickHandler;
@@ -44,8 +45,9 @@ public class FireworkWarsGame {
     private final ChestManager chestManager;
 
     private final GameEventListener eventListener;
-    private GameTickHandler tickHandler;
+    private final PlayerConnectionListener connectionListener;
 
+    private GameTickHandler tickHandler;
     private @Nullable GameCountdown countdown;
 
     private GameState gameState = GameState.WAITING;
@@ -66,6 +68,10 @@ public class FireworkWarsGame {
 
     public ChestManager getChestManager() {
         return chestManager;
+    }
+
+    public GameEventListener getEventListener() {
+        return eventListener;
     }
 
     public GameState getGameState() {
@@ -137,6 +143,9 @@ public class FireworkWarsGame {
         this.chestManager = new ChestManager(plugin, this);
 
         this.eventListener = new GameEventListener(plugin, this);
+        this.connectionListener = new PlayerConnectionListener(plugin, this);
+
+        connectionListener.register();
 
         for (String worldName : arena.getWorlds()) {
             worldLoadStates.put(worldName, true);
@@ -307,6 +316,8 @@ public class FireworkWarsGame {
     public void endGame() {
         eventListener.unregister();
         tickHandler.cancel();
+
+        connectionListener.getDisconnectedPlayers().clear();
 
         tasks.stream()
             .filter(Predicate.not(BukkitTask::isCancelled))
