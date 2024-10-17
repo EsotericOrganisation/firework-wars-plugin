@@ -175,6 +175,9 @@ public class FireworkWarsGame {
 
     public void sendMessage(Message message, Object... arguments) {
         for (TeamPlayer player : players) {
+            if (!player.getPlayer().isOnline()) {
+                continue;
+            }
             languageManager.sendMessage(message, player.getPlayer(), arguments);
         }
     }
