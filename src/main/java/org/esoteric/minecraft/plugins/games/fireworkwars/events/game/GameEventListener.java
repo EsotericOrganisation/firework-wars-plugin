@@ -133,7 +133,11 @@ public class GameEventListener implements Listener {
 
         player.setGameMode(GameMode.SPECTATOR);
 
-        player.getInventory().forEach(drop -> player.getWorld().dropItemNaturally(player.getLocation(), drop));
+        player.getInventory().forEach(drop -> {
+            if (drop != null) {
+                player.getWorld().dropItemNaturally(player.getLocation(), drop);
+            }
+        });
         player.getInventory().clear();
 
         Sound sound = disconnected
