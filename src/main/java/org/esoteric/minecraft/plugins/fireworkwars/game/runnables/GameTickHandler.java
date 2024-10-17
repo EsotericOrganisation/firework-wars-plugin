@@ -15,6 +15,7 @@ import org.esoteric.minecraft.plugins.fireworkwars.scoreboard.wrapper.FireworkWa
 import org.esoteric.minecraft.plugins.fireworkwars.util.Pair;
 import org.esoteric.minecraft.plugins.fireworkwars.util.Util;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class GameTickHandler extends BukkitRunnable {
     private final FireworkWarsPlugin plugin;
     private final LanguageManager languageManager;
@@ -24,6 +25,8 @@ public class GameTickHandler extends BukkitRunnable {
 
     private final SupplyDropData supplyDropData;
     private final EndgameData endgameData;
+
+    private final int second = 20;
 
     private int ticksElapsed;
     private int ticksUntilSupplyDrop;
@@ -56,11 +59,11 @@ public class GameTickHandler extends BukkitRunnable {
     public void run() {
         ticksElapsed++;
 
-        if (--ticksUntilSupplyDrop <= 20) {
+        if (ticksUntilSupplyDrop-- <= second) {
             handleSupplyDrops();
         }
 
-        if (ticksElapsed >= endgameData.getEndgameStartTicks() - 20 && !endgameStarted) {
+        if (ticksElapsed >= endgameData.getEndgameStartTicks() - second && !endgameStarted) {
             startEndgame();
         }
 
@@ -70,7 +73,7 @@ public class GameTickHandler extends BukkitRunnable {
         }
 
         if (totalChestRefills < 10) {
-            if (ticksElapsed % chestRefillInterval == chestRefillInterval - 11 * 20) {
+            if (ticksElapsed % chestRefillInterval == chestRefillInterval - (11 * second)) {
                 game.sendMessage(Message.EVENT_CHEST_REFILL_WARNING, 10);
             }
 
