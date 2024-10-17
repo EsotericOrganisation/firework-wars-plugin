@@ -129,6 +129,8 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
 
     private void moveMapsToRoot() throws IOException {
         moveFolderToRoot(mapsDirectory);
+
+        new File("world/playerdata").mkdir();
     }
 
     private void moveFolderToRoot(Path path) throws IOException {
