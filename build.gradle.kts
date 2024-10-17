@@ -45,7 +45,7 @@ description = "A Minecraft Paper plugin that adds a firework-focused PvP game-mo
 val mainProjectAuthor = "Esoteric Organisation"
 val simplifiedMainProjectAuthor = "Esoteric"
 
-val projectAuthors = listOfNotNull(mainProjectAuthor, "Esoteric Enderman", "rolyPolyVole")
+val projectAuthors = listOfNotNull(mainProjectAuthor, "rolyPolyVole", "Esoteric Enderman")
 
 val topLevelDomain = "org"
 val projectNameString = rootProject.name
@@ -106,11 +106,11 @@ paperPluginYaml {
   name = pascalCase(projectName).replace(Regex(" Plugin$"), "")
   authors = projectAuthors
 
-  main = projectGroupString + groupStringSeparator + "minecraft.plugins.games.firework.wars" + groupStringSeparator + pascalCase(projectNameString)
+  main = projectGroupString + groupStringSeparator + "minecraft.plugins.games.fireworkwars" + groupStringSeparator + pascalCase(projectNameString)
   apiVersion = paperApiVersion
   description = project.description
 
-  bootstrapper = projectGroupString + groupStringSeparator + "minecraft.plugins.games.firework.wars" + groupStringSeparator + pascalCase(bootstrapperNameString)
+  bootstrapper = projectGroupString + groupStringSeparator + "minecraft.plugins.games.fireworkwars" + groupStringSeparator + pascalCase(bootstrapperNameString)
 }
 
 bukkitPluginYaml {
