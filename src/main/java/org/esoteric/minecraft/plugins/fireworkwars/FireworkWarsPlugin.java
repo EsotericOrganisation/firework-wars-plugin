@@ -29,6 +29,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     private static FireworkWarsPlugin instance;
     private static Logger logger;
 
+    private final boolean isFirstRun;
+
     private final FileManager fileManager;
     private final Path mapsDirectory = Paths.get("plugins/FireworkWarsPlugin/maps");
     private final Path rootDirectory = Paths.get("").toAbsolutePath();
@@ -91,6 +93,8 @@ public final class FireworkWarsPlugin extends JavaPlugin {
     public FireworkWarsPlugin(CustomItemManager customItemManager) {
         FireworkWarsPlugin.instance = this;
         FireworkWarsPlugin.logger = getLogger();
+
+        isFirstRun = !getDataFolder().exists();
 
         this.customItemManager = customItemManager;
         this.fileManager = new FileManager(this);
