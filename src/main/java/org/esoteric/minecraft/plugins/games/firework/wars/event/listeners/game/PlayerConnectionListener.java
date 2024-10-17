@@ -33,10 +33,7 @@ public class PlayerConnectionListener implements Listener {
         if (teamPlayer.getGame().equals(game)) {
             if (game.isWaiting() || game.isStarting()) {
                 game.removePlayer(teamPlayer);
-            } else if (game.isAlive(player)) {
-                plugin.logLoudly("Player left bruv");
             }
         }
-
     }
 }

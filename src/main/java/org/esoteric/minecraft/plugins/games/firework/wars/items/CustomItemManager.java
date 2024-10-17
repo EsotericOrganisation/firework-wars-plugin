@@ -120,7 +120,6 @@ public class CustomItemManager {
             }
         }
 
-        plugin.logLoudly("Failed to get weighted random item");
         return null;
     }
 
