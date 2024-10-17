@@ -105,8 +105,6 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
         this.fileManager = new FileManager(this);
 
         try {
-            FileUtils.deleteDirectory(new File("world"));
-
             saveMaps();
         } catch (IOException exception) {
             getLogger().severe(exception.getMessage() + Arrays.toString(exception.getStackTrace()));
@@ -117,6 +115,8 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
         if (new File("barracks").exists()) {
             getLogger().info("Worlds already exist, skipping saving procedure.");
         } else {
+            FileUtils.deleteDirectory(new File("world"));
+
             fileManager.saveResourceFileFolder("maps/barracks");
             saveResource("maps/barracks/level.dat", true);
 
