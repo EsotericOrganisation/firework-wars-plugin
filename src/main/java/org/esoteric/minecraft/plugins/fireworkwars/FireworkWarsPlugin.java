@@ -109,8 +109,9 @@ public final class FireworkWarsPlugin extends JavaPlugin {
         }
     }
 
-    private void saveLobby() {
+    private void saveLobby() throws IOException {
         fileManager.saveResourceFileFolder("lobby");
+        moveFolderToRoot(Paths.get("plugins/FireworkWarsPlugin/lobby"));
     }
 
     private void saveMaps() throws IOException {
