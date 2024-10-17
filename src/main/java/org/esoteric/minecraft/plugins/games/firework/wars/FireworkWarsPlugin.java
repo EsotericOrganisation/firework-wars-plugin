@@ -239,7 +239,7 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
 
         FireworkWarsGame game = gameManager.getFireworkWarsGame(player);
 
-        if (game == null) {
+        if (game == null || game.getGameState() != FireworkWarsGame.GameState.PLAYING) {
             event.setCancelled(true);
         }
     }
@@ -250,7 +250,7 @@ public final class FireworkWarsPlugin extends JavaPlugin implements Listener {
 
         FireworkWarsGame game = gameManager.getFireworkWarsGame(player);
 
-        if (game == null) {
+        if (game == null || game.getGameState() != FireworkWarsGame.GameState.PLAYING) {
             event.setCancelled(true);
         }
     }
