@@ -91,6 +91,9 @@ public class PlayerConnectionListener implements Listener {
                 UUID uuid = player.getUniqueId();
 
                 if (!disconnectedPlayers.containsKey(uuid)) {
+                    Location location = arenaManager.getFirstLobbySpawnLocation();
+                    player.teleport(location);
+                    player.setGameMode(GameMode.ADVENTURE);
                     return;
                 }
 
