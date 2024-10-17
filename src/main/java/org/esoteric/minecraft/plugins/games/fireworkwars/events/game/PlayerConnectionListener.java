@@ -98,6 +98,9 @@ public class PlayerConnectionListener implements Listener {
                 teamPlayer.getTeam().getPlayers().add(teamPlayer);
                 game.getPlayers().add(teamPlayer);
 
+                teamPlayer.showScoreboard();
+                teamPlayer.showWorldBorder();
+
                 Title title = title(
                     languageManager.getMessage(Message.YOU_DIED, player),
                     languageManager.getMessage(Message.YOU_ARE_NOW_SPECTATOR, player));
